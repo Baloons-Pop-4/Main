@@ -43,6 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Console UI.cs" />
+    <Compile Include="Contracts.cs" />
+    <Compile Include="Engine.cs" />
+    <Compile Include="GameLogic.cs" />
+    <Compile Include="Highscore.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>

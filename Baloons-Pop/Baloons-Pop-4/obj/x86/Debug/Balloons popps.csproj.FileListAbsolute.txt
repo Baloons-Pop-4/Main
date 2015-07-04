@@ -1,0 +1,4 @@
+C:\Users\Pc\Downloads\Main\Baloons-Pop\Baloons-Pop-4\bin\Debug\ConsoleApplication1.exe
+C:\Users\Pc\Downloads\Main\Baloons-Pop\Baloons-Pop-4\bin\Debug\ConsoleApplication1.pdb
+C:\Users\Pc\Downloads\Main\Baloons-Pop\Baloons-Pop-4\obj\x86\Debug\ConsoleApplication1.exe
+C:\Users\Pc\Downloads\Main\Baloons-Pop\Baloons-Pop-4\obj\x86\Debug\ConsoleApplication1.pdb
