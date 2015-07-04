@@ -17,7 +17,6 @@ namespace Balloons_Pops_game
             Name = name;
         }
 
-// test da ima
         public int CompareTo(structOfRow other)
         {
             return Value.CompareTo(other.Value);
