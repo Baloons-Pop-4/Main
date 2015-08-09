@@ -1,3 +1,5 @@
-# Main
-This is the working repo for the TW project, I put in all the files in the Telerik TW repo that are relatet to Baloons-Pop-4.
-kvo she stane
+# Baloons-Pop-4
+
+This is the working repository for our teamwork for the HQC course.
+
+Link to the [Tasklist](https://github.com/Baloons-Pop-4/Main/blob/kon.simeonov_branch/TASK-LIST.md) with the active tasks.
