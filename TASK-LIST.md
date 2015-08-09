@@ -10,5 +10,5 @@ Feel free to add/correct any of them.
 5. **Put all magic values in constants and name them correctly**
 6. **Exception handling**
 7. **Abstraction levels** - implement interfaces, inheritance and generics where needed, and remove them wherever they're not needed
-8. **Design patterns** - research, discuss ideas with other members about how to implement
+8. **Design patterns** - research, discuss ideas with other members about which design patternes to implement and how to do it
 9. (Optional) **GUI** - Something with XAML, Winforms, etc(will have to implements the ILogger interface)
