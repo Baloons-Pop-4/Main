@@ -1,0 +1,7 @@
+C:\Users\Pc\Downloads\Main\Baloons-Pop\Baloons-Pop-4\Console UI\bin\Debug\Console UI.dll
+C:\Users\Pc\Downloads\Main\Baloons-Pop\Baloons-Pop-4\Console UI\bin\Debug\Console UI.pdb
+C:\Users\Pc\Downloads\Main\Baloons-Pop\Baloons-Pop-4\Console UI\bin\Debug\Contracts.dll
+C:\Users\Pc\Downloads\Main\Baloons-Pop\Baloons-Pop-4\Console UI\bin\Debug\Contracts.pdb
+C:\Users\Pc\Downloads\Main\Baloons-Pop\Baloons-Pop-4\Console UI\obj\Debug\Console UI.csprojResolveAssemblyReference.cache
+C:\Users\Pc\Downloads\Main\Baloons-Pop\Baloons-Pop-4\Console UI\obj\Debug\Console UI.dll
+C:\Users\Pc\Downloads\Main\Baloons-Pop\Baloons-Pop-4\Console UI\obj\Debug\Console UI.pdb
