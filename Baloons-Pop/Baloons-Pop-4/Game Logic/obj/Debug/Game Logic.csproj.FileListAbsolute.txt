@@ -1,5 +1,0 @@
-C:\Users\Pc\Downloads\Main\Baloons-Pop\Baloons-Pop-4\Game Logic\bin\Debug\Game Logic.dll
-C:\Users\Pc\Downloads\Main\Baloons-Pop\Baloons-Pop-4\Game Logic\bin\Debug\Game Logic.pdb
-C:\Users\Pc\Downloads\Main\Baloons-Pop\Baloons-Pop-4\Game Logic\obj\Debug\Game Logic.csprojResolveAssemblyReference.cache
-C:\Users\Pc\Downloads\Main\Baloons-Pop\Baloons-Pop-4\Game Logic\obj\Debug\Game Logic.dll
-C:\Users\Pc\Downloads\Main\Baloons-Pop\Baloons-Pop-4\Game Logic\obj\Debug\Game Logic.pdb

@@ -1,5 +1,0 @@
-C:\Users\Pc\Downloads\Main\Baloons-Pop\Baloons-Pop-4\Highscore\bin\Debug\Highscore.dll
-C:\Users\Pc\Downloads\Main\Baloons-Pop\Baloons-Pop-4\Highscore\bin\Debug\Highscore.pdb
-C:\Users\Pc\Downloads\Main\Baloons-Pop\Baloons-Pop-4\Highscore\obj\Debug\Highscore.csprojResolveAssemblyReference.cache
-C:\Users\Pc\Downloads\Main\Baloons-Pop\Baloons-Pop-4\Highscore\obj\Debug\Highscore.dll
-C:\Users\Pc\Downloads\Main\Baloons-Pop\Baloons-Pop-4\Highscore\obj\Debug\Highscore.pdb
