@@ -8,7 +8,7 @@ Feel free to add/correct any of them.
 	- ensuring good coupling and cohesion
 	- invert dependancies
 	- shorten/simplify code where possible, without changing the behaviour
-4. **Highscore** - refactor the code inside the .cs file and (Optional) add a permanant highscore
+4. **Highscore** - refactor the code inside the .cs file and (Optional) add a permanent highscore
 5. **Put all magic values in constants and name them correctly**
 6. **Exception handling**
 7. **Abstraction levels** - implement interfaces, inheritance and generics where needed, and remove them wherever they're not needed
