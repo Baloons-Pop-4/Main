@@ -1,7 +1,9 @@
 ﻿namespace Engine
 {
     using System;
+
     using Contracts;
+    using Highscore;
 
     internal class Game
     {
@@ -56,6 +58,8 @@
         private const string ON_EXIT_MESSAGE = "Good Bye!";
         #endregion
 
+        HighScoreUtility highScore = new HighScoreUtility();
+
         // Singleton design pattern
 
         private static Engine instance = new Engine();
@@ -85,6 +89,7 @@
 
         public void Run()
         {
+
             // this.Initialize(new ConsoleUI(), ValidationProvider.InputValidator);
 
             string[,] topFive = new string[5, 2];
@@ -106,7 +111,7 @@
                         break;
 
                     case TOP:
-                        HighScoreUtility.sortAndPrintChartFive(topFive);
+                        highScore.SortAndPrintChartFive(topFive);
                         break;
 
                     case EXIT:
@@ -155,9 +160,9 @@
         {
             this.UI.PrintMessage(string.Format(WIN_MESSAGE_TEMPLATE, userMoves));
 
-            if (HighScoreUtility.signIfSkilled(topFive, userMoves))
+            if (highScore.SignIfSkilled(topFive, userMoves))
             {
-                HighScoreUtility.sortAndPrintChartFive(topFive);
+                highScore.SortAndPrintChartFive(topFive);
             }
             else
             {

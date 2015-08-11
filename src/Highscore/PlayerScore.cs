@@ -12,7 +12,6 @@
             this.Name = name;
         }
 
-
         public int Score
         {
             get 
@@ -35,11 +34,6 @@
             {
                 this.name = value; 
             }
-        }
-
-        public int CompareTo(PlayerScore other)
-        {
-            return this.Score.CompareTo(other.Score);
         }
     }
 }
