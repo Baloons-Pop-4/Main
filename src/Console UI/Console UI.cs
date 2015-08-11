@@ -45,4 +45,9 @@ public class ConsoleUI : IBaloonsUserInterface
         // TODO: implement
         throw new NotImplementedException("Implement me!");
     }
+
+    public string ReadUserInput()
+    {
+        return Console.ReadLine();
+    }
 }

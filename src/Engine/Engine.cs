@@ -4,159 +4,119 @@ using Contracts;
 
 public class Engine : IEngine
 {
+    #region Constants
+    private const string EXIT = "EXIT";
+    private const string TOP = "TOP";
+    private const string RESTART = "RESTART";
+    private const string WRONG_INPUT = "Wrong input! Try Again!";
+    private const string CANNOT_POP_MISSING_BALLOON = "Cannot pop missing ballon!";
+    private const string WIN_MESSAGE_TEMPLATE = "Gratz ! You completed it in {0} moves.";
+    private const string NOT_IN_TOP_FIVE = "I am sorry you are not skillful enough for TopFive chart!";
+    private const string MOVE_PROMPT = "Enter a row and column: ";
+    private const string ON_EXIT_MESSAGE = "Good Bye!";
+    #endregion
+
     // Singleton design pattern
 
-    public static Engine Instance = new Engine();
+    private static Engine instance = new Engine();
+
+    private IBaloonsUserInterface UI;
 
     private Engine()
     {
 
     }
 
-    //public void Run()
-    //{
-    //    string[,] topFive = new string[5, 2];
-    //    byte[,] matrix = GameLogic.GenerateField(5, 10);
+    public static IEngine Instance
+    {
+        get
+        {
+            return Engine.instance;
+        }
+    }
 
-    //    GameLogic.printMatrix(matrix);
-    //    string temp = null;
-    //    int userMoves = 0;
-    //    while (temp != "EXIT")
-    //    {
-    //        Console.WriteLine("Enter a row and column: ");
-    //        temp = Console.ReadLine();
-    //        temp = temp.ToUpper().Trim();
+    public void Initialize(IBaloonsUserInterface UI)
+    {
+        this.UI = UI;
+    }
 
-    //        switch (temp)
-    //        {
-    //            case "RESTART":
-    //                matrix = GameLogic.GenerateField(5, 10);
-    //                GameLogic.printMatrix(matrix);
-    //                userMoves = 0;
-    //                break;
-
-    //            case "TOP":
-    //                HighScoreUtility.sortAndPrintChartFive(topFive);
-    //                break;
-
-    //            default:
-    //                if ((temp.Length == 3) && (temp[0] >= '0' && temp[0] <= '9') && (temp[2] >= '0' && temp[2] <= '9') && (temp[1] == ' ' || temp[1] == '.' || temp[1] == ','))
-    //                {
-    //                    int userRow, userColumn;
-    //                    userRow = int.Parse(temp[0].ToString());
-    //                    if (userRow > 4)
-    //                    {
-    //                        Console.WriteLine("Wrong input ! Try Again ! ");
-    //                        continue;
-    //                    }
-    //                    userColumn = int.Parse(temp[2].ToString());
-
-    //                    if (GameLogic.change(matrix, userRow, userColumn))
-    //                    {
-    //                        Console.WriteLine("cannot pop missing ballon!");
-    //                        continue;
-    //                    }
-    //                    userMoves++;
-    //                    if (GameLogic.doit(matrix))
-    //                    {
-    //                        Console.WriteLine("Gratz ! You completed it in {0} moves.", userMoves);
-    //                        if (HighScoreUtility.signIfSkilled(topFive, userMoves))
-    //                        {
-    //                            HighScoreUtility.sortAndPrintChartFive(topFive);
-    //                        }
-    //                        else
-    //                        {
-    //                            Console.WriteLine("I am sorry you are not skillful enough for TopFive chart!");
-    //                        }
-    //                        matrix = GameLogic.GenerateField(5, 10);
-    //                        userMoves = 0;
-    //                    }
-    //                    GameLogic.printMatrix(matrix);
-    //                    break;
-    //                }
-    //                else
-    //                {
-    //                    Console.WriteLine("Wrong input ! Try Again ! ");
-    //                    break;
-    //                }
-
-
-    //        }
-    //    }
-    //    Console.WriteLine("Good Bye! ");
-    //}
     public void Run()
     {
-        IBaloonsUserInterface logger = new ConsoleUI();
+        this.Initialize(new ConsoleUI());
 
         string[,] topFive = new string[5, 2];
         byte[,] matrix = GameLogic.GenerateField();
 
-        logger.PrintField(matrix);
-        string temp = null;
+        this.UI.PrintField(matrix);
+        var inputAsString = string.Empty;
+        var trimmedUppercaseInput = string.Empty;
         int userMoves = 0;
-        while (temp != "EXIT")
-        {
-            logger.PrintMessage("Enter a row and column: ");
-            temp = Console.ReadLine();
-            temp = temp.ToUpper().Trim();
 
-            switch (temp)
+        while (trimmedUppercaseInput != EXIT)
+        {
+            this.UI.PrintMessage(MOVE_PROMPT);
+            inputAsString = this.UI.ReadUserInput();
+            trimmedUppercaseInput = inputAsString.ToUpper().Trim();
+
+            switch (trimmedUppercaseInput)
             {
-                case "RESTART":
+                case RESTART:
                     matrix = GameLogic.GenerateField();
-                    logger.PrintField(matrix);
+                    this.UI.PrintField(matrix);
                     userMoves = 0;
                     break;
 
-                case "TOP":
+                case TOP:
                     HighScoreUtility.sortAndPrintChartFive(topFive);
                     break;
 
                 default:
-                    if ((temp.Length == 3) && (temp[0] >= '0' && temp[0] <= '9') && (temp[2] >= '0' && temp[2] <= '9') && (temp[1] == ' ' || temp[1] == '.' || temp[1] == ','))
+                    if ((trimmedUppercaseInput.Length == 3) && (trimmedUppercaseInput[0] >= '0' && trimmedUppercaseInput[0] <= '9') && (trimmedUppercaseInput[2] >= '0' && trimmedUppercaseInput[2] <= '9') && (trimmedUppercaseInput[1] == ' ' || trimmedUppercaseInput[1] == '.' || trimmedUppercaseInput[1] == ','))
                     {
                         int userRow, userColumn;
-                        userRow = int.Parse(temp[0].ToString());
+                        userRow = int.Parse(trimmedUppercaseInput[0].ToString());
                         if (userRow > 4)
                         {
-                            logger.PrintMessage("Wrong input ! Try Again ! ");
+                            this.UI.PrintMessage(WRONG_INPUT);
                             continue;
                         }
-                        userColumn = int.Parse(temp[2].ToString());
+                        userColumn = int.Parse(trimmedUppercaseInput[2].ToString());
 
-                        if (GameLogic.change(matrix, userRow, userColumn))
+                        if (matrix[userRow, userColumn] == 0)
                         {
-                            logger.PrintMessage("cannot pop missing ballon!");
+                            this.UI.PrintMessage(CANNOT_POP_MISSING_BALLOON);
                             continue;
                         }
+
+                        GameLogic.change(matrix, userRow, userColumn);
+
                         userMoves++;
                         if (GameLogic.doit(matrix))
                         {
-                            logger.PrintMessage(string.Format("Gratz ! You completed it in {0} moves.", userMoves));
+                            this.UI.PrintMessage(string.Format(WIN_MESSAGE_TEMPLATE, userMoves));
                             if (HighScoreUtility.signIfSkilled(topFive, userMoves))
                             {
                                 HighScoreUtility.sortAndPrintChartFive(topFive);
                             }
                             else
                             {
-                                logger.PrintMessage("I am sorry you are not skillful enough for TopFive chart!");
+                                this.UI.PrintMessage(NOT_IN_TOP_FIVE);
                             }
                             matrix = GameLogic.GenerateField();
                             userMoves = 0;
                         }
-                        logger.PrintField(matrix);
+                        this.UI.PrintField(matrix);
                         break;
                     }
                     else
                     {
-                        logger.PrintMessage("Wrong input ! Try Again ! ");
+                        this.UI.PrintMessage(WRONG_INPUT);
                         break;
                     }
 
 
             }
         }
-        Console.WriteLine("Good Bye! ");
+        this.UI.PrintMessage(ON_EXIT_MESSAGE);
     }
 }
