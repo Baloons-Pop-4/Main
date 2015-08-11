@@ -6,11 +6,19 @@ public class Engine : IEngine
 {
     // Singleton design pattern
 
-    public static Engine Instance = new Engine();
+    private static Engine instance = new Engine();
 
     private Engine()
     {
 
+    }
+
+    public static IEngine Instance
+    {
+        get
+        {
+            return Engine.instance;
+        }
     }
 
     //public void Run()
