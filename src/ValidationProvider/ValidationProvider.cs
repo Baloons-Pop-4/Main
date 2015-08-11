@@ -44,7 +44,7 @@
 
             private bool IsValidRowMove(char notParsedRow)
             {
-                bool isValidRow = (notParsedRow - 48) < MAX_ROW_INPUT_VALUE;
+                bool isValidRow = (notParsedRow - 48) <= MAX_ROW_INPUT_VALUE;
                 return isValidRow;
             }
         }

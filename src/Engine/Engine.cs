@@ -75,6 +75,10 @@ public class Engine : IEngine
                     HighScoreUtility.sortAndPrintChartFive(topFive);
                     break;
 
+                case EXIT:
+                    this.UI.PrintMessage(ON_EXIT_MESSAGE);
+                    return;
+
                 default:
 
                     if (!this.validator.IsValidUserMove(trimmedUppercaseInput))
@@ -83,23 +87,27 @@ public class Engine : IEngine
                         break;
                     }
 
-                    int userRow, userColumn;
-                    userRow = int.Parse(trimmedUppercaseInput[0].ToString());
+                    var userRow = int.Parse(trimmedUppercaseInput[0].ToString());
+                    var userColumn = int.Parse(trimmedUppercaseInput[2].ToString());
 
-                    userColumn = int.Parse(trimmedUppercaseInput[2].ToString());
-
+                    // this condition should be a GameLogic method
                     if (matrix[userRow, userColumn] == 0)
                     {
                         this.UI.PrintMessage(CANNOT_POP_MISSING_BALLOON);
                         continue;
                     }
-
-                    GameLogic.change(matrix, userRow, userColumn);
-
+                    else
+                    {
+                        GameLogic.change(matrix, userRow, userColumn);
+                    }
+                    
                     userMoves++;
+                    // win condition
+                    // GameLogic should have an IsGameWon method
                     if (GameLogic.doit(matrix))
                     {
                         this.UI.PrintMessage(string.Format(WIN_MESSAGE_TEMPLATE, userMoves));
+
                         if (HighScoreUtility.signIfSkilled(topFive, userMoves))
                         {
                             HighScoreUtility.sortAndPrintChartFive(topFive);
@@ -108,6 +116,7 @@ public class Engine : IEngine
                         {
                             this.UI.PrintMessage(NOT_IN_TOP_FIVE);
                         }
+                        // new game
                         matrix = GameLogic.GenerateField();
                         userMoves = 0;
                     }
@@ -116,6 +125,5 @@ public class Engine : IEngine
                     break;
             }
         }
-        this.UI.PrintMessage(ON_EXIT_MESSAGE);
     }
 }
