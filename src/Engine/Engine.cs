@@ -55,7 +55,7 @@ public class Engine : IEngine
         while (trimmedInput != EXIT)
         {
             this.UI.PrintMessage(MOVE_PROMPT);
-            inputAsString = Console.ReadLine();
+            inputAsString = this.UI.ReadUserInput();
             trimmedInput = inputAsString.ToUpper().Trim();
 
             switch (trimmedInput)

@@ -14,5 +14,6 @@ namespace Contracts
         void PrintMessage(string message);
         void PrintField(byte[,] matrix);
         void PrintHighscore(string highscore);
+        string ReadUserInput();
     }
 }
