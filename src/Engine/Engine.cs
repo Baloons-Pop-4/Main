@@ -82,11 +82,14 @@ public class Engine : IEngine
                         }
                         userColumn = int.Parse(trimmedUppercaseInput[2].ToString());
 
-                        if (GameLogic.change(matrix, userRow, userColumn))
+                        if (matrix[userRow, userColumn] == 0)
                         {
                             this.UI.PrintMessage(CANNOT_POP_MISSING_BALLOON);
                             continue;
                         }
+
+                        GameLogic.change(matrix, userRow, userColumn);
+
                         userMoves++;
                         if (GameLogic.doit(matrix))
                         {
