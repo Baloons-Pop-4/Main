@@ -5,6 +5,7 @@ namespace Contracts
     public interface IEngine
     {
         void Run();
+        void Initialize(ILogger logger);
     }
 
     // The ILogger interface will be used to allow switching between different types of GUIs.

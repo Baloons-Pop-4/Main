@@ -8,6 +8,8 @@ public class Engine : IEngine
 
     private static IEngine instance = new Engine();
 
+    private ILogger logger;
+
     private Engine()
     {
 
@@ -19,6 +21,11 @@ public class Engine : IEngine
         {
             return instance;
         }
+    }
+
+    public void Initialize(ILogger logger)
+    {
+        this.logger = logger;
     }
 
     //public void Run()
@@ -95,17 +102,15 @@ public class Engine : IEngine
     //}
     public void Run()
     {
-        ILogger logger = new ConsoleUI();
-
         string[,] topFive = new string[5, 2];
         byte[,] matrix = GameLogic.GenerateField();
 
-        logger.PrintField(matrix);
+        this.logger.PrintField(matrix);
         string temp = null;
         int userMoves = 0;
         while (temp != "EXIT")
         {
-            logger.PrintMessage("Enter a row and column: ");
+            this.logger.PrintMessage("Enter a row and column: ");
             temp = Console.ReadLine();
             temp = temp.ToUpper().Trim();
 
@@ -113,7 +118,7 @@ public class Engine : IEngine
             {
                 case "RESTART":
                     matrix = GameLogic.GenerateField();
-                    logger.PrintField(matrix);
+                    this.logger.PrintField(matrix);
                     userMoves = 0;
                     break;
 
@@ -128,37 +133,37 @@ public class Engine : IEngine
                         userRow = int.Parse(temp[0].ToString());
                         if (userRow > 4)
                         {
-                            logger.PrintMessage("Wrong input ! Try Again ! ");
+                            this.logger.PrintMessage("Wrong input ! Try Again ! ");
                             continue;
                         }
                         userColumn = int.Parse(temp[2].ToString());
 
                         if (GameLogic.change(matrix, userRow, userColumn))
                         {
-                            logger.PrintMessage("cannot pop missing ballon!");
+                            this.logger.PrintMessage("cannot pop missing ballon!");
                             continue;
                         }
                         userMoves++;
                         if (GameLogic.doit(matrix))
                         {
-                            logger.PrintMessage(string.Format("Gratz ! You completed it in {0} moves.", userMoves));
+                            this.logger.PrintMessage(string.Format("Gratz ! You completed it in {0} moves.", userMoves));
                             if (HighScoreUtility.signIfSkilled(topFive, userMoves))
                             {
                                 HighScoreUtility.sortAndPrintChartFive(topFive);
                             }
                             else
                             {
-                                logger.PrintMessage("I am sorry you are not skillful enough for TopFive chart!");
+                                this.logger.PrintMessage("I am sorry you are not skillful enough for TopFive chart!");
                             }
                             matrix = GameLogic.GenerateField();
                             userMoves = 0;
                         }
-                        logger.PrintField(matrix);
+                        this.logger.PrintField(matrix);
                         break;
                     }
                     else
                     {
-                        logger.PrintMessage("Wrong input ! Try Again ! ");
+                        this.logger.PrintMessage("Wrong input ! Try Again ! ");
                         break;
                     }
 
