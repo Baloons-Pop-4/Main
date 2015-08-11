@@ -1,88 +1,82 @@
-﻿using System;
-using System.Collections.Generic;
-
-public struct PlayerScore : IComparable<PlayerScore>
+﻿namespace Highscore
 {
-    public int Value;
-    public string Name;
-    public PlayerScore(int value, string name)
+    using System;
+    using System.Collections.Generic;
+
+    public class HighScoreUtility
     {
-        Value = value;
-        Name = name;
-    }
+        private static readonly  int TOP_FIVE_NUMBER = 5;
 
-    public int CompareTo(PlayerScore other)
-    {
-        return Value.CompareTo(other.Value);
-    }
-}
-
-public class HighScoreUtility
-{
-    public static void sortAndPrintChartFive(string[,] tableToSort)
-    {
-
-        List<PlayerScore> klasirane = new List<PlayerScore>();
-
-        for (int i = 0; i < 5; ++i)
+        public static void SortAndPrintChartFive(string[,] scoresToAdd)
         {
-            if (tableToSort[i, 0] == null)
+            List<PlayerScore> currentScore = new List<PlayerScore>();
+
+            for (int i = 0; i < TOP_FIVE_NUMBER; i++)
             {
-                break;
+                if (scoresToAdd[i, 0] == null)
+                {
+                    break;
+                }
+
+                currentScore.Add(new PlayerScore(int.Parse(scoresToAdd[i, 0]), scoresToAdd[i, 1]));
             }
 
-            klasirane.Add(new PlayerScore(int.Parse(tableToSort[i, 0]), tableToSort[i, 1]));
+            currentScore.Sort();
+            Console.WriteLine("---------TOP FIVE CHART-----------");
 
-        }
-
-        klasirane.Sort();
-        Console.WriteLine("---------TOP FIVE CHART-----------");
-        for (int i = 0; i < klasirane.Count; ++i)
-        {
-            PlayerScore slot = klasirane[i];
-            Console.WriteLine("{2}.   {0} with {1} moves.", slot.Name, slot.Value, i + 1);
-        }
-        Console.WriteLine("----------------------------------");
-
-
-    }
-
-    public static bool signIfSkilled(string[,] Chart, int points)
-    {
-        bool Skilled = false;
-        int worstMoves = 0;
-        int worstMovesChartPosition = 0;
-        for (int i = 0; i < 5; i++)
-        {
-            if (Chart[i, 0] == null)
+            for (int i = 0; i < currentScore.Count; ++i)
             {
-                Console.WriteLine("Type in your name.");
-                string tempUserName = Console.ReadLine();
-                Chart[i, 0] = points.ToString();
-                Chart[i, 1] = tempUserName;
-                Skilled = true;
-                break;
+                PlayerScore slot = currentScore[i];
+                Console.WriteLine("{0}.   {1} with {2} moves.", i + 1, slot.Name, slot.Score);
             }
+
+            Console.WriteLine("----------------------------------");
         }
-        if (Skilled == false)
+
+        public static bool signIfSkilled(string[,] chart, int points)
         {
+            bool skilled = false;
+            int worstScore = 0;
+            int worstScoreChartPosition = 0;
+
             for (int i = 0; i < 5; i++)
             {
-                if (int.Parse(Chart[i, 0]) > worstMoves)
+                if (chart[i, 0] == null)
                 {
-                    worstMovesChartPosition = i;
-                    worstMoves = int.Parse(Chart[i, 0]);
+                    Console.WriteLine("Type in your name.");
+                    string userName = Console.ReadLine();
+
+                    chart[i, 0] = points.ToString();
+                    chart[i, 1] = userName;
+                    skilled = true;
+
+                    break;
                 }
             }
+
+            if (skilled == false)
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    if (int.Parse(chart[i, 0]) > worstScore)
+                    {
+                        worstScoreChartPosition = i;
+                        worstScore = int.Parse(chart[i, 0]);
+                    }
+                }
+            }
+
+            if (points < worstScore && skilled == false)
+            {
+                Console.WriteLine("Type in your name.");
+                string userName = Console.ReadLine();
+
+                chart[worstScoreChartPosition, 0] = points.ToString();
+                chart[worstScoreChartPosition, 1] = userName;
+                skilled = true;
+            }
+
+            return skilled;
         }
-        if (points < worstMoves && Skilled == false)
-        {
-            Console.WriteLine("Type in your name.");
-            string tempUserName = Console.ReadLine();
-            Chart[worstMovesChartPosition, 0] = points.ToString();
-            Chart[worstMovesChartPosition, 1] = tempUserName;
-            Skilled = true;
-        }
-        return Skilled;
     }
 }
