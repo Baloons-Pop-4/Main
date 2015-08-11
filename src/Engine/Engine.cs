@@ -2,6 +2,8 @@
 
 using Contracts;
 
+using Validations;
+
 public class Engine : IEngine
 {
     #region Constants
@@ -22,6 +24,8 @@ public class Engine : IEngine
 
     private IBaloonsUserInterface UI;
 
+    private IUserInputValidator validator;
+
     private Engine()
     {
 
@@ -35,14 +39,15 @@ public class Engine : IEngine
         }
     }
 
-    public void Initialize(IBaloonsUserInterface UI)
+    public void Initialize(IBaloonsUserInterface UI, IUserInputValidator validator)
     {
         this.UI = UI;
+        this.validator = validator;
     }
 
     public void Run()
     {
-        this.Initialize(new ConsoleUI());
+        this.Initialize(new ConsoleUI(), ValidationProvider.InputValidator);
 
         string[,] topFive = new string[5, 2];
         byte[,] matrix = GameLogic.GenerateField();
@@ -71,50 +76,44 @@ public class Engine : IEngine
                     break;
 
                 default:
-                    if ((trimmedUppercaseInput.Length == 3) && (trimmedUppercaseInput[0] >= '0' && trimmedUppercaseInput[0] <= '9') && (trimmedUppercaseInput[2] >= '0' && trimmedUppercaseInput[2] <= '9') && (trimmedUppercaseInput[1] == ' ' || trimmedUppercaseInput[1] == '.' || trimmedUppercaseInput[1] == ','))
-                    {
-                        int userRow, userColumn;
-                        userRow = int.Parse(trimmedUppercaseInput[0].ToString());
-                        if (userRow > 4)
-                        {
-                            this.UI.PrintMessage(WRONG_INPUT);
-                            continue;
-                        }
-                        userColumn = int.Parse(trimmedUppercaseInput[2].ToString());
 
-                        if (matrix[userRow, userColumn] == 0)
-                        {
-                            this.UI.PrintMessage(CANNOT_POP_MISSING_BALLOON);
-                            continue;
-                        }
-
-                        GameLogic.change(matrix, userRow, userColumn);
-
-                        userMoves++;
-                        if (GameLogic.doit(matrix))
-                        {
-                            this.UI.PrintMessage(string.Format(WIN_MESSAGE_TEMPLATE, userMoves));
-                            if (HighScoreUtility.signIfSkilled(topFive, userMoves))
-                            {
-                                HighScoreUtility.sortAndPrintChartFive(topFive);
-                            }
-                            else
-                            {
-                                this.UI.PrintMessage(NOT_IN_TOP_FIVE);
-                            }
-                            matrix = GameLogic.GenerateField();
-                            userMoves = 0;
-                        }
-                        this.UI.PrintField(matrix);
-                        break;
-                    }
-                    else
+                    if (!this.validator.IsValidUserMove(trimmedUppercaseInput))
                     {
                         this.UI.PrintMessage(WRONG_INPUT);
                         break;
                     }
 
+                    int userRow, userColumn;
+                    userRow = int.Parse(trimmedUppercaseInput[0].ToString());
 
+                    userColumn = int.Parse(trimmedUppercaseInput[2].ToString());
+
+                    if (matrix[userRow, userColumn] == 0)
+                    {
+                        this.UI.PrintMessage(CANNOT_POP_MISSING_BALLOON);
+                        continue;
+                    }
+
+                    GameLogic.change(matrix, userRow, userColumn);
+
+                    userMoves++;
+                    if (GameLogic.doit(matrix))
+                    {
+                        this.UI.PrintMessage(string.Format(WIN_MESSAGE_TEMPLATE, userMoves));
+                        if (HighScoreUtility.signIfSkilled(topFive, userMoves))
+                        {
+                            HighScoreUtility.sortAndPrintChartFive(topFive);
+                        }
+                        else
+                        {
+                            this.UI.PrintMessage(NOT_IN_TOP_FIVE);
+                        }
+                        matrix = GameLogic.GenerateField();
+                        userMoves = 0;
+                    }
+
+                    this.UI.PrintField(matrix);
+                    break;
             }
         }
         this.UI.PrintMessage(ON_EXIT_MESSAGE);

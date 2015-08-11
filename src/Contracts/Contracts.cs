@@ -5,7 +5,12 @@ namespace Contracts
     public interface IEngine
     {
         void Run();
-        void Initialize(IBaloonsUserInterface UI);
+        void Initialize(IBaloonsUserInterface UI, IUserInputValidator validator);
+    }
+
+    public interface IUserInputValidator
+    {
+        bool IsValidUserMove(string userInput);
     }
 
     // The ILogger interface will be used to allow switching between different types of GUIs.
