@@ -48,6 +48,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Console UI\Console UI.csproj">
+      <Project>{93513a68-1b63-4ff6-8ee3-3150acdd8631}</Project>
+      <Name>Console UI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Contracts\Contracts.csproj">
       <Project>{22c7f7be-55f5-4a1e-b121-9aa5bbf5c312}</Project>
       <Name>Contracts</Name>

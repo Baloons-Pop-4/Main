@@ -7,7 +7,9 @@
         public static void Main()
         {
             var engine = Engine.Instance;
+            var consoleUI = new ConsoleUI();
 
+            engine.Initialize(consoleUI);
             engine.Run();
         }
     }
