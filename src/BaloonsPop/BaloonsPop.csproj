@@ -48,6 +48,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Console UI\Console UI.csproj">
+      <Project>{93513a68-1b63-4ff6-8ee3-3150acdd8631}</Project>
+      <Name>Console UI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Contracts\Contracts.csproj">
       <Project>{22c7f7be-55f5-4a1e-b121-9aa5bbf5c312}</Project>
       <Name>Contracts</Name>
@@ -56,6 +60,13 @@
       <Project>{eaf16dec-7b3b-45ac-9ca7-b6f4e28a34a9}</Project>
       <Name>Engine</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ValidationProvider\ValidationProvider.csproj">
+      <Project>{27fa28bc-b955-43bc-847a-1a45eee5fa23}</Project>
+      <Name>ValidationProvider</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

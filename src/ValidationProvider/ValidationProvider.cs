@@ -1,10 +1,12 @@
-﻿namespace Validation
+﻿namespace Validations
 {
     using System;
 
+    using Contracts;
+
     public static class ValidationProvider
     {
-        public class UserInputValidator
+        public class UserInputValidator : IUserInputValidator
         {
             private const char COMMA = ',';
             private const char DOT = '.';
@@ -29,20 +31,25 @@
             public bool IsValidUserMove(string userInput)
             {
                 bool hasCorrectLength = userInput.Length == VALID_INPUT_LENGTH;
+                if(!hasCorrectLength)
+                {
+                    return false;
+                }
                 bool firstCharIsDigit = char.IsDigit(userInput[2]);
                 bool secondCharIsValid = char.IsWhiteSpace(userInput[1]) || userInput[1] == DOT || userInput[1] == COMMA;
                 bool thirdCharIsDigit = char.IsDigit(userInput[2]);
 
-                return hasCorrectLength && firstCharIsDigit && secondCharIsValid && thirdCharIsDigit && this.IsValidRowMove(userInput[1]);
+                return firstCharIsDigit && secondCharIsValid && thirdCharIsDigit && this.IsValidRowMove(userInput[0]);
             }
 
             private bool IsValidRowMove(char notParsedRow)
             {
-                return Convert.ToInt32(notParsedRow) < MAX_ROW_INPUT_VALUE;
+                bool isValidRow = (notParsedRow - 48) <= MAX_ROW_INPUT_VALUE;
+                return isValidRow;
             }
         }
 
-        public static UserInputValidator InputValidator
+        public static IUserInputValidator InputValidator
         {
             get
             {
