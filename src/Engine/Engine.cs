@@ -48,16 +48,17 @@ public class Engine : IEngine
         byte[,] matrix = GameLogic.GenerateField();
 
         this.UI.PrintField(matrix);
-        string temp = null;
+        var inputAsString = string.Empty;
+        var trimmedInput = string.Empty;
         int userMoves = 0;
 
-        while (temp != EXIT)
+        while (trimmedInput != EXIT)
         {
             this.UI.PrintMessage(MOVE_PROMPT);
-            temp = Console.ReadLine();
-            temp = temp.ToUpper().Trim();
+            inputAsString = Console.ReadLine();
+            trimmedInput = inputAsString.ToUpper().Trim();
 
-            switch (temp)
+            switch (trimmedInput)
             {
                 case RESTART:
                     matrix = GameLogic.GenerateField();
@@ -70,16 +71,16 @@ public class Engine : IEngine
                     break;
 
                 default:
-                    if ((temp.Length == 3) && (temp[0] >= '0' && temp[0] <= '9') && (temp[2] >= '0' && temp[2] <= '9') && (temp[1] == ' ' || temp[1] == '.' || temp[1] == ','))
+                    if ((trimmedInput.Length == 3) && (trimmedInput[0] >= '0' && trimmedInput[0] <= '9') && (trimmedInput[2] >= '0' && trimmedInput[2] <= '9') && (trimmedInput[1] == ' ' || trimmedInput[1] == '.' || trimmedInput[1] == ','))
                     {
                         int userRow, userColumn;
-                        userRow = int.Parse(temp[0].ToString());
+                        userRow = int.Parse(trimmedInput[0].ToString());
                         if (userRow > 4)
                         {
                             this.UI.PrintMessage(WRONG_INPUT);
                             continue;
                         }
-                        userColumn = int.Parse(temp[2].ToString());
+                        userColumn = int.Parse(trimmedInput[2].ToString());
 
                         if (GameLogic.change(matrix, userRow, userColumn))
                         {
