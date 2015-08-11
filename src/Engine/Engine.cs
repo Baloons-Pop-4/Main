@@ -49,16 +49,16 @@ public class Engine : IEngine
 
         this.UI.PrintField(matrix);
         var inputAsString = string.Empty;
-        var trimmedInput = string.Empty;
+        var trimmedUppercaseInput = string.Empty;
         int userMoves = 0;
 
-        while (trimmedInput != EXIT)
+        while (trimmedUppercaseInput != EXIT)
         {
             this.UI.PrintMessage(MOVE_PROMPT);
             inputAsString = this.UI.ReadUserInput();
-            trimmedInput = inputAsString.ToUpper().Trim();
+            trimmedUppercaseInput = inputAsString.ToUpper().Trim();
 
-            switch (trimmedInput)
+            switch (trimmedUppercaseInput)
             {
                 case RESTART:
                     matrix = GameLogic.GenerateField();
@@ -71,16 +71,16 @@ public class Engine : IEngine
                     break;
 
                 default:
-                    if ((trimmedInput.Length == 3) && (trimmedInput[0] >= '0' && trimmedInput[0] <= '9') && (trimmedInput[2] >= '0' && trimmedInput[2] <= '9') && (trimmedInput[1] == ' ' || trimmedInput[1] == '.' || trimmedInput[1] == ','))
+                    if ((trimmedUppercaseInput.Length == 3) && (trimmedUppercaseInput[0] >= '0' && trimmedUppercaseInput[0] <= '9') && (trimmedUppercaseInput[2] >= '0' && trimmedUppercaseInput[2] <= '9') && (trimmedUppercaseInput[1] == ' ' || trimmedUppercaseInput[1] == '.' || trimmedUppercaseInput[1] == ','))
                     {
                         int userRow, userColumn;
-                        userRow = int.Parse(trimmedInput[0].ToString());
+                        userRow = int.Parse(trimmedUppercaseInput[0].ToString());
                         if (userRow > 4)
                         {
                             this.UI.PrintMessage(WRONG_INPUT);
                             continue;
                         }
-                        userColumn = int.Parse(trimmedInput[2].ToString());
+                        userColumn = int.Parse(trimmedUppercaseInput[2].ToString());
 
                         if (GameLogic.change(matrix, userRow, userColumn))
                         {
