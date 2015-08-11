@@ -87,7 +87,7 @@ public class Engine : IEngine
     //}
     public void Run()
     {
-        ILogger logger = new ConsoleUI();
+        IBaloonsUserInterface logger = new ConsoleUI();
 
         string[,] topFive = new string[5, 2];
         byte[,] matrix = GameLogic.GenerateField();

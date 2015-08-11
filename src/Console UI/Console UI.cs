@@ -2,7 +2,7 @@
 
 using Contracts;
 
-public class ConsoleUI : ILogger
+public class ConsoleUI : IBaloonsUserInterface
 {
     public void PrintMessage(string message)
     {

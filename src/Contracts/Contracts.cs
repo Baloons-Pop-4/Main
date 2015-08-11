@@ -8,7 +8,7 @@ namespace Contracts
     }
 
     // The ILogger interface will be used to allow switching between different types of GUIs.
-    public interface ILogger
+    public interface IBaloonsUserInterface
     {
         void PrintMessage(string message);
         void PrintField(byte[,] matrix);
