@@ -47,7 +47,7 @@ public class Engine : IEngine
 
     public void Run()
     {
-        this.Initialize(new ConsoleUI(), ValidationProvider.InputValidator);
+        // this.Initialize(new ConsoleUI(), ValidationProvider.InputValidator);
 
         string[,] topFive = new string[5, 2];
         byte[,] matrix = GameLogic.GenerateField();
