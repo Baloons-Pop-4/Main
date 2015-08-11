@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EAF16DEC-7B3B-45AC-9CA7-B6F4E28A34A9}</ProjectGuid>
+    <ProjectGuid>{27FA28BC-B955-43BC-847A-1A45EEE5FA23}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Engine</RootNamespace>
-    <AssemblyName>Engine</AssemblyName>
+    <RootNamespace>ValidationProvider</RootNamespace>
+    <AssemblyName>ValidationProvider</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,30 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Engine.cs" />
+    <Compile Include="ValidationProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Console UI\Console UI.csproj">
-      <Project>{93513a68-1b63-4ff6-8ee3-3150acdd8631}</Project>
-      <Name>Console UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Contracts\Contracts.csproj">
-      <Project>{22c7f7be-55f5-4a1e-b121-9aa5bbf5c312}</Project>
-      <Name>Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Game Logic\Game Logic.csproj">
-      <Project>{493ec7bd-9c21-4938-87ac-9466cb806c96}</Project>
-      <Name>Game Logic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Highscore\Highscore.csproj">
-      <Project>{7cca7ebc-b013-4349-8dae-94c22a141738}</Project>
-      <Name>Highscore</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ValidationProvider\ValidationProvider.csproj">
-      <Project>{27fa28bc-b955-43bc-847a-1a45eee5fa23}</Project>
-      <Name>ValidationProvider</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
