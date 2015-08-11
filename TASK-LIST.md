@@ -6,6 +6,8 @@ Feel free to add/correct any of them.
 3. **Refactoring** the existing methods and classes
 	- good naming and formatting
 	- ensuring good coupling and cohesion
+	- invert dependancies
+	- shorten/simplify code where possible, without changing the behaviour
 4. **Highscore** - refactor the code inside the .cs file and (Optional) add a permanant highscore
 5. **Put all magic values in constants and name them correctly**
 6. **Exception handling**
