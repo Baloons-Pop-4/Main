@@ -21,4 +21,9 @@ namespace Contracts
         void PrintHighscore(string highscore);
         string ReadUserInput();
     }
+
+    public interface IMatrixValidator
+    {
+        bool IsInsideMatrix<T>(T[,] matrix, int row, int col);
+    }
 }
