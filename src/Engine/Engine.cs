@@ -1,6 +1,8 @@
 ﻿namespace Engine
 {
     using System;
+
+    using GameLogic;
     using Contracts;
 
     public class Engine : IEngine

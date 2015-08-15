@@ -1,5 +1,7 @@
 ﻿namespace Engine
 {
+    using GameLogic;
+
     internal class Game
     {
         private byte[,] field;
