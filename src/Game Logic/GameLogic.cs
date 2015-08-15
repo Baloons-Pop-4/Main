@@ -7,6 +7,8 @@
     {
         private const int FIELD_ROWS = 4;
         private const int FIELD_COLS = 9;
+        private const int MIN_BALOON_VALUE = 1;
+        private const int MAX_BALOON_VALUE = 4;
 
         private Random rng;
 
@@ -23,7 +25,7 @@
             {
                 for (var column = 0; column <= FIELD_COLS; column++)
                 {
-                    var cellValue = (byte)this.rng.Next(1, 5);
+                    var cellValue = (byte)this.rng.Next(MIN_BALOON_VALUE, MAX_BALOON_VALUE + 1);
                     newField[row, column] = cellValue;
                 }
             }
