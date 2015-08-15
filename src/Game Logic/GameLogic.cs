@@ -8,6 +8,13 @@
         private const int FIELD_ROWS = 4;
         private const int FIELD_COLS = 9;
 
+        private Random rng;
+
+        public GameLogic()
+        {
+            rng = new Random();
+        }
+
         public static byte[,] GenerateField()
         {
             byte[,] temp = new byte[FIELD_ROWS + 1, FIELD_COLS + 1];
