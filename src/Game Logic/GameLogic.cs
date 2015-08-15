@@ -32,8 +32,8 @@
             {
                 for (var column = 0; column <= FIELD_COLS; column++)
                 {
-                    var cellValue = (byte)this.rng.Next(MIN_BALOON_VALUE, MAX_BALOON_VALUE + 1);
-                    newField[row, column] = cellValue;
+                    var currentBaloonValue = this.GetRandomBaloonValue();
+                    newField[row, column] = currentBaloonValue;
                 }
             }
 
@@ -109,6 +109,12 @@
             }
 
             return true;
+        }
+
+        private byte GetRandomBaloonValue()
+        {
+            var randomBaloonValue = (byte)this.rng.Next(MIN_BALOON_VALUE, MAX_BALOON_VALUE + 1);
+            return randomBaloonValue;
         }
     }
 }
