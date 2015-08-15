@@ -32,6 +32,18 @@
 
             return newField;
         }
+        
+        public void PopInDirection(byte[,] matrix, int row, int col, int xUpdate, int yUpdate)
+        {
+            var baloonType = matrix[row, col];
+
+            do
+            {
+                matrix[row, col] = 0;
+                row += yUpdate;
+                col += xUpdate;
+            } while (matrix[row, col] == baloonType);
+        }
 
         public static void checkLeft(byte[,] matrix, int row, int column, int searchedItem)
         {
