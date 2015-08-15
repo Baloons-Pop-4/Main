@@ -15,19 +15,20 @@
             rng = new Random();
         }
 
-        public static byte[,] GenerateField()
+        public byte[,] GenerateField()
         {
-            byte[,] temp = new byte[FIELD_ROWS + 1, FIELD_COLS + 1];
-            Random randNumber = new Random();
-            for (byte row = 0; row <= GameLogic.FIELD_ROWS; row++)
+            byte[,] newField = new byte[FIELD_ROWS + 1, FIELD_COLS + 1];
+
+            for (byte row = 0; row <= FIELD_ROWS; row++)
             {
-                for (byte column = 0; column <= GameLogic.FIELD_COLS; column++)
+                for (byte column = 0; column <= FIELD_COLS; column++)
                 {
-                    byte tempByte = (byte)randNumber.Next(1, 5);
-                    temp[row, column] = tempByte;
+                    byte tempByte = (byte)this.rng.Next(1, 5);
+                    newField[row, column] = tempByte;
                 }
             }
-            return temp;
+
+            return newField;
         }
 
         public static void printMatrix(byte[,] matrix)
