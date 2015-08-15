@@ -17,14 +17,14 @@
 
         public byte[,] GenerateField()
         {
-            byte[,] newField = new byte[FIELD_ROWS + 1, FIELD_COLS + 1];
+            var newField = new byte[FIELD_ROWS + 1, FIELD_COLS + 1];
 
-            for (byte row = 0; row <= FIELD_ROWS; row++)
+            for (var row = 0; row <= FIELD_ROWS; row++)
             {
-                for (byte column = 0; column <= FIELD_COLS; column++)
+                for (var column = 0; column <= FIELD_COLS; column++)
                 {
-                    byte tempByte = (byte)this.rng.Next(1, 5);
-                    newField[row, column] = tempByte;
+                    var cellValue = (byte)this.rng.Next(1, 5);
+                    newField[row, column] = cellValue;
                 }
             }
 
