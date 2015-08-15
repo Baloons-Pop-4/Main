@@ -54,7 +54,7 @@
             this.UI.PrintField(game.Field);
             var command = string.Empty;
 
-            while (command != EXIT)
+            while (true)
             {
                 this.UI.PrintMessage(MOVE_PROMPT);
                 command = this.GetTrimmedUppercaseInput();
