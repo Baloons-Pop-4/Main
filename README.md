@@ -17,6 +17,6 @@ They can be found [here](REQUIREMENTS.md).
 
 ##Contributing
 
-In the first place, add your name to the [contributors](#contributors) section following the existing pattern. Check the [issues list](https://github.com/Baloons-Pop-4/Main/issues) and self-assign the one you will be working on or open a new issue if the feature is not present yet. Note that according to the [requirements](REQUIREMENTS.md), you must have contributed to the project in at least **7 different days** in order for you to be considered a contributor by the trainers. You should accordingly **update the [documentation](#documentation)** with your change!
+In the first place, add your name to the [contributors](#contributors) section following the existing pattern. Check the [issues list](https://github.com/Baloons-Pop-4/Main/issues) and self-assign the one you will be working on or open a new issue if the feature is not present yet. Use branching for tasks that are not small or trivial(branches already exist for some of the tasks). Note that according to the [requirements](REQUIREMENTS.md), you must have contributed to the project in at least **7 different days** in order for you to be considered a contributor by the trainers. You should accordingly **update the [documentation](#documentation)** with your change!
 
 ##Documentation
