@@ -56,11 +56,6 @@
 
         public void PopBaloons(byte[,] baloonField, int row, int column)
         {
-            if (baloonField[row, column] == 0)
-            {
-                return;
-            }
-
             foreach (var dir in popDirections)
             {
                 PopInDirection(baloonField, row, column, dir[0], dir[1]);
