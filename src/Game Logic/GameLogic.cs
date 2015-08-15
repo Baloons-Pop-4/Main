@@ -15,6 +15,7 @@
         private static readonly int[][] popDirections = new int[][] { new int[] { 0, 1 }, new int[] { 0, -1 }, new int[] { 1, 0 }, new int[] { -1, 0 } };
 
         private Random rng;
+
         private IMatrixValidator matrixValidator;
 
         public GameLogic(IMatrixValidator matrixValidator)
@@ -53,76 +54,6 @@
             } 
         }
 
-        public static void checkLeft(byte[,] matrix, int row, int column, int searchedItem)
-        {
-            int newRow = row;
-            int newColumn = column - 1;
-            try
-            {
-                if (matrix[newRow, newColumn] == searchedItem)
-                {
-                    matrix[newRow, newColumn] = 0; checkLeft(matrix, newRow, newColumn, searchedItem);
-                }
-                else return;
-            }
-            catch (IndexOutOfRangeException)
-            { return; }
-
-        }
-
-        public static void checkRight(byte[,] matrix, int row, int column, int searchedItem)
-        {
-            int newRow = row;
-            int newColumn = column + 1;
-            try
-            {
-                if (matrix[newRow, newColumn] == searchedItem)
-                {
-                    matrix[newRow, newColumn] = 0;
-                    checkRight(matrix, newRow, newColumn, searchedItem);
-                }
-                else return;
-            }
-            catch (IndexOutOfRangeException)
-            { return; }
-
-        }
-
-        public static void checkUp(byte[,] matrix, int row, int column, int searchedItem)
-        {
-            int newRow = row + 1;
-            int newColumn = column;
-            try
-            {
-                if (matrix[newRow, newColumn] == searchedItem)
-                {
-                    matrix[newRow, newColumn] = 0;
-                    checkUp(matrix, newRow, newColumn, searchedItem);
-                }
-                else return;
-            }
-            catch (IndexOutOfRangeException)
-            { return; }
-        }
-
-        public static void checkDown(byte[,] matrix, int row, int column, int searchedItem)
-        {
-            int newRow = row - 1;
-            int newColumn = column;
-            try
-            {
-                if (matrix[newRow, newColumn] == searchedItem)
-                {
-                    matrix[newRow, newColumn] = 0;
-                    checkDown(matrix, newRow, newColumn, searchedItem);
-                }
-                else return;
-            }
-            catch (IndexOutOfRangeException)
-            { return; }
-
-        }
-
         public void PopBaloons(byte[,] baloonField, int row, int column)
         {
             if (baloonField[row, column] == 0)
@@ -138,34 +69,73 @@
             baloonField[row, column] = 0;
         }
 
-        public static bool doit(byte[,] matrix)
+        public void LetBaloonsFall(byte[,] baloonField)
         {
-            bool isWinner = true;
-            Stack<byte> stek = new Stack<byte>();
-            int columnLenght = matrix.GetLength(0);
-            for (int j = 0; j < matrix.GetLength(1); j++)
+            var baloonColumn = new Stack<byte>();
+
+            for (int column = 0, length = baloonField.GetLength(1); column < length; column++)
             {
-                for (int i = 0; i < columnLenght; i++)
+                for (int row = 0, rowsCount = baloonField.GetLength(0); row < rowsCount; row++)
                 {
-                    if (matrix[i, j] != 0)
+                    if(baloonField[row, column] != 0)
                     {
-                        isWinner = false;
-                        stek.Push(matrix[i, j]);
+                        baloonColumn.Push(baloonField[row, column]);
                     }
                 }
-                for (int k = columnLenght - 1; (k >= 0); k--)
+
+                for (int row = baloonField.GetLength(0) - 1; row >= 0; row--)
                 {
-                    try
+                    if(baloonColumn.Count > 0)
                     {
-                        matrix[k, j] = stek.Pop();
+                        baloonField[row, column] = baloonColumn.Pop();
                     }
-                    catch (Exception)
+                    else
                     {
-                        matrix[k, j] = 0;
+                        baloonField[row, column] = 0;
                     }
+                    
                 }
             }
-            return isWinner;
+        }
+
+        public bool GameIsOver(byte[,] matrix)
+        {
+            foreach (var cell in matrix)
+            {
+                if(cell != 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+
+            //bool isWinner = true;
+            //Stack<byte> stek = new Stack<byte>();
+            //int columnLenght = matrix.GetLength(0);
+            //for (int j = 0; j < matrix.GetLength(1); j++)
+            //{
+            //    for (int i = 0; i < columnLenght; i++)
+            //    {
+            //        if (matrix[i, j] != 0)
+            //        {
+            //            isWinner = false;
+            //            stek.Push(matrix[i, j]);
+            //        }
+            //    }
+            //    for (int k = columnLenght - 1; (k >= 0); k--)
+            //    {
+            //        try
+            //        {
+            //            matrix[k, j] = stek.Pop();
+            //        }
+            //        catch (Exception)
+            //        {
+            //            matrix[k, j] = 0;
+            //        }
+            //    }
+            //}
+            //return isWinner;
         }
     }
 }

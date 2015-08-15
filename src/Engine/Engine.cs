@@ -98,12 +98,13 @@
                         {
                             // GameLogic.change(game.Field, userRow, userColumn);
                             gameLogicProvider.PopBaloons(game.Field, userRow, userColumn);
+                            gameLogicProvider.LetBaloonsFall(game.Field);
                         }
 
                         game.IncrementMoves();
                         // win condition
                         // GameLogic should have an IsGameWon method
-                        if (GameLogic.doit(game.Field))
+                        if (gameLogicProvider.GameIsOver(game.Field))
                         {
                             EndGame(topFive, game.UserMovesCount);
                             // new game
