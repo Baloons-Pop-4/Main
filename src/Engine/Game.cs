@@ -7,9 +7,11 @@
         private byte[,] field;
 
         private int userMovesCount;
+        private GameLogic gameLogicProvider;
 
-        public Game()
+        public Game(GameLogic gameLogicProvider)
         {
+            this.gameLogicProvider = gameLogicProvider;
             this.Reset();
         }
 
@@ -31,7 +33,7 @@
 
         public void Reset()
         {
-            this.field = GameLogic.GenerateField();
+            this.field = this.gameLogicProvider.GenerateField();
             this.userMovesCount = 0;
         }
 
