@@ -109,33 +109,6 @@
             }
 
             return true;
-
-            //bool isWinner = true;
-            //Stack<byte> stek = new Stack<byte>();
-            //int columnLenght = matrix.GetLength(0);
-            //for (int j = 0; j < matrix.GetLength(1); j++)
-            //{
-            //    for (int i = 0; i < columnLenght; i++)
-            //    {
-            //        if (matrix[i, j] != 0)
-            //        {
-            //            isWinner = false;
-            //            stek.Push(matrix[i, j]);
-            //        }
-            //    }
-            //    for (int k = columnLenght - 1; (k >= 0); k--)
-            //    {
-            //        try
-            //        {
-            //            matrix[k, j] = stek.Pop();
-            //        }
-            //        catch (Exception)
-            //        {
-            //            matrix[k, j] = 0;
-            //        }
-            //    }
-            //}
-            //return isWinner;
         }
     }
 }
