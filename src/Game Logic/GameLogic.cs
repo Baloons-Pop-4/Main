@@ -12,6 +12,8 @@
         private const int MIN_BALOON_VALUE = 1;
         private const int MAX_BALOON_VALUE = 4;
 
+        private static readonly int[][] popDirections = new int[][] { new int[] { 0, 1 }, new int[] { 0, -1 }, new int[] { 1, 0 }, new int[] { -1, 0 } };
+
         private Random rng;
         private IMatrixValidator matrixValidator;
 
@@ -40,13 +42,15 @@
         public void PopInDirection(byte[,] matrix, int row, int col, int xUpdate, int yUpdate)
         {
             var baloonType = matrix[row, col];
+            row += yUpdate;
+            col += xUpdate;
 
-            do
+            while (this.matrixValidator.IsInsideMatrix(matrix, row, col) && matrix[row, col] == baloonType)
             {
                 matrix[row, col] = 0;
                 row += yUpdate;
                 col += xUpdate;
-            } while (this.matrixValidator.IsInsideMatrix(matrix, row, col) && matrix[row, col] == baloonType);
+            } 
         }
 
         public static void checkLeft(byte[,] matrix, int row, int column, int searchedItem)
@@ -119,21 +123,19 @@
 
         }
 
-        public static bool change(byte[,] matrixToModify, int rowAtm, int columnAtm)
+        public void PopBaloons(byte[,] baloonField, int row, int column)
         {
-            if (matrixToModify[rowAtm, columnAtm] == 0)
+            if (baloonField[row, column] == 0)
             {
-                return true;
+                return;
             }
-            byte searchedTarget = matrixToModify[rowAtm, columnAtm];
-            matrixToModify[rowAtm, columnAtm] = 0;
-            checkLeft(matrixToModify, rowAtm, columnAtm, searchedTarget);
-            checkRight(matrixToModify, rowAtm, columnAtm, searchedTarget);
 
+            foreach (var dir in popDirections)
+            {
+                PopInDirection(baloonField, row, column, dir[0], dir[1]);
+            }
 
-            checkUp(matrixToModify, rowAtm, columnAtm, searchedTarget);
-            checkDown(matrixToModify, rowAtm, columnAtm, searchedTarget);
-            return false;
+            baloonField[row, column] = 0;
         }
 
         public static bool doit(byte[,] matrix)

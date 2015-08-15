@@ -96,7 +96,8 @@
                         }
                         else
                         {
-                            GameLogic.change(game.Field, userRow, userColumn);
+                            // GameLogic.change(game.Field, userRow, userColumn);
+                            gameLogicProvider.PopBaloons(game.Field, userRow, userColumn);
                         }
 
                         game.IncrementMoves();
