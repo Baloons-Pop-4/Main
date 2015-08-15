@@ -3,45 +3,6 @@
     using System;
     using Contracts;
 
-    internal class Game
-    {
-        private byte[,] field;
-
-        private int userMovesCount;
-
-        public Game()
-        {
-            this.Reset();
-        }
-
-        public byte[,] Field
-        {
-            get
-            {
-                return this.field;
-            }
-        }
-
-        public int UserMovesCount
-        {
-            get
-            {
-                return this.userMovesCount;
-            }
-        }
-
-        public void Reset()
-        {
-            this.field = GameLogic.GenerateField();
-            this.userMovesCount = 0;
-        }
-
-        public void IncrementMoves()
-        {
-            this.userMovesCount++;
-        }
-    }
-
     public class Engine : IEngine
     {
         #region Constants
@@ -93,7 +54,7 @@
             this.UI.PrintField(game.Field);
             var command = string.Empty;
 
-            while (command != EXIT)
+            while (true)
             {
                 this.UI.PrintMessage(MOVE_PROMPT);
                 command = this.GetTrimmedUppercaseInput();
