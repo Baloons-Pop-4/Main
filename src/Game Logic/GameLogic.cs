@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
 
+    using Contracts;
+
     public class GameLogic
     {
         private const int FIELD_ROWS = 4;
@@ -11,10 +13,12 @@
         private const int MAX_BALOON_VALUE = 4;
 
         private Random rng;
+        private IMatrixValidator matrixValidator;
 
-        public GameLogic()
+        public GameLogic(IMatrixValidator matrixValidator)
         {
-            rng = new Random();
+            this.matrixValidator = matrixValidator;
+            this.rng = new Random();
         }
 
         public byte[,] GenerateField()
@@ -42,7 +46,7 @@
                 matrix[row, col] = 0;
                 row += yUpdate;
                 col += xUpdate;
-            } while (matrix[row, col] == baloonType);
+            } while (this.matrixValidator.IsInsideMatrix(matrix, row, col) && matrix[row, col] == baloonType);
         }
 
         public static void checkLeft(byte[,] matrix, int row, int column, int searchedItem)

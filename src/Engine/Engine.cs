@@ -51,7 +51,7 @@
             // this.Initialize(new ConsoleUI(), ValidationProvider.InputValidator);
 
             string[,] topFive = new string[5, 2];
-            var gameLogicProvider = new GameLogic();
+            var gameLogicProvider = new GameLogic(Validations.ValidationProvider.Validator);
             var game = new Game(gameLogicProvider);
 
             this.UI.PrintField(game.Field);
