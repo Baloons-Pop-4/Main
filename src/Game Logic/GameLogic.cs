@@ -39,20 +39,6 @@
 
             return newField;
         }
-        
-        public void PopInDirection(byte[,] matrix, int row, int col, int xUpdate, int yUpdate)
-        {
-            var baloonType = matrix[row, col];
-            row += yUpdate;
-            col += xUpdate;
-
-            while (this.matrixValidator.IsInsideMatrix(matrix, row, col) && matrix[row, col] == baloonType)
-            {
-                matrix[row, col] = 0;
-                row += yUpdate;
-                col += xUpdate;
-            } 
-        }
 
         public void PopBaloons(byte[,] baloonField, int row, int column)
         {
@@ -104,6 +90,20 @@
             }
 
             return true;
+        }
+
+        private void PopInDirection(byte[,] matrix, int row, int col, int xUpdate, int yUpdate)
+        {
+            var baloonType = matrix[row, col];
+            row += yUpdate;
+            col += xUpdate;
+
+            while (this.matrixValidator.IsInsideMatrix(matrix, row, col) && matrix[row, col] == baloonType)
+            {
+                matrix[row, col] = 0;
+                row += yUpdate;
+                col += xUpdate;
+            }
         }
 
         private byte GetRandomBaloonValue()
