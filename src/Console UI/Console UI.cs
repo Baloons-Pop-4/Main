@@ -1,23 +1,18 @@
 ﻿namespace UserInterfaces
 {
     using System;
-    using System.Collections.Generic;
 
     using Contracts;
 
     public class ConsoleUI : IBaloonsUserInterface
     {
         private const string COLUMN_INDECES = "    0 1 2 3 4 5 6 7 8 9 ";
-        private const ConsoleColor DEFAULT_COLOR = ConsoleColor.White;
+        private const int DEFAULT_COLOR_INDEX = 0;
 
-        private readonly Dictionary<int, ConsoleColor> colorsByNumbers = new Dictionary<int, ConsoleColor>();
+        private readonly ConsoleColor[] consoleColors = new ConsoleColor[] { ConsoleColor.White, ConsoleColor.Red, ConsoleColor.Green, ConsoleColor.Blue, ConsoleColor.Yellow};
 
         public ConsoleUI()
         {
-            this.colorsByNumbers.Add(1, ConsoleColor.Red);
-            this.colorsByNumbers.Add(2, ConsoleColor.Green);
-            this.colorsByNumbers.Add(3, ConsoleColor.Blue);
-            this.colorsByNumbers.Add(4, ConsoleColor.Yellow);
             this.SetConsoleColorToDefault();
         }
 
@@ -82,12 +77,12 @@
 
         private void SetConsoleColor(int key)
         {
-            Console.ForegroundColor = this.colorsByNumbers[key];
+            Console.ForegroundColor = this.consoleColors[key];
         }
 
         private void SetConsoleColorToDefault()
         {
-            Console.ForegroundColor = DEFAULT_COLOR;
+            Console.ForegroundColor = this.consoleColors[DEFAULT_COLOR_INDEX];
         }
     }
 }
