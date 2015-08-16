@@ -28,12 +28,6 @@
 
         public void PrintField(byte[,] matrix)
         {
-            //Console.Write("    ");
-            //for (byte column = 0; column < matrix.GetLongLength(1); column++)
-            //{
-            //    Console.Write(column + " ");
-            //}
-
             Console.WriteLine(COLUMN_INDECES);
 
             Console.WriteLine(SPACING + this.GetDashedLine(1 + matrix.GetLength(1) * 2));
