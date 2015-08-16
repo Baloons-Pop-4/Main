@@ -13,7 +13,7 @@ namespace Contracts
         bool IsValidUserMove(string userInput);
     }
 
-    // The ILogger interface will be used to allow switching between different types of GUIs.
+    // The IBalonsUserInterface will be used to allow switching between different types of GUIs.
     public interface IBaloonsUserInterface
     {
         void PrintMessage(string message);
