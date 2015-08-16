@@ -14,11 +14,19 @@ namespace Contracts
     }
 
     // The IBalonsUserInterface will be used to allow switching between different types of GUIs.
-    public interface IBaloonsUserInterface
+    public interface IUserInputReader
+    {
+        string ReadUserInput();
+    }
+
+    public interface IBaloonsPrinter
     {
         void PrintMessage(string message);
         void PrintField(byte[,] matrix);
         void PrintHighscore(string highscore);
-        string ReadUserInput();
+    }
+
+    public interface IBaloonsUserInterface : IUserInputReader, IBaloonsPrinter
+    {
     }
 }
