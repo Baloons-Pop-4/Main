@@ -13,7 +13,7 @@ namespace Contracts
         bool IsValidUserMove(string userInput);
     }
 
-    // The IBalonsUserInterface will be used to allow switching between different types of GUIs.
+    
     public interface IUserInputReader
     {
         string ReadUserInput();
@@ -26,6 +26,7 @@ namespace Contracts
         void PrintHighscore(string highscore);
     }
 
+    // The IBalonsUserInterface will be used to allow switching between different types of GUIs.
     public interface IBaloonsUserInterface : IUserInputReader, IBaloonsPrinter
     {
     }
