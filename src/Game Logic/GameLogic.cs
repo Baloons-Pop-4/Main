@@ -1,188 +1,115 @@
-﻿using System;
-using System.Collections.Generic;
-
-public class GameLogic
+﻿namespace GameLogic
 {
-    private const int FIELD_ROWS = 4;
-    private const int FIELD_COLS = 9;
+    using System;
+    using System.Collections.Generic;
 
-    public static byte[,] GenerateField()
+    using Contracts;
+
+    public class GameLogic
     {
-        byte[,] temp = new byte[GameLogic.FIELD_ROWS + 1, GameLogic.FIELD_COLS + 1];
-        Random randNumber = new Random();
-        for (byte row = 0; row <= GameLogic.FIELD_ROWS; row++)
+        private const int FIELD_ROWS = 4;
+        private const int FIELD_COLS = 9;
+        private const int MIN_BALOON_VALUE = 1;
+        private const int MAX_BALOON_VALUE = 4;
+
+        private static readonly int[][] popDirections = new int[][] { new int[] { 0, 1 }, new int[] { 0, -1 }, new int[] { 1, 0 }, new int[] { -1, 0 } };
+
+        private Random rng;
+
+        private IMatrixValidator matrixValidator;
+
+        public GameLogic(IMatrixValidator matrixValidator)
         {
-            for (byte column = 0; column <= GameLogic.FIELD_COLS; column++)
+            this.matrixValidator = matrixValidator;
+            this.rng = new Random();
+        }
+
+        public byte[,] GenerateField()
+        {
+            var newField = new byte[FIELD_ROWS + 1, FIELD_COLS + 1];
+
+            for (var row = 0; row <= FIELD_ROWS; row++)
             {
-                byte tempByte = (byte)randNumber.Next(1, 5);
-                temp[row, column] = tempByte;
-            }
-        }
-        return temp;
-    }
-
-    public static void printMatrix(byte[,] matrix)
-    {
-        Console.Write("    ");
-        for (byte column = 0; column < matrix.GetLongLength(1); column++)
-        {
-            Console.Write(column + " ");
-        }
-
-
-        Console.Write("\n   ");
-        for (byte column = 0; column < matrix.GetLongLength(1) * 2 + 1; column++)
-        {
-            Console.Write("-");
-
-
-
-        }
-
-        Console.WriteLine();
-
-        for (byte i = 0; i < matrix.GetLongLength(0); i++)
-        {
-            Console.Write(i + " | ");
-            for (byte j = 0; j < matrix.GetLongLength(1); j++)
-            {
-                if (matrix[i, j] == 0)
+                for (var column = 0; column <= FIELD_COLS; column++)
                 {
-                    Console.Write("  ");
-                    continue;
+                    var currentBaloonValue = this.GetRandomBaloonValue();
+                    newField[row, column] = currentBaloonValue;
+                }
+            }
+
+            return newField;
+        }
+
+        public void PopBaloons(byte[,] baloonField, int row, int column)
+        {
+            foreach (var dir in popDirections)
+            {
+                PopInDirection(baloonField, row, column, dir[0], dir[1]);
+            }
+
+            baloonField[row, column] = 0;
+        }
+
+        public void LetBaloonsFall(byte[,] baloonField)
+        {
+            var baloonColumn = new Stack<byte>();
+
+            for (int column = 0, length = baloonField.GetLength(1); column < length; column++)
+            {
+                for (int row = 0, rowsCount = baloonField.GetLength(0); row < rowsCount; row++)
+                {
+                    if(baloonField[row, column] != 0)
+                    {
+                        baloonColumn.Push(baloonField[row, column]);
+                    }
                 }
 
-
-
-                Console.Write(matrix[i, j] + " ");
+                for (int row = baloonField.GetLength(0) - 1; row >= 0; row--)
+                {
+                    if(baloonColumn.Count > 0)
+                    {
+                        baloonField[row, column] = baloonColumn.Pop();
+                    }
+                    else
+                    {
+                        baloonField[row, column] = 0;
+                    }
+                    
+                }
             }
-            Console.Write("| ");
-            Console.WriteLine();
         }
 
-        Console.Write("   ");
-        for (byte column = 0; column < matrix.GetLongLength(1) * 2 + 1; column++)
+        public bool GameIsOver(byte[,] matrix)
         {
-            Console.Write("-");
-        }
-        Console.WriteLine();
-
-    }
-
-    public static void checkLeft(byte[,] matrix, int row, int column, int searchedItem)
-    {
-        int newRow = row;
-        int newColumn = column - 1;
-        try
-        {
-            if (matrix[newRow, newColumn] == searchedItem)
+            foreach (var cell in matrix)
             {
-                matrix[newRow, newColumn] = 0; checkLeft(matrix, newRow, newColumn, searchedItem);
+                if(cell != 0)
+                {
+                    return false;
+                }
             }
-            else return;
-        }
-        catch (IndexOutOfRangeException)
-        { return; }
 
-    }
-
-    public static void checkRight(byte[,] matrix, int row, int column, int searchedItem)
-    {
-        int newRow = row;
-        int newColumn = column + 1;
-        try
-        {
-            if (matrix[newRow, newColumn] == searchedItem)
-            {
-                matrix[newRow, newColumn] = 0;
-                checkRight(matrix, newRow, newColumn, searchedItem);
-            }
-            else return;
-        }
-        catch (IndexOutOfRangeException)
-        { return; }
-
-    }
-
-    public static void checkUp(byte[,] matrix, int row, int column, int searchedItem)
-    {
-        int newRow = row + 1;
-        int newColumn = column;
-        try
-        {
-            if (matrix[newRow, newColumn] == searchedItem)
-            {
-                matrix[newRow, newColumn] = 0;
-                checkUp(matrix, newRow, newColumn, searchedItem);
-            }
-            else return;
-        }
-        catch (IndexOutOfRangeException)
-        { return; }
-    }
-
-    public static void checkDown(byte[,] matrix, int row, int column, int searchedItem)
-    {
-        int newRow = row - 1;
-        int newColumn = column;
-        try
-        {
-            if (matrix[newRow, newColumn] == searchedItem)
-            {
-                matrix[newRow, newColumn] = 0;
-                checkDown(matrix, newRow, newColumn, searchedItem);
-            }
-            else return;
-        }
-        catch (IndexOutOfRangeException)
-        { return; }
-
-    }
-
-    public static bool change(byte[,] matrixToModify, int rowAtm, int columnAtm)
-    {
-        if (matrixToModify[rowAtm, columnAtm] == 0)
-        {
             return true;
         }
-        byte searchedTarget = matrixToModify[rowAtm, columnAtm];
-        matrixToModify[rowAtm, columnAtm] = 0;
-        checkLeft(matrixToModify, rowAtm, columnAtm, searchedTarget);
-        checkRight(matrixToModify, rowAtm, columnAtm, searchedTarget);
 
-
-        checkUp(matrixToModify, rowAtm, columnAtm, searchedTarget);
-        checkDown(matrixToModify, rowAtm, columnAtm, searchedTarget);
-        return false;
-    }
-
-    public static bool doit(byte[,] matrix)
-    {
-        bool isWinner = true;
-        Stack<byte> stek = new Stack<byte>();
-        int columnLenght = matrix.GetLength(0);
-        for (int j = 0; j < matrix.GetLength(1); j++)
+        private void PopInDirection(byte[,] matrix, int row, int col, int xUpdate, int yUpdate)
         {
-            for (int i = 0; i < columnLenght; i++)
+            var baloonType = matrix[row, col];
+            row += yUpdate;
+            col += xUpdate;
+
+            while (this.matrixValidator.IsInsideMatrix(matrix, row, col) && matrix[row, col] == baloonType)
             {
-                if (matrix[i, j] != 0)
-                {
-                    isWinner = false;
-                    stek.Push(matrix[i, j]);
-                }
-            }
-            for (int k = columnLenght - 1; (k >= 0); k--)
-            {
-                try
-                {
-                    matrix[k, j] = stek.Pop();
-                }
-                catch (Exception)
-                {
-                    matrix[k, j] = 0;
-                }
+                matrix[row, col] = 0;
+                row += yUpdate;
+                col += xUpdate;
             }
         }
-        return isWinner;
+
+        private byte GetRandomBaloonValue()
+        {
+            var randomBaloonValue = (byte)this.rng.Next(MIN_BALOON_VALUE, MAX_BALOON_VALUE + 1);
+            return randomBaloonValue;
+        }
     }
 }

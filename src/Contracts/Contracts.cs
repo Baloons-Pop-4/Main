@@ -30,4 +30,9 @@ namespace Contracts
     public interface IBaloonsUserInterface : IUserInputReader, IBaloonsPrinter
     {
     }
+
+    public interface IMatrixValidator
+    {
+        bool IsInsideMatrix<T>(T[,] matrix, int row, int col);
+    }
 }

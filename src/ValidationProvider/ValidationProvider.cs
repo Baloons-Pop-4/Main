@@ -57,6 +57,39 @@
             }
         }
 
+        public class MatrixValidator : IMatrixValidator
+        {
+            private static readonly MatrixValidator instance = new MatrixValidator();
+
+            private MatrixValidator()
+            {
+
+            }
+
+            public static MatrixValidator Instance
+            {
+                get
+                {
+                    return instance;
+                }
+            }
+
+            public bool IsInsideMatrix<T>(T[,] matrix, int row, int col)
+            {
+                var rowIsInRange = 0 <= row && row < matrix.GetLength(0);
+                var colIsInRange = 0 <= col && col < matrix.GetLength(1);
+
+                return rowIsInRange && colIsInRange;
+            }
+        }
+
+        public static IMatrixValidator Validator
+        {
+            get
+            {
+                return MatrixValidator.Instance;
+            }
+        }
         // this is the the template for a validator
 
         //public class ValidatorTemplate
