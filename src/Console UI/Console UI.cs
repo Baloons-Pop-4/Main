@@ -7,6 +7,11 @@
     public class ConsoleUI : IBaloonsUserInterface
     {
         private const string COLUMN_INDECES = "    0 1 2 3 4 5 6 7 8 9 ";
+        private const string SPACING = "   ";
+        private const string EMPTY_CELL = "  ";
+        private const string CELL_PRINTING_FORMAT = "{0,2}";
+        private const string SIDE_BORDER = "|";
+        private const char DASH = '-';
         private const int DEFAULT_COLOR_INDEX = 0;
 
         private readonly ConsoleColor[] consoleColors = new ConsoleColor[] { ConsoleColor.White, ConsoleColor.Red, ConsoleColor.Green, ConsoleColor.Blue, ConsoleColor.Yellow};
@@ -31,29 +36,29 @@
 
             Console.WriteLine(COLUMN_INDECES);
 
-            Console.WriteLine("   " + this.GetDashedLine(1 + matrix.GetLength(1) * 2));
+            Console.WriteLine(SPACING + this.GetDashedLine(1 + matrix.GetLength(1) * 2));
 
             for (byte i = 0; i < matrix.GetLongLength(0); i++)
             {
-                Console.Write(i + " |");
+                Console.Write(i + " " + SIDE_BORDER);
                 for (byte j = 0; j < matrix.GetLongLength(1); j++)
                 {
                     if (matrix[i, j] == 0)
                     {
-                        Console.Write("  ");
+                        Console.Write(EMPTY_CELL);
                         continue;
                     }
 
                     this.SetConsoleColor(matrix[i, j]);
-                    Console.Write("{0, 2}", matrix[i, j]);
+                    Console.Write(CELL_PRINTING_FORMAT, matrix[i, j]);
                     this.SetConsoleColorToDefault();
                 }
 
-                Console.WriteLine("{0, 2}", '|');
+                Console.WriteLine(CELL_PRINTING_FORMAT, SIDE_BORDER);
             }
 
 
-            Console.WriteLine("   " + this.GetDashedLine(1 + matrix.GetLength(1) * 2));
+            Console.WriteLine(SPACING + this.GetDashedLine(1 + matrix.GetLength(1) * 2));
 
         }
 
@@ -70,7 +75,7 @@
 
         private string GetDashedLine(int count)
         {
-            var dashedLine = new string('-', count);
+            var dashedLine = new string(DASH, count);
 
             return dashedLine;
         }
