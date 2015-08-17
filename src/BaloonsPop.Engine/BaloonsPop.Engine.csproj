@@ -43,6 +43,7 @@
     <Compile Include="Commands\CommandFactory.cs" />
     <Compile Include="Commands\ExitCommand.cs" />
     <Compile Include="Commands\GameCommand.cs" />
+    <Compile Include="Commands\PopBaloonCommand.cs" />
     <Compile Include="Commands\PrintCommands.cs" />
     <Compile Include="Commands\PrintFieldCommand.cs" />
     <Compile Include="Commands\PrintMessageCommand.cs" />
