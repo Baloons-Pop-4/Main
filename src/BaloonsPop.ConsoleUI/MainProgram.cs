@@ -11,7 +11,12 @@
         {
             var engine = Engine.Instance;
 
-            engine.Initialize(new ConsoleUI(), UserInputValidator.GetInstance, new CommandFactory());
+            var consoleUI = new ConsoleUI();
+            var commandFactory = new CommandFactory();
+            var gameLogicProvider = new GameLogic(MatrixValidator.GetInstance);
+            var gameModel = new Game(gameLogicProvider);
+
+            engine.Initialize(consoleUI, UserInputValidator.GetInstance, commandFactory, gameModel, gameLogicProvider);
             engine.Run();
         }
     }
