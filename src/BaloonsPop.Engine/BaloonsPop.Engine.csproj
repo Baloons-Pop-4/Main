@@ -39,6 +39,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\CommandFactory.cs" />
+    <Compile Include="Commands\ExitCommand.cs" />
+    <Compile Include="Commands\GameCommand.cs" />
+    <Compile Include="Commands\PrintCommands.cs" />
+    <Compile Include="Commands\PrintFieldCommand.cs" />
+    <Compile Include="Commands\PrintMessageCommand.cs" />
+    <Compile Include="Commands\RestartCommand.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameLogic.cs" />

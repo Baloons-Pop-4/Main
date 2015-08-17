@@ -1,6 +1,6 @@
 ﻿namespace BaloonsPop.Engine
 {
-    internal class Game
+    public class Game
     {
         private byte[,] field;
 
