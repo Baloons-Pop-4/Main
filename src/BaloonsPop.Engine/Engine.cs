@@ -63,23 +63,37 @@
                 switch (command)
                 {
                     case RESTART:
-                        game.Reset();
-                        this.userInterface.PrintField(game.Field);
+
+                        var restartCommand = this.create.RestartCommand(game);
+                        restartCommand.Execute();
+
+                        var printFieldCommand = this.create.PrintFieldCommand(this.userInterface, game.Field);
+                        printFieldCommand.Execute();
+
                         break;
 
                     case TOP:
+
                         HighScoreUtility.SortAndPrintChartFive(topFive);
+                        
                         break;
 
                     case EXIT:
-                        this.userInterface.PrintMessage(ON_EXIT_MESSAGE);
-                        return;
+
+                        var printMessageCommand = this.create.PrintMessageCommand(this.userInterface, ON_EXIT_MESSAGE);
+                        printMessageCommand.Execute();
+
+                        var exitCommand = this.create.ExitCommand();
+                        exitCommand.Execute();
+
+                        break;
 
                     default:
 
                         if (!this.validator.IsValidUserMove(command))
                         {
                             this.userInterface.PrintMessage(WRONG_INPUT);
+
                             break;
                         }
 
