@@ -4,49 +4,25 @@
 
     public class PopBaloonCommand : GameCommand
     {
-        private GameLogic gameLogicProvider;
-
-        private IUserInputValidator validator;
-
-        private string rawCommand;
+        private IGameLogicProvider gameLogicProvider;
 
         private int row;
 
         private int col;
 
-        private bool inputIsValid;
-
-        public PopBaloonCommand(Game gameModel, GameLogic gameLogicProvider, IUserInputValidator validator, string commandLine) 
+        public PopBaloonCommand(IGameModel gameModel, IGameLogicProvider gameLogicProvider, int row, int col) 
             : base(gameModel)
         {
             this.gameLogicProvider = gameLogicProvider;
-            this.validator = validator;
-            this.rawCommand = commandLine;
+            this.row = row;
+            this.col = col;
         }
 
         public override void Execute()
         {
-            if(!this.inputIsValid)
-            {
-                return;
-            }
-
-        }
-
-        private void TryParseUserInput()
-        {
-            if(!validator.IsValidUserMove(rawCommand))
-            {
-                this.inputIsValid = false;
-
-                return;
-            }
-
-            bool rowParsedSuccessfully = int.TryParse(this.rawCommand[0].ToString(), out this.row);
-
-            bool colParsedSuccessfully = int.TryParse(this.rawCommand[2].ToString(), out this.col);
-
-            this.inputIsValid = rowParsedSuccessfully && colParsedSuccessfully;
+            this.gameLogicProvider.PopBaloons(this.gameModel.Field, this.row, this.col);
+            this.gameLogicProvider.LetBaloonsFall(this.gameModel.Field);
+            this.gameModel.IncrementMoves();
         }
     }
 }
