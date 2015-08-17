@@ -10,8 +10,6 @@
 
         private string rawCommand;
 
-        private string parsedCommand;
-
         private int row;
 
         private int col;
@@ -23,6 +21,7 @@
         {
             this.gameLogicProvider = gameLogicProvider;
             this.validator = validator;
+            this.rawCommand = commandLine;
         }
 
         public override void Execute()

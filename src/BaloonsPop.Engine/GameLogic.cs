@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using BaloonsPop.Common.Validators;
 
-    public class GameLogic
+    public class GameLogic : IGameLogicProvider
     {
         private const int FIELD_ROWS = 4;
         private const int FIELD_COLS = 9;
@@ -39,39 +39,39 @@
             return newField;
         }
 
-        public void PopBaloons(byte[,] baloonField, int row, int column)
+        public void PopBaloons(byte[,] field, int row, int column)
         {
             foreach (var dir in PopDirections)
             {
-                this.PopInDirection(baloonField, row, column, dir[0], dir[1]);
+                this.PopInDirection(field, row, column, dir[0], dir[1]);
             }
 
-            baloonField[row, column] = 0;
+            field[row, column] = 0;
         }
 
-        public void LetBaloonsFall(byte[,] baloonField)
+        public void LetBaloonsFall(byte[,] field)
         {
             var baloonColumn = new Stack<byte>();
 
-            for (int column = 0, length = baloonField.GetLength(1); column < length; column++)
+            for (int column = 0, length = field.GetLength(1); column < length; column++)
             {
-                for (int row = 0, rowsCount = baloonField.GetLength(0); row < rowsCount; row++)
+                for (int row = 0, rowsCount = field.GetLength(0); row < rowsCount; row++)
                 {
-                    if (baloonField[row, column] != 0)
+                    if (field[row, column] != 0)
                     {
-                        baloonColumn.Push(baloonField[row, column]);
+                        baloonColumn.Push(field[row, column]);
                     }
                 }
 
-                for (int row = baloonField.GetLength(0) - 1; row >= 0; row--)
+                for (int row = field.GetLength(0) - 1; row >= 0; row--)
                 {
                     if (baloonColumn.Count > 0)
                     {
-                        baloonField[row, column] = baloonColumn.Pop();
+                        field[row, column] = baloonColumn.Pop();
                     }
                     else
                     {
-                        baloonField[row, column] = 0;
+                        field[row, column] = 0;
                     }
                 }
             }
@@ -90,15 +90,15 @@
             return true;
         }
 
-        private void PopInDirection(byte[,] matrix, int row, int col, int xUpdate, int yUpdate)
+        private void PopInDirection(byte[,] field, int row, int col, int xUpdate, int yUpdate)
         {
-            var baloonType = matrix[row, col];
+            var baloonType = field[row, col];
             row += yUpdate;
             col += xUpdate;
 
-            while (this.matrixValidator.IsInsideMatrix(matrix, row, col) && matrix[row, col] == baloonType)
+            while (this.matrixValidator.IsInsideMatrix(field, row, col) && field[row, col] == baloonType)
             {
-                matrix[row, col] = 0;
+                field[row, col] = 0;
                 row += yUpdate;
                 col += xUpdate;
             }
