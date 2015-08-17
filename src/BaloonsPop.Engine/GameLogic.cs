@@ -13,6 +13,8 @@
 
         private static readonly int[][] PopDirections = new int[][] { new int[] { 0, 1 }, new int[] { 0, -1 }, new int[] { 1, 0 }, new int[] { -1, 0 } };
 
+        private byte[,] field;
+
         private Random rng;
 
         private IMatrixValidator matrixValidator;
@@ -21,22 +23,21 @@
         {
             this.matrixValidator = matrixValidator;
             this.rng = new Random();
+            this.field = new byte[FIELD_ROWS + 1, FIELD_COLS + 1];
         }
 
         public byte[,] GenerateField()
         {
-            var newField = new byte[FIELD_ROWS + 1, FIELD_COLS + 1];
-
             for (var row = 0; row <= FIELD_ROWS; row++)
             {
                 for (var column = 0; column <= FIELD_COLS; column++)
                 {
                     var currentBaloonValue = this.GetRandomBaloonValue();
-                    newField[row, column] = currentBaloonValue;
+                    this.field[row, column] = currentBaloonValue;
                 }
             }
 
-            return newField;
+            return field;
         }
 
         public void PopBaloons(byte[,] field, int row, int column)
