@@ -1,33 +1,31 @@
 ﻿namespace Tests
 {
     using System;
+    using BaloonsPop.Common.Validators;
+    using BaloonsPop.Engine;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using Contracts;
-    using GameLogic;
-    using Validations;
 
     [TestClass]
     public class GameLogicTests
     {
-        GameLogic gameLogicProvider;
+        private GameLogic gameLogicProvider;
 
         public GameLogicTests()
         {
-            gameLogicProvider = new GameLogic(ValidationProvider.Validator);
+            this.gameLogicProvider = new GameLogic(MatrixValidator.GetInstance);
         }
 
         [TestMethod]
         public void TestIfGenerateFieldReturnAByteMatrix()
         {
-            var field = gameLogicProvider.GenerateField();
+            var field = this.gameLogicProvider.GenerateField();
             Assert.AreEqual(typeof(byte[,]), field.GetType());
         }
 
         [TestMethod]
         public void TestIfGenerateFieldRetunrsAByteMatrixOfCorrectSize()
         {
-            var field = gameLogicProvider.GenerateField();
+            var field = this.gameLogicProvider.GenerateField();
 
             Assert.AreEqual(5, field.GetLength(0));
             Assert.AreEqual(10, field.GetLength(1));
@@ -36,8 +34,8 @@
         [TestMethod]
         public void TestIfGenerateFieldReturnsFieldThatAreSignificantlyDifferentFromEachOther()
         {
-            var field1 = gameLogicProvider.GenerateField();
-            var field2 = gameLogicProvider.GenerateField();
+            var field1 = this.gameLogicProvider.GenerateField();
+            var field2 = this.gameLogicProvider.GenerateField();
 
             var differenceCount = 0;
 
@@ -62,7 +60,7 @@
         {
             for (int i = 0; i < 10; i++)
             {
-                var field = gameLogicProvider.GenerateField();
+                var field = this.gameLogicProvider.GenerateField();
 
                 foreach (var cell in field)
                 {
@@ -78,7 +76,7 @@
         public void TestIfGameIsOverReturnsTrueWithAnEmptyField()
         {
             var sampleEmptyField = new byte[5, 10];
-            Assert.IsTrue(gameLogicProvider.GameIsOver(sampleEmptyField));
+            Assert.IsTrue(this.gameLogicProvider.GameIsOver(sampleEmptyField));
         }
 
         [TestMethod]
@@ -91,16 +89,16 @@
                 var sampleEmptyField = new byte[5, 10];
                 sampleEmptyField[rng.Next(0, 5), rng.Next(0, 10)] = (byte)rng.Next(1, 5);
 
-                Assert.IsFalse(gameLogicProvider.GameIsOver(sampleEmptyField));
+                Assert.IsFalse(this.gameLogicProvider.GameIsOver(sampleEmptyField));
             }
         }
 
         [TestMethod]
         public void TestIfGameIsOverReturnsFalseWithFullField()
         {
-            var field = gameLogicProvider.GenerateField();
+            var field = this.gameLogicProvider.GenerateField();
 
-            Assert.IsFalse(gameLogicProvider.GameIsOver(field));
+            Assert.IsFalse(this.gameLogicProvider.GameIsOver(field));
         }
 
         [TestMethod]
@@ -118,11 +116,11 @@
                 field[j, i] = (byte)1;
             }
 
-            gameLogicProvider.PopBaloons(field, 2, 5);
+            this.gameLogicProvider.PopBaloons(field, 2, 5);
 
             foreach (var cell in field)
             {
-                if(cell != 0)
+                if (cell != 0)
                 {
                     Assert.Fail();
                 }
@@ -132,7 +130,7 @@
         [TestMethod]
         public void TestIfPopBaloonsPopsOnlyTheBaloonsOnTheSameRowAndColumn()
         {
-            var field = gameLogicProvider.GenerateField();
+            var field = this.gameLogicProvider.GenerateField();
             var storedField = (byte[,])field.Clone();
 
             for (int i = 0, j = 5; i < 5; i++)
@@ -145,22 +143,22 @@
                 field[j, i] = (byte)1;
             }
 
-            gameLogicProvider.PopBaloons(field, 2, 5);
+            this.gameLogicProvider.PopBaloons(field, 2, 5);
 
             for (int i = 0; i < field.GetLength(0); i++)
             {
                 for (int j = 0; j < field.GetLength(1); j++)
                 {
-                    if(i == 2 || j == 5)
+                    if (i == 2 || j == 5)
                     {
-                        if(field[i, j] != 0)
+                        if (field[i, j] != 0)
                         {
                             Assert.Fail();
                         }
                     }
                     else
                     {
-                        if(storedField[i, j] == 0)
+                        if (storedField[i, j] == 0)
                         {
                             Assert.Fail();
                         }
@@ -182,13 +180,13 @@
                 }
             }
 
-            gameLogicProvider.PopBaloons(field, 2, 3);
+            this.gameLogicProvider.PopBaloons(field, 2, 3);
 
             for (int i = 1; i < 4; i++)
             {
                 for (int j = 2; j < 5; j++)
                 {
-                    if(i != 2 && j != 3)
+                    if (i != 2 && j != 3)
                     {
                         Assert.AreEqual(field[i, j], 2);
                     }
