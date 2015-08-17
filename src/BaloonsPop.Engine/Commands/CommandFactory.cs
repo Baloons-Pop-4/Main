@@ -29,5 +29,10 @@
         {
             return new PrintHighscoreCommand(printer, chart);
         }
+
+        public ICommand PopBaloonCommand(IGameModel gameModel, IGameLogicProvider gameLogicProvider, int row, int col)
+        {
+            return new PopBaloonCommand(gameModel, gameLogicProvider, row, col);
+        }
     }
 }

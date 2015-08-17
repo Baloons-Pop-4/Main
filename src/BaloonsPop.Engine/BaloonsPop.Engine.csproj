@@ -46,6 +46,7 @@
     <Compile Include="Commands\PopBaloonCommand.cs" />
     <Compile Include="Commands\PrintCommands.cs" />
     <Compile Include="Commands\PrintFieldCommand.cs" />
+    <Compile Include="Commands\PrintHighscoreCommand.cs" />
     <Compile Include="Commands\PrintMessageCommand.cs" />
     <Compile Include="Commands\RestartCommand.cs" />
     <Compile Include="Engine.cs" />
