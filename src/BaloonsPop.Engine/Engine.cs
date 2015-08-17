@@ -3,6 +3,7 @@
     using System;
     using BaloonsPop.Common.Validators;
     using BaloonsPop.Engine.Commands;
+using System.Collections.Generic;
 
     public class Engine : IEngine
     {
@@ -20,6 +21,8 @@
 
         private static Engine instance = new Engine();
 
+        private string[,] highScoreChart;
+
         private IUserInterface userInterface;
 
         private IUserInputValidator validator;
@@ -29,6 +32,11 @@
         private IGameModel game;
 
         private IGameLogicProvider gameLogicProvider;
+
+        private Engine()
+        {
+            this.highScoreChart = new string[2, 5];
+        }
 
         public static IEngine Instance
         {
@@ -49,9 +57,6 @@
 
         public void Run()
         {
-            // this.Initialize(new ConsoleUI(), ValidationProvider.InputValidator);
-            string[,] topFive = new string[5, 2];
-
             this.userInterface.PrintField(game.Field);
             var command = string.Empty;
 
@@ -74,7 +79,7 @@
 
                     case TOP:
 
-                        HighScoreUtility.SortAndPrintChartFive(topFive);
+                        var printHighscoreCommand = this.create.PrintHighscoreCommand(this.userInterface, this.highScoreChart);
                         
                         break;
 
@@ -119,7 +124,7 @@
                         // GameLogic should have an IsGameWon method
                         if (gameLogicProvider.GameIsOver(game.Field))
                         {
-                            this.EndGame(topFive, game.UserMovesCount);
+                            this.EndGame(this.highScoreChart, game.UserMovesCount);
                             
                             // new game
                             game.Reset();
@@ -129,6 +134,78 @@
                         break;
                 }
             }
+        }
+        
+        protected virtual IList<ICommand> GetCommandList(string userCommand)
+        {
+            var commandList = new List<ICommand>();
+
+            switch (userCommand)
+            {
+                case RESTART:
+
+                    commandList.Add(this.create.RestartCommand(this.game));
+                    commandList.Add(this.create.PrintFieldCommand(this.userInterface, game.Field));
+
+                    break;
+
+                case TOP:
+
+                    commandList.Add(this.create.PrintHighscoreCommand(this.userInterface, this.highScoreChart));
+
+                    break;
+
+                case EXIT:
+
+                    commandList.Add(this.create.PrintMessageCommand(this.userInterface, ON_EXIT_MESSAGE));
+                    commandList.Add(this.create.ExitCommand());
+
+                    break;
+
+                default:
+
+                    if (!this.validator.IsValidUserMove(userCommand))
+                    {
+                        commandList.Add(this.create.PrintMessageCommand(this.userInterface, WRONG_INPUT));
+
+                        break;
+                    }
+
+                    var userRow = int.Parse(userCommand[0].ToString());
+                    var userColumn = int.Parse(userCommand[2].ToString());
+
+                    // this condition should be a GameLogic method
+                    if (game.Field[userRow, userColumn] == 0)
+                    {
+                        commandList.Add(this.create.PrintMessageCommand(this.userInterface, CANNOT_POP_MISSING_BALLOON));
+                    }
+                    else
+                    {
+                        // GameLogic.change(game.Field, userRow, userColumn);
+                        gameLogicProvider.PopBaloons(game.Field, userRow, userColumn);
+                        gameLogicProvider.LetBaloonsFall(game.Field);
+                        game.IncrementMoves();
+
+                        commandList.Add(this.create.PopBaloonCommand(this.game, this.gameLogicProvider, userRow, userColumn));
+                    }
+
+                    // win condition
+                    // GameLogic should have an IsGameWon method
+                    if (gameLogicProvider.GameIsOver(game.Field))
+                    {
+                        commandList.Add(this.create.PrintMessageCommand(this.userInterface, string.Format(WIN_MESSAGE_TEMPLATE, game.UserMovesCount)));
+
+                        HighScoreUtility.SignIfSkilled(this.highScoreChart, this.game.UserMovesCount);
+
+                        commandList.Add(this.create.PrintHighscoreCommand(this.userInterface, this.highScoreChart));
+                    }
+
+                    commandList.Add(this.create.PrintFieldCommand(this.userInterface, this.game.Field));
+
+                    break;
+            }
+
+            return commandList;
         }
 
         private void EndGame(string[,] topFive, int userMoves)
