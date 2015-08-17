@@ -18,7 +18,8 @@
         private const string ON_EXIT_MESSAGE = "Good Bye!";
         #endregion
 
-        private static Engine instance = new Engine();
+        private static Engine instance = new Engine(
+            );
 
         private IUserInterface userInterface;
 
@@ -26,9 +27,9 @@
 
         private ICommandFactory create;
 
-        private Engine()
-        {
-        }
+        private IGameModel game;
+
+        private IGameLogicProvider gameLogicProvider;
 
         public static IEngine Instance
         {
@@ -38,19 +39,19 @@
             }
         }
 
-        public void Initialize(IUserInterface ui, IUserInputValidator validator, ICommandFactory commandFactory)
+        public void Initialize(IUserInterface ui, IUserInputValidator validator, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
         {
             this.userInterface = ui;
             this.validator = validator;
             this.create = commandFactory;
+            this.game = gameModel;
+            this.gameLogicProvider = gameLogicProvider;
         }
 
         public void Run()
         {
             // this.Initialize(new ConsoleUI(), ValidationProvider.InputValidator);
             string[,] topFive = new string[5, 2];
-            var gameLogicProvider = new GameLogic(MatrixValidator.GetInstance);
-            var game = new Game(gameLogicProvider);
 
             this.userInterface.PrintField(game.Field);
             var command = string.Empty;
@@ -64,7 +65,7 @@
                 {
                     case RESTART:
 
-                        var restartCommand = this.create.RestartCommand(game);
+                        var restartCommand = this.create.RestartCommand(this.game);
                         restartCommand.Execute();
 
                         var printFieldCommand = this.create.PrintFieldCommand(this.userInterface, game.Field);

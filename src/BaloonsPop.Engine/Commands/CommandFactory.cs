@@ -11,7 +11,7 @@
             return new ExitCommand();
         }
 
-        public ICommand RestartCommand(Game gameModel)
+        public ICommand RestartCommand(IGameModel gameModel)
         {
             return new RestartCommand(gameModel);
         }

@@ -2,9 +2,9 @@
 {
     public abstract class GameCommand : Command
     {
-        protected Game gameModel;
+        protected IGameModel gameModel;
 
-        public GameCommand(Game gameModel)
+        public GameCommand(IGameModel gameModel)
         {
             this.gameModel = gameModel;
         }

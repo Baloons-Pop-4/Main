@@ -2,7 +2,7 @@
 {
     public class RestartCommand : GameCommand
     {
-        public RestartCommand(Game gameModel)
+        public RestartCommand(IGameModel gameModel)
             :base(gameModel)
         {
         }
