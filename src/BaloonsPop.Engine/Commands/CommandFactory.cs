@@ -25,5 +25,9 @@
         {
             return new PrintMessageCommand(printer, message);
         }
+        public ICommand PrintHighscoreCommand(IPrinter printer, string[,] chart)
+        {
+            return new PrintHighscoreCommand(printer, chart);
+        }
     }
 }
