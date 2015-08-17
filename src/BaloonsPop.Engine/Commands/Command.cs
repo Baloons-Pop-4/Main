@@ -1,6 +1,6 @@
 ﻿namespace BaloonsPop.Engine.Commands
 {
-    public abstract class Command
+    public abstract class Command : ICommand
     {
         public Command()
         {

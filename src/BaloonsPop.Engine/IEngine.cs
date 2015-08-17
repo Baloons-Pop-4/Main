@@ -6,6 +6,6 @@
     {
         void Run();
 
-        void Initialize(IUserInterface ui, IUserInputValidator validator);
+        void Initialize(IUserInterface ui, IUserInputValidator validator, ICommandFactory commandFactory);
     }
 }

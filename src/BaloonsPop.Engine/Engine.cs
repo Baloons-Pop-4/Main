@@ -2,6 +2,7 @@
 {
     using System;
     using BaloonsPop.Common.Validators;
+    using BaloonsPop.Engine.Commands;
 
     public class Engine : IEngine
     {
@@ -23,6 +24,8 @@
 
         private IUserInputValidator validator;
 
+        private ICommandFactory create;
+
         private Engine()
         {
         }
@@ -35,10 +38,11 @@
             }
         }
 
-        public void Initialize(IUserInterface ui, IUserInputValidator validator)
+        public void Initialize(IUserInterface ui, IUserInputValidator validator, ICommandFactory commandFactory)
         {
             this.userInterface = ui;
             this.validator = validator;
+            this.create = commandFactory;
         }
 
         public void Run()

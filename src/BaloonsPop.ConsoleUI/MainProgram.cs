@@ -3,6 +3,7 @@
     using System;
     using BaloonsPop.Common.Validators;
     using BaloonsPop.Engine;
+    using BaloonsPop.Engine.Commands;
 
     public class MainProgram
     {
@@ -10,7 +11,7 @@
         {
             var engine = Engine.Instance;
 
-            engine.Initialize(new ConsoleUI(), UserInputValidator.GetInstance);
+            engine.Initialize(new ConsoleUI(), UserInputValidator.GetInstance, new CommandFactory());
             engine.Run();
         }
     }

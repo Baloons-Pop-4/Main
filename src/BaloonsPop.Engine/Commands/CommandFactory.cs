@@ -1,27 +1,27 @@
 ﻿namespace BaloonsPop.Engine.Commands
 {
-    public class CommandFactory
+    public class CommandFactory : ICommandFactory
     {
         public CommandFactory()
         {
         }
 
-        public Command ExitCommand()
+        public ICommand ExitCommand()
         {
             return new ExitCommand();
         }
 
-        public Command RestartCommand(Game gameModel)
+        public ICommand RestartCommand(Game gameModel)
         {
             return new RestartCommand(gameModel);
         }
 
-        public Command PrintFieldCommand(IPrinter printer, byte[,] field)
+        public ICommand PrintFieldCommand(IPrinter printer, byte[,] field)
         {
             return new PrintFieldCommand(printer, field);
         }
 
-        public Command PrintMessageCommand(IPrinter printer, string message)
+        public ICommand PrintMessageCommand(IPrinter printer, string message)
         {
             return new PrintMessageCommand(printer, message);
         }
