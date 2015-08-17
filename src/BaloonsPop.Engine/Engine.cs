@@ -3,7 +3,7 @@
     using System;
     using BaloonsPop.Common.Validators;
     using BaloonsPop.Engine.Commands;
-using System.Collections.Generic;
+    using System.Collections.Generic;
 
     public class Engine : IEngine
     {
@@ -65,75 +65,6 @@ using System.Collections.Generic;
                 this.userInterface.PrintMessage(MOVE_PROMPT);
                 command = this.GetTrimmedUppercaseInput();
 
-                //switch (command)
-                //{
-                //    case RESTART:
-
-                //        var restartCommand = this.create.RestartCommand(this.game);
-                //        restartCommand.Execute();
-
-                //        var printFieldCommand = this.create.PrintFieldCommand(this.userInterface, game.Field);
-                //        printFieldCommand.Execute();
-
-                //        break;
-
-                //    case TOP:
-
-                //        var printHighscoreCommand = this.create.PrintHighscoreCommand(this.userInterface, this.highScoreChart);
-                        
-                //        break;
-
-                //    case EXIT:
-
-                //        var printMessageCommand = this.create.PrintMessageCommand(this.userInterface, ON_EXIT_MESSAGE);
-                //        printMessageCommand.Execute();
-
-                //        var exitCommand = this.create.ExitCommand();
-                //        exitCommand.Execute();
-
-                //        break;
-
-                //    default:
-
-                //        if (!this.validator.IsValidUserMove(command))
-                //        {
-                //            this.userInterface.PrintMessage(WRONG_INPUT);
-
-                //            break;
-                //        }
-
-                //        var userRow = int.Parse(command[0].ToString());
-                //        var userColumn = int.Parse(command[2].ToString());
-
-                //        // this condition should be a GameLogic method
-                //        if (game.Field[userRow, userColumn] == 0)
-                //        {
-                //            this.userInterface.PrintMessage(CANNOT_POP_MISSING_BALLOON);
-                //            continue;
-                //        }
-                //        else
-                //        {
-                //            // GameLogic.change(game.Field, userRow, userColumn);
-                //            gameLogicProvider.PopBaloons(game.Field, userRow, userColumn);
-                //            gameLogicProvider.LetBaloonsFall(game.Field);
-                //        }
-
-                //        game.IncrementMoves();
-
-                //        // win condition
-                //        // GameLogic should have an IsGameWon method
-                //        if (gameLogicProvider.GameIsOver(game.Field))
-                //        {
-                //            this.EndGame(this.highScoreChart, game.UserMovesCount);
-                            
-                //            // new game
-                //            game.Reset();
-                //        }
-
-                //        this.userInterface.PrintField(game.Field);
-                //        break;
-                //}
-
                 var commandList = this.GetCommandList(command);
 
                 this.ExecuteCommandList(commandList);
@@ -178,7 +109,6 @@ using System.Collections.Generic;
                     var userRow = int.Parse(userCommand[0].ToString());
                     var userColumn = int.Parse(userCommand[2].ToString());
 
-                    // this condition should be a GameLogic method
                     if (game.Field[userRow, userColumn] == 0)
                     {
                         commandList.Add(this.create.PrintMessageCommand(this.userInterface, CANNOT_POP_MISSING_BALLOON));
@@ -188,8 +118,6 @@ using System.Collections.Generic;
                         commandList.Add(this.create.PopBaloonCommand(this.game, this.gameLogicProvider, userRow, userColumn));
                     }
 
-                    // win condition
-                    // GameLogic should have an IsGameWon method
                     if (gameLogicProvider.GameIsOver(game.Field))
                     {
                         commandList.Add(this.create.PrintMessageCommand(this.userInterface, string.Format(WIN_MESSAGE_TEMPLATE, game.UserMovesCount)));
@@ -207,25 +135,11 @@ using System.Collections.Generic;
             return commandList;
         }
 
-        private void ExecuteCommandList(IList<ICommand> commandList)
+        protected virtual void ExecuteCommandList(IList<ICommand> commandList)
         {
             foreach (var command in commandList)
             {
                 command.Execute();
-            }
-        }
-
-        private void EndGame(string[,] topFive, int userMoves)
-        {
-            this.userInterface.PrintMessage(string.Format(WIN_MESSAGE_TEMPLATE, userMoves));
-
-            if (HighScoreUtility.SignIfSkilled(topFive, userMoves))
-            {
-                HighScoreUtility.SortAndPrintChartFive(topFive);
-            }
-            else
-            {
-                this.userInterface.PrintMessage(NOT_IN_TOP_FIVE);
             }
         }
 
