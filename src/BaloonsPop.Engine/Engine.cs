@@ -185,11 +185,6 @@ using System.Collections.Generic;
                     }
                     else
                     {
-                        // GameLogic.change(game.Field, userRow, userColumn);
-                        gameLogicProvider.PopBaloons(game.Field, userRow, userColumn);
-                        gameLogicProvider.LetBaloonsFall(game.Field);
-                        game.IncrementMoves();
-
                         commandList.Add(this.create.PopBaloonCommand(this.game, this.gameLogicProvider, userRow, userColumn));
                     }
 
