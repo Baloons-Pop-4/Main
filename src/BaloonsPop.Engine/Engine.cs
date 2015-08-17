@@ -18,8 +18,7 @@
         private const string ON_EXIT_MESSAGE = "Good Bye!";
         #endregion
 
-        private static Engine instance = new Engine(
-            );
+        private static Engine instance = new Engine();
 
         private IUserInterface userInterface;
 
