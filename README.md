@@ -16,6 +16,7 @@ They can be found [here](REQUIREMENTS.md).
 
 * Konstantin Simeonov ([TelerikAcademy](http://telerikacademy.com/Users/kon.simeonov), [GitHub](https://github.com/KonstantinSimeonov))
 * Ivaylo Arnaudov ([TelerikAcademy](http://telerikacademy.com/Users/ivaylo.arnaudov), [GitHub](https://github.com/arnaudoff))
+* Martin Atanasov ([TelerikAcademy](https://telerikacademy.com/Users/jumarto), [GitHub](https://github.com/juvemar))
 
 ##Contributing
 
