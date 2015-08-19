@@ -35,7 +35,7 @@
             {
                 for (int j = 0; j < fieldBeforeReset.GetLength(1); j++)
                 {
-                    if(fieldBeforeReset[i, j] != gameModel.Field[i, j])
+                    if (fieldBeforeReset[i, j] != gameModel.Field[i, j])
                     {
                         differentFieldCount++;
                     }
