@@ -2,6 +2,8 @@
 {
     using System;
     using BaloonsPop.Common.Validators;
+    using BaloonsPop.Engine.Commands;
+    using System.Collections.Generic;
 
     public class Engine : IEngine
     {
@@ -19,12 +21,21 @@
 
         private static Engine instance = new Engine();
 
+        private string[,] highScoreChart;
+
         private IUserInterface userInterface;
 
         private IUserInputValidator validator;
 
+        private ICommandFactory create;
+
+        private IGameModel game;
+
+        private IGameLogicProvider gameLogicProvider;
+
         private Engine()
         {
+            this.highScoreChart = new string[2, 5];
         }
 
         public static IEngine Instance
@@ -35,95 +46,101 @@
             }
         }
 
-        public void Initialize(IUserInterface ui, IUserInputValidator validator)
+        public void Initialize(IUserInterface ui, IUserInputValidator validator, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
         {
             this.userInterface = ui;
             this.validator = validator;
+            this.create = commandFactory;
+            this.game = gameModel;
+            this.gameLogicProvider = gameLogicProvider;
         }
 
         public void Run()
         {
-            // this.Initialize(new ConsoleUI(), ValidationProvider.InputValidator);
-            string[,] topFive = new string[5, 2];
-            var gameLogicProvider = new GameLogic(MatrixValidator.GetInstance);
-            var game = new Game(gameLogicProvider);
-
             this.userInterface.PrintField(game.Field);
             var command = string.Empty;
 
             while (true)
             {
-                this.userInterface.PrintMessage(MOVE_PROMPT);
+                this.create.PrintMessageCommand(this.userInterface, MOVE_PROMPT).Execute();
+
                 command = this.GetTrimmedUppercaseInput();
 
-                switch (command)
-                {
-                    case RESTART:
-                        game.Reset();
-                        this.userInterface.PrintField(game.Field);
-                        break;
+                var commandList = this.GetCommandList(command);
 
-                    case TOP:
-                        HighScoreUtility.SortAndPrintChartFive(topFive);
-                        break;
-
-                    case EXIT:
-                        this.userInterface.PrintMessage(ON_EXIT_MESSAGE);
-                        return;
-
-                    default:
-
-                        if (!this.validator.IsValidUserMove(command))
-                        {
-                            this.userInterface.PrintMessage(WRONG_INPUT);
-                            break;
-                        }
-
-                        var userRow = int.Parse(command[0].ToString());
-                        var userColumn = int.Parse(command[2].ToString());
-
-                        // this condition should be a GameLogic method
-                        if (game.Field[userRow, userColumn] == 0)
-                        {
-                            this.userInterface.PrintMessage(CANNOT_POP_MISSING_BALLOON);
-                            continue;
-                        }
-                        else
-                        {
-                            // GameLogic.change(game.Field, userRow, userColumn);
-                            gameLogicProvider.PopBaloons(game.Field, userRow, userColumn);
-                            gameLogicProvider.LetBaloonsFall(game.Field);
-                        }
-
-                        game.IncrementMoves();
-
-                        // win condition
-                        // GameLogic should have an IsGameWon method
-                        if (gameLogicProvider.GameIsOver(game.Field))
-                        {
-                            this.EndGame(topFive, game.UserMovesCount);
-                            
-                            // new game
-                            game.Reset();
-                        }
-
-                        this.userInterface.PrintField(game.Field);
-                        break;
-                }
+                this.ExecuteCommandList(commandList);
             }
         }
-
-        private void EndGame(string[,] topFive, int userMoves)
+        
+        protected virtual IList<ICommand> GetCommandList(string userCommand)
         {
-            this.userInterface.PrintMessage(string.Format(WIN_MESSAGE_TEMPLATE, userMoves));
+            var commandList = new List<ICommand>();
 
-            if (HighScoreUtility.SignIfSkilled(topFive, userMoves))
+            switch (userCommand)
             {
-                HighScoreUtility.SortAndPrintChartFive(topFive);
+                case RESTART:
+
+                    commandList.Add(this.create.RestartCommand(this.game));
+                    commandList.Add(this.create.PrintFieldCommand(this.userInterface, game.Field));
+
+                    break;
+
+                case TOP:
+
+                    commandList.Add(this.create.PrintHighscoreCommand(this.userInterface, this.highScoreChart));
+
+                    break;
+
+                case EXIT:
+
+                    commandList.Add(this.create.PrintMessageCommand(this.userInterface, ON_EXIT_MESSAGE));
+                    commandList.Add(this.create.ExitCommand());
+
+                    break;
+
+                default:
+
+                    if (!this.validator.IsValidUserMove(userCommand))
+                    {
+                        commandList.Add(this.create.PrintMessageCommand(this.userInterface, WRONG_INPUT));
+
+                        break;
+                    }
+
+                    var userRow = int.Parse(userCommand[0].ToString());
+                    var userColumn = int.Parse(userCommand[2].ToString());
+
+                    if (game.Field[userRow, userColumn] == 0)
+                    {
+                        commandList.Add(this.create.PrintMessageCommand(this.userInterface, CANNOT_POP_MISSING_BALLOON));
+                    }
+                    else
+                    {
+                        commandList.Add(this.create.PopBaloonCommand(this.game, this.gameLogicProvider, userRow, userColumn));
+                    }
+
+                    if (gameLogicProvider.GameIsOver(game.Field))
+                    {
+                        commandList.Add(this.create.PrintMessageCommand(this.userInterface, string.Format(WIN_MESSAGE_TEMPLATE, game.UserMovesCount)));
+
+                        HighScoreUtility.SignIfSkilled(this.highScoreChart, this.game.UserMovesCount);
+
+                        commandList.Add(this.create.PrintHighscoreCommand(this.userInterface, this.highScoreChart));
+                    }
+
+                    commandList.Add(this.create.PrintFieldCommand(this.userInterface, this.game.Field));
+
+                    break;
             }
-            else
+
+            return commandList;
+        }
+
+        protected virtual void ExecuteCommandList(IList<ICommand> commandList)
+        {
+            foreach (var command in commandList)
             {
-                this.userInterface.PrintMessage(NOT_IN_TOP_FIVE);
+                command.Execute();
             }
         }
 

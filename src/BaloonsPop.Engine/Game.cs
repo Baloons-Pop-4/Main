@@ -1,10 +1,11 @@
 ﻿namespace BaloonsPop.Engine
 {
-    internal class Game
+    public class Game : IGameModel
     {
         private byte[,] field;
 
         private int userMovesCount;
+
         private GameLogic gameLogicProvider;
 
         public Game(GameLogic gameLogicProvider)
