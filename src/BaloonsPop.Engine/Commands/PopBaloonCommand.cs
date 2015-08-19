@@ -1,6 +1,6 @@
 ﻿namespace BaloonsPop.Engine.Commands
 {
-    using Common.Validators;
+    using BaloonsPop.Common.Contracts;
 
     public class PopBaloonCommand : GameCommand
     {

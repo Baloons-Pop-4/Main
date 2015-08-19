@@ -1,5 +1,7 @@
 ﻿namespace BaloonsPop.Engine.Commands
 {
+    using BaloonsPop.Common.Contracts;
+
     public class PrintHighscoreCommand : PrintCommands
     {
         private string[,] chart;

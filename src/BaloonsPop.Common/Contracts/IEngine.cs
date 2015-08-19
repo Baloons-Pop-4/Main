@@ -1,7 +1,5 @@
-﻿namespace BaloonsPop.Engine
+﻿namespace BaloonsPop.Common.Contracts
 {
-    using BaloonsPop.Common.Validators;
-
     public interface IEngine
     {
         void Run();

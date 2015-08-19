@@ -1,6 +1,7 @@
 ﻿namespace BaloonsPop.Engine
 {
     using System;
+    using BaloonsPop.Common.Contracts;
     using BaloonsPop.Common.Validators;
     using BaloonsPop.Engine.Commands;
     using System.Collections.Generic;

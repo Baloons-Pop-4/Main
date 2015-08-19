@@ -1,4 +1,4 @@
-﻿namespace BaloonsPop.Engine
+﻿namespace BaloonsPop.Common.Contracts
 {
     public interface IPrinter
     {

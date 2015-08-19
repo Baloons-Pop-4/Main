@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using BaloonsPop.Common.Validators;
+    using BaloonsPop.Common.Contracts;
 
     public class GameLogic : IGameLogicProvider
     {

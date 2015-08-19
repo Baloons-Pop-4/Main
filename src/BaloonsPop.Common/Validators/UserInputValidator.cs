@@ -1,5 +1,7 @@
 ﻿namespace BaloonsPop.Common.Validators
 {
+    using BaloonsPop.Common.Contracts;
+
     public class UserInputValidator : IUserInputValidator
     {
         private const char COMMA = ',';

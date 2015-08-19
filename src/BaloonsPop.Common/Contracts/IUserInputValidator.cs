@@ -1,4 +1,4 @@
-﻿namespace BaloonsPop.Common.Validators
+﻿namespace BaloonsPop.Common.Contracts
 {
     public interface IUserInputValidator
     {

@@ -39,8 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Validators\IMatrixValidator.cs" />
-    <Compile Include="Validators\IUserInputValidator.cs" />
+    <Compile Include="Contracts\ICommand.cs" />
+    <Compile Include="Contracts\ICommandFactory.cs" />
+    <Compile Include="Contracts\IEngine.cs" />
+    <Compile Include="Contracts\IGameLogicProvider.cs" />
+    <Compile Include="Contracts\IGameModel.cs" />
+    <Compile Include="Contracts\IMatrixValidator.cs" />
+    <Compile Include="Contracts\IPrinter.cs" />
+    <Compile Include="Contracts\IUserInputReader.cs" />
+    <Compile Include="Contracts\IUserInputValidator.cs" />
+    <Compile Include="Contracts\IUserInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validators\MatrixValidator.cs" />
     <Compile Include="Validators\UserInputValidator.cs" />

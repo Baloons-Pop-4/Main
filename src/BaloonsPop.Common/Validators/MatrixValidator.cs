@@ -1,5 +1,7 @@
 ﻿namespace BaloonsPop.Common.Validators
 {
+    using BaloonsPop.Common.Contracts;
+
     public class MatrixValidator : IMatrixValidator
     {
         private static readonly MatrixValidator Instance = new MatrixValidator();

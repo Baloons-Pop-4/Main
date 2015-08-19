@@ -53,14 +53,6 @@
     <Compile Include="Game.cs" />
     <Compile Include="GameLogic.cs" />
     <Compile Include="Highscore.cs" />
-    <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="Commands\ICommandFactory.cs" />
-    <Compile Include="IEngine.cs" />
-    <Compile Include="IGameLogicProvider.cs" />
-    <Compile Include="IGameModel.cs" />
-    <Compile Include="IPrinter.cs" />
-    <Compile Include="IUserInputReader.cs" />
-    <Compile Include="IUserInterface.cs" />
     <Compile Include="PlayerScore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

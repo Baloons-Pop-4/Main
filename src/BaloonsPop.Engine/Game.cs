@@ -1,5 +1,7 @@
 ﻿namespace BaloonsPop.Engine
 {
+    using BaloonsPop.Common.Contracts;
+
     public class Game : IGameModel
     {
         private byte[,] field;

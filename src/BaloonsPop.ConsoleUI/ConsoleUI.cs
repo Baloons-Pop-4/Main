@@ -1,7 +1,7 @@
 ﻿namespace BaloonsPop.ConsoleUI
 {
     using System;
-    using BaloonsPop.Engine;
+    using BaloonsPop.Common.Contracts;
 
     public class ConsoleUI : IUserInterface
     {
