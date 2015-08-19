@@ -27,30 +27,24 @@
 
         public void PrintField(byte[,] matrix)
         {
-            Console.WriteLine(COLUMN_INDECES);
+            this.PrintColumnIndeces();
 
-            Console.WriteLine(SPACING + this.GetDashedLine(1 + (matrix.GetLength(1) * 2)));
+            this.PrintDashedLine(1 + (matrix.GetLength(1) * 2));
 
             for (byte i = 0; i < matrix.GetLongLength(0); i++)
             {
-                Console.Write(i + " " + SIDE_BORDER);
+                PrintRowBeggining(i);
+
                 for (byte j = 0; j < matrix.GetLongLength(1); j++)
                 {
-                    if (matrix[i, j] == 0)
-                    {
-                        Console.Write(EMPTY_CELL);
-                        continue;
-                    }
-
-                    this.SetConsoleColor(matrix[i, j]);
-                    Console.Write(CELL_PRINTING_FORMAT, matrix[i, j]);
-                    this.SetConsoleColorToDefault();
+                    PrintCell(matrix[i, j]);
                 }
 
-                Console.WriteLine(CELL_PRINTING_FORMAT, SIDE_BORDER);
+                this.SetConsoleColorToDefault();
+                this.PrintRowEnd();
             }
 
-            Console.WriteLine(SPACING + this.GetDashedLine(1 + (matrix.GetLength(1) * 2)));
+            this.PrintDashedLine(1 + (matrix.GetLength(1) * 2));
         }
 
         public void PrintHighscore(string highscore)
@@ -79,6 +73,39 @@
         private void SetConsoleColorToDefault()
         {
             Console.ForegroundColor = this.consoleColors[DEFAULT_COLOR_INDEX];
+        }
+
+        private void PrintColumnIndeces()
+        {
+            Console.WriteLine(COLUMN_INDECES);
+        }
+
+        private void PrintDashedLine(int dashesCount)
+        {
+            Console.WriteLine(SPACING + this.GetDashedLine(dashesCount));
+        }
+
+        private void PrintRowBeggining(byte cellValue)
+        {
+            Console.Write(cellValue + " " + SIDE_BORDER);
+        }
+
+        private void PrintCell(byte cellValue)
+        {
+            if (cellValue == 0)
+            {
+                Console.Write(EMPTY_CELL);
+            }
+            else
+            {
+                this.SetConsoleColor(cellValue);
+                Console.Write(CELL_PRINTING_FORMAT, cellValue);
+            }
+        }
+
+        private void PrintRowEnd()
+        {
+            Console.WriteLine(CELL_PRINTING_FORMAT, SIDE_BORDER);
         }
     }
 }
