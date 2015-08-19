@@ -62,7 +62,8 @@
 
             while (true)
             {
-                this.userInterface.PrintMessage(MOVE_PROMPT);
+                this.create.PrintMessageCommand(this.userInterface, MOVE_PROMPT).Execute();
+
                 command = this.GetTrimmedUppercaseInput();
 
                 var commandList = this.GetCommandList(command);
