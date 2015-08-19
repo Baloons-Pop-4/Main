@@ -54,6 +54,7 @@
     <Compile Include="GameTests.cs" />
     <Compile Include="MatrixValidatorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserInputValidatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\BaloonsPop.Common\BaloonsPop.Common.csproj">
