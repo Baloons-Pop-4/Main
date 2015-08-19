@@ -34,7 +34,7 @@
         [TestMethod]
         public void TestIfGenerateFieldReturnsFieldThatAreSignificantlyDifferentFromEachOther()
         {
-            var field1 = this.gameLogicProvider.GenerateField();
+            var field1 = (byte[,])this.gameLogicProvider.GenerateField().Clone();
             var field2 = this.gameLogicProvider.GenerateField();
 
             var differenceCount = 0;
