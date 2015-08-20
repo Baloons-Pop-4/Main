@@ -25,9 +25,17 @@ namespace BaloonsPop.GraphicUserInterface
         private const int BALOON_IMG_HEIGHT = 40;
         private const int BALOON_IMG_WIDTH = 30;
 
-        private string[] colors = new string[] { "white", "red", "blue", "green", "yellow"};
+        private string[] colors = new string[] { "white", "red", "blue", "green", "yellow" };
 
         private string imageFolderPath;
+
+        private string[,] sampleHighscoreChart = new string[,] { 
+                                                                 {"Gosho", "20"},
+                                                                 {"Bay Ivan", "28"},
+                                                                 {"Mariya(umna e kato za jena)", "19"},
+                                                                 {"Pesh0", "19"},
+                                                                 {"Bate Borko", "20"}
+                                                                };
 
         public MainWindow()
         {
@@ -36,6 +44,9 @@ namespace BaloonsPop.GraphicUserInterface
             var currentDir = Environment.CurrentDirectory;
 
             imageFolderPath = currentDir.Substring(0, currentDir.IndexOf("bin"));
+
+            this.InitializeHighscoreGrid();
+            this.PrintHighscore("");
         }
 
         public void PrintMessage(string message)
@@ -53,7 +64,8 @@ namespace BaloonsPop.GraphicUserInterface
 
                     var coordinatesAsString = row + " " + col;
 
-                    img.MouseDown += (s, e) => {
+                    img.MouseDown += (s, e) =>
+                    {
                         this.Raise(s, new ClickEventArgs(coordinatesAsString));
                     };
 
@@ -65,10 +77,36 @@ namespace BaloonsPop.GraphicUserInterface
             }
         }
 
+        private void InitializeHighscoreGrid()
+        {
+            var wrappedPlayer = this.GetTextBlockWithBorder("Player");
+            var wrappedPoints = this.GetTextBlockWithBorder("Points");
+
+            this.HighscoreTable.Children.Add(wrappedPlayer);
+            this.SetPositionInGrid(wrappedPlayer, 0, 1);
+
+            this.HighscoreTable.Children.Add(wrappedPoints);
+            this.SetPositionInGrid(wrappedPoints, 0, 2);
+        }
+
         public void PrintHighscore(string highscore)
         {
-            // TODO: Implement this method
-            throw new NotImplementedException();
+            for (int i = 1; i <= 5; i++)
+            {
+                this.FillHighscoreGridRow(this.sampleHighscoreChart[i - 1, 0], this.sampleHighscoreChart[i - 1, 1], i);
+            }
+        }
+
+        private void FillHighscoreGridRow(string playerName, string playerPoints, int row)
+        {
+            var wrappedPlayer = this.GetTextBlockWithBorder(playerName);
+            var wrappedPoints = this.GetTextBlockWithBorder(playerPoints);
+
+            this.HighscoreTable.Children.Add(wrappedPlayer);
+            this.HighscoreTable.Children.Add(wrappedPoints);
+
+            this.SetPositionInGrid(wrappedPlayer, row, 1);
+            this.SetPositionInGrid(wrappedPoints, row, 2);
         }
 
         public string ReadUserInput()
@@ -95,10 +133,27 @@ namespace BaloonsPop.GraphicUserInterface
             img.Source = new BitmapImage(new Uri(this.imageFolderPath + @"Images\" + this.colors[baloonNumber] + ".png"));
         }
 
-        private void SetPositionInGrid(Image img, int row, int col)
+        private void SetPositionInGrid(UIElement element, int row, int col)
         {
-            Grid.SetRow(img, row);
-            Grid.SetColumn(img, col);
+            Grid.SetRow(element, row);
+            Grid.SetColumn(element, col);
+        }
+
+        private Border GetTextBlockWithBorder(string content)
+        {
+            var result = new Border();
+
+            result.BorderThickness = new Thickness(1, 2, 1, 2);
+            result.BorderBrush = Brushes.Coral;
+
+            var textBlock = new TextBlock();
+            textBlock.Text = content;
+            textBlock.TextAlignment = TextAlignment.Center;
+            textBlock.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+
+            result.Child = textBlock;
+
+            return result;
         }
     }
 }
