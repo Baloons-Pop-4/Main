@@ -20,8 +20,6 @@
         private const string ON_EXIT_MESSAGE = "Good Bye!";
         #endregion
 
-        private static Engine instance = new Engine();
-
         private string[,] highScoreChart;
 
         private IUserInterface userInterface;
@@ -34,26 +32,14 @@
 
         private IGameLogicProvider gameLogicProvider;
 
-        private Engine()
-        {
-            this.highScoreChart = new string[2, 5];
-        }
-
-        public static IEngine Instance
-        {
-            get
-            {
-                return Engine.instance;
-            }
-        }
-
-        public void Initialize(IUserInterface ui, IUserInputValidator validator, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
+        public Engine(IUserInterface ui, IUserInputValidator validator, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
         {
             this.userInterface = ui;
             this.validator = validator;
             this.create = commandFactory;
             this.game = gameModel;
             this.gameLogicProvider = gameLogicProvider;
+            this.highScoreChart = new string[2, 5];
         }
 
         public void Run()
