@@ -37,6 +37,8 @@ namespace BaloonsPop.GraphicUserInterface
                                                                  {"Bate Borko", "20"}
                                                                 };
 
+        private Image[,] baloonField = new Image[5, 10];
+
         public MainWindow()
         {
             InitializeComponent();
@@ -45,8 +47,31 @@ namespace BaloonsPop.GraphicUserInterface
 
             imageFolderPath = currentDir.Substring(0, currentDir.IndexOf("bin"));
 
+
             this.InitializeHighscoreGrid();
-            this.PrintHighscore("");
+            this.InitializeBaloonField();
+        }
+
+        private void InitializeBaloonField()
+        {
+            for (int row = 0, rowsCount = 5; row < rowsCount; row++)
+            {
+                for (int col = 0, colsCount = 10; col < colsCount; col++)
+                {
+                    this.baloonField[row, col] = new Image();
+
+                    var coordinatesAsString = row + " " + col;
+
+                    this.baloonField[row, col].MouseDown += (sender, e) =>
+                    {
+                        this.Raise(sender, new ClickEventArgs(coordinatesAsString));
+                    };
+
+                    this.SetBaloonImageSize(this.baloonField[row, col]);
+                    this.BaloonField.Children.Add(this.baloonField[row, col]);
+                    this.SetPositionInGrid(this.baloonField[row, col], row, col);
+                }
+            }
         }
 
         public void PrintMessage(string message)
@@ -60,19 +85,19 @@ namespace BaloonsPop.GraphicUserInterface
             {
                 for (int col = 0, colsCount = matrix.GetLength(1); col < colsCount; col++)
                 {
-                    var img = new Image();
+                    //var img = new Image();
 
-                    var coordinatesAsString = row + " " + col;
+                    //var coordinatesAsString = row + " " + col;
 
-                    img.MouseDown += (s, e) =>
-                    {
-                        this.Raise(s, new ClickEventArgs(coordinatesAsString));
-                    };
+                    //img.MouseDown += (s, e) =>
+                    //{
+                    //    this.Raise(s, new ClickEventArgs(coordinatesAsString));
+                    //};
 
-                    this.SetBaloonImageSize(img);
-                    this.SetSource(img, matrix[row, col]);
-                    this.BaloonField.Children.Add(img);
-                    this.SetPositionInGrid(img, row, col);
+                    //this.SetBaloonImageSize(img);
+                    this.SetSource(this.baloonField[row, col], matrix[row, col]);
+                    //this.BaloonField.Children.Add(img);
+                    //this.SetPositionInGrid(img, row, col);
                 }
             }
         }
@@ -89,11 +114,11 @@ namespace BaloonsPop.GraphicUserInterface
             this.SetPositionInGrid(wrappedPoints, 0, 2);
         }
 
-        public void PrintHighscore(string highscore)
+        public void PrintHighscore(string[,] highscore)
         {
-            for (int i = 1; i <= 5; i++)
+            for (int i = 1; i <= highscore.GetLength(0); i++)
             {
-                this.FillHighscoreGridRow(this.sampleHighscoreChart[i - 1, 0], this.sampleHighscoreChart[i - 1, 1], i);
+                this.FillHighscoreGridRow(highscore[i - 1, 1], highscore[i - 1, 0], i);
             }
         }
 
@@ -119,6 +144,10 @@ namespace BaloonsPop.GraphicUserInterface
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            var senderAsButton = sender as Button;
+
+            senderAsButton.Content = "Restart";
+
             Raise(sender, new ClickEventArgs("RESTART"));
         }
 

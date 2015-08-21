@@ -53,7 +53,7 @@
             Console.WriteLine(SPACING + this.GetDashedLine(1 + (matrix.GetLength(1) * 2)));
         }
 
-        public void PrintHighscore(string highscore)
+        public void PrintHighscore(string[,] highscore)
         {
             // TODO: implement
             throw new NotImplementedException("Implement me!");
