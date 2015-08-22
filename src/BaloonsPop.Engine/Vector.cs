@@ -29,7 +29,7 @@
             }
         }
 
-        public override Vector operator+ (Vector a, Vector b)
+        public static Vector operator+ (Vector a, Vector b)
         {
             var result = new Vector(a.X + b.X, a.Y + b.Y);
             return result;

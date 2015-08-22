@@ -11,7 +11,7 @@
         private const int MIN_BALOON_VALUE = 1;
         private const int MAX_BALOON_VALUE = 4;
 
-        private static readonly int[][] PopDirections = new int[][] { new int[] { 0, 1 }, new int[] { 0, -1 }, new int[] { 1, 0 }, new int[] { -1, 0 } };
+        private static readonly Vector[] PopDirections = new Vector[] { new Vector(0, 1), new Vector(0, -1), new Vector(1, 0), new Vector(-1, 0) };
 
         private byte[,] field;
 
@@ -44,7 +44,7 @@
         {
             foreach (var dir in PopDirections)
             {
-                this.PopInDirection(field, row, column, dir[0], dir[1]);
+                this.PopInDirection(field, new Vector(row, column), dir);
             }
 
             field[row, column] = 0;
@@ -91,17 +91,15 @@
             return true;
         }
 
-        private void PopInDirection(byte[,] field, int row, int col, int xUpdate, int yUpdate)
+        private void PopInDirection(byte[,] field, Vector point, Vector update)
         {
-            var baloonType = field[row, col];
-            row += yUpdate;
-            col += xUpdate;
+            var baloonType = field[point.X, point.Y];
+            point = point + update;
 
-            while (this.matrixValidator.IsInsideMatrix(field, row, col) && field[row, col] == baloonType)
+            while (this.matrixValidator.IsInsideMatrix(field, point.X, point.Y) && field[point.X, point.Y] == baloonType)
             {
-                field[row, col] = 0;
-                row += yUpdate;
-                col += xUpdate;
+                field[point.X, point.Y] = 0;
+                point = point + update;
             }
         }
 
