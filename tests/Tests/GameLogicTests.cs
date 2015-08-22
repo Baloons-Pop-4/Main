@@ -3,6 +3,7 @@
     using System;
     using BaloonsPop.Common.Validators;
     using BaloonsPop.Engine;
+    using BaloonsPop.Common;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
@@ -12,7 +13,7 @@
 
         public GameLogicTests()
         {
-            this.gameLogicProvider = new GameLogic(MatrixValidator.GetInstance);
+            this.gameLogicProvider = new GameLogic(MatrixValidator.GetInstance, new RandomNumberGenerator());
         }
 
         [TestMethod]

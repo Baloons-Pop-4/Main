@@ -15,14 +15,14 @@
 
         private byte[,] field;
 
-        private Random rng;
+        private IRandomNumberGenerator randomNumberGenerator;
 
         private IMatrixValidator matrixValidator;
 
-        public GameLogic(IMatrixValidator matrixValidator)
+        public GameLogic(IMatrixValidator matrixValidator, IRandomNumberGenerator randomNumberGenerator)
         {
             this.matrixValidator = matrixValidator;
-            this.rng = new Random();
+            this.randomNumberGenerator = randomNumberGenerator;
             this.field = new byte[FIELD_ROWS + 1, FIELD_COLS + 1];
         }
 
@@ -107,7 +107,7 @@
 
         private byte GetRandomBaloonValue()
         {
-            var randomBaloonValue = (byte)this.rng.Next(MIN_BALOON_VALUE, MAX_BALOON_VALUE + 1);
+            var randomBaloonValue = (byte)this.randomNumberGenerator.Next(MIN_BALOON_VALUE, MAX_BALOON_VALUE + 1);
             return randomBaloonValue;
         }
     }

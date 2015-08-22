@@ -2,6 +2,7 @@
 {
     using System;
     using BaloonsPop.Common.Validators;
+    using BaloonsPop.Common;
     using BaloonsPop.Engine;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -11,21 +12,21 @@
         [TestMethod]
         public void TestIfGameModelIsCreatedWithInitializedField()
         {
-            var gameModel = new Game(new GameLogic(MatrixValidator.GetInstance));
+            var gameModel = new Game(new GameLogic(MatrixValidator.GetInstance, new RandomNumberGenerator()));
             Assert.IsNotNull(gameModel.Field);
         }
 
         [TestMethod]
         public void TestIfInitialMovesCountIsZero()
         {
-            var gameModel = new Game(new GameLogic(MatrixValidator.GetInstance));
+            var gameModel = new Game(new GameLogic(MatrixValidator.GetInstance, new RandomNumberGenerator()));
             Assert.AreEqual(0, gameModel.UserMovesCount);
         }
 
         [TestMethod]
         public void TestIfResetMethodResetsTheGameFieldCorrectly()
         {
-            var gameModel = new Game(new GameLogic(MatrixValidator.GetInstance));
+            var gameModel = new Game(new GameLogic(MatrixValidator.GetInstance, new RandomNumberGenerator()));
             var fieldBeforeReset = (byte[,])gameModel.Field.Clone();
             gameModel.Reset();
 
@@ -48,7 +49,7 @@
         [TestMethod]
         public void TestIfIncrementMovesMethodCorrectlyIncrementTheMovesCount()
         {
-            var gameModel = new Game(new GameLogic(MatrixValidator.GetInstance));
+            var gameModel = new Game(new GameLogic(MatrixValidator.GetInstance, new RandomNumberGenerator()));
             gameModel.IncrementMoves();
             Assert.AreEqual(1, gameModel.UserMovesCount);
         }
@@ -56,7 +57,7 @@
         [TestMethod]
         public void TestIfResetMethodCorrectlyResetsTheUserMovesCount()
         {
-            var gameModel = new Game(new GameLogic(MatrixValidator.GetInstance));
+            var gameModel = new Game(new GameLogic(MatrixValidator.GetInstance, new RandomNumberGenerator()));
             gameModel.IncrementMoves();
             gameModel.Reset();
             Assert.AreEqual(0, gameModel.UserMovesCount);
