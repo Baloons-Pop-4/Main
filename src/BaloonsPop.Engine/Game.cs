@@ -4,23 +4,20 @@
 
     public class Game : IGameModel
     {
-        private byte[,] field;
+        private IBaloonsField baloons;
 
         private int userMovesCount;
 
-        private GameLogic gameLogicProvider;
-
-        public Game(GameLogic gameLogicProvider)
+        public Game(IBaloonsField field)
         {
-            this.gameLogicProvider = gameLogicProvider;
-            this.Reset();
+            this.baloons = field;
         }
 
-        public byte[,] Field
+        public IBaloonsField Field
         {
             get
             {
-                return this.field;
+                return this.baloons;
             }
         }
 
@@ -32,15 +29,14 @@
             }
         }
 
-        public void Reset()
-        {
-            this.field = this.gameLogicProvider.GenerateField();
-            this.userMovesCount = 0;
-        }
-
         public void IncrementMoves()
         {
             this.userMovesCount++;
+        }
+
+        public void NullifyUserMoves()
+        {
+            this.userMovesCount = 0;
         }
     }
 }

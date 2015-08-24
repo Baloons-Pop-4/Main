@@ -10,9 +10,11 @@
 
         private int col;
 
-        public PopBaloonCommand(IGameModel gameModel, IGameLogicProvider gameLogicProvider, int row, int col) 
-            : base(gameModel)
+        private IPopPattern pattern;
+
+        public PopBaloonCommand(IGameModel gameModel, IGameLogicProvider gameLogicProvider, int row, int col, IPopPattern pattern) : base(gameModel)
         {
+            this.pattern = pattern;
             this.gameLogicProvider = gameLogicProvider;
             this.row = row;
             this.col = col;
@@ -20,7 +22,7 @@
 
         public override void Execute()
         {
-            this.gameLogicProvider.PopBaloons(this.gameModel.Field, this.row, this.col);
+            this.gameLogicProvider.PopBaloons(this.gameModel.Field, new Point(this.row, this.col), this.pattern);
             this.gameLogicProvider.LetBaloonsFall(this.gameModel.Field);
             this.gameModel.IncrementMoves();
         }

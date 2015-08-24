@@ -1,6 +1,8 @@
 ﻿namespace BaloonsPop.Engine
 {
-    public struct Vector
+    using BaloonsPop.Common.Contracts;
+
+    public struct Vector : IVector
     {
         private const int DIMENSION = 2;
 
@@ -27,12 +29,6 @@
             {
                 return this.coordinates[1];
             }
-        }
-
-        public static Vector operator+ (Vector a, Vector b)
-        {
-            var result = new Vector(a.X + b.X, a.Y + b.Y);
-            return result;
         }
     }
 }

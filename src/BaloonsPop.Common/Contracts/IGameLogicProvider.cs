@@ -2,9 +2,10 @@
 {
     public interface IGameLogicProvider
     {
-        byte[,] GenerateField();
-        void PopBaloons(byte[,] field, int row, int col);
-        void LetBaloonsFall(byte[,] field);
-        bool GameIsOver(byte[,] field);
+        // byte[,] GenerateField();
+        void RandomizeBaloonField(IBaloonsField field);
+        void PopBaloons(IBaloonsField field, IPoint point, IPopPattern pattern);
+        void LetBaloonsFall(IBaloonsField field);
+        bool GameIsOver(IBaloonsField field);
     }
 }

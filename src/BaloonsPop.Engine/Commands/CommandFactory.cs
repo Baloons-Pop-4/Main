@@ -13,12 +13,12 @@
             return new ExitCommand();
         }
 
-        public ICommand RestartCommand(IGameModel gameModel)
+        public ICommand RestartCommand(IGameModel gameModel, IGameLogicProvider gameLogicProvider)
         {
-            return new RestartCommand(gameModel);
+            return new RestartCommand(gameModel, gameLogicProvider);
         }
 
-        public ICommand PrintFieldCommand(IPrinter printer, byte[,] field)
+        public ICommand PrintFieldCommand(IPrinter printer, IBaloonsField field)
         {
             return new PrintFieldCommand(printer, field);
         }
@@ -32,9 +32,9 @@
             return new PrintHighscoreCommand(printer, chart);
         }
 
-        public ICommand PopBaloonCommand(IGameModel gameModel, IGameLogicProvider gameLogicProvider, int row, int col)
+        public ICommand PopBaloonCommand(IGameModel gameModel, IGameLogicProvider gameLogicProvider, int row, int col, IPopPattern pattern)
         {
-            return new PopBaloonCommand(gameModel, gameLogicProvider, row, col);
+            return new PopBaloonCommand(gameModel, gameLogicProvider, row, col, pattern);
         }
     }
 }

@@ -18,7 +18,8 @@
             var consoleUI = new ConsoleUI();
             var commandFactory = new CommandFactory();
             var gameLogicProvider = new GameLogic(MatrixValidator.GetInstance, new RandomNumberGenerator());
-            var gameModel = new Game(gameLogicProvider);
+            var field = new BaloonField();
+            var gameModel = new Game(field);
             
             var engine = new Engine(consoleUI, UserInputValidator.GetInstance, commandFactory, gameModel, gameLogicProvider);
             engine.Run();

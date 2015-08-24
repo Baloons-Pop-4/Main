@@ -4,9 +4,9 @@
 
     public class PrintFieldCommand : PrintCommands
     {
-        private byte[,] field;
+        private IBaloonsField field;
 
-        public PrintFieldCommand(IPrinter printer, byte[,] field)
+        public PrintFieldCommand(IPrinter printer, IBaloonsField field)
             :base(printer)
         {
             this.field = field;
@@ -14,7 +14,7 @@
 
         public override void Execute()
         {
-            this.printer.PrintField(field);
+            this.printer.PrintField(field.Baloons);
         }
     }
 }

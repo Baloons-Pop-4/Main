@@ -4,14 +4,17 @@
 
     public class RestartCommand : GameCommand
     {
-        public RestartCommand(IGameModel gameModel)
+        private IGameLogicProvider gameLogicProvider;
+
+        public RestartCommand(IGameModel gameModel, IGameLogicProvider gameLogicProvider)
             :base(gameModel)
         {
+            this.gameLogicProvider = gameLogicProvider;
         }
 
         public override void Execute()
         {
-            this.gameModel.Reset();
+            this.gameLogicProvider.RandomizeBaloonField(gameModel.Field);
         }
     }
 }

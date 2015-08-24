@@ -30,7 +30,8 @@ namespace BaloonsPop.GraphicUserInterface
             var validator = MatrixValidator.GetInstance;
             var rng = new RandomNumberGenerator();
             var logicProvider = new GameLogic(validator, rng);
-            var model = new Game(logicProvider);
+            var field = new BaloonField();
+            var model = new Game(field);
 
             this.engine = new GraphicEngine(graphicUi, UserInputValidator.GetInstance, factory, model, logicProvider);
 
