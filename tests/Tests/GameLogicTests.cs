@@ -1,8 +1,9 @@
 ﻿namespace Tests
 {
     using System;
-    using BalloonsPop.Common.Validators;
-    using BalloonsPop.Engine;
+    using BaloonsPop.Common.Validators;
+    using BaloonsPop.Engine;
+    using BaloonsPop.Common;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
@@ -12,30 +13,25 @@
 
         public GameLogicTests()
         {
-            this.gameLogicProvider = new GameLogic(MatrixValidator.GetInstance);
-        }
-
-        [TestMethod]
-        public void TestIfGenerateFieldReturnAByteMatrix()
-        {
-            var field = this.gameLogicProvider.GenerateField();
-            Assert.AreEqual(typeof(byte[,]), field.GetType());
+            this.gameLogicProvider = new GameLogic(MatrixValidator.GetInstance, new RandomNumberGenerator());
         }
 
         [TestMethod]
         public void TestIfGenerateFieldRetunrsAByteMatrixOfCorrectSize()
         {
-            var field = this.gameLogicProvider.GenerateField();
+            var field = new BaloonField();
 
-            Assert.AreEqual(5, field.GetLength(0));
-            Assert.AreEqual(10, field.GetLength(1));
+            Assert.AreEqual(5, field.Rows);
+            Assert.AreEqual(10, field.Columns);
         }
 
         [TestMethod]
         public void TestIfGenerateFieldReturnsFieldThatAreSignificantlyDifferentFromEachOther()
         {
-            var field1 = (byte[,])this.gameLogicProvider.GenerateField().Clone();
-            var field2 = this.gameLogicProvider.GenerateField();
+            var baloonField = new BaloonField();
+            var field1 = (byte[,])baloonField.Baloons.Clone();
+            this.gameLogicProvider.RandomizeBaloonField(baloonField);
+            var field2 = baloonField.Baloons;
 
             var differenceCount = 0;
 
@@ -60,7 +56,9 @@
         {
             for (int i = 0; i < 10; i++)
             {
-                var field = this.gameLogicProvider.GenerateField();
+                var field = new BaloonField();
+
+                new GameLogic(null, new RandomNumberGenerator()).RandomizeBaloonField(field);
 
                 foreach (var cell in field)
                 {
@@ -75,7 +73,7 @@
         [TestMethod]
         public void TestIfGameIsOverReturnsTrueWithAnEmptyField()
         {
-            var sampleEmptyField = new byte[5, 10];
+            var sampleEmptyField = new BaloonField();
             Assert.IsTrue(this.gameLogicProvider.GameIsOver(sampleEmptyField));
         }
 
@@ -86,7 +84,7 @@
 
             for (int i = 0; i < 50; i++)
             {
-                var sampleEmptyField = new byte[5, 10];
+                var sampleEmptyField = new BaloonField();
                 sampleEmptyField[rng.Next(0, 5), rng.Next(0, 10)] = (byte)rng.Next(1, 5);
 
                 Assert.IsFalse(this.gameLogicProvider.GameIsOver(sampleEmptyField));
@@ -96,15 +94,17 @@
         [TestMethod]
         public void TestIfGameIsOverReturnsFalseWithFullField()
         {
-            var field = this.gameLogicProvider.GenerateField();
+            var field = new BaloonField();
+
+            this.gameLogicProvider.RandomizeBaloonField(field);
 
             Assert.IsFalse(this.gameLogicProvider.GameIsOver(field));
         }
 
         [TestMethod]
-        public void TestIfPopBalloonsPopsTheBalloonsOnTheSameRowAndColumn()
+        public void TestIfPopBalloonsPopsTheBaloonsOnTheSameRowAndColumn()
         {
-            var field = new byte[5, 10];
+            var field = new BaloonField();
 
             for (int i = 0, j = 5; i < 5; i++)
             {
@@ -116,7 +116,8 @@
                 field[j, i] = (byte)1;
             }
 
-            this.gameLogicProvider.PopBalloons(field, 2, 5);
+
+            this.gameLogicProvider.PopBaloons(field, new Point(2,5), new DefaultPoppingPattern());
 
             foreach (var cell in field)
             {
@@ -128,10 +129,11 @@
         }
 
         [TestMethod]
-        public void TestIfPopBalloonsPopsOnlyTheBalloonsOnTheSameRowAndColumn()
+        public void TestIfPopBalloonsPopsOnlyTheBaloonsOnTheSameRowAndColumn()
         {
-            var field = this.gameLogicProvider.GenerateField();
-            var storedField = (byte[,])field.Clone();
+            var field = new BaloonField();
+            this.gameLogicProvider.RandomizeBaloonField(field);
+            var storedField = (byte[,])field.Baloons.Clone();
 
             for (int i = 0, j = 5; i < 5; i++)
             {
@@ -143,11 +145,13 @@
                 field[j, i] = (byte)1;
             }
 
-            this.gameLogicProvider.PopBalloons(field, 2, 5);
 
-            for (int i = 0; i < field.GetLength(0); i++)
+            this.gameLogicProvider.PopBaloons(field, new Point(2,5), new DefaultPoppingPattern());
+
+
+            for (int i = 0; i < storedField.GetLength(0); i++)
             {
-                for (int j = 0; j < field.GetLength(1); j++)
+                for (int j = 0; j < storedField.GetLength(1); j++)
                 {
                     if (i == 2 || j == 5)
                     {
@@ -170,7 +174,7 @@
         [TestMethod]
         public void TestIfPopBalloonsPopsOnlyTargetBalloonWhenTheBalloonHasNoNeighborsOfTheSameType()
         {
-            var field = new byte[5, 10];
+            var field = new BaloonField();
 
             for (int i = 1; i < 4; i++)
             {
@@ -180,7 +184,9 @@
                 }
             }
 
-            this.gameLogicProvider.PopBalloons(field, 2, 3);
+
+            this.gameLogicProvider.PopBaloons(field, new Point(2,3), new DefaultPoppingPattern());
+
 
             for (int i = 1; i < 4; i++)
             {

@@ -6,57 +6,58 @@
 
     public class GameLogic : IGameLogicProvider
     {
-        private const int FIELD_ROWS = 4;
-        private const int FIELD_COLS = 9;
-        private const int MIN_BALLOON_VALUE = 1;
-        private const int MAX_BALLOON_VALUE = 4;
+        //private const int FIELD_ROWS = 4;
+        //private const int FIELD_COLS = 9;
+        //private const int MIN_BALOON_VALUE = 1;
+        //private const int MAX_BALOON_VALUE = 4;
 
-        private static readonly int[][] PopDirections = new int[][] { new int[] { 0, 1 }, new int[] { 0, -1 }, new int[] { 1, 0 }, new int[] { -1, 0 } };
+        private const int MinBaloonValue = 1;
 
-        private byte[,] field;
+        private const int MaxBaloonValue = 4;
 
-        private Random rng;
+        private static readonly Vector[] PopDirections = new Vector[] { new Vector(0, 1), new Vector(0, -1), new Vector(1, 0), new Vector(-1, 0) };
+
+        //private byte[,] field;
+
+        private IRandomNumberGenerator randomNumberGenerator;
 
         private IMatrixValidator matrixValidator;
 
-        public GameLogic(IMatrixValidator matrixValidator)
+        public GameLogic(IMatrixValidator matrixValidator, IRandomNumberGenerator randomNumberGenerator)
         {
             this.matrixValidator = matrixValidator;
-            this.rng = new Random();
-            this.field = new byte[FIELD_ROWS + 1, FIELD_COLS + 1];
+            this.randomNumberGenerator = randomNumberGenerator;
         }
 
-        public byte[,] GenerateField()
+        public void RandomizeBaloonField(IBaloonsField field)
         {
-            for (var row = 0; row <= FIELD_ROWS; row++)
+            for (int i = 0, rowsCount = field.Rows; i < rowsCount; i++)
             {
-                for (var column = 0; column <= FIELD_COLS; column++)
+                for (int j = 0, columnsCount = field.Columns; j < columnsCount; j++)
                 {
-                    var currentBalloonValue = this.GetRandomBalloonValue();
-                    this.field[row, column] = currentBalloonValue;
+                    field[i, j] = (byte)this.randomNumberGenerator.Next(MinBaloonValue, MaxBaloonValue + 1);
+
                 }
             }
-
-            return field;
         }
 
-        public void PopBalloons(byte[,] field, int row, int column)
+        public void PopBaloons(IBaloonsField field, IPoint point, IPopPattern pattern)
         {
-            foreach (var dir in PopDirections)
+            foreach (var dir in pattern.Directions)
             {
-                this.PopInDirection(field, row, column, dir[0], dir[1]);
+                this.PopInDirection(field, (IPoint)point.Clone(), dir);
             }
 
-            field[row, column] = 0;
+            field[point] = 0;
         }
 
-        public void LetBalloonsFall(byte[,] field)
+        public void LetBaloonsFall(IBaloonsField field)
         {
             var balloonColumn = new Stack<byte>();
 
-            for (int column = 0, length = field.GetLength(1); column < length; column++)
+            for (int column = 0, length = field.Columns; column < length; column++)
             {
-                for (int row = 0, rowsCount = field.GetLength(0); row < rowsCount; row++)
+                for (int row = 0, rowsCount = field.Rows; row < rowsCount; row++)
                 {
                     if (field[row, column] != 0)
                     {
@@ -64,7 +65,7 @@
                     }
                 }
 
-                for (int row = field.GetLength(0) - 1; row >= 0; row--)
+                for (int row = field.Rows - 1; row >= 0; row--)
                 {
                     if (balloonColumn.Count > 0)
                     {
@@ -78,9 +79,9 @@
             }
         }
 
-        public bool GameIsOver(byte[,] matrix)
+        public bool GameIsOver(IBaloonsField field)
         {
-            foreach (var cell in matrix)
+            foreach (var cell in field)
             {
                 if (cell != 0)
                 {
@@ -91,24 +92,17 @@
             return true;
         }
 
-        private void PopInDirection(byte[,] field, int row, int col, int xUpdate, int yUpdate)
+        private void PopInDirection(IBaloonsField field, IPoint point, IVector update)
         {
-            var balloonType = field[row, col];
-            row += yUpdate;
-            col += xUpdate;
+            var baloonType = field[point];
+            point.Update(update);
 
-            while (this.matrixValidator.IsInsideMatrix(field, row, col) && field[row, col] == balloonType)
+            while (this.matrixValidator.IsInsideMatrix(field.Baloons, point.X, point.Y) && field[point] == baloonType)
             {
-                field[row, col] = 0;
-                row += yUpdate;
-                col += xUpdate;
+                field[point] = 0;
+                point.Update(update);
             }
         }
 
-        private byte GetRandomBalloonValue()
-        {
-            var randomBalloonValue = (byte)this.rng.Next(MIN_BALLOON_VALUE, MAX_BALLOON_VALUE + 1);
-            return randomBalloonValue;
-        }
     }
 }

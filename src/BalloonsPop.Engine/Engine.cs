@@ -1,9 +1,7 @@
 ﻿namespace BalloonsPop.Engine
 {
     using System;
-    using BalloonsPop.Common.Contracts;
-    using BalloonsPop.Common.Validators;
-    using BalloonsPop.Engine.Commands;
+    using BaloonsPop.Common.Contracts;
     using System.Collections.Generic;
 
     public class Engine : IEngine
@@ -39,12 +37,13 @@
             this.create = commandFactory;
             this.game = gameModel;
             this.gameLogicProvider = gameLogicProvider;
+            this.gameLogicProvider.RandomizeBaloonField(game.Field);
             this.highScoreChart = new string[2, 5];
         }
 
         public void Run()
         {
-            this.userInterface.PrintField(game.Field);
+            this.userInterface.PrintField(game.Field.Baloons);
             var command = string.Empty;
 
             while (true)
@@ -67,7 +66,7 @@
             {
                 case RESTART:
 
-                    commandList.Add(this.create.RestartCommand(this.game));
+                    commandList.Add(this.create.RestartCommand(this.game, gameLogicProvider));
                     commandList.Add(this.create.PrintFieldCommand(this.userInterface, game.Field));
 
                     break;
@@ -103,7 +102,8 @@
                     }
                     else
                     {
-                        commandList.Add(this.create.PopBalloonCommand(this.game, this.gameLogicProvider, userRow, userColumn));
+                        commandList.Add(this.create.PopBaloonCommand(this.game, this.gameLogicProvider, userRow, userColumn, new DefaultPoppingPattern()));
+
                     }
 
                     if (gameLogicProvider.GameIsOver(game.Field))

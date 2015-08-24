@@ -1,8 +1,8 @@
 ﻿namespace Tests
 {
     using System;
-    using BalloonsPop.Common.Validators;
-    using BalloonsPop.Engine;
+    using BaloonsPop.Common;
+    using BaloonsPop.Engine;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
@@ -11,23 +11,25 @@
         [TestMethod]
         public void TestIfGameModelIsCreatedWithInitializedField()
         {
-            var gameModel = new Game(new GameLogic(MatrixValidator.GetInstance));
+            var gameModel = new Game(new BaloonField());
             Assert.IsNotNull(gameModel.Field);
         }
 
         [TestMethod]
         public void TestIfInitialMovesCountIsZero()
         {
-            var gameModel = new Game(new GameLogic(MatrixValidator.GetInstance));
+            var gameModel = new Game(new BaloonField());
             Assert.AreEqual(0, gameModel.UserMovesCount);
         }
 
         [TestMethod]
         public void TestIfResetMethodResetsTheGameFieldCorrectly()
         {
-            var gameModel = new Game(new GameLogic(MatrixValidator.GetInstance));
-            var fieldBeforeReset = (byte[,])gameModel.Field.Clone();
-            gameModel.Reset();
+            var gameModel = new Game(new BaloonField());
+            var fieldBeforeReset = (byte[,])gameModel.Field.Baloons.Clone();
+
+            var provider = new GameLogic(null, new RandomNumberGenerator());
+            provider.RandomizeBaloonField(gameModel.Field);
 
             var differentFieldCount = 0;
 
@@ -42,23 +44,24 @@
                 }
             }
 
-            Assert.IsTrue(gameModel.Field.Length / differentFieldCount < 2);
+            Assert.IsTrue(gameModel.Field.Baloons.Length / differentFieldCount < 2);
         }
 
         [TestMethod]
         public void TestIfIncrementMovesMethodCorrectlyIncrementTheMovesCount()
         {
-            var gameModel = new Game(new GameLogic(MatrixValidator.GetInstance));
+            var gameModel = new Game(new BaloonField());
             gameModel.IncrementMoves();
             Assert.AreEqual(1, gameModel.UserMovesCount);
         }
 
         [TestMethod]
-        public void TestIfResetMethodCorrectlyResetsTheUserMovesCount()
+        public void TestIfNullifyMethodSetsTheUserMovesCountToZero()
         {
-            var gameModel = new Game(new GameLogic(MatrixValidator.GetInstance));
+            var gameModel = new Game(new BaloonField());
             gameModel.IncrementMoves();
-            gameModel.Reset();
+            new GameLogic(null, new RandomNumberGenerator()).RandomizeBaloonField(gameModel.Field);
+            gameModel.NullifyUserMoves();
             Assert.AreEqual(0, gameModel.UserMovesCount);
         }
     }

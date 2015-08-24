@@ -1,4 +1,4 @@
-﻿namespace BalloonsPop.Common.Contracts
+﻿namespace BaloonsPop.Common.Contracts
 {
     public interface ICommandFactory
     {

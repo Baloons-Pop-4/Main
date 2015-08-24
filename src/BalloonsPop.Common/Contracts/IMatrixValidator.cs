@@ -2,6 +2,6 @@
 {
     public interface IMatrixValidator
     {
-        bool IsInsideMatrix<T>(T[,] matrix, int row, int col);
+        bool IsInsideMatrix(byte[,] matrix, int row, int col);
     }
 }

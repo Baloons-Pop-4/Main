@@ -5,7 +5,7 @@
     public class UserInputValidator : IUserInputValidator
     {
         private const char COMMA = ',';
-        private const char DOT = '.';
+        private const char X = 'X';
         private const int VALID_INPUT_LENGTH = 3;
         private const int MAX_ROW_INPUT_VALUE = 4;
 
@@ -33,7 +33,7 @@
             }
 
             bool firstCharIsDigit = char.IsDigit(userInput[2]);
-            bool secondCharIsValid = char.IsWhiteSpace(userInput[1]) || userInput[1] == DOT || userInput[1] == COMMA;
+            bool secondCharIsValid = char.IsWhiteSpace(userInput[1]) || userInput[1] == X || userInput[1] == COMMA;
             bool thirdCharIsDigit = char.IsDigit(userInput[2]);
 
             return firstCharIsDigit && secondCharIsValid && thirdCharIsDigit && this.IsValidRowMove(userInput[0]);
