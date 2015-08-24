@@ -52,7 +52,7 @@
         }
 
         [TestMethod]
-        public void TestIfGenerateFieldInitializesTheFieldWithCorrectBaloonValues()
+        public void TestIfGenerateFieldInitializesTheFieldWithCorrectBalloonValues()
         {
             for (int i = 0; i < 10; i++)
             {
@@ -102,7 +102,7 @@
         }
 
         [TestMethod]
-        public void TestIfPopBaloonsPopsTheBaloonsOnTheSameRowAndColumn()
+        public void TestIfPopBalloonsPopsTheBaloonsOnTheSameRowAndColumn()
         {
             var field = new BaloonField();
 
@@ -116,6 +116,7 @@
                 field[j, i] = (byte)1;
             }
 
+
             this.gameLogicProvider.PopBaloons(field, new Point(2,5), new DefaultPoppingPattern());
 
             foreach (var cell in field)
@@ -128,7 +129,7 @@
         }
 
         [TestMethod]
-        public void TestIfPopBaloonsPopsOnlyTheBaloonsOnTheSameRowAndColumn()
+        public void TestIfPopBalloonsPopsOnlyTheBaloonsOnTheSameRowAndColumn()
         {
             var field = new BaloonField();
             this.gameLogicProvider.RandomizeBaloonField(field);
@@ -144,7 +145,9 @@
                 field[j, i] = (byte)1;
             }
 
+
             this.gameLogicProvider.PopBaloons(field, new Point(2,5), new DefaultPoppingPattern());
+
 
             for (int i = 0; i < storedField.GetLength(0); i++)
             {
@@ -169,7 +172,7 @@
         }
 
         [TestMethod]
-        public void TestIfPopBaloonsPopsOnlyTargetBaloonWhenTheBaloonHasNoNeighborsOfTheSameType()
+        public void TestIfPopBalloonsPopsOnlyTargetBalloonWhenTheBalloonHasNoNeighborsOfTheSameType()
         {
             var field = new BaloonField();
 
@@ -181,7 +184,9 @@
                 }
             }
 
+
             this.gameLogicProvider.PopBaloons(field, new Point(2,3), new DefaultPoppingPattern());
+
 
             for (int i = 1; i < 4; i++)
             {
