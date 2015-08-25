@@ -13,9 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BalloonsPop.GraphicUserInterface
+namespace BaloonsPop.GraphicUserInterface
 {
     using BalloonsPop.Common.Contracts;
+    using BalloonsPop.GraphicUserInterface;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -39,17 +40,24 @@ namespace BalloonsPop.GraphicUserInterface
 
         private Image[,] balloonField = new Image[5, 10];
 
+        public event EventHandler Raise;
+
         public MainWindow()
         {
             InitializeComponent();
 
+
+
+            this.InitializeImagePath();
+            this.InitializeHighscoreGrid();
+            this.InitializeBalloonField();
+        }
+
+        private void InitializeImagePath()
+        {
             var currentDir = Environment.CurrentDirectory;
 
             imageFolderPath = currentDir.Substring(0, currentDir.IndexOf("bin"));
-
-
-            this.InitializeHighscoreGrid();
-            this.InitializeBalloonField();
         }
 
         private void InitializeBalloonField()
@@ -76,7 +84,7 @@ namespace BalloonsPop.GraphicUserInterface
 
         public void PrintMessage(string message)
         {
-            System.Windows.MessageBox.Show(message);
+            MessageBox.Show(message);
         }
 
         public void PrintField(byte[,] matrix)
@@ -85,19 +93,7 @@ namespace BalloonsPop.GraphicUserInterface
             {
                 for (int col = 0, colsCount = matrix.GetLength(1); col < colsCount; col++)
                 {
-                    //var img = new Image();
-
-                    //var coordinatesAsString = row + " " + col;
-
-                    //img.MouseDown += (s, e) =>
-                    //{
-                    //    this.Raise(s, new ClickEventArgs(coordinatesAsString));
-                    //};
-
-                    //this.SetBalloonImageSize(img);
                     this.SetSource(this.balloonField[row, col], matrix[row, col]);
-                    //this.BalloonField.Children.Add(img);
-                    //this.SetPositionInGrid(img, row, col);
                 }
             }
         }
@@ -116,9 +112,10 @@ namespace BalloonsPop.GraphicUserInterface
 
         public void PrintHighscore(string[,] highscore)
         {
-            for (int i = 1; i <= highscore.GetLength(0); i++)
+            this.HighscoreTable.Children.RemoveRange(2, this.HighscoreTable.Children.Count - 2);
+            for (int i = 1; i < highscore.GetLength(0); i++)
             {
-                this.FillHighscoreGridRow(highscore[i - 1, 1], highscore[i - 1, 0], i);
+                this.FillHighscoreGridRow("IMPLEMENT IN WPF PLZ :D", highscore[i - 1, 0], i);
             }
         }
 
@@ -136,11 +133,13 @@ namespace BalloonsPop.GraphicUserInterface
 
         public string ReadUserInput()
         {
-            // TODO: Implement this method
-            throw new NotImplementedException();
+            var enterUserNameDialog = new PromptWindow();
+            enterUserNameDialog.ShowDialog();
+
+            return enterUserNameDialog.UserName;
         }
 
-        public event EventHandler Raise;
+        
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
