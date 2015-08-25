@@ -1,8 +1,8 @@
 ﻿namespace Tests
 {
     using System;
-    using BaloonsPop.Common.Validators;
-    using BaloonsPop.Engine;
+    using BalloonsPop.Common.Validators;
+    using BalloonsPop.Engine;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
@@ -56,7 +56,7 @@
         }
 
         [TestMethod]
-        public void TestIfGenerateFieldInitializesTheFieldWithCorrectBaloonValues()
+        public void TestIfGenerateFieldInitializesTheFieldWithCorrectBalloonValues()
         {
             for (int i = 0; i < 10; i++)
             {
@@ -102,7 +102,7 @@
         }
 
         [TestMethod]
-        public void TestIfPopBaloonsPopsTheBaloonsOnTheSameRowAndColumn()
+        public void TestIfPopBalloonsPopsTheBalloonsOnTheSameRowAndColumn()
         {
             var field = new byte[5, 10];
 
@@ -116,7 +116,7 @@
                 field[j, i] = (byte)1;
             }
 
-            this.gameLogicProvider.PopBaloons(field, 2, 5);
+            this.gameLogicProvider.PopBalloons(field, 2, 5);
 
             foreach (var cell in field)
             {
@@ -128,7 +128,7 @@
         }
 
         [TestMethod]
-        public void TestIfPopBaloonsPopsOnlyTheBaloonsOnTheSameRowAndColumn()
+        public void TestIfPopBalloonsPopsOnlyTheBalloonsOnTheSameRowAndColumn()
         {
             var field = this.gameLogicProvider.GenerateField();
             var storedField = (byte[,])field.Clone();
@@ -143,7 +143,7 @@
                 field[j, i] = (byte)1;
             }
 
-            this.gameLogicProvider.PopBaloons(field, 2, 5);
+            this.gameLogicProvider.PopBalloons(field, 2, 5);
 
             for (int i = 0; i < field.GetLength(0); i++)
             {
@@ -168,7 +168,7 @@
         }
 
         [TestMethod]
-        public void TestIfPopBaloonsPopsOnlyTargetBaloonWhenTheBaloonHasNoNeighborsOfTheSameType()
+        public void TestIfPopBalloonsPopsOnlyTargetBalloonWhenTheBalloonHasNoNeighborsOfTheSameType()
         {
             var field = new byte[5, 10];
 
@@ -180,7 +180,7 @@
                 }
             }
 
-            this.gameLogicProvider.PopBaloons(field, 2, 3);
+            this.gameLogicProvider.PopBalloons(field, 2, 3);
 
             for (int i = 1; i < 4; i++)
             {
