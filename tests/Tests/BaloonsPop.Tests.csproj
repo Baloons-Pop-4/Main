@@ -57,13 +57,21 @@
     <Compile Include="UserInputValidatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\BaloonsPop.Common\BaloonsPop.Common.csproj">
+    <ProjectReference Include="..\..\src\BalloonsPop.Common\BalloonsPop.Common.csproj">
       <Project>{8c8b1419-0948-4d28-b57a-8d4f68d3bc0c}</Project>
-      <Name>BaloonsPop.Common</Name>
+      <Name>BalloonsPop.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\BaloonsPop.Engine\BaloonsPop.Engine.csproj">
+    <ProjectReference Include="..\..\src\BalloonsPop.ConsoleUI\BalloonsPop.ConsoleUI.csproj">
+      <Project>{dd61bf23-6994-4ebb-aaa3-cb280765e833}</Project>
+      <Name>BalloonsPop.ConsoleUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\BalloonsPop.Engine\BalloonsPop.Engine.csproj">
       <Project>{b4ff3beb-43d3-4d4e-963e-50108922d688}</Project>
-      <Name>BaloonsPop.Engine</Name>
+      <Name>BalloonsPop.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\BalloonsPop.GraphicUserInterface\BalloonsPop.GraphicUserInterface.csproj">
+      <Project>{9a2a0f78-59a1-4acd-8fc0-4fff55d963aa}</Project>
+      <Name>BalloonsPop.GraphicUserInterface</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

@@ -1,8 +1,7 @@
 ﻿namespace Tests
 {
     using System;
-    using BaloonsPop.Common.Validators;
-    using BaloonsPop.Engine;
+    using BalloonsPop.Common.Validators;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]

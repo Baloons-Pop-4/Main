@@ -1,0 +1,45 @@
+﻿<Window x:Class="BalloonsPop.GraphicUserInterface.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="905">
+    <Grid>
+        <Button Content="Start" HorizontalAlignment="Left" Margin="118,235,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Grid x:Name="BalloonField" Height="200" Margin="345,10,148,0" VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="28"></ColumnDefinition>
+                <ColumnDefinition Width="28"></ColumnDefinition>
+                <ColumnDefinition Width="28"></ColumnDefinition>
+                <ColumnDefinition Width="28"></ColumnDefinition>
+                <ColumnDefinition Width="28"></ColumnDefinition>
+                <ColumnDefinition Width="28"></ColumnDefinition>
+                <ColumnDefinition Width="28"></ColumnDefinition>
+                <ColumnDefinition Width="28"></ColumnDefinition>
+                <ColumnDefinition Width="28"></ColumnDefinition>
+                <ColumnDefinition Width="28"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <Grid x:Name="HighscoreTable" HorizontalAlignment="Left" Height="220" Margin="28,10,0,0" VerticalAlignment="Top" Width="250">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"></ColumnDefinition>
+                <ColumnDefinition Width="180"></ColumnDefinition>
+                <ColumnDefinition Width="50"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+        </Grid>
+
+    </Grid>
+</Window>
