@@ -1,0 +1,10 @@
+﻿<Window x:Class="BaloonsPop.GraphicUserInterface.PromptWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PromptWindow" Height="99" Width="300">
+    <StackPanel>
+        <TextBlock Text="Enter you name" />
+        <TextBox x:Name="UsernameTextBox" />
+        <Button Content="OK" Height="26" Click="Close"/>
+    </StackPanel>
+</Window>
