@@ -1,7 +1,9 @@
 ﻿namespace BalloonsPop.Engine
 {
+    using System;
     using BalloonsPop.Common.Contracts;
 
+    [Serializable]
     public class Game : IGameModel
     {
         private byte[,] field;

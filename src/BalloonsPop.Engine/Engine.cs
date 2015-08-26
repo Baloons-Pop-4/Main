@@ -5,6 +5,7 @@
     using BalloonsPop.Common.Validators;
     using BalloonsPop.Engine.Commands;
     using System.Collections.Generic;
+    using BalloonsPop.Engine.Memento;
 
     public class Engine : IEngine
     {
@@ -31,6 +32,8 @@
         private IGameModel game;
 
         private IGameLogicProvider gameLogicProvider;
+
+        private IMemento<IGameModel> memento = new Memento<IGameModel>();
 
         public Engine(IUserInterface ui, IUserInputValidator validator, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
         {
@@ -63,6 +66,7 @@
         {
             var commandList = new List<ICommand>();
 
+            //commandList.Add(new SaveCommand(this.game, this.memento));
             switch (userCommand)
             {
                 case RESTART:
@@ -84,6 +88,12 @@
                     commandList.Add(this.create.ExitCommand());
 
                     break;
+
+                //case "UNDO":
+
+                //    commandList.Add(new UndoCommand(this.game, this.memento));
+
+                //    break;
 
                 default:
 
