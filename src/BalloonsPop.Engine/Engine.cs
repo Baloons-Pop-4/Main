@@ -1,6 +1,7 @@
 ﻿namespace BalloonsPop.Engine
 {
     using System;
+    using BalloonsPop.Common.Gadgets;
     using BalloonsPop.Common.Contracts;
     using System.Collections.Generic;
     using BalloonsPop.Engine.Memento;
@@ -51,75 +52,134 @@
             };
         }
 
-     
+
 
         protected virtual IList<ICommand> GetCommandList(string userCommand)
         {
             var commandList = new List<ICommand>();
 
-            switch (userCommand)
-            {
-                case RESTART:
-                    
-                    commandList.Add(this.commandFactory.CreateCommand("save"));
-                    commandList.Add(this.commandFactory.CreateCommand("restart"));
-                    commandList.Add(this.commandFactory.CreateCommand("field"));
-                    break;
+            new Switch<string>(userCommand)
+                               .Case(RESTART, () =>
+                               {
+                                   commandList.Add(this.commandFactory.CreateCommand("save"));
+                                   commandList.Add(this.commandFactory.CreateCommand("restart"));
+                                   commandList.Add(this.commandFactory.CreateCommand("field"));
+                               })
+                               .Case(TOP, () =>
+                               {
+                                   commandList.Add(this.commandFactory.CreateCommand("highscore"));
+                               })
+                               .Case("UNDO", () =>
+                               {
+                                   commandList.Add(this.commandFactory.CreateCommand("undo"));
+                                   commandList.Add(this.commandFactory.CreateCommand("field"));
+                               })
+                               .Case(EXIT, () =>
+                               {
+                                   this.context.Message = ON_EXIT_MESSAGE;
+                                   commandList.Add(this.commandFactory.CreateCommand("message"));
+                                   commandList.Add(this.commandFactory.CreateCommand("exit"));
+                               })
+                               .Case(!this.validator.IsValidUserMove(userCommand), () =>
+                               {
+                                   this.context.Message = WRONG_INPUT;
+                                   commandList.Add(this.commandFactory.CreateCommand("message"));
+                               })
+                               .Default(() =>
+                               {
+                                   commandList.Add(this.commandFactory.CreateCommand("save"));
 
-                case TOP:
-                    commandList.Add(this.commandFactory.CreateCommand("highscore"));
-                    break;
+                                   var userRow = int.Parse(userCommand[0].ToString());
+                                   var userColumn = int.Parse(userCommand[2].ToString());
 
-                case EXIT:
-                    this.context.Message = ON_EXIT_MESSAGE;
-                    commandList.Add(this.commandFactory.CreateCommand("message"));
-                    commandList.Add(this.commandFactory.CreateCommand("exit"));    
+                                   if (this.context.Game.Field[userRow, userColumn] == 0)
+                                   {
+                                       this.context.Message = CANNOT_POP_MISSING_BALLOON;
+                                       commandList.Add(this.commandFactory.CreateCommand("message"));
+                                   }
+                                   else
+                                   {
+                                       this.context.UserRow = userRow;
+                                       this.context.UserCol = userColumn;
+                                       commandList.Add(this.commandFactory.CreateCommand("pop"));
+                                   }
 
-                    break;
+                                   if (this.context.LogicProvider.GameIsOver(this.context.Game.Field))
+                                   {
+                                       this.context.Message = "Gratz, completed in " + this.context.Game.UserMovesCount + " moves";
+                                       commandList.Add(this.commandFactory.CreateCommand("message"));
+                                       commandList.Add(this.commandFactory.CreateCommand("restart"));
+                                   }
+                                   else
+                                   {
+                                       commandList.Add(this.commandFactory.CreateCommand("field"));
+                                   }
+                               });
 
-                case "UNDO":
+            //switch (userCommand)
+            //{
+            //    case RESTART:
 
-                    commandList.Add(this.commandFactory.CreateCommand("undo"));
-                    commandList.Add(this.commandFactory.CreateCommand("field"));
-                    break;
+            //        commandList.Add(this.commandFactory.CreateCommand("save"));
+            //        commandList.Add(this.commandFactory.CreateCommand("restart"));
+            //        commandList.Add(this.commandFactory.CreateCommand("field"));
+            //        break;
 
-                default:
-                    commandList.Add(this.commandFactory.CreateCommand("save"));
+            //    case TOP:
+            //        commandList.Add(this.commandFactory.CreateCommand("highscore"));
+            //        break;
 
-                    if (!this.validator.IsValidUserMove(userCommand))
-                    {
-                        this.context.Message = WRONG_INPUT;
-                        commandList.Add(this.commandFactory.CreateCommand("message"));
-                        break;
-                    }
+            //    case EXIT:
+            //        this.context.Message = ON_EXIT_MESSAGE;
+            //        commandList.Add(this.commandFactory.CreateCommand("message"));
+            //        commandList.Add(this.commandFactory.CreateCommand("exit"));
 
-                    var userRow = int.Parse(userCommand[0].ToString());
-                    var userColumn = int.Parse(userCommand[2].ToString());
+            //        break;
 
-                    if (this.context.Game.Field[userRow, userColumn] == 0)
-                    {
-                        this.context.Message = CANNOT_POP_MISSING_BALLOON;
-                        commandList.Add(this.commandFactory.CreateCommand("message"));
-                    }
-                    else
-                    {
-                        this.context.UserRow = userRow;
-                        this.context.UserCol = userColumn;
-                        commandList.Add(this.commandFactory.CreateCommand("pop"));                    
-                    }
+            //    case "UNDO":
 
-                    if (this.context.LogicProvider.GameIsOver(this.context.Game.Field))
-                    {
-                        this.context.Message = "Gratz, completed in " + this.context.Game.UserMovesCount + " moves";
-                        commandList.Add(this.commandFactory.CreateCommand("message"));
-                        commandList.Add(this.commandFactory.CreateCommand("restart"));
-                    } else
-                    {
-                        commandList.Add(this.commandFactory.CreateCommand("field"));
-                    }
-                    
-                    break;
-            }
+            //        commandList.Add(this.commandFactory.CreateCommand("undo"));
+            //        commandList.Add(this.commandFactory.CreateCommand("field"));
+            //        break;
+
+            //    default:
+            //        commandList.Add(this.commandFactory.CreateCommand("save"));
+
+            //        if (!this.validator.IsValidUserMove(userCommand))
+            //        {
+            //            this.context.Message = WRONG_INPUT;
+            //            commandList.Add(this.commandFactory.CreateCommand("message"));
+            //            break;
+            //        }
+
+            //        var userRow = int.Parse(userCommand[0].ToString());
+            //        var userColumn = int.Parse(userCommand[2].ToString());
+
+            //        if (this.context.Game.Field[userRow, userColumn] == 0)
+            //        {
+            //            this.context.Message = CANNOT_POP_MISSING_BALLOON;
+            //            commandList.Add(this.commandFactory.CreateCommand("message"));
+            //        }
+            //        else
+            //        {
+            //            this.context.UserRow = userRow;
+            //            this.context.UserCol = userColumn;
+            //            commandList.Add(this.commandFactory.CreateCommand("pop"));
+            //        }
+
+            //        if (this.context.LogicProvider.GameIsOver(this.context.Game.Field))
+            //        {
+            //            this.context.Message = "Gratz, completed in " + this.context.Game.UserMovesCount + " moves";
+            //            commandList.Add(this.commandFactory.CreateCommand("message"));
+            //            commandList.Add(this.commandFactory.CreateCommand("restart"));
+            //        }
+            //        else
+            //        {
+            //            commandList.Add(this.commandFactory.CreateCommand("field"));
+            //        }
+
+            //        break;
+            //}
 
             return commandList;
         }
