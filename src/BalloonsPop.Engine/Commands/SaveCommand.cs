@@ -1,21 +1,15 @@
 ﻿using BalloonsPop.Common.Contracts;
-using BalloonsPop.Engine.Memento;
 namespace BalloonsPop.Engine.Commands
 {
-    public class SaveCommand : GameCommand
+    public class SaveCommand : ICommand
     {
-        private IMemento<IGameModel> memento;
-
-        public SaveCommand(IGameModel gameModel, IMemento<IGameModel> memento)
-            :base(gameModel)
+        public SaveCommand()
         {
-            this.memento = memento;
         }
 
-        public override void Execute()
+        public void Execute(IContext context)
         {
-            this.memento.State = this.gameModel;
-            System.Console.WriteLine("urg");
+            context.Memento.State = context.Game;
         }
     }
 }

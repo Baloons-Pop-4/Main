@@ -41,10 +41,12 @@
   <ItemGroup>
     <Compile Include="Contracts\ICommand.cs" />
     <Compile Include="Contracts\ICommandFactory.cs" />
+    <Compile Include="Contracts\IContext.cs" />
     <Compile Include="Contracts\IEngine.cs" />
     <Compile Include="Contracts\IGameLogicProvider.cs" />
     <Compile Include="Contracts\IGameModel.cs" />
     <Compile Include="Contracts\IMatrixValidator.cs" />
+    <Compile Include="Contracts\IMemento.cs" />
     <Compile Include="Contracts\IPrinter.cs" />
     <Compile Include="Contracts\IUserInputReader.cs" />
     <Compile Include="Contracts\IUserInputValidator.cs" />

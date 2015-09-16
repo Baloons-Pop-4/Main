@@ -30,6 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,23 +40,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\CommandFactory.cs" />
     <Compile Include="Commands\ExitCommand.cs" />
-    <Compile Include="Commands\GameCommand.cs" />
     <Compile Include="Commands\PopBalloonCommand.cs" />
-    <Compile Include="Commands\PrintCommands.cs" />
     <Compile Include="Commands\PrintFieldCommand.cs" />
     <Compile Include="Commands\PrintHighscoreCommand.cs" />
     <Compile Include="Commands\PrintMessageCommand.cs" />
     <Compile Include="Commands\RestartCommand.cs" />
     <Compile Include="Commands\SaveCommand.cs" />
     <Compile Include="Commands\UndoCommand.cs" />
+    <Compile Include="Contexts\Context.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameLogic.cs" />
     <Compile Include="Highscore.cs" />
-    <Compile Include="Memento\IMemento.cs" />
     <Compile Include="Memento\Memento.cs" />
     <Compile Include="PlayerScore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,23 +1,16 @@
 ﻿namespace BalloonsPop.Engine.Commands
 {
     using BalloonsPop.Common.Contracts;
-    using BalloonsPop.Engine.Memento;
 
-
-    public class UndoCommand : GameCommand
+    public class UndoCommand : ICommand
     {
-        private IMemento<IGameModel> memento;
-
-        public UndoCommand(IGameModel gameModel, IMemento<IGameModel> memento)
-            : base(gameModel)
+        public UndoCommand()
         {
-            this.memento = memento;
         }
 
-        public override void Execute()
+        public void Execute(IContext context)
         {
-            this.gameModel.Field = memento.State.Field;
-            System.Console.WriteLine("mirishi");
+            context.Game.Field = context.Memento.State.Field;
         }
     }
 }
