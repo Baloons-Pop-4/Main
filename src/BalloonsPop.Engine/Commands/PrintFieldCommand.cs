@@ -4,17 +4,17 @@
 
     public class PrintFieldCommand : PrintCommands
     {
-        private byte[,] field;
+        private IGameModel game;
 
-        public PrintFieldCommand(IPrinter printer, byte[,] field)
+        public PrintFieldCommand(IPrinter printer, IGameModel game)
             :base(printer)
         {
-            this.field = field;
+            this.game = game;
         }
 
         public override void Execute()
         {
-            this.printer.PrintField(field);
+            this.printer.PrintField(game.Field);
         }
     }
 }

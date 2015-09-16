@@ -11,23 +11,23 @@
         [TestMethod]
         public void TestIfGameModelIsCreatedWithInitializedField()
         {
-            var gameModel = new Game(new GameLogic(MatrixValidator.GetInstance));
+            var gameModel = new Game(new GameLogic(MatrixValidator.GetInstance).GenerateField());
             Assert.IsNotNull(gameModel.Field);
         }
 
         [TestMethod]
         public void TestIfInitialMovesCountIsZero()
         {
-            var gameModel = new Game(new GameLogic(MatrixValidator.GetInstance));
+            var gameModel = new Game(new GameLogic(MatrixValidator.GetInstance).GenerateField());
             Assert.AreEqual(0, gameModel.UserMovesCount);
         }
 
         [TestMethod]
         public void TestIfResetMethodResetsTheGameFieldCorrectly()
         {
-            var gameModel = new Game(new GameLogic(MatrixValidator.GetInstance));
+            var gameModel = new Game(new GameLogic(MatrixValidator.GetInstance).GenerateField());
             var fieldBeforeReset = (byte[,])gameModel.Field.Clone();
-            gameModel.Reset();
+            gameModel.Field = new byte[5, 10];
 
             var differentFieldCount = 0;
 
@@ -48,7 +48,7 @@
         [TestMethod]
         public void TestIfIncrementMovesMethodCorrectlyIncrementTheMovesCount()
         {
-            var gameModel = new Game(new GameLogic(MatrixValidator.GetInstance));
+            var gameModel = new Game(new byte[5, 10]);
             gameModel.IncrementMoves();
             Assert.AreEqual(1, gameModel.UserMovesCount);
         }
@@ -56,9 +56,9 @@
         [TestMethod]
         public void TestIfResetMethodCorrectlyResetsTheUserMovesCount()
         {
-            var gameModel = new Game(new GameLogic(MatrixValidator.GetInstance));
+            var gameModel = new Game(new GameLogic(MatrixValidator.GetInstance).GenerateField());
             gameModel.IncrementMoves();
-            gameModel.Reset();
+            gameModel.ResetUserMoves();
             Assert.AreEqual(0, gameModel.UserMovesCount);
         }
     }

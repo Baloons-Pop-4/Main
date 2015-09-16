@@ -5,6 +5,7 @@
     using BalloonsPop.Common.Validators;
     using BalloonsPop.Engine.Commands;
     using System.Collections.Generic;
+    using BalloonsPop.Engine.Memento;
 
     public class Engine : IEngine
     {
@@ -31,6 +32,8 @@
         private IGameModel game;
 
         private IGameLogicProvider gameLogicProvider;
+
+        private IMemento<IGameModel> memento = new Memento<IGameModel>();
 
         public Engine(IUserInterface ui, IUserInputValidator validator, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
         {
@@ -66,10 +69,9 @@
             switch (userCommand)
             {
                 case RESTART:
-
-                    commandList.Add(this.create.RestartCommand(this.game));
-                    commandList.Add(this.create.PrintFieldCommand(this.userInterface, game.Field));
-
+                    commandList.Add(new SaveCommand(this.game, this.memento));
+                    commandList.Add(this.create.RestartCommand(this.game, this.gameLogicProvider));
+                    commandList.Add(this.create.PrintFieldCommand(this.userInterface, game));
                     break;
 
                 case TOP:
@@ -85,7 +87,15 @@
 
                     break;
 
+                case "UNDO":
+
+                    commandList.Add(new UndoCommand(this.game, this.memento));
+                    commandList.Add(new PrintFieldCommand(this.userInterface, this.game));
+                    break;
+
                 default:
+
+                    commandList.Add(new SaveCommand(this.game, this.memento));
 
                     if (!this.validator.IsValidUserMove(userCommand))
                     {
@@ -115,8 +125,8 @@
                         commandList.Add(this.create.PrintHighscoreCommand(this.userInterface, this.highScoreChart));
                     }
 
-                    commandList.Add(this.create.PrintFieldCommand(this.userInterface, this.game.Field));
-
+                    commandList.Add(this.create.PrintFieldCommand(this.userInterface, this.game));
+                    
                     break;
             }
 

@@ -1,19 +1,18 @@
 ﻿namespace BalloonsPop.Engine
 {
+    using System;
     using BalloonsPop.Common.Contracts;
 
+    [Serializable]
     public class Game : IGameModel
     {
         private byte[,] field;
 
         private int userMovesCount;
 
-        private GameLogic gameLogicProvider;
-
-        public Game(GameLogic gameLogicProvider)
+        public Game(byte[,] field)
         {
-            this.gameLogicProvider = gameLogicProvider;
-            this.Reset();
+            this.field = field;
         }
 
         public byte[,] Field
@@ -21,6 +20,12 @@
             get
             {
                 return this.field;
+            }
+
+            set
+            {
+                // TODO: validations here, logging here
+                this.field = value;
             }
         }
 
@@ -32,9 +37,8 @@
             }
         }
 
-        public void Reset()
+        public void ResetUserMoves()
         {
-            this.field = this.gameLogicProvider.GenerateField();
             this.userMovesCount = 0;
         }
 

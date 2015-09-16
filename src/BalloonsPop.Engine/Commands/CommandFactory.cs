@@ -13,14 +13,14 @@
             return new ExitCommand();
         }
 
-        public ICommand RestartCommand(IGameModel gameModel)
+        public ICommand RestartCommand(IGameModel gameModel, IGameLogicProvider logicProvider)
         {
-            return new RestartCommand(gameModel);
+            return new RestartCommand(gameModel, logicProvider);
         }
 
-        public ICommand PrintFieldCommand(IPrinter printer, byte[,] field)
+        public ICommand PrintFieldCommand(IPrinter printer, IGameModel game)
         {
-            return new PrintFieldCommand(printer, field);
+            return new PrintFieldCommand(printer, game);
         }
 
         public ICommand PrintMessageCommand(IPrinter printer, string message)
