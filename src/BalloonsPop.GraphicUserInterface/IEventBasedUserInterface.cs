@@ -4,7 +4,7 @@
 
     using BalloonsPop.Common.Contracts;
 
-    public interface IEventBasedUserInterface : IUserInterface
+    public interface IEventBasedUserInterface : IPrinter
     {
         event EventHandler Raise;
     }

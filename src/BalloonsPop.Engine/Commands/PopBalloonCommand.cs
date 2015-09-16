@@ -2,27 +2,17 @@
 {
     using BalloonsPop.Common.Contracts;
 
-    public class PopBalloonCommand : GameCommand
+    public class PopBalloonCommand : ICommand
     {
-        private IGameLogicProvider gameLogicProvider;
-
-        private int row;
-
-        private int col;
-
-        public PopBalloonCommand(IGameModel gameModel, IGameLogicProvider gameLogicProvider, int row, int col) 
-            : base(gameModel)
+        public PopBalloonCommand() 
         {
-            this.gameLogicProvider = gameLogicProvider;
-            this.row = row;
-            this.col = col;
         }
 
-        public override void Execute()
+        public void Execute(IContext context)
         {
-            this.gameLogicProvider.PopBalloons(this.gameModel.Field, this.row, this.col);
-            this.gameLogicProvider.LetBalloonsFall(this.gameModel.Field);
-            this.gameModel.IncrementMoves();
+            context.LogicProvider.PopBalloons(context.Game.Field, context.UserRow, context.UserCol);
+            context.LogicProvider.LetBalloonsFall(context.Game.Field);
+            context.Game.IncrementMoves();
         }
     }
 }

@@ -2,20 +2,15 @@
 {
     using BalloonsPop.Common.Contracts;
 
-    public class PrintHighscoreCommand : PrintCommands
+    public class PrintHighscoreCommand : ICommand
     {
-        private string[,] chart;
-
-        public PrintHighscoreCommand(IPrinter printer, string[,] chart) 
-            : base(printer)
+        public PrintHighscoreCommand()
         {
-            this.chart = chart;
-            this.printer = printer;
         }
 
-        public override void Execute()
+        public void Execute(IContext context)
         {
-            this.printer.PrintHighscore(this.chart);
+            context.Printer.PrintHighscore(new string[,] { { "mirishe", "mnogo" } });
         }
     }
 }
