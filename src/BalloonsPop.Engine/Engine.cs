@@ -35,17 +35,17 @@
 
         protected IContext context;
 
-        public Engine(IPrinter printer, IUserInputValidator validator, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
+        public Engine(IPrinter printer, IUserInputValidator validator, IHighscoreTable highScoreTable, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
         {
             this.validator = validator;
             this.commandFactory = commandFactory;
             //this.game = gameModel;
             //this.gameLogicProvider = gameLogicProvider;
-            this.highScoreChart = new string[2, 5];
 
             this.context = new Context()
             {
                 Game = gameModel,
+                HighscoreTable = highScoreTable,
                 LogicProvider = gameLogicProvider,
                 Memento = new Memento<IGameModel>(),
                 Printer = printer
@@ -67,7 +67,7 @@
                                })
                                .Case(TOP, () =>
                                {
-                                   commandList.Add(this.commandFactory.CreateCommand("highscore"));
+                                   commandList.Add(this.commandFactory.CreateCommand("top"));
                                })
                                .Case("UNDO", () =>
                                {
@@ -106,7 +106,16 @@
 
                                    if (this.context.LogicProvider.GameIsOver(this.context.Game.Field))
                                    {
-                                       this.context.Message = "Gratz, completed in " + this.context.Game.UserMovesCount + " moves";
+                                       this.context.Message = "Gratz, completed in " + this.context.Game.UserMovesCount + " moves.";
+                                       if (this.context.HighscoreTable.CanAddPlayer(this.context.Game.UserMovesCount))
+                                       {
+                                           // TODO: Abstract to work with all types of UIs, not just the console?
+                                           Console.WriteLine("Type in your name: ");
+                                           string username = Console.ReadLine();
+
+                                           this.context.HighscoreTable.AddPlayer(new PlayerScore(username, this.context.Game.UserMovesCount, DateTime.Now));
+                                       }
+
                                        commandList.Add(this.commandFactory.CreateCommand("message"));
                                        commandList.Add(this.commandFactory.CreateCommand("restart"));
                                    }

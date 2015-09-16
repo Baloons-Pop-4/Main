@@ -6,6 +6,6 @@
 
         void PrintField(byte[,] matrix);
 
-        void PrintHighscore(string[,] highscore);
+        void PrintHighscore(IHighscoreTable table);
     }
 }

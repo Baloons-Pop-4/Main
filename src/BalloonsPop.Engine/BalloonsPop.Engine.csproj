@@ -53,9 +53,8 @@
     <Compile Include="Engine.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameLogic.cs" />
-    <Compile Include="Highscore.cs" />
+    <Compile Include="HighscoreTable.cs" />
     <Compile Include="Memento\Memento.cs" />
-    <Compile Include="PlayerScore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

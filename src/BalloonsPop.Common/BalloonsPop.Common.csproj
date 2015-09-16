@@ -45,10 +45,12 @@
     <Compile Include="Contracts\IContext.cs" />
     <Compile Include="Contracts\IGameLogicProvider.cs" />
     <Compile Include="Contracts\IGameModel.cs" />
+    <Compile Include="Contracts\IHighscoreTable.cs" />
     <Compile Include="Contracts\IMatrixValidator.cs" />
     <Compile Include="Contracts\IMemento.cs" />
     <Compile Include="Contracts\IPrinter.cs" />
     <Compile Include="Contracts\IUserInputValidator.cs" />
+    <Compile Include="Contracts\PlayerScore.cs" />
     <Compile Include="Gadgets\FluentSwitch.cs" />
     <Compile Include="Gadgets\IEnumerableExtension.cs" />
     <Compile Include="Gadgets\QueriableMatrix.cs" />

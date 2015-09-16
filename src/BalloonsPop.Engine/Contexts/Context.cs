@@ -13,6 +13,8 @@
 
         public IMemento<IGameModel> Memento{ get; internal set; }
 
+        public IHighscoreTable HighscoreTable { get; internal set; }
+
         public string Message { get; set; }
 
         public int UserRow{ get; set; }
