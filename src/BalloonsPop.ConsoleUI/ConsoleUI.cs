@@ -1,9 +1,9 @@
 ﻿namespace BalloonsPop.ConsoleUI
 {
     using System;
-    using BalloonsPop.Common.Contracts;
+    using BalloonsPop.ConsoleUI.Contracts;
 
-    public class ConsoleUI : IUserInterface
+    public class ConsoleUI : IConsoleUserInterface
     {
         private const string COLUMN_INDECES = "    0 1 2 3 4 5 6 7 8 9 ";
         private const string SPACING = "   ";
