@@ -6,27 +6,25 @@
     using BalloonsPop.Engine.Memento;
     using BalloonsPop.Engine.Contexts;
 
-    public class Engine : IEngine
+    public class Engine
     {
         #region Constants
-        private const string EXIT = "EXIT";
-        private const string TOP = "TOP";
-        private const string RESTART = "RESTART";
-        private const string WRONG_INPUT = "Wrong input! Try Again!";
-        private const string CANNOT_POP_MISSING_BALLOON = "Cannot pop missing ballon!";
-        private const string WIN_MESSAGE_TEMPLATE = "Gratz ! You completed it in {0} moves.";
-        private const string NOT_IN_TOP_FIVE = "I am sorry you are not skillful enough for TopFive chart!";
-        private const string MOVE_PROMPT = "Enter a row and column: ";
-        private const string ON_EXIT_MESSAGE = "Good Bye!";
+        protected const string EXIT = "EXIT";
+        protected const string TOP = "TOP";
+        protected const string RESTART = "RESTART";
+        protected const string WRONG_INPUT = "Wrong input! Try Again!";
+        protected const string CANNOT_POP_MISSING_BALLOON = "Cannot pop missing ballon!";
+        protected const string WIN_MESSAGE_TEMPLATE = "Gratz ! You completed it in {0} moves.";
+        protected const string NOT_IN_TOP_FIVE = "I am sorry you are not skillful enough for TopFive chart!";
+        protected const string MOVE_PROMPT = "Enter a row and column: ";
+        protected const string ON_EXIT_MESSAGE = "Good Bye!";
         #endregion
 
-        private string[,] highScoreChart;
+        protected string[,] highScoreChart;
 
-        private IUserInterface userInterface;
+        protected IUserInputValidator validator;
 
-        private IUserInputValidator validator;
-
-        private ICommandFactory commandFactory;
+        protected ICommandFactory commandFactory;
 
         //private IGameModel game;
 
@@ -34,11 +32,10 @@
 
         //private IMemento<IGameModel> memento = new Memento<IGameModel>();
 
-        private IContext context;
+        protected IContext context;
 
-        public Engine(IUserInterface ui, IUserInputValidator validator, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
+        public Engine(IPrinter printer, IUserInputValidator validator, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
         {
-            this.userInterface = ui;
             this.validator = validator;
             this.commandFactory = commandFactory;
             //this.game = gameModel;
@@ -50,27 +47,11 @@
                 Game = gameModel,
                 LogicProvider = gameLogicProvider,
                 Memento = new Memento<IGameModel>(),
-                Printer = this.userInterface
+                Printer = printer
             };
         }
 
-        public void Run()
-        {
-            this.userInterface.PrintField(this.context.Game.Field);
-            var command = string.Empty;
-
-            while (true)
-            {
-                // this.commandFactory.PrintMessageCommand(this.userInterface, MOVE_PROMPT).Execute();
-                this.context.Message = MOVE_PROMPT;
-                this.commandFactory.CreateCommand("message").Execute(this.context);
-                command = this.GetTrimmedUppercaseInput();
-
-                var commandList = this.GetCommandList(command);
-
-                this.ExecuteCommandList(commandList);
-            }
-        }
+     
 
         protected virtual IList<ICommand> GetCommandList(string userCommand)
         {
@@ -149,14 +130,6 @@
             {
                 command.Execute(this.context);
             }
-        }
-
-        private string GetTrimmedUppercaseInput()
-        {
-            var inputAsString = this.userInterface.ReadUserInput();
-            var trimmedUppercaseInput = inputAsString.Trim().ToUpper();
-
-            return trimmedUppercaseInput;
         }
     }
 }

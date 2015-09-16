@@ -5,9 +5,6 @@
     using BalloonsPop.Common.Validators;
     using BalloonsPop.Engine;
     using BalloonsPop.Engine.Commands;
-    using System.Collections.Generic;
-
-    using System.Linq;
 
     public class MainProgram
     {
@@ -18,7 +15,7 @@
             var gameLogicProvider = new GameLogic(MatrixValidator.GetInstance);
             var gameModel = new Game(gameLogicProvider.GenerateField());
             
-            var engine = new Engine(consoleUI, UserInputValidator.GetInstance, commandFactory, gameModel, gameLogicProvider);
+            var engine = new ConsoleEngine(consoleUI, UserInputValidator.GetInstance, commandFactory, gameModel, gameLogicProvider);
             engine.Run();
         }
     }
