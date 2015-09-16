@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BalloonsPop.GraphicUserInterface
+﻿namespace BalloonsPop.GraphicUserInterface
 {
+    using System;
+
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Engine;
 
     public class GraphicEngine : Engine, IGraphicEngine
     {
-        public GraphicEngine(IEventBasedUserInterface ui, IUserInputValidator validator, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider) 
+        public GraphicEngine(IEventBasedUserInterface ui, IUserInputValidator validator, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
             : base(ui, validator, commandFactory, gameModel, gameLogicProvider)
         {
             ui.Raise += new EventHandler(this.HandleUserInput);
@@ -21,7 +17,7 @@ namespace BalloonsPop.GraphicUserInterface
         {
             var castedArguments = e as ClickEventArgs;
 
-            if(castedArguments == null)
+            if (castedArguments == null)
             {
                 throw new ArgumentException("Invalid event arguments are provided");
             }

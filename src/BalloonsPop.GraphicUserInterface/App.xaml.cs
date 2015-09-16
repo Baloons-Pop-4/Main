@@ -12,6 +12,7 @@ namespace BalloonsPop.GraphicUserInterface
     using BalloonsPop.Common.Validators;
     using BalloonsPop.Engine;
     using BalloonsPop.Engine.Commands;
+    using BaloonsPop.GraphicUserInterface;
 
     /// <summary>
     /// Interaction logic for App.xaml
