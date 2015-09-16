@@ -7,8 +7,8 @@
     <ProjectGuid>{9A2A0F78-59A1-4ACD-8FC0-4FFF55D963AA}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BaloonsPop.GraphicUserInterface</RootNamespace>
-    <AssemblyName>BaloonsPop.GraphicUserInterface</AssemblyName>
+    <RootNamespace>BalloonsPop.GraphicUserInterface</RootNamespace>
+    <AssemblyName>BalloonsPop.GraphicUserInterface</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

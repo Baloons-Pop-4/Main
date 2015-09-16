@@ -2,10 +2,9 @@
 {
     using System;
     using BalloonsPop.Common.Contracts;
-    using BalloonsPop.Common.Validators;
-    using BalloonsPop.Engine.Commands;
     using System.Collections.Generic;
     using BalloonsPop.Engine.Memento;
+    using BalloonsPop.Engine.Contexts;
 
     public class Engine : IEngine
     {
@@ -27,33 +26,44 @@
 
         private IUserInputValidator validator;
 
-        private ICommandFactory create;
+        private ICommandFactory commandFactory;
 
-        private IGameModel game;
+        //private IGameModel game;
 
-        private IGameLogicProvider gameLogicProvider;
+        //private IGameLogicProvider gameLogicProvider;
 
-        private IMemento<IGameModel> memento = new Memento<IGameModel>();
+        //private IMemento<IGameModel> memento = new Memento<IGameModel>();
+
+        private IContext context;
 
         public Engine(IUserInterface ui, IUserInputValidator validator, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
         {
             this.userInterface = ui;
             this.validator = validator;
-            this.create = commandFactory;
-            this.game = gameModel;
-            this.gameLogicProvider = gameLogicProvider;
+            this.commandFactory = commandFactory;
+            //this.game = gameModel;
+            //this.gameLogicProvider = gameLogicProvider;
             this.highScoreChart = new string[2, 5];
+
+            this.context = new Context()
+            {
+                Game = gameModel,
+                LogicProvider = gameLogicProvider,
+                Memento = new Memento<IGameModel>(),
+                Printer = this.userInterface
+            };
         }
 
         public void Run()
         {
-            this.userInterface.PrintField(game.Field);
+            this.userInterface.PrintField(this.context.Game.Field);
             var command = string.Empty;
 
             while (true)
             {
-                this.create.PrintMessageCommand(this.userInterface, MOVE_PROMPT).Execute();
-
+                // this.commandFactory.PrintMessageCommand(this.userInterface, MOVE_PROMPT).Execute();
+                this.context.Message = MOVE_PROMPT;
+                this.commandFactory.CreateCommand("message").Execute(this.context);
                 command = this.GetTrimmedUppercaseInput();
 
                 var commandList = this.GetCommandList(command);
@@ -61,7 +71,7 @@
                 this.ExecuteCommandList(commandList);
             }
         }
-        
+
         protected virtual IList<ICommand> GetCommandList(string userCommand)
         {
             var commandList = new List<ICommand>();
@@ -69,63 +79,63 @@
             switch (userCommand)
             {
                 case RESTART:
-                    commandList.Add(new SaveCommand(this.game, this.memento));
-                    commandList.Add(this.create.RestartCommand(this.game, this.gameLogicProvider));
-                    commandList.Add(this.create.PrintFieldCommand(this.userInterface, game));
+                    
+                    commandList.Add(this.commandFactory.CreateCommand("save"));
+                    commandList.Add(this.commandFactory.CreateCommand("restart"));
+                    commandList.Add(this.commandFactory.CreateCommand("field"));
                     break;
 
                 case TOP:
-
-                    commandList.Add(this.create.PrintHighscoreCommand(this.userInterface, this.highScoreChart));
-
+                    commandList.Add(this.commandFactory.CreateCommand("highscore"));
                     break;
 
                 case EXIT:
-
-                    commandList.Add(this.create.PrintMessageCommand(this.userInterface, ON_EXIT_MESSAGE));
-                    commandList.Add(this.create.ExitCommand());
+                    this.context.Message = ON_EXIT_MESSAGE;
+                    commandList.Add(this.commandFactory.CreateCommand("message"));
+                    commandList.Add(this.commandFactory.CreateCommand("exit"));    
 
                     break;
 
                 case "UNDO":
 
-                    commandList.Add(new UndoCommand(this.game, this.memento));
-                    commandList.Add(new PrintFieldCommand(this.userInterface, this.game));
+                    commandList.Add(this.commandFactory.CreateCommand("undo"));
+                    commandList.Add(this.commandFactory.CreateCommand("field"));
                     break;
 
                 default:
-
-                    commandList.Add(new SaveCommand(this.game, this.memento));
+                    commandList.Add(this.commandFactory.CreateCommand("save"));
 
                     if (!this.validator.IsValidUserMove(userCommand))
                     {
-                        commandList.Add(this.create.PrintMessageCommand(this.userInterface, WRONG_INPUT));
-
+                        this.context.Message = WRONG_INPUT;
+                        commandList.Add(this.commandFactory.CreateCommand("message"));
                         break;
                     }
 
                     var userRow = int.Parse(userCommand[0].ToString());
                     var userColumn = int.Parse(userCommand[2].ToString());
 
-                    if (game.Field[userRow, userColumn] == 0)
+                    if (this.context.Game.Field[userRow, userColumn] == 0)
                     {
-                        commandList.Add(this.create.PrintMessageCommand(this.userInterface, CANNOT_POP_MISSING_BALLOON));
+                        this.context.Message = CANNOT_POP_MISSING_BALLOON;
+                        commandList.Add(this.commandFactory.CreateCommand("message"));
                     }
                     else
                     {
-                        commandList.Add(this.create.PopBalloonCommand(this.game, this.gameLogicProvider, userRow, userColumn));
+                        this.context.UserRow = userRow;
+                        this.context.UserCol = userColumn;
+                        commandList.Add(this.commandFactory.CreateCommand("pop"));                    
                     }
 
-                    if (gameLogicProvider.GameIsOver(game.Field))
+                    if (this.context.LogicProvider.GameIsOver(this.context.Game.Field))
                     {
-                        commandList.Add(this.create.PrintMessageCommand(this.userInterface, string.Format(WIN_MESSAGE_TEMPLATE, game.UserMovesCount)));
-
-                        HighScoreUtility.SignIfSkilled(this.highScoreChart, this.game.UserMovesCount);
-
-                        commandList.Add(this.create.PrintHighscoreCommand(this.userInterface, this.highScoreChart));
+                        this.context.Message = "Gratz, completed in " + this.context.Game.UserMovesCount + " moves";
+                        commandList.Add(this.commandFactory.CreateCommand("message"));
+                        commandList.Add(this.commandFactory.CreateCommand("restart"));
+                    } else
+                    {
+                        commandList.Add(this.commandFactory.CreateCommand("field"));
                     }
-
-                    commandList.Add(this.create.PrintFieldCommand(this.userInterface, this.game));
                     
                     break;
             }
@@ -137,7 +147,7 @@
         {
             foreach (var command in commandList)
             {
-                command.Execute();
+                command.Execute(this.context);
             }
         }
 

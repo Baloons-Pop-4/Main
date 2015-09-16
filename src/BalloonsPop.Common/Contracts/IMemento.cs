@@ -1,4 +1,4 @@
-﻿namespace BalloonsPop.Engine.Memento
+﻿namespace BalloonsPop.Common.Contracts
 {
     public interface IMemento<T>
     {

@@ -2,19 +2,15 @@
 {
     using BalloonsPop.Common.Contracts;
 
-    public class PrintMessageCommand : PrintCommands
+    public class PrintMessageCommand : ICommand
     {
-        private string message;
-
-        public PrintMessageCommand(IPrinter printer, string message)
-            :base(printer)
+        public PrintMessageCommand()
         {
-            this.message = message;
         }
 
-        public override void Execute()
+        public void Execute(IContext context)
         {
-            this.printer.PrintMessage(this.message);
+            context.Printer.PrintMessage(context.Message);
         }
     }
 }

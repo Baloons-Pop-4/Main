@@ -2,20 +2,16 @@
 {
     using BalloonsPop.Common.Contracts;
 
-    public class RestartCommand : GameCommand
+    public class RestartCommand : ICommand
     {
-        private IGameLogicProvider logicProvider;
-
-        public RestartCommand(IGameModel gameModel, IGameLogicProvider logicProvider)
-            :base(gameModel)
+        public RestartCommand()
         {
-            this.logicProvider = logicProvider;
         }
 
-        public override void Execute()
+        public void Execute(IContext context)
         {
-            this.gameModel.Field = logicProvider.GenerateField();
-            this.gameModel.ResetUserMoves();
+            context.Game.Field = context.LogicProvider.GenerateField();
+            context.Game.ResetUserMoves();
         }
     }
 }

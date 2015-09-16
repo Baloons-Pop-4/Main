@@ -3,6 +3,8 @@
     using System.IO;
     using System.Runtime.Serialization.Formatters.Binary;
 
+    using BalloonsPop.Common.Contracts;
+
     public class Memento<T> : IMemento<T>
     {
         private T state;
