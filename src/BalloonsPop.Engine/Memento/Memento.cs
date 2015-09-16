@@ -20,15 +20,15 @@
         {
             get
             {
-                return this.DeepClone<T>(this.state);
+                return this.DeepClone(this.state);
             }
             set
             {
-                this.state = this.DeepClone<T>(value);
+                this.state = this.DeepClone(value);
             }
         }
 
-        private T DeepClone<T>(T obj)
+        private T DeepClone(T obj)
         {
             using (var ms = new MemoryStream())
             {

@@ -66,14 +66,12 @@
         {
             var commandList = new List<ICommand>();
 
-            //commandList.Add(new SaveCommand(this.game, this.memento));
             switch (userCommand)
             {
                 case RESTART:
-
-                    commandList.Add(this.create.RestartCommand(this.game));
-                    commandList.Add(this.create.PrintFieldCommand(this.userInterface, game.Field));
-
+                    commandList.Add(new SaveCommand(this.game, this.memento));
+                    commandList.Add(this.create.RestartCommand(this.game, this.gameLogicProvider));
+                    commandList.Add(this.create.PrintFieldCommand(this.userInterface, game));
                     break;
 
                 case TOP:
@@ -89,13 +87,15 @@
 
                     break;
 
-                //case "UNDO":
+                case "UNDO":
 
-                //    commandList.Add(new UndoCommand(this.game, this.memento));
-
-                //    break;
+                    commandList.Add(new UndoCommand(this.game, this.memento));
+                    commandList.Add(new PrintFieldCommand(this.userInterface, this.game));
+                    break;
 
                 default:
+
+                    commandList.Add(new SaveCommand(this.game, this.memento));
 
                     if (!this.validator.IsValidUserMove(userCommand))
                     {
@@ -125,8 +125,8 @@
                         commandList.Add(this.create.PrintHighscoreCommand(this.userInterface, this.highScoreChart));
                     }
 
-                    commandList.Add(this.create.PrintFieldCommand(this.userInterface, this.game.Field));
-
+                    commandList.Add(this.create.PrintFieldCommand(this.userInterface, this.game));
+                    
                     break;
             }
 

@@ -16,7 +16,8 @@
 
         public override void Execute()
         {
-            this.gameModel = memento.State;
+            this.gameModel.Field = memento.State.Field;
+            System.Console.WriteLine("mirishi");
         }
     }
 }

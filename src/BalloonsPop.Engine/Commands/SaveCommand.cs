@@ -15,6 +15,7 @@ namespace BalloonsPop.Engine.Commands
         public override void Execute()
         {
             this.memento.State = this.gameModel;
+            System.Console.WriteLine("urg");
         }
     }
 }
