@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using BalloonsPop.Common.Contracts;
 
+    [Serializable]
     public class GameLogic : IGameLogicProvider
     {
         private const int FIELD_ROWS = 4;

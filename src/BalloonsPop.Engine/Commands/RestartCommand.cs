@@ -4,14 +4,18 @@
 
     public class RestartCommand : GameCommand
     {
-        public RestartCommand(IGameModel gameModel)
+        private IGameLogicProvider logicProvider;
+
+        public RestartCommand(IGameModel gameModel, IGameLogicProvider logicProvider)
             :base(gameModel)
         {
+            this.logicProvider = logicProvider;
         }
 
         public override void Execute()
         {
-            this.gameModel.Reset();
+            this.gameModel.Field = logicProvider.GenerateField();
+            this.gameModel.ResetUserMoves();
         }
     }
 }

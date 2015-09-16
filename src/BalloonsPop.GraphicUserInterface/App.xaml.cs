@@ -29,7 +29,7 @@ namespace BalloonsPop.GraphicUserInterface
             var factory = new CommandFactory();
             var validator = MatrixValidator.GetInstance;
             var logicProvider = new GameLogic(validator);
-            var model = new Game(logicProvider);
+            var model = new Game(logicProvider.GenerateField());
 
             this.engine = new GraphicEngine(graphicUi, UserInputValidator.GetInstance, factory, model, logicProvider);
 

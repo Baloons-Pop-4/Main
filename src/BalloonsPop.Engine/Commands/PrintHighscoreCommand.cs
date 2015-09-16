@@ -6,8 +6,6 @@
     {
         private string[,] chart;
 
-        private IPrinter printer;
-
         public PrintHighscoreCommand(IPrinter printer, string[,] chart) 
             : base(printer)
         {

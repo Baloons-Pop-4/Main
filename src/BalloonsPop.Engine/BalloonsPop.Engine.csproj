@@ -49,10 +49,14 @@
     <Compile Include="Commands\PrintHighscoreCommand.cs" />
     <Compile Include="Commands\PrintMessageCommand.cs" />
     <Compile Include="Commands\RestartCommand.cs" />
+    <Compile Include="Commands\SaveCommand.cs" />
+    <Compile Include="Commands\UndoCommand.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameLogic.cs" />
     <Compile Include="Highscore.cs" />
+    <Compile Include="Memento\IMemento.cs" />
+    <Compile Include="Memento\Memento.cs" />
     <Compile Include="PlayerScore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
