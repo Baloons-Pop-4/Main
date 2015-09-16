@@ -7,8 +7,8 @@
     <ProjectGuid>{B4FF3BEB-43D3-4D4E-963E-50108922D688}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BaloonsPop.Engine</RootNamespace>
-    <AssemblyName>BaloonsPop.Engine</AssemblyName>
+    <RootNamespace>BalloonsPop.Engine</RootNamespace>
+    <AssemblyName>BalloonsPop.Engine</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

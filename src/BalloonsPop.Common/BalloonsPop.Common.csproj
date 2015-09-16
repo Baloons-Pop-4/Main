@@ -7,8 +7,8 @@
     <ProjectGuid>{8C8B1419-0948-4D28-B57A-8D4F68D3BC0C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BaloonsPop.Common</RootNamespace>
-    <AssemblyName>BaloonsPop.Common</AssemblyName>
+    <RootNamespace>BalloonsPop.Common</RootNamespace>
+    <AssemblyName>BalloonsPop.Common</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
