@@ -2,10 +2,10 @@
 {
     public interface IGameModel
     {
-        byte[,] Field { get; }
+        byte[,] Field { get; set; }
         int UserMovesCount { get; }
 
-        void Reset();
+        void ResetUserMoves();
         void IncrementMoves();
     }
 }

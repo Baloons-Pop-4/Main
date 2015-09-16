@@ -7,8 +7,8 @@
     <ProjectGuid>{DD61BF23-6994-4EBB-AAA3-CB280765E833}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BaloonsPop</RootNamespace>
-    <AssemblyName>BaloonsPop</AssemblyName>
+    <RootNamespace>BalloonsPop</RootNamespace>
+    <AssemblyName>BalloonsPop</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
