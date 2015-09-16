@@ -2,19 +2,15 @@
 {
     using BalloonsPop.Common.Contracts;
 
-    public class PrintFieldCommand : PrintCommands
+    public class PrintFieldCommand : ICommand
     {
-        private byte[,] field;
-
-        public PrintFieldCommand(IPrinter printer, byte[,] field)
-            :base(printer)
+        public PrintFieldCommand()
         {
-            this.field = field;
         }
 
-        public override void Execute()
+        public void Execute(IContext context)
         {
-            this.printer.PrintField(field);
+            context.Printer.PrintField(context.Game.Field);
         }
     }
 }

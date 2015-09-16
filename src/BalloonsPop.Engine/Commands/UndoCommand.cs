@@ -2,15 +2,15 @@
 {
     using BalloonsPop.Common.Contracts;
 
-    public class PrintHighscoreCommand : ICommand
+    public class UndoCommand : ICommand
     {
-        public PrintHighscoreCommand()
+        public UndoCommand()
         {
         }
 
         public void Execute(IContext context)
         {
-            context.Printer.PrintHighscore(new string[,] { { "mirishe", "mnogo" } });
+            context.Game.Field = context.Memento.State.Field;
         }
     }
 }

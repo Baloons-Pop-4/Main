@@ -2,13 +2,15 @@
 {
     using System;
 
-    public class ExitCommand : Command
+    using BalloonsPop.Common.Contracts;
+
+    public class ExitCommand : ICommand
     {
         public ExitCommand()
         {
         }
 
-        public override void Execute()
+        public void Execute(IContext context)
         {
             Environment.Exit(0);
         }
