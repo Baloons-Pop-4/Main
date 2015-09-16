@@ -13,6 +13,7 @@
         public Game(byte[,] field)
         {
             this.field = field;
+            this.userMovesCount = 0;
         }
 
         public byte[,] Field
@@ -45,6 +46,13 @@
         public void IncrementMoves()
         {
             this.userMovesCount++;
+        }
+
+        public IGameModel Clone()
+        {
+            var clonedField = (byte[,])this.Field.Clone();
+
+            return new Game(clonedField);
         }
     }
 }
