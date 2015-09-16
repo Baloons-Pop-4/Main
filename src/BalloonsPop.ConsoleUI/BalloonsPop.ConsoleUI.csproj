@@ -42,6 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsoleUI.cs" />
+    <Compile Include="ConsoleEngine.cs" />
+    <Compile Include="Contracts\IConsoleEngine.cs" />
+    <Compile Include="Contracts\IConsoleUserInterface.cs" />
+    <Compile Include="Contracts\IInputReader.cs" />
     <Compile Include="MainProgram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
