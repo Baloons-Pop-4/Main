@@ -3,6 +3,9 @@
     using System;
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Engine.Commands;
+    using BalloonsPop.Engine.Contexts;
+    using Tests.MockClasses;
+
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -10,6 +13,8 @@
     public class CommandTests
     {
         private ICommandFactory commandFactory;
+
+        private IContext context;
 
         public CommandTests()
         {
@@ -19,7 +24,7 @@
         [TestMethod]
         public void TestIfNonNullObjectIsReturnedWithValidCommandKey()
         {
-            var commands = new string[] {"message", "exit", "undo", "pop", "restart", "field", "save", "top" };
+            var commands = new string[] { "message", "exit", "undo", "pop", "restart", "field", "save", "top" };
 
             foreach (var key in commands)
             {
@@ -40,7 +45,7 @@
                 {
                     this.commandFactory.CreateCommand(key);
                 }
-                catch(ArgumentException)
+                catch (ArgumentException)
                 {
                     continue;
                 }
@@ -49,6 +54,52 @@
             }
         }
 
+        [TestMethod]
+        public void TestIfPrintFieldCommandCallsThePrintFieldMethodOfTheUI()
+        {
+            this.context = new Context() { Printer = new MockPrinter(), Game = new GameMock() };
 
+            var printFieldCommand = this.commandFactory.CreateCommand("field");
+
+            printFieldCommand.Execute(context);
+
+            Assert.AreEqual(1, (this.context.Printer as MockPrinter).methodCallCounts["field"]);
+        }
+
+        [TestMethod]
+        public void TestIfPrintHighscoreCommandCallsThePrintHighscoreMethodOfTheUI()
+        {
+            this.context = new Context() { Printer = new MockPrinter(), Game = new GameMock() };
+
+            var printHighscoreCommand = this.commandFactory.CreateCommand("top");
+
+            printHighscoreCommand.Execute(context);
+
+            Assert.AreEqual(1, (this.context.Printer as MockPrinter).methodCallCounts["highscore"]);
+        }
+
+        [TestMethod]
+        public void TestIfPrintMessageCommandCallsThePrintMessageMethodOfTheUI()
+        {
+            this.context = new Context() { Printer = new MockPrinter(), Game = new GameMock() };
+
+            var printMessageCommand = this.commandFactory.CreateCommand("message");
+
+            printMessageCommand.Execute(this.context);
+
+            Assert.AreEqual(1, (this.context.Printer as MockPrinter).methodCallCounts["message"]);
+        }
+
+        [TestMethod]
+        public void TestIfSaveCommandUsesTheMementoSetter()
+        {
+            this.context = new Context() { Game = new GameMock(), Memento = new MementoMock()};
+
+            var saveCommand = this.commandFactory.CreateCommand("save");
+
+            saveCommand.Execute(this.context);
+
+            Assert.AreEqual(1, (this.context.Memento as MementoMock).CallsToSetCount);
+        }
     }
 }
