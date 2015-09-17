@@ -26,7 +26,7 @@ namespace Tests.MockClasses
             this.methodCallCounts["message"]++;
         }
 
-        public void PrintField(byte[,] matrix)
+        public void PrintField(IBalloon[,] matrix)
         {
             this.methodCallCounts["field"]++;
         }

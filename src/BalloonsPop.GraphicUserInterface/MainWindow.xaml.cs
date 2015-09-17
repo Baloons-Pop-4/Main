@@ -87,13 +87,14 @@ namespace BaloonsPop.GraphicUserInterface
             MessageBox.Show(message);
         }
 
-        public void PrintField(byte[,] matrix)
+        public void PrintField(IBalloon[,] matrix)
         {
             for (int row = 0, rowsCount = matrix.GetLength(0); row < rowsCount; row++)
             {
                 for (int col = 0, colsCount = matrix.GetLength(1); col < colsCount; col++)
                 {
-                    this.SetSource(this.balloonField[row, col], matrix[row, col]);
+                    var sourceNumber = matrix[row, col].isPopped ? 0 : matrix[row, col].Number;
+                    this.SetSource(this.balloonField[row, col], sourceNumber);
                 }
             }
         }

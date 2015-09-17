@@ -2,9 +2,9 @@
 {
     public interface IGameLogicProvider
     {
-        byte[,] GenerateField();
-        void PopBalloons(byte[,] field, int row, int col);
-        void LetBalloonsFall(byte[,] field);
-        bool GameIsOver(byte[,] field);
+        IBalloon[,] GenerateField();
+        void PopBalloons(IBalloon[,] field, int row, int col);
+        void LetBalloonsFall(IBalloon[,] field);
+        bool GameIsOver(IBalloon[,] field);
     }
 }
