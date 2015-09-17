@@ -54,6 +54,7 @@
     <Compile Include="GameLogicTests.cs" />
     <Compile Include="GameTests.cs" />
     <Compile Include="MatrixValidatorTest.cs" />
+    <Compile Include="MementoTests.cs" />
     <Compile Include="MockClasses\GameMock.cs" />
     <Compile Include="MockClasses\MementoMock.cs" />
     <Compile Include="MockClasses\MockUI.cs" />
