@@ -10,9 +10,9 @@ namespace Tests.MockClasses
 {
     public class GameMock : IGameModel
     {
-        private byte[,] field = new byte[5, 10];
+        private IBalloon[,] field = new IBalloon[5, 10];
 
-        public byte[,] Field
+        public IBalloon[,] Field
         {
             get
             {
