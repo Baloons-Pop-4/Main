@@ -4,7 +4,7 @@
     {
         void PrintMessage(string message);
 
-        void PrintField(byte[,] matrix);
+        void PrintField(IBalloon[,] matrix);
 
         void PrintHighscore(string[,] highscore);
     }
