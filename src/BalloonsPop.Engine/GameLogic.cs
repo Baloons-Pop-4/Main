@@ -2,9 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
-    using BalloonsPop.Common.Contracts;
+    using System.Linq;
 
-    [Serializable]
+    using BalloonsPop.Common.Contracts;
+    using BalloonsPop.Common.Gadgets;
+
     public class GameLogic : IGameLogicProvider
     {
         private const int FIELD_ROWS = 4;
@@ -14,7 +16,7 @@
 
         private static readonly int[][] PopDirections = new int[][] { new int[] { 0, 1 }, new int[] { 0, -1 }, new int[] { 1, 0 }, new int[] { -1, 0 } };
 
-        private byte[,] field;
+        //private byte[,] field;
 
         private Random rng;
 
@@ -24,19 +26,23 @@
         {
             this.matrixValidator = matrixValidator;
             this.rng = new Random();
-            this.field = new byte[FIELD_ROWS + 1, FIELD_COLS + 1];
+            // this.field = new byte[FIELD_ROWS + 1, FIELD_COLS + 1];
         }
 
         public byte[,] GenerateField()
         {
-            for (var row = 0; row <= FIELD_ROWS; row++)
-            {
-                for (var column = 0; column <= FIELD_COLS; column++)
-                {
-                    var currentBalloonValue = this.GetRandomBalloonValue();
-                    this.field[row, column] = currentBalloonValue;
-                }
-            }
+            var field = new QueriableMatrix<byte>(new byte[FIELD_ROWS + 1, FIELD_COLS + 1])
+                            .Select(x => this.GetRandomBalloonValue())
+                            .ToMatrix(FIELD_ROWS + 1, FIELD_COLS + 1);
+
+            //for (var row = 0; row <= FIELD_ROWS; row++)
+            //{
+            //    for (var column = 0; column <= FIELD_COLS; column++)
+            //    {
+            //        var currentBalloonValue = this.GetRandomBalloonValue();
+            //        this.field[row, column] = currentBalloonValue;
+            //    }
+            //}
 
             return field;
         }
@@ -53,43 +59,48 @@
 
         public void LetBalloonsFall(byte[,] field)
         {
-            var balloonColumn = new Stack<byte>();
+            var asColumns = new QueriableMatrix<byte>(field)
+                                        .TakeColumns()
+                                        .Select(column => column.OrderBy(x => (x == 0 ? -1 : 0)).ToArray())
+                                        .ToArray();
 
-            for (int column = 0, length = field.GetLength(1); column < length; column++)
+            for (int i = 0; i < field.GetLength(1); i++)
             {
-                for (int row = 0, rowsCount = field.GetLength(0); row < rowsCount; row++)
+                for (int j = 0; j < field.GetLength(0); j++)
                 {
-                    if (field[row, column] != 0)
-                    {
-                        balloonColumn.Push(field[row, column]);
-                    }
-                }
-
-                for (int row = field.GetLength(0) - 1; row >= 0; row--)
-                {
-                    if (balloonColumn.Count > 0)
-                    {
-                        field[row, column] = balloonColumn.Pop();
-                    }
-                    else
-                    {
-                        field[row, column] = 0;
-                    }
+                    field[j, i] = asColumns[i][j];
                 }
             }
+
+            //for (int column = 0, length = field.GetLength(1); column < length; column++)
+            //{
+            //    for (int row = 0, rowsCount = field.GetLength(0); row < rowsCount; row++)
+            //    {
+            //        if (field[row, column] != 0)
+            //        {
+            //            balloonColumn.Push(field[row, column]);
+            //        }
+            //    }
+
+            //    for (int row = field.GetLength(0) - 1; row >= 0; row--)
+            //    {
+            //        if (balloonColumn.Count > 0)
+            //        {
+            //            field[row, column] = balloonColumn.Pop();
+            //        }
+            //        else
+            //        {
+            //            field[row, column] = 0;
+            //        }
+            //    }
+            //}
         }
 
         public bool GameIsOver(byte[,] matrix)
         {
-            foreach (var cell in matrix)
-            {
-                if (cell != 0)
-                {
-                    return false;
-                }
-            }
+            var fieldIsEmpty = new QueriableMatrix<byte>(matrix).All(balloon => balloon == 0);
 
-            return true;
+            return fieldIsEmpty;
         }
 
         private void PopInDirection(byte[,] field, int row, int col, int xUpdate, int yUpdate)
