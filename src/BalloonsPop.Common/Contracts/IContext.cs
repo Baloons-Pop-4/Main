@@ -5,7 +5,7 @@
         IGameModel Game { get; }
         IGameLogicProvider LogicProvider { get; }
         IPrinter Printer { get; }
-        IMemento<IGameModel> Memento { get; }
+        IStateSaver<IGameModel> Memento { get; }
 
         string Message { get; set; }
         int UserRow { get; set; }

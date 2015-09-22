@@ -7,6 +7,7 @@
     using BalloonsPop.Common.Contracts;
     using System.Linq;
     using BalloonsPop.Common.Gadgets;
+    using BalloonsPop.Engine.Memento;
 
     [TestClass]
     public class GameLogicTests
@@ -191,6 +192,25 @@
             }
 
             Assert.IsTrue(field[2, 3].isPopped);
+        }
+
+        [TestMethod]
+        public void TestIfLetBalloonsFallMethodCorrectlyMovesTheBalloons()
+        {
+            var balloonsField = this.gameLogicProvider.GenerateField();
+
+            var cloned = (IBalloon[,])balloonsField.Clone();
+
+            for (int i = 0, j = 0; i < 5 && j < 10; i++, j++)
+            {
+                balloonsField[i, j].isPopped = true;
+            }
+
+            gameLogicProvider.LetBalloonsFall(cloned);
+
+            var areEqual = new QueriableMatrix<IBalloon>(balloonsField).Join(new QueriableMatrix<IBalloon>(cloned), x => x.isPopped, y => y.isPopped, (x, y) => !(x.isPopped ^ y.isPopped)).All(x => x);
+
+            Assert.IsTrue(areEqual);
         }
     }
 }

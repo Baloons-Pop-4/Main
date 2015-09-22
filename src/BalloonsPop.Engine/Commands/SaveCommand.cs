@@ -9,7 +9,7 @@ namespace BalloonsPop.Engine.Commands
 
         public void Execute(IContext context)
         {
-            context.Memento.State = context.Game;
+            context.Memento.SaveState(context.Game);
         }
     }
 }

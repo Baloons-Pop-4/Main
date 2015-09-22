@@ -50,6 +50,24 @@
         }
 
         [TestMethod]
+        public void TestIfConstructorWithParametersHasTheSameBehaviorAsTheSetter()
+        {
+            var game = new Game(logic.GenerateField());
+
+            this.memento.State = game;
+            var memento2 = new Memento<IGameModel>(game);
+
+
+            var stateFromMemento = this.memento.State;
+
+            var areEqual = new QueriableMatrix<IBalloon>(memento2.State.Field)
+                                .Join(new QueriableMatrix<IBalloon>(stateFromMemento.Field), x => x, y => y, (x, y) => (x.isPopped == y.isPopped) && (x.Number == y.Number))
+                                .All(x => x);
+
+            Assert.IsTrue(areEqual);
+        }
+
+        [TestMethod]
         public void TestIfMementoProvidesDeepCopy()
         {
             var game = new Game(logic.GenerateField());

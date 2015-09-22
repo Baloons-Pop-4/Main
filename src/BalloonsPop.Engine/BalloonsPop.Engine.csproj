@@ -55,7 +55,12 @@
     <Compile Include="Game.cs" />
     <Compile Include="GameLogic.cs" />
     <Compile Include="Highscore.cs" />
-    <Compile Include="Memento\Memento.cs" />
+    <Compile Include="Memento\CloningStrategies\CustomCloning.cs" />
+    <Compile Include="Memento\CloningStrategies\DotNetCloning.cs" />
+    <Compile Include="Memento\CloningStrategies\ReflectionCloning.cs" />
+    <Compile Include="Memento\CloningStrategies\SerializationCloning.cs" />
+    <Compile Include="Memento\Memory.cs" />
+    <Compile Include="Memento\Saver.cs" />
     <Compile Include="PlayerScore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

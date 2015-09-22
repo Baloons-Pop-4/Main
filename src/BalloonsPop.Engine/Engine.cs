@@ -47,7 +47,7 @@
             {
                 Game = gameModel,
                 LogicProvider = gameLogicProvider,
-                Memento = new Memento<IGameModel>(),
+                Memento = new Saver<IGameModel>(),
                 Printer = printer
             };
         }
