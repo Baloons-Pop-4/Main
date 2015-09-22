@@ -134,13 +134,13 @@
         [TestMethod]
         public void TestIfSaveCommandUsesTheMementoSetter()
         {
-            this.context = new Context() { Game = new GameMock(), Memento = new MementoMock()};
+            this.context = new Context() { Game = new GameMock(), Memento = new MockSaver()};
 
             var saveCommand = this.commandFactory.CreateCommand("save");
 
             saveCommand.Execute(this.context);
 
-            Assert.AreEqual(1, (this.context.Memento as MementoMock).CallsToSetCount);
+            Assert.AreEqual(1, (this.context.Memento as MockSaver).CallsToSetCount);
         }
     }
 }

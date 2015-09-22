@@ -14,23 +14,14 @@
     [TestClass]
     public class MementoTests
     {
-        private readonly IMemento<IGameModel> memento = new Memento<IGameModel>();
+        private readonly IStateSaver<IGameModel> memento = new Saver<IGameModel>();
         private readonly IGameLogicProvider logic = new GameLogic(MatrixValidator.GetInstance);
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void TestIfMementoStateThrowsExceptionWhenNoStateIsProvidedButAStateIsRequeste()
         {
-            var state = this.memento.State;
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof (SerializationException))]
-        public void TestIfMementoThrowsAnExceptionWhenNoCloneableObjectIsProvided()
-        {
-            var notClonableObj = new MockPrinter();
-
-            new Memento<IPrinter>().State = notClonableObj;
+            var state = this.memento.GetState();
         }
 
         [TestMethod]
@@ -38,9 +29,9 @@
         {
             var game = new Game(logic.GenerateField());
 
-            this.memento.State = game;
+            this.memento.SaveState(game);
 
-            var stateFromMemento = this.memento.State;
+            var stateFromMemento = this.memento.GetState();
 
             var areEqual = new QueriableMatrix<IBalloon>(game.Field)
                                 .Join(new QueriableMatrix<IBalloon>(stateFromMemento.Field), x => x, y => y, (x, y) => (x.isPopped == y.isPopped) && (x.Number == y.Number))
@@ -54,13 +45,13 @@
         {
             var game = new Game(logic.GenerateField());
 
-            this.memento.State = game;
-            var memento2 = new Memento<IGameModel>(game);
+            this.memento.SaveState(game);
+            var memento2 = new Saver<IGameModel>();
+            memento2.SaveState(game);
 
+            var stateFromMemento = this.memento.GetState();
 
-            var stateFromMemento = this.memento.State;
-
-            var areEqual = new QueriableMatrix<IBalloon>(memento2.State.Field)
+            var areEqual = new QueriableMatrix<IBalloon>(memento2.GetState().Field)
                                 .Join(new QueriableMatrix<IBalloon>(stateFromMemento.Field), x => x, y => y, (x, y) => (x.isPopped == y.isPopped) && (x.Number == y.Number))
                                 .All(x => x);
 
@@ -72,9 +63,9 @@
         {
             var game = new Game(logic.GenerateField());
 
-            this.memento.State = game;
+            this.memento.SaveState(game);
 
-            var stateFromMemento = this.memento.State;
+            var stateFromMemento = this.memento.GetState();
 
             game.Field[0, 0].isPopped = true;
 
@@ -101,16 +92,19 @@
         {
             var game = new Game(this.logic.GenerateField());
 
-            this.memento.State = game;
-            this.memento.State.Field[0, 0].Number = 99;
+            this.memento.SaveState(game);
+            var state = this.memento.GetState();
 
-            Assert.AreNotEqual(this.memento.State.Field[0, 0].Number, 99);
+            state.Field[0, 0].Number = 99;
 
-            var moves = this.memento.State.UserMovesCount;
-            this.memento.State.IncrementMoves();
-            var moves2 = this.memento.State.UserMovesCount;
+            Assert.AreNotEqual(game.Field[0, 0].Number, 99);
 
-            Assert.AreEqual(moves, moves2);
+            var moves = state.UserMovesCount;
+
+            game.IncrementMoves();
+            var moves2 = game.UserMovesCount;
+
+            Assert.AreNotEqual(moves, moves2);
 
         }
     }
