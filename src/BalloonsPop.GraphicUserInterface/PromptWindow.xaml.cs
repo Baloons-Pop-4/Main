@@ -1,4 +1,4 @@
-﻿namespace BaloonsPop.GraphicUserInterface
+﻿namespace BalloonsPop.GraphicUserInterface
 {
     using System;
     using System.Windows;

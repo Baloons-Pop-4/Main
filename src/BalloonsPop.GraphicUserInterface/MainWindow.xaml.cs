@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BaloonsPop.GraphicUserInterface
+namespace BalloonsPop.GraphicUserInterface
 {
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.GraphicUserInterface;

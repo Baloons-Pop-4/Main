@@ -6,6 +6,6 @@
 
         void PrintField(IBalloon[,] matrix);
 
-        void PrintHighscore(string[,] highscore);
+        void PrintHighscore(IHighscoreTable table);
     }
 }

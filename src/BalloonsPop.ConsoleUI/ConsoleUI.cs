@@ -48,10 +48,18 @@
             this.PrintDashedLine(1 + (matrix.GetLength(1) * 2));
         }
 
-        public void PrintHighscore(string[,] highscore)
+        // TODO: Improve the formatting using the predefined stuff
+        public void PrintHighscore(IHighscoreTable highScore)
         {
-            // TODO: implement
-            throw new NotImplementedException("Implement me!");
+            Console.WriteLine("---------TOP FIVE CHART-----------");
+
+            for (int i = 0; i < highScore.Table.Count; i++)
+            {
+                var currentRow = highScore.Table[i];
+                Console.WriteLine("{0}. {1} - {2} - {3}", i + 1, currentRow.Name, currentRow.Moves, currentRow.Time);
+            }
+
+            Console.WriteLine("----------------------------------");
         }
 
         public string ReadUserInput()
