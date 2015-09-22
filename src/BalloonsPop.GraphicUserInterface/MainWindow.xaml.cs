@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BaloonsPop.GraphicUserInterface
+namespace BalloonsPop.GraphicUserInterface
 {
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.GraphicUserInterface;
@@ -87,15 +87,22 @@ namespace BaloonsPop.GraphicUserInterface
             MessageBox.Show(message);
         }
 
-        public void PrintField(byte[,] matrix)
+        public void PrintField(IBalloon[,] matrix)
         {
             for (int row = 0, rowsCount = matrix.GetLength(0); row < rowsCount; row++)
             {
                 for (int col = 0, colsCount = matrix.GetLength(1); col < colsCount; col++)
                 {
-                    this.SetSource(this.balloonField[row, col], matrix[row, col]);
+                    var sourceNumber = matrix[row, col].isPopped ? 0 : matrix[row, col].Number;
+                    this.SetSource(this.balloonField[row, col], sourceNumber);
                 }
             }
+        }
+
+        public void PrintHighscore(IHighscoreTable table)
+        {
+            // TODO: Implement this method
+            throw new NotImplementedException("Implement highscore printing, u lazy ginger");
         }
 
         private void InitializeHighscoreGrid()

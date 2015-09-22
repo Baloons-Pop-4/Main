@@ -2,21 +2,23 @@
 {
     using System;
     using BalloonsPop.Common.Contracts;
+    using BalloonsPop.Common.Gadgets;
+    using System.Linq;
 
     [Serializable]
     public class Game : IGameModel
     {
-        private byte[,] field;
+        private IBalloon[,] field;
 
         private int userMovesCount;
 
-        public Game(byte[,] field)
+        public Game(IBalloon[,] field)
         {
             this.field = field;
             this.userMovesCount = 0;
         }
 
-        public byte[,] Field
+        public IBalloon[,] Field
         {
             get
             {
@@ -50,7 +52,9 @@
 
         public IGameModel Clone()
         {
-            var clonedField = (byte[,])this.Field.Clone();
+            var clonedField = new QueriableMatrix<IBalloon>(this.field)
+                                        .Select(balloon => new Balloon() { Number = balloon.Number, isPopped = balloon.isPopped })
+                                        .ToMatrix(this.field.GetLength(0), this.field.GetLength(1));
 
             return new Game(clonedField);
         }

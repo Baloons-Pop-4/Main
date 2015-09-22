@@ -10,7 +10,7 @@
 
         public void Execute(IContext context)
         {
-            context.Printer.PrintHighscore(new string[,] { { "mirishe", "mnogo" } });
+            context.Printer.PrintHighscore(context.HighscoreTable);
         }
     }
 }

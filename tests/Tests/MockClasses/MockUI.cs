@@ -26,12 +26,12 @@ namespace Tests.MockClasses
             this.methodCallCounts["message"]++;
         }
 
-        public void PrintField(byte[,] matrix)
+        public void PrintField(IBalloon[,] matrix)
         {
             this.methodCallCounts["field"]++;
         }
 
-        public void PrintHighscore(string[,] highscore)
+        public void PrintHighscore(IHighscoreTable table)
         {
             this.methodCallCounts["highscore"]++;
         }

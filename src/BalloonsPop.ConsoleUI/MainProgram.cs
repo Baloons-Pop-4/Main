@@ -11,11 +11,12 @@
         public static void Main()
         {
             var consoleUI = new ConsoleUI();
+            var highscoreTable = new HighscoreTable();
             var commandFactory = new CommandFactory();
             var gameLogicProvider = new GameLogic(MatrixValidator.GetInstance);
             var gameModel = new Game(gameLogicProvider.GenerateField());
             
-            var engine = new ConsoleEngine(consoleUI, UserInputValidator.GetInstance, commandFactory, gameModel, gameLogicProvider);
+            var engine = new ConsoleEngine(consoleUI, UserInputValidator.GetInstance, highscoreTable, commandFactory, gameModel, gameLogicProvider);
             engine.Run();
         }
     }

@@ -11,7 +11,9 @@
 
         public IPrinter Printer { get; set; }
 
-        public IMemento<IGameModel> Memento{ get; set; }
+        public IStateSaver<IGameModel> Memento{ get; set; }
+
+        public IHighscoreTable HighscoreTable { get; internal set; }
 
         public string Message { get; set; }
 

@@ -12,7 +12,7 @@ namespace BalloonsPop.GraphicUserInterface
     using BalloonsPop.Common.Validators;
     using BalloonsPop.Engine;
     using BalloonsPop.Engine.Commands;
-    using BaloonsPop.GraphicUserInterface;
+    using BalloonsPop.GraphicUserInterface;
 
     /// <summary>
     /// Interaction logic for App.xaml
@@ -30,8 +30,9 @@ namespace BalloonsPop.GraphicUserInterface
             var validator = MatrixValidator.GetInstance;
             var logicProvider = new GameLogic(validator);
             var model = new Game(logicProvider.GenerateField());
+            var table = new HighscoreTable();
 
-            this.engine = new GraphicEngine(graphicUi, UserInputValidator.GetInstance, factory, model, logicProvider);
+            this.engine = new GraphicEngine(graphicUi, UserInputValidator.GetInstance, factory, model, logicProvider, table);
 
             graphicUi.Show();
         }
