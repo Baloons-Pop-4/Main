@@ -8,7 +8,7 @@
 
         IPrinter Printer { get; }
 
-        IMemento<IGameModel> Memento { get; }
+        IStateSaver<IGameModel> Memento { get; }
 
         IHighscoreTable HighscoreTable { get; }
 

@@ -47,7 +47,7 @@
                 Game = gameModel,
                 HighscoreTable = highScoreTable,
                 LogicProvider = gameLogicProvider,
-                Memento = new Memento<IGameModel>(),
+                Memento = new Saver<IGameModel>(),
                 Printer = printer
             };
         }

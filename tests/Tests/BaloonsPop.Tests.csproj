@@ -51,11 +51,14 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CommandTests.cs" />
+    <Compile Include="Gadget tests\QueriableMatrixTests.cs" />
     <Compile Include="GameLogicTests.cs" />
     <Compile Include="GameTests.cs" />
     <Compile Include="MatrixValidatorTest.cs" />
+    <Compile Include="MementoTests.cs" />
     <Compile Include="MockClasses\GameMock.cs" />
     <Compile Include="MockClasses\MementoMock.cs" />
+    <Compile Include="MockClasses\MockLogic.cs" />
     <Compile Include="MockClasses\MockUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserInputValidatorTests.cs" />
