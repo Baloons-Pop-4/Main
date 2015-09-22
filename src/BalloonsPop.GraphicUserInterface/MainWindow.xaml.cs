@@ -99,6 +99,12 @@ namespace BalloonsPop.GraphicUserInterface
             }
         }
 
+        public void PrintHighscore(IHighscoreTable table)
+        {
+            // TODO: Implement this method
+            throw new NotImplementedException("Implement highscore printing, u lazy ginger");
+        }
+
         private void InitializeHighscoreGrid()
         {
             var wrappedPlayer = this.GetTextBlockWithBorder("Player");

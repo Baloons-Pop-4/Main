@@ -31,7 +31,7 @@ namespace Tests.MockClasses
             this.methodCallCounts["field"]++;
         }
 
-        public void PrintHighscore(string[,] highscore)
+        public void PrintHighscore(IHighscoreTable table)
         {
             this.methodCallCounts["highscore"]++;
         }
