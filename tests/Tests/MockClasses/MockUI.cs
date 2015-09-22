@@ -31,6 +31,12 @@ namespace Tests.MockClasses
             this.methodCallCounts["field"]++;
         }
 
+        public void PrintHighscore(IHighscoreTable table)
+        {
+            // TODO: Implement this method
+            throw new NotImplementedException();
+        }
+
         public void PrintHighscore(string[,] highscore)
         {
             this.methodCallCounts["highscore"]++;

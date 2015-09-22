@@ -7,8 +7,15 @@
 
     public class GraphicEngine : Engine, IGraphicEngine
     {
-        public GraphicEngine(IEventBasedUserInterface ui, IUserInputValidator validator, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
-            : base(ui, validator, commandFactory, gameModel, gameLogicProvider)
+        public GraphicEngine(
+            IEventBasedUserInterface ui,
+            IUserInputValidator validator,
+            ICommandFactory commandFactory,
+            IGameModel gameModel,
+            IGameLogicProvider gameLogicProvider,
+            IHighscoreTable scoreTable
+            )
+            : base(ui, validator, scoreTable, commandFactory, gameModel, gameLogicProvider)
         {
             ui.Raise += new EventHandler(this.HandleUserInput);
         }
