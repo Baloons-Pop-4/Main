@@ -10,7 +10,10 @@
 
         public void Execute(IContext context)
         {
-            context.Game.Field = context.Memento.State.Field;
+            if(context.Memento.HasStates)
+            {
+                context.Game.Field = context.Memento.GetState().Field;
+            }
         }
     }
 }

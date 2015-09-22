@@ -9,8 +9,8 @@
     {
         private IInputReader reader;
 
-        public ConsoleEngine(IConsoleUserInterface consoleUI, IUserInputValidator validator, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
-            : base(consoleUI, validator, commandFactory, gameModel, gameLogicProvider)
+        public ConsoleEngine(IConsoleUserInterface consoleUI, IUserInputValidator validator, IHighscoreTable highscoreTable, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
+            : base(consoleUI, validator, highscoreTable, commandFactory, gameModel, gameLogicProvider)
         {
             this.reader = consoleUI as IInputReader;
         }

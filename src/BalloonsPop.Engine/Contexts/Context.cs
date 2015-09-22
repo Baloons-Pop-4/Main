@@ -5,13 +5,15 @@
 
     public class Context : IContext
     {
-        public IGameModel Game { get; internal set; }
+        public IGameModel Game { get; set; }
 
-        public IGameLogicProvider LogicProvider { get; internal set; }
+        public IGameLogicProvider LogicProvider { get; set; }
 
-        public IPrinter Printer { get; internal set; }
+        public IPrinter Printer { get; set; }
 
-        public IMemento<IGameModel> Memento{ get; internal set; }
+        public IStateSaver<IGameModel> Memento{ get; set; }
+
+        public IHighscoreTable HighscoreTable { get; internal set; }
 
         public string Message { get; set; }
 

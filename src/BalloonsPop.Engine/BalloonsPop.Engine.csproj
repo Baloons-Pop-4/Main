@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Balloon.cs" />
     <Compile Include="Commands\CommandFactory.cs" />
     <Compile Include="Commands\ExitCommand.cs" />
     <Compile Include="Commands\PopBalloonCommand.cs" />
@@ -53,9 +54,13 @@
     <Compile Include="Engine.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameLogic.cs" />
-    <Compile Include="Highscore.cs" />
-    <Compile Include="Memento\Memento.cs" />
-    <Compile Include="PlayerScore.cs" />
+    <Compile Include="HighscoreTable.cs" />
+    <Compile Include="Memento\CloningStrategies\CustomCloning.cs" />
+    <Compile Include="Memento\CloningStrategies\DotNetCloning.cs" />
+    <Compile Include="Memento\CloningStrategies\ReflectionCloning.cs" />
+    <Compile Include="Memento\CloningStrategies\SerializationCloning.cs" />
+    <Compile Include="Memento\Memory.cs" />
+    <Compile Include="Memento\Saver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -65,7 +70,7 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
