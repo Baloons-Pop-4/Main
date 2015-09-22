@@ -26,7 +26,7 @@
             Console.WriteLine(message);
         }
 
-        public void PrintField(byte[,] matrix)
+        public void PrintField(IBalloon[,] matrix)
         {
             this.PrintColumnIndeces();
 
@@ -38,7 +38,7 @@
 
                 for (byte j = 0; j < matrix.GetLongLength(1); j++)
                 {
-                    PrintCell(matrix[i, j]);
+                    PrintBalloon(matrix[i, j]);
                 }
 
                 this.SetConsoleColorToDefault();
@@ -99,16 +99,16 @@
             Console.Write(cellValue + " " + SIDE_BORDER);
         }
 
-        private void PrintCell(byte cellValue)
+        private void PrintBalloon(IBalloon balloon)
         {
-            if (cellValue == 0)
+            if (balloon.isPopped)
             {
                 Console.Write(EMPTY_CELL);
             }
             else
             {
-                this.SetConsoleColor(cellValue);
-                Console.Write(CELL_PRINTING_FORMAT, cellValue);
+                this.SetConsoleColor(balloon.Number);
+                Console.Write(CELL_PRINTING_FORMAT, balloon.Number);
             }
         }
 

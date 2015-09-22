@@ -29,9 +29,9 @@
             // this.field = new byte[FIELD_ROWS + 1, FIELD_COLS + 1];
         }
 
-        public byte[,] GenerateField()
+        public IBalloon[,] GenerateField()
         {
-            var field = new QueriableMatrix<byte>(new byte[FIELD_ROWS + 1, FIELD_COLS + 1])
+            var field = new QueriableMatrix<IBalloon>(new IBalloon[FIELD_ROWS + 1, FIELD_COLS + 1])
                             .Select(x => this.GetRandomBalloonValue())
                             .ToMatrix(FIELD_ROWS + 1, FIELD_COLS + 1);
 
@@ -47,21 +47,23 @@
             return field;
         }
 
-        public void PopBalloons(byte[,] field, int row, int column)
+        public void PopBalloons(IBalloon[,] field, int row, int column)
         {
             foreach (var dir in PopDirections)
             {
                 this.PopInDirection(field, row, column, dir[0], dir[1]);
             }
 
-            field[row, column] = 0;
+            // field[row, column] = 0;
+
+            this.Pop(field[row, column]);
         }
 
-        public void LetBalloonsFall(byte[,] field)
+        public void LetBalloonsFall(IBalloon[,] field)
         {
-            var asColumns = new QueriableMatrix<byte>(field)
+            var asColumns = new QueriableMatrix<IBalloon>(field)
                                         .TakeColumns()
-                                        .Select(column => column.OrderBy(x => (x == 0 ? -1 : 0)).ToArray())
+                                        .Select(column => column.OrderBy(x => (x.isPopped ? -1 : 0)).ToArray())
                                         .ToArray();
 
             for (int i = 0; i < field.GetLength(1); i++)
@@ -96,31 +98,36 @@
             //}
         }
 
-        public bool GameIsOver(byte[,] matrix)
+        public bool GameIsOver(IBalloon[,] matrix)
         {
-            var fieldIsEmpty = new QueriableMatrix<byte>(matrix).All(balloon => balloon == 0);
+            var fieldIsEmpty = new QueriableMatrix<IBalloon>(matrix).All(balloon => balloon.isPopped);
 
             return fieldIsEmpty;
         }
 
-        private void PopInDirection(byte[,] field, int row, int col, int xUpdate, int yUpdate)
+        private void PopInDirection(IBalloon[,] field, int row, int col, int xUpdate, int yUpdate)
         {
             var balloonType = field[row, col];
             row += yUpdate;
             col += xUpdate;
 
-            while (this.matrixValidator.IsInsideMatrix(field, row, col) && field[row, col] == balloonType)
+            while (this.matrixValidator.IsInsideMatrix(field, row, col) && field[row, col].Number == balloonType.Number)
             {
-                field[row, col] = 0;
+                this.Pop(field[row, col]);
                 row += yUpdate;
                 col += xUpdate;
             }
         }
 
-        private byte GetRandomBalloonValue()
+        private IBalloon GetRandomBalloonValue()
         {
             var randomBalloonValue = (byte)this.rng.Next(MIN_BALLOON_VALUE, MAX_BALLOON_VALUE + 1);
-            return randomBalloonValue;
+            return new Balloon() { Number = randomBalloonValue};
+        }
+
+        private void Pop(IBalloon balloon)
+        {
+            balloon.isPopped = true;
         }
     }
 }

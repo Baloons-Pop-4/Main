@@ -2,7 +2,7 @@
 {
     public interface IGameModel : ICloneableObject<IGameModel>
     {
-        byte[,] Field { get; set; }
+        IBalloon[,] Field { get; set; }
         int UserMovesCount { get; }
 
         void ResetUserMoves();
