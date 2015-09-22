@@ -12,6 +12,17 @@ namespace Tests.MockClasses
     {
         private IBalloon[,] field = new IBalloon[5, 10];
 
+        public GameMock()
+        {
+            this.Calls = new Dictionary<string, int>() 
+            {
+                {"ResetMoves",0},
+                {"IncrementMoves",0},
+            };
+        }
+
+        public IDictionary<string, int> Calls { get; private set; }
+
         public IBalloon[,] Field
         {
             get
@@ -31,12 +42,12 @@ namespace Tests.MockClasses
 
         public void ResetUserMoves()
         {
-            throw new NotImplementedException();
+            this.Calls["ResetMoves"]++;
         }
 
         public void IncrementMoves()
         {
-            throw new NotImplementedException();
+            this.Calls["IncrementMoves"]++;
         }
 
         public IGameModel Clone()

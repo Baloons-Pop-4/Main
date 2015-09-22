@@ -11,7 +11,7 @@
 
         public IPrinter Printer { get; set; }
 
-        public IMemento<IGameModel> Memento{ get; set; }
+        public IStateSaver<IGameModel> Memento{ get; set; }
 
         public string Message { get; set; }
 

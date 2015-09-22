@@ -19,6 +19,24 @@
         }
 
         [TestMethod]
+        public void TestIfFieldPropertyReturnsTheSameValueItIsSetTo()
+        {
+            var game = new Game(null);
+            var field = new IBalloon[5, 10];
+            game.Field = field;
+
+            Assert.AreEqual(field, game.Field);
+        }
+
+        [TestMethod]
+        public void TestIfFieldPropertyReturnTheSameFieldItIsSetTo()
+        {
+            var field = new GameLogic(MatrixValidator.GetInstance).GenerateField();
+            var gameModel = new Game(field);
+            Assert.AreEqual(field, gameModel.Field);
+        }
+
+        [TestMethod]
         public void TestIfInitialMovesCountIsZero()
         {
             var gameModel = new Game(new GameLogic(MatrixValidator.GetInstance).GenerateField());

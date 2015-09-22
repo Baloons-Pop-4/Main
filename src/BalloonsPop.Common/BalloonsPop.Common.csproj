@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Contracts\IBalloon.cs" />
     <Compile Include="Contracts\ICloneableObject.cs" />
+    <Compile Include="Contracts\ICloningStrategy.cs" />
     <Compile Include="Contracts\ICommand.cs" />
     <Compile Include="Contracts\ICommandFactory.cs" />
     <Compile Include="Contracts\IContext.cs" />
@@ -48,7 +49,9 @@
     <Compile Include="Contracts\IGameModel.cs" />
     <Compile Include="Contracts\IMatrixValidator.cs" />
     <Compile Include="Contracts\IMemento.cs" />
+    <Compile Include="Contracts\IMemory.cs" />
     <Compile Include="Contracts\IPrinter.cs" />
+    <Compile Include="Contracts\IStateSaver.cs" />
     <Compile Include="Contracts\IUserInputValidator.cs" />
     <Compile Include="Gadgets\FluentSwitch.cs" />
     <Compile Include="Gadgets\IEnumerableExtension.cs" />

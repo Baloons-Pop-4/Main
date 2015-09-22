@@ -55,6 +55,47 @@
         }
 
         [TestMethod]
+        public void TestIfPopBalloonsCommandCallsTheNeededMethodsFromGameModelAndGameLogic()
+        {
+            var mockLogic = new MockLogic();
+            var mockGame = new GameMock();
+
+            var context = new Context() 
+            {
+                LogicProvider = mockLogic,
+                Game = mockGame
+            };
+
+            var popCmd = this.commandFactory.CreateCommand("pop");
+
+            popCmd.Execute(context);
+
+            Assert.AreEqual(1, mockLogic.Calls["PopBalloons"]);
+            Assert.AreEqual(1, mockLogic.Calls["LetBalloonsFall"]);
+            Assert.AreEqual(1, mockGame.Calls["IncrementMoves"]);
+        }
+
+        [TestMethod]
+        public void TestIfRestartCommandCallsTheNeededMethodsFromGameModelAndGameLogic()
+        {
+            var mockLogic = new MockLogic();
+            var mockGame = new GameMock();
+
+            var context = new Context() 
+            {
+                LogicProvider = mockLogic,
+                Game = mockGame
+            };
+
+            var restartCmd = this.commandFactory.CreateCommand("restart");
+
+            restartCmd.Execute(context);
+
+            Assert.AreEqual(1, mockLogic.Calls["GenerateField"]);
+            Assert.AreEqual(1, mockGame.Calls["ResetMoves"]);
+        }
+
+        [TestMethod]
         public void TestIfPrintFieldCommandCallsThePrintFieldMethodOfTheUI()
         {
             this.context = new Context() { Printer = new MockPrinter(), Game = new GameMock() };
