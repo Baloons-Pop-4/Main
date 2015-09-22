@@ -33,26 +33,12 @@
 
         public void AddPlayer(PlayerScore score)
         {
-            if (this.table.Count == 0)
-            {
-                this.table.Add(score);
-            }
-            else
-            {
-                for (var i = 0; i < this.table.Count; i++)
-                {
-                    if (score.Moves < this.table[i].Moves)
-                    {
-                        this.table.Insert(i, score);
+            this.table.Add(score);
+            this.table.Sort();
 
-                        if (this.table.Count == HighscoreMaxPlayers)
-                        {
-                            this.table.RemoveAt(this.table.Count - 1);
-                        }
-
-                        break;
-                    }
-                }
+            if (this.table.Count > HighscoreMaxPlayers)
+            {
+                this.table.RemoveAt(this.table.Count - 1);
             }
         }
     }
