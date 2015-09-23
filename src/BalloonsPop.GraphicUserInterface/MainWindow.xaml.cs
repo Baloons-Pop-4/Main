@@ -16,38 +16,28 @@ using System.Windows.Shapes;
 namespace BalloonsPop.GraphicUserInterface
 {
     using BalloonsPop.Common.Contracts;
-    using BalloonsPop.GraphicUserInterface;
+    using BalloonsPop.Common.Gadgets;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window, IEventBasedUserInterface
     {
-        private const int BALLOON_IMG_HEIGHT = 40;
-        private const int BALLOON_IMG_WIDTH = 30;
+        private const int BalloonImgHeight = 40;
+        private const int BalloonImgWidth = 30;
 
-        private string[] colors = new string[] { "white", "red", "blue", "green", "yellow" };
+        private readonly string[] colors = new string[] { "white", "red", "blue", "green", "yellow" };
 
         private string imageFolderPath;
-
-        private string[,] sampleHighscoreChart = new string[,] { 
-                                                                 {"Gosho", "20"},
-                                                                 {"Bay Ivan", "28"},
-                                                                 {"Mariya(umna e kato za jena)", "19"},
-                                                                 {"Pesh0", "19"},
-                                                                 {"Bate Borko", "20"}
-                                                                };
-
-        private Image[,] balloonField = new Image[5, 10];
+        // private string userName;
+        private Image[,] balloonField;
 
         public event EventHandler Raise;
 
         public MainWindow()
         {
             InitializeComponent();
-
-
-
+            // this.userName = this.ReadUserInput();
             this.InitializeImagePath();
             this.InitializeHighscoreGrid();
             this.InitializeBalloonField();
@@ -62,24 +52,44 @@ namespace BalloonsPop.GraphicUserInterface
 
         private void InitializeBalloonField()
         {
+            this.balloonField = new Image[5, 10];
+
             for (int row = 0, rowsCount = 5; row < rowsCount; row++)
             {
                 for (int col = 0, colsCount = 10; col < colsCount; col++)
                 {
-                    this.balloonField[row, col] = new Image();
+                    //this.balloonField[row, col] = new Image();
 
-                    var coordinatesAsString = row + " " + col;
+                    //var coordinatesAsString = row + " " + col;
 
-                    this.balloonField[row, col].MouseDown += (sender, e) =>
-                    {
-                        this.Raise(sender, new ClickEventArgs(coordinatesAsString));
-                    };
+                    //this.balloonField[row, col].MouseDown += (sender, e) =>
+                    //{
+                    //    this.Raise(sender, new ClickEventArgs(coordinatesAsString));
+                    //};
 
-                    this.SetBalloonImageSize(this.balloonField[row, col]);
-                    this.BalloonField.Children.Add(this.balloonField[row, col]);
-                    this.SetPositionInGrid(this.balloonField[row, col], row, col);
+                    //this.SetBalloonImageSize(this.balloonField[row, col]);
+                    //this.BalloonField.Children.Add(this.balloonField[row, col]);
+                    //this.SetPositionInGrid(this.balloonField[row, col], row, col);
+
+                    this.InitializeImageFielCell(row, col, this.balloonField);
                 }
             }
+        }
+
+        private void InitializeImageFielCell(int row, int col, Image[,] field)
+        {
+            field[row, col] = new Image();
+
+            var coordinatesAsString = row + " " + col;
+
+            field[row, col].MouseDown += (sender, e) =>
+            {
+                this.Raise(sender, new ClickEventArgs(coordinatesAsString));
+            };
+
+            this.SetBalloonImageSize(field[row, col]);
+            this.BalloonField.Children.Add(field[row, col]);
+            this.SetPositionInGrid(field[row, col], row, col);
         }
 
         public void PrintMessage(string message)
@@ -103,6 +113,7 @@ namespace BalloonsPop.GraphicUserInterface
         {
             // TODO: Implement this method
             throw new NotImplementedException("Implement highscore printing, u lazy ginger");
+
         }
 
         private void InitializeHighscoreGrid()
@@ -117,25 +128,17 @@ namespace BalloonsPop.GraphicUserInterface
             this.SetPositionInGrid(wrappedPoints, 0, 2);
         }
 
-        public void PrintHighscore(string[,] highscore)
-        {
-            this.HighscoreTable.Children.RemoveRange(2, this.HighscoreTable.Children.Count - 2);
-            for (int i = 1; i < highscore.GetLength(0); i++)
-            {
-                this.FillHighscoreGridRow("IMPLEMENT IN WPF PLZ :D", highscore[i - 1, 0], i);
-            }
-        }
-
         private void FillHighscoreGridRow(string playerName, string playerPoints, int row)
         {
-            var wrappedPlayer = this.GetTextBlockWithBorder(playerName);
-            var wrappedPoints = this.GetTextBlockWithBorder(playerPoints);
+            this.FillHighscoreGridField(playerName, row, 1);
+            this.FillHighscoreGridField(playerPoints, row, 2);
+        }
 
+        private void FillHighscoreGridField(string content, int row, int col)
+        {
+            var wrappedPlayer = this.GetTextBlockWithBorder(content);
             this.HighscoreTable.Children.Add(wrappedPlayer);
-            this.HighscoreTable.Children.Add(wrappedPoints);
-
-            this.SetPositionInGrid(wrappedPlayer, row, 1);
-            this.SetPositionInGrid(wrappedPoints, row, 2);
+            this.SetPositionInGrid(wrappedPlayer, row, col);
         }
 
         public string ReadUserInput()
@@ -145,8 +148,6 @@ namespace BalloonsPop.GraphicUserInterface
 
             return enterUserNameDialog.UserName;
         }
-
-        
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -159,13 +160,20 @@ namespace BalloonsPop.GraphicUserInterface
 
         private void SetBalloonImageSize(Image img)
         {
-            img.Height = BALLOON_IMG_HEIGHT;
-            img.Width = BALLOON_IMG_WIDTH;
+            img.Height = BalloonImgHeight;
+            img.Width = BalloonImgWidth;
         }
 
         private void SetSource(Image img, int balloonNumber)
         {
-            img.Source = new BitmapImage(new Uri(this.imageFolderPath + @"Images\" + this.colors[balloonNumber] + ".png"));
+            var uri = this.GetBalloonImageUri(this.colors[balloonNumber]);
+            img.Source = new BitmapImage(uri);
+        }
+
+        private Uri GetBalloonImageUri(string color)
+        {
+            var uri = new Uri(this.imageFolderPath + @"Images\" + color + ".png");
+            return uri;
         }
 
         private void SetPositionInGrid(UIElement element, int row, int col)
@@ -176,19 +184,32 @@ namespace BalloonsPop.GraphicUserInterface
 
         private Border GetTextBlockWithBorder(string content)
         {
+            return this.AddTextBlockToBorder(this.GetBorder(), content);
+        }
+
+        private Border GetBorder()
+        {
             var result = new Border();
 
             result.BorderThickness = new Thickness(1, 2, 1, 2);
             result.BorderBrush = Brushes.Coral;
 
+            return result;
+        }
+
+        private Border AddTextBlockToBorder(Border border, string content)
+        {
             var textBlock = new TextBlock();
             textBlock.Text = content;
-            textBlock.TextAlignment = TextAlignment.Center;
-            textBlock.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+            this.StyleTextBlock(textBlock);
+            border.Child = textBlock;
+            return border;
+        }
 
-            result.Child = textBlock;
-
-            return result;
+        private void StyleTextBlock(TextBlock block)
+        {
+            block.TextAlignment = TextAlignment.Center;
+            block.VerticalAlignment = System.Windows.VerticalAlignment.Center;
         }
     }
 }
