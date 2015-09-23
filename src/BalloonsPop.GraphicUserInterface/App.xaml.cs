@@ -32,7 +32,7 @@ namespace BalloonsPop.GraphicUserInterface
             var model = new Game(logicProvider.GenerateField());
             var table = new HighscoreTable();
 
-            this.engine = new GraphicEngine(graphicUi, UserInputValidator.GetInstance, factory, model, logicProvider, table);
+            this.engine = new EventEngine(graphicUi, UserInputValidator.GetInstance, factory, model, logicProvider, table);
 
             graphicUi.Show();
         }

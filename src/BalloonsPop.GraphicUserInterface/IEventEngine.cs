@@ -2,7 +2,7 @@ namespace BalloonsPop.GraphicUserInterface
 {
     using System;
 
-    public interface IGraphicEngine
+    public interface IEventEngine
     {
         void HandleUserInput(object sender, EventArgs e);
     }

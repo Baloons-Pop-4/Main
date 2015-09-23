@@ -5,9 +5,9 @@
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Engine;
 
-    public class GraphicEngine : Engine, IGraphicEngine
+    public class EventEngine : Engine, IEventEngine
     {
-        public GraphicEngine(
+        public EventEngine(
             IEventBasedUserInterface ui,
             IUserInputValidator validator,
             ICommandFactory commandFactory,
