@@ -9,18 +9,8 @@
         private const int VALID_INPUT_LENGTH = 3;
         private const int MAX_ROW_INPUT_VALUE = 4;
 
-        private static readonly UserInputValidator Instance = new UserInputValidator();
-
-        private UserInputValidator()
+        public UserInputValidator()
         {
-        }
-
-        public static UserInputValidator GetInstance
-        {
-            get
-            {
-                return UserInputValidator.Instance;
-            }
         }
 
         public bool IsValidUserMove(string userInput)
