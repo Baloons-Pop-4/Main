@@ -40,7 +40,7 @@ namespace BalloonsPop.GraphicUserInterface
             // this.userName = this.ReadUserInput();
             this.InitializeImagePath();
             this.InitializeHighscoreGrid();
-            this.InitializeBalloonField();
+            this.balloonField = this.GetInitializedBalloonField();
         }
 
         private void InitializeImagePath()
@@ -50,9 +50,9 @@ namespace BalloonsPop.GraphicUserInterface
             imageFolderPath = currentDir.Substring(0, currentDir.IndexOf("bin"));
         }
 
-        private void InitializeBalloonField()
+        private Image[,] GetInitializedBalloonField()
         {
-            this.balloonField = new Image[5, 10];
+            var field = new Image[5, 10];
 
             for (int row = 0, rowsCount = 5; row < rowsCount; row++)
             {
@@ -71,9 +71,11 @@ namespace BalloonsPop.GraphicUserInterface
                     //this.BalloonField.Children.Add(this.balloonField[row, col]);
                     //this.SetPositionInGrid(this.balloonField[row, col], row, col);
 
-                    this.InitializeImageFielCell(row, col, this.balloonField);
+                    this.InitializeImageFielCell(row, col, field);
                 }
             }
+
+            return field;
         }
 
         private void InitializeImageFielCell(int row, int col, Image[,] field)
