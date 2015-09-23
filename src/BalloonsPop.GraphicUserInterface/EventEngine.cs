@@ -3,9 +3,9 @@
     using System;
 
     using BalloonsPop.Common.Contracts;
-    using BalloonsPop.Engine;
+    using BalloonsPop.Core;
 
-    public class EventEngine : Engine, IEventEngine
+    public class EventEngine : EngineCore, IEventEngine
     {
         public EventEngine(
             IEventBasedUserInterface ui,

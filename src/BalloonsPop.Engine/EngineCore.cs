@@ -1,13 +1,13 @@
-﻿namespace BalloonsPop.Engine
+﻿namespace BalloonsPop.Core
 {
     using System;
     using BalloonsPop.Common.Gadgets;
     using BalloonsPop.Common.Contracts;
     using System.Collections.Generic;
-    using BalloonsPop.Engine.Memento;
-    using BalloonsPop.Engine.Contexts;
+    using BalloonsPop.Core.Memento;
+    using BalloonsPop.Core.Contexts;
 
-    public class Engine
+    public class EngineCore
     {
         #region Constants
         protected const string EXIT = "EXIT";
@@ -35,7 +35,7 @@
 
         protected IContext context;
 
-        public Engine(IPrinter printer, IUserInputValidator validator, IHighscoreTable highScoreTable, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
+        public EngineCore(IPrinter printer, IUserInputValidator validator, IHighscoreTable highScoreTable, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
         {
             this.validator = validator;
             this.commandFactory = commandFactory;

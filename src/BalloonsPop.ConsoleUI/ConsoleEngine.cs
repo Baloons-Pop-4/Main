@@ -5,7 +5,7 @@
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.ConsoleUI.Contracts;
 
-    public class ConsoleEngine : Engine.Engine, IConsoleEngine
+    public class ConsoleEngine : Core.EngineCore, IConsoleEngine
     {
         private IInputReader reader;
 

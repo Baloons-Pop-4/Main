@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalloonsPop.Common", "Ballo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalloonsPop.ConsoleUI", "BalloonsPop.ConsoleUI\BalloonsPop.ConsoleUI.csproj", "{DD61BF23-6994-4EBB-AAA3-CB280765E833}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalloonsPop.Engine", "BalloonsPop.Engine\BalloonsPop.Engine.csproj", "{B4FF3BEB-43D3-4D4E-963E-50108922D688}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalloonsPop.Core", "BalloonsPop.Engine\BalloonsPop.Core.csproj", "{B4FF3BEB-43D3-4D4E-963E-50108922D688}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalloonsPop.GraphicUserInterface", "BalloonsPop.GraphicUserInterface\BalloonsPop.GraphicUserInterface.csproj", "{9A2A0F78-59A1-4ACD-8FC0-4FFF55D963AA}"
 EndProject

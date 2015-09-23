@@ -10,8 +10,8 @@ namespace BalloonsPop.GraphicUserInterface
 {
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Validators;
-    using BalloonsPop.Engine;
-    using BalloonsPop.Engine.Commands;
+    using BalloonsPop.Core;
+    using BalloonsPop.Core.Commands;
     using BalloonsPop.GraphicUserInterface;
 
     /// <summary>
@@ -19,7 +19,7 @@ namespace BalloonsPop.GraphicUserInterface
     /// </summary>
     public partial class App : Application
     {
-        private Engine engine;
+        private EngineCore engine;
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -28,8 +28,8 @@ namespace BalloonsPop.GraphicUserInterface
             var graphicUi = new MainWindow();
             var factory = new CommandFactory();
             var validator = MatrixValidator.GetInstance;
-            var logicProvider = new GameLogic(validator);
-            var model = new Game(logicProvider.GenerateField());
+            var logicProvider = new LogicProvider(validator);
+            var model = new GameModel(logicProvider.GenerateField());
             var table = new HighscoreTable();
 
             this.engine = new EventEngine(graphicUi, UserInputValidator.GetInstance, factory, model, logicProvider, table);

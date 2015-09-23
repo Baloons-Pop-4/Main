@@ -1,4 +1,4 @@
-﻿namespace BalloonsPop.Engine.Memento
+﻿namespace BalloonsPop.Core.Memento
 {
     using System.Collections.Generic;
 

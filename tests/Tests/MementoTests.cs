@@ -2,9 +2,9 @@
 {
     using System;
     using BalloonsPop.Common.Validators;
-    using BalloonsPop.Engine;
+    using BalloonsPop.Core;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using BalloonsPop.Engine.Memento;
+    using BalloonsPop.Core.Memento;
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
     using System.Linq;
@@ -15,7 +15,7 @@
     public class MementoTests
     {
         private readonly IStateSaver<IGameModel> memento = new Saver<IGameModel>();
-        private readonly IGameLogicProvider logic = new GameLogic(MatrixValidator.GetInstance);
+        private readonly IGameLogicProvider logic = new LogicProvider(MatrixValidator.GetInstance);
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
@@ -27,7 +27,7 @@
         [TestMethod]
         public void TestIfMementoReturnsTheSameStateItAccepter()
         {
-            var game = new Game(logic.GenerateField());
+            var game = new GameModel(logic.GenerateField());
 
             this.memento.SaveState(game);
 
@@ -43,7 +43,7 @@
         [TestMethod]
         public void TestIfConstructorWithParametersHasTheSameBehaviorAsTheSetter()
         {
-            var game = new Game(logic.GenerateField());
+            var game = new GameModel(logic.GenerateField());
 
             this.memento.SaveState(game);
             var memento2 = new Saver<IGameModel>();
@@ -61,7 +61,7 @@
         [TestMethod]
         public void TestIfMementoProvidesDeepCopy()
         {
-            var game = new Game(logic.GenerateField());
+            var game = new GameModel(logic.GenerateField());
 
             this.memento.SaveState(game);
 
@@ -90,7 +90,7 @@
         [TestMethod]
         public void TestIfGetterEncapsulatesTheCurrentState()
         {
-            var game = new Game(this.logic.GenerateField());
+            var game = new GameModel(this.logic.GenerateField());
 
             this.memento.SaveState(game);
             var state = this.memento.GetState();

@@ -1,4 +1,4 @@
-﻿namespace BalloonsPop.Engine
+﻿namespace BalloonsPop.Core
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,7 @@
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
 
-    public class GameLogic : IGameLogicProvider
+    public class LogicProvider : IGameLogicProvider
     {
         private const int FIELD_ROWS = 4;
         private const int FIELD_COLS = 9;
@@ -22,7 +22,7 @@
 
         private IMatrixValidator matrixValidator;
 
-        public GameLogic(IMatrixValidator matrixValidator)
+        public LogicProvider(IMatrixValidator matrixValidator)
         {
             this.matrixValidator = matrixValidator;
             this.rng = new Random();

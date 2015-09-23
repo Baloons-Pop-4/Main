@@ -1,4 +1,4 @@
-﻿namespace BalloonsPop.Engine
+﻿namespace BalloonsPop.Core
 {
     using System;
     using System.Linq;

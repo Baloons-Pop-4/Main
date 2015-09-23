@@ -1,4 +1,4 @@
-﻿namespace BalloonsPop.Engine.Commands
+﻿namespace BalloonsPop.Core.Commands
 {
     using BalloonsPop.Common.Contracts;
 

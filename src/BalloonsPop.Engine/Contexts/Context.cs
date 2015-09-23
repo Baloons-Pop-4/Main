@@ -1,4 +1,4 @@
-﻿namespace BalloonsPop.Engine.Contexts
+﻿namespace BalloonsPop.Core.Contexts
 {
     using System;
     using BalloonsPop.Common.Contracts;

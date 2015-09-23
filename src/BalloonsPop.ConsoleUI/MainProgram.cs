@@ -3,8 +3,8 @@
     using System;
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Validators;
-    using BalloonsPop.Engine;
-    using BalloonsPop.Engine.Commands;
+    using BalloonsPop.Core;
+    using BalloonsPop.Core.Commands;
 
     public class MainProgram
     {
@@ -13,8 +13,8 @@
             var consoleUI = new ConsoleUI();
             var highscoreTable = new HighscoreTable();
             var commandFactory = new CommandFactory();
-            var gameLogicProvider = new GameLogic(MatrixValidator.GetInstance);
-            var gameModel = new Game(gameLogicProvider.GenerateField());
+            var gameLogicProvider = new LogicProvider(MatrixValidator.GetInstance);
+            var gameModel = new GameModel(gameLogicProvider.GenerateField());
             
             var engine = new ConsoleEngine(consoleUI, UserInputValidator.GetInstance, highscoreTable, commandFactory, gameModel, gameLogicProvider);
             engine.Run();

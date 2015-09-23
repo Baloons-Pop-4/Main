@@ -2,7 +2,7 @@
 {
     using System;
     using BalloonsPop.Common.Validators;
-    using BalloonsPop.Engine;
+    using BalloonsPop.Core;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]

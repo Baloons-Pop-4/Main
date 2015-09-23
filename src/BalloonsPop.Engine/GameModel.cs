@@ -1,4 +1,4 @@
-﻿namespace BalloonsPop.Engine
+﻿namespace BalloonsPop.Core
 {
     using System;
     using BalloonsPop.Common.Contracts;
@@ -6,13 +6,13 @@
     using System.Linq;
 
     [Serializable]
-    public class Game : IGameModel
+    public class GameModel : IGameModel
     {
         private IBalloon[,] field;
 
         private int userMovesCount;
 
-        public Game(IBalloon[,] field)
+        public GameModel(IBalloon[,] field)
         {
             this.field = field;
             this.userMovesCount = 0;
@@ -56,7 +56,7 @@
                                         .Select(balloon => new Balloon() { Number = balloon.Number, isPopped = balloon.isPopped })
                                         .ToMatrix(this.field.GetLength(0), this.field.GetLength(1));
 
-            return new Game(clonedField);
+            return new GameModel(clonedField);
         }
     }
 }
