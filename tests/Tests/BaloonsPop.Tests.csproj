@@ -72,7 +72,7 @@
       <Project>{dd61bf23-6994-4ebb-aaa3-cb280765e833}</Project>
       <Name>BalloonsPop.ConsoleUI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\BalloonsPop.Engine\BalloonsPop.Core.csproj">
+    <ProjectReference Include="..\..\src\BalloonsPop.Core\BalloonsPop.Core.csproj">
       <Project>{b4ff3beb-43d3-4d4e-963e-50108922d688}</Project>
       <Name>BalloonsPop.Core</Name>
     </ProjectReference>

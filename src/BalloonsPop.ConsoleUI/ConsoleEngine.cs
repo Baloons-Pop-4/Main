@@ -2,10 +2,11 @@
 {
     using System;
 
+    using BalloonsPop.Core;
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.ConsoleUI.Contracts;
 
-    public class ConsoleEngine : Core.EngineCore, IConsoleEngine
+    public class ConsoleEngine : EngineCore, IConsoleEngine
     {
         private IInputReader reader;
 
