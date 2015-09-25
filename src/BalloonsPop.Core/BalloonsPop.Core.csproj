@@ -54,9 +54,7 @@
     <Compile Include="Commands\UndoCommand.cs" />
     <Compile Include="Contexts\Context.cs" />
     <Compile Include="EngineCore.cs" />
-    <Compile Include="GameModel.cs" />
     <Compile Include="HighscoreSavingStrategies\IHighscoreSavingStrategy.cs" />
-    <Compile Include="LogicProvider.cs" />
     <Compile Include="HighscoreTable.cs" />
     <Compile Include="Memento\CloningStrategies\CustomCloning.cs" />
     <Compile Include="Memento\CloningStrategies\DotNetCloning.cs" />
