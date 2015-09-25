@@ -11,23 +11,23 @@
 6. Implemented `Singleton` design pattern for the Engine class.
 7. Added basic interface abstraction (`ConsoleUI` and `ILogger`), with the intent of addingan option GUI.
 8. Moved the different files into .dll-s
-> The startup project is named `BalloonsPop`
+			>The startup project is named `BalloonsPop`
 9. Renamed some methods in `ConsoleUI.cs`
->       printHighscore --> PrintHighscore
->       printField --> PrintField
->       printMessage --> PrintMessage
+			>printHighscore --> PrintHighscore
+			>printField --> PrintField
+			>printMessage --> PrintMessage
 
 10. Removed some unnecessary .cs files.
 11. Reordered repository structure.
 12. Added `README.md` with information about requirements, contributors.
 13. Renamed `ILogger` to `IBalloonsUserInterface`.
 14. Added property for the Engine instance of type `IEngine`
-```
-        private static Engine instance = new Engine();
-```
-15. Added Initialize method to `IEngine` and implemented in Engine. 
->       Assigns an instance of a UI that implements the IBalloonsUserInteface to the engine instance
+	```
+private static Engine instance = new Engine();
+	```
 
+15. Added  Initialize method to `IEngine` and implemented in Engine. 
+			>Assigns an instance of a UI that implements the IBalloonsUserInteface to the engine instance
 16. Deleted the commented code in the Engine class.
 17. Extracted all messages in const strings.
 18. Renamed temp variables with appropriate names 
@@ -41,48 +41,46 @@
 24. Fixed a bug in Validation and Engine refactoring.
 25. Moved the Initializing of the Engine to `MainProgram.cs`.
 26. Added a Game class for the Engine to work with
->       It has a field, user moves count and a reset method. Will help to avoid
-code duplication in Engine.Run
+			>It has a field, user moves count and a reset method. Will help to avoid code duplication in Engine.Run
 
 27. Refactored the `PrintField` method in the `ConsoleUI.cs`.
 28. Added colors.
 29. Extracted methods from the `PrintMatrix()`
-```
-        GetDashedLine(), SetConsoleColor(), SetConsoleColorToDefault()
-```
+			>GetDashedLine(), SetConsoleColor(), SetConsoleColorToDefault()
+
 30. Wrapped the `ConsoleUI` class in a namespace `UserInterfaces`.
 31. Extracted class `Game.cs` from `Engine.cs`.
 32. Removed the unnecessary loop condition in `Run()`
-```
-        while (command != EXIT) --> while (true)
-```
+	```
+while (command != EXIT) --> while (true)
+	```
 33. Wrapped the `GameLogic` class in a namespace `GameLogic`.
 34. Added public Constructor and a private field of type Random.
 35. Made the `GenerateField()` method non-static and renamed the varaibles in side.
 36. Added implicit typing in the `GenerateFieldMethod`.
 37. Changed the engine class to work with instances of the `GameLogic` class.
 38. Extracted some more constants
-```
-        private const int MIN_BALLOON_VALUE = 1;
-        private const int MAX_BALLOON_VALUE = 4;
-```
+	```
+private const int MIN_BALLOON_VALUE = 1;
+private const int MAX_BALLOON_VALUE = 4;
+	```
 39. Removed the unused `printMatrix` method from the `GameLogic.cs`.
 40. Added a method which pops all baloons of a type in a given direction
-```
-        public void PopInDirection(byte[,] matrix, int row, int col, int xUpdate, int yUpdate)
-```
+	```
+public void PopInDirection(byte[,] matrix, int row, int col, int xUpdate, int yUpdate)
+	```
 41. Added a `MatrixValidator` and a `IMatrixValidator` interface. Implemented the `IsInsideMatrix()` method in the `MatrixValidator` class.
 42. Added validation for the `PopInDirection` method.
 43. Removed the static check methods with non-static ones
->           The new methods are PopInDirection and PopBaloons which use loops
+			>The new methods are PopInDirection and PopBaloons which use loops
 instead of recursion
 
 44. Substituted remove doit method and added two non-static methods in its place.
 45. Removed the commented code in `GameIsOver()` method.
 46. Extracted the random baloon value generation in another method
-```
-        private byte GetRandomBaloonValue()
-```
+	```
+private byte GetRandomBaloonValue()
+	```
 47. Removed a case that is handled by the `Engine` class.`
 48. Added test for `GameLogic`. `PopInDirection()` method is now private.
 49. The `IBaloonsUserInterface` is splitted into 2 interfaces - `IBaloonsPrinter`, `IBaloonsUserInterface`.
@@ -112,7 +110,7 @@ instead of recursion
 73. Removed unnecessary code in `Engine.cs`.
 74.  Removed commented code and the useless method `EndGame()`.
 75. Fixed a test in `GameLogic` tests.
->       TestIfGenerateFieldReturnsFieldThatAreSignificantlyDifferentFromEachOther()
+			>TestIfGenerateFieldReturnsFieldThatAreSignificantlyDifferentFromEachOther()
 
 76. Added `tests` for class `Game`.
 77. Added `tests` for class `MatrixValidator`.
