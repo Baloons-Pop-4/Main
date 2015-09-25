@@ -14,12 +14,15 @@
             : base(consoleUI, validator, highscoreTable, commandFactory, gameModel, gameLogicProvider)
         {
             this.reader = consoleUI as IInputReader;
+            this.context.Game.Field = this.context.LogicProvider.GenerateField();
         }
 
         public void Run()
         {
             this.context.Printer.PrintField(this.context.Game.Field);
             var command = string.Empty;
+
+            
 
             while (true)
             {
@@ -28,7 +31,7 @@
                 command = this.GetTrimmedUppercaseInput();
 
                 var commandList = this.GetCommandList(command);
-
+                // Console.Clear();
                 this.ExecuteCommandList(commandList);
             }
         }

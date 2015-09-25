@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -40,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Balloon.cs" />
     <Compile Include="Commands\CommandFactory.cs" />
     <Compile Include="Commands\ExitCommand.cs" />
     <Compile Include="Commands\PopBalloonCommand.cs" />
@@ -52,8 +54,6 @@
     <Compile Include="Commands\UndoCommand.cs" />
     <Compile Include="Contexts\Context.cs" />
     <Compile Include="EngineCore.cs" />
-    <Compile Include="GameModel.cs" />
-    <Compile Include="LogicProvider.cs" />
     <Compile Include="HighscoreTable.cs" />
     <Compile Include="Memento\CloningStrategies\CustomCloning.cs" />
     <Compile Include="Memento\CloningStrategies\DotNetCloning.cs" />
@@ -68,6 +68,9 @@
       <Project>{8c8b1419-0948-4d28-b57a-8d4f68d3bc0c}</Project>
       <Name>BalloonsPop.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

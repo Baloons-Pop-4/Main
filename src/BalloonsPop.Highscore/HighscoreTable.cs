@@ -1,4 +1,4 @@
-﻿namespace BalloonsPop.Core
+﻿namespace BalloonsPop.Highscore
 {
     using System;
     using System.Linq;

@@ -1,20 +1,21 @@
-﻿namespace BalloonsPop.Core
+﻿namespace BalloonsPop.GameModels
 {
     using System;
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
     using System.Linq;
 
-    [Serializable]
+    // using Ninject;
+
     public class GameModel : IGameModel
     {
         private IBalloon[,] field;
 
         private int userMovesCount;
 
-        public GameModel(IBalloon[,] field)
+        public GameModel()
         {
-            this.field = field;
+            this.field = new IBalloon[5, 10];
             this.userMovesCount = 0;
         }
 
@@ -56,7 +57,7 @@
                                         .Select(balloon => new Balloon() { Number = balloon.Number, isPopped = balloon.isPopped })
                                         .ToMatrix(this.field.GetLength(0), this.field.GetLength(1));
 
-            return new GameModel(clonedField);
+            return new GameModel() { field = clonedField };
         }
     }
 }

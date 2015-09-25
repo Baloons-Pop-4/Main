@@ -1,4 +1,4 @@
-﻿namespace BalloonsPop.Common.Validators
+﻿namespace BalloonsPop.Validation
 {
     using BalloonsPop.Common.Contracts;
 

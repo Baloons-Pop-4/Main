@@ -16,7 +16,7 @@
 
         public GameLogicTests()
         {
-            this.gameLogicProvider = new LogicProvider(MatrixValidator.GetInstance);
+            this.gameLogicProvider = new LogicProvider(new MatrixValidator());
         }
 
         [TestMethod]

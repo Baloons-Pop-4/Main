@@ -1,8 +1,11 @@
-﻿namespace BalloonsPop.Core
+﻿namespace BalloonsPop.LogicProvider
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using BalloonsPop.GameModels;
+
+    //using Ninject;
 
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
@@ -22,6 +25,7 @@
 
         private IMatrixValidator matrixValidator;
 
+        // [Inject]
         public LogicProvider(IMatrixValidator matrixValidator)
         {
             this.matrixValidator = matrixValidator;
