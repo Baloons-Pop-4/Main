@@ -54,6 +54,9 @@
     <Compile Include="Commands\UndoCommand.cs" />
     <Compile Include="Contexts\Context.cs" />
     <Compile Include="EngineCore.cs" />
+    <Compile Include="GameModel.cs" />
+    <Compile Include="HighscoreSavingStrategies\IHighscoreSavingStrategy.cs" />
+    <Compile Include="LogicProvider.cs" />
     <Compile Include="HighscoreTable.cs" />
     <Compile Include="Memento\CloningStrategies\CustomCloning.cs" />
     <Compile Include="Memento\CloningStrategies\DotNetCloning.cs" />
@@ -62,6 +65,8 @@
     <Compile Include="Memento\Memory.cs" />
     <Compile Include="Memento\Saver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="HighscoreSavingStrategies\BinaryFileSavingStrategy.cs" />
+    <Compile Include="HighscoreSavingStrategies\XmlFileSavingStrategy.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BalloonsPop.Common\BalloonsPop.Common.csproj">
