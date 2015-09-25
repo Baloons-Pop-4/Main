@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DD61BF23-6994-4EBB-AAA3-CB280765E833}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{8E28D39B-5915-48D9-8419-A7B0CB995E81}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BalloonsPop</RootNamespace>
-    <AssemblyName>BalloonsPop</AssemblyName>
+    <RootNamespace>BalloonsPop.Highscore</RootNamespace>
+    <AssemblyName>BalloonsPop.Highscore</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,8 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -45,38 +42,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConsoleUI.cs" />
-    <Compile Include="ConsoleEngine.cs" />
-    <Compile Include="Contracts\IConsoleEngine.cs" />
-    <Compile Include="Contracts\IConsoleUserInterface.cs" />
-    <Compile Include="Contracts\IInputReader.cs" />
-    <Compile Include="MainProgram.cs" />
+    <Compile Include="HighscoreModule.cs" />
+    <Compile Include="HighscoreTable.cs" />
+    <Compile Include="PlayerScore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BalloonsPop.Common\BalloonsPop.Common.csproj">
       <Project>{8c8b1419-0948-4d28-b57a-8d4f68d3bc0c}</Project>
       <Name>BalloonsPop.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BalloonsPop.Core\BalloonsPop.Core.csproj">
-      <Project>{b4ff3beb-43d3-4d4e-963e-50108922d688}</Project>
-      <Name>BalloonsPop.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BalloonsPop.GameModels\BalloonsPop.GameModels.csproj">
-      <Project>{95de20c4-4653-44d9-91c3-8944b4753faa}</Project>
-      <Name>BalloonsPop.GameModels</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BalloonsPop.Highscore\BalloonsPop.Highscore.csproj">
-      <Project>{8e28d39b-5915-48d9-8419-a7b0cb995e81}</Project>
-      <Name>BalloonsPop.Highscore</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BalloonsPop.LogicProvider\BalloonsPop.LogicProvider.csproj">
-      <Project>{e735039b-49cc-4cc2-a57a-49c1ef91290a}</Project>
-      <Name>BalloonsPop.LogicProvider</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
