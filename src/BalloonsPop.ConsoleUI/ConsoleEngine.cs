@@ -31,7 +31,7 @@
                 command = this.GetTrimmedUppercaseInput();
 
                 var commandList = this.GetCommandList(command);
-
+                // Console.Clear();
                 this.ExecuteCommandList(commandList);
             }
         }
