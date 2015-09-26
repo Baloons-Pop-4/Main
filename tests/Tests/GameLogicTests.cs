@@ -9,6 +9,9 @@
     using BalloonsPop.Common.Gadgets;
     using BalloonsPop.Core.Memento;
 
+    using BalloonsPop.LogicProvider;
+    using BalloonsPop.GameModels;
+
     [TestClass]
     public class GameLogicTests
     {
@@ -16,7 +19,7 @@
 
         public GameLogicTests()
         {
-            this.gameLogicProvider = new LogicProvider(new MatrixValidator());
+            this.gameLogicProvider = new LogicProvider(new MatrixValidator(), new RandomNumberGenerator());
         }
 
         [TestMethod]
@@ -128,7 +131,8 @@
         [TestMethod]
         public void TestIfPopBalloonsPopsOnlyTheBalloonsOnTheSameRowAndColumn()
         {
-            var game = new GameModel(this.gameLogicProvider.GenerateField());
+            var game = new GameModel();
+            game.Field = this.gameLogicProvider.GenerateField();
             var storedField = game.Clone().Field;
 
             for (int i = 0, j = 5; i < 5; i++)

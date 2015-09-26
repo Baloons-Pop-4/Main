@@ -46,7 +46,7 @@ namespace BalloonsPop.GraphicUserInterface
             var model = kernel.Get<IGameModel>();
             var table = kernel.Get<IHighscoreTable>();
 
-            this.engine = new EventEngine(graphicUi, new UserInputValidator(), factory, model, logicProvider, table);
+            this.engine = new EventEngine(graphicUi, new UserInputValidator(), factory, model, logicProvider, table, kernel.Get<IHighscoreSaver>());
 
             graphicUi.Show();
         }

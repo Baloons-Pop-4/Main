@@ -8,7 +8,7 @@
     [TestClass]
     public class MatrixValidatorTests
     {
-        private MatrixValidator validator = MatrixValidator.GetInstance;
+        private MatrixValidator validator = new MatrixValidator();
 
         [TestMethod]
         public void TestIfIsInsideMethodReturnsFalseForTooSmallRow()
