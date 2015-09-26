@@ -25,6 +25,7 @@ namespace BalloonsPop.LogicProvider
         public override void Load()
         {
             kernel.Bind<IGameLogicProvider>().To<LogicProvider>();
+            kernel.Bind<IRandomNumberGenerator>().To<RandomNumberGenerator>();
         }
     }
 }

@@ -20,16 +20,16 @@
         private static readonly int[][] PopDirections = new int[][] { new int[] { 0, 1 }, new int[] { 0, -1 }, new int[] { 1, 0 }, new int[] { -1, 0 } };
 
         //private byte[,] field;
-
-        private Random rng;
+     
+        private IRandomNumberGenerator rng;
 
         private IMatrixValidator matrixValidator;
 
         // [Inject]
-        public LogicProvider(IMatrixValidator matrixValidator)
+        public LogicProvider(IMatrixValidator matrixValidator, IRandomNumberGenerator rng)
         {
             this.matrixValidator = matrixValidator;
-            this.rng = new Random();
+            this.rng = rng;
             // this.field = new byte[FIELD_ROWS + 1, FIELD_COLS + 1];
         }
 
