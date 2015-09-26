@@ -30,3 +30,4 @@ They can be found [here](REQUIREMENTS.md).
 Note that according to the [requirements](REQUIREMENTS.md), you must have contributed to the project in at least **7 different days** in order for you to be considered a contributor by the trainers. 
 
 ##Documentation
+Can be found [here](./RefactoringDocumentation.md)
