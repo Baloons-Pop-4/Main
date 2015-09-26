@@ -43,6 +43,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HighscoreModule.cs" />
+    <Compile Include="HighscoreSaver.cs" />
+    <Compile Include="HighscoreSavingStrategies\BinaryFileSavingStrategy.cs" />
+    <Compile Include="HighscoreSavingStrategies\IHighscoreSavingStrategy.cs" />
+    <Compile Include="HighscoreSavingStrategies\XmlFileSavingStrategy.cs" />
     <Compile Include="HighscoreTable.cs" />
     <Compile Include="PlayerScore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

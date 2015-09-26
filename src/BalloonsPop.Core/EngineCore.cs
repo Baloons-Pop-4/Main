@@ -8,6 +8,7 @@
     using BalloonsPop.Core.Contexts;
 
     using Ninject;
+    using BalloonsPop.Highscore;
 
     public class EngineCore
     {
@@ -29,6 +30,8 @@
 
         protected ICommandFactory commandFactory;
 
+        protected IHighscoreSaver highscoreSaver;
+
         //private IGameModel game;
 
         //private IGameLogicProvider gameLogicProvider;
@@ -38,10 +41,11 @@
         protected IContext context;
 
         [Inject]
-        public EngineCore(IPrinter printer, IUserInputValidator validator, IHighscoreTable highScoreTable, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
+        public EngineCore(IPrinter printer, IUserInputValidator validator, IHighscoreTable highScoreTable, IHighscoreSaver highscoreSaver, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
         {
             this.validator = validator;
             this.commandFactory = commandFactory;
+            this.highscoreSaver = highscoreSaver;
             //this.game = gameModel;
             //this.gameLogicProvider = gameLogicProvider;
 
@@ -82,6 +86,7 @@
                                    this.context.Message = ON_EXIT_MESSAGE;
                                    commandList.Add(this.commandFactory.CreateCommand("message"));
                                    commandList.Add(this.commandFactory.CreateCommand("exit"));
+                                   this.highscoreSaver.Save(this.context.HighscoreTable.Table);
                                })
                                .Case(!this.validator.IsValidUserMove(userCommand), () =>
                                {
@@ -109,15 +114,16 @@
 
                                    if (this.context.LogicProvider.GameIsOver(this.context.Game.Field))
                                    {
-                                       //this.context.Message = "Gratz, completed in " + this.context.Game.UserMovesCount + " moves.";
-                                       //if (this.context.HighscoreTable.CanAddPlayer(this.context.Game.UserMovesCount))
-                                       //{
-                                       //    // TODO: Abstract to work with all types of UIs, not just the console?
-                                       //    Console.WriteLine("Type in your name: ");
-                                       //    string username = Console.ReadLine();
+                                       this.context.Message = "Gratz, completed in " + this.context.Game.UserMovesCount + " moves.";
+                                       if (this.context.HighscoreTable.CanAddPlayer(this.context.Game.UserMovesCount))
+                                       {
+                                           // TODO: Abstract to work with all types of UIs, not just the console?
+                                           Console.WriteLine("Type in your name: ");
+                                           string username = Console.ReadLine();
 
-                                       //    this.context.HighscoreTable.AddPlayer(new PlayerScore(username, this.context.Game.UserMovesCount, DateTime.Now));
-                                       //}
+                                           // TODO: Do that through the interface, it couples to PlayerScore now
+                                           this.context.HighscoreTable.AddPlayer(new PlayerScore(username, this.context.Game.UserMovesCount, DateTime.Now));
+                                       }
 
                                        commandList.Add(this.commandFactory.CreateCommand("message"));
                                        commandList.Add(this.commandFactory.CreateCommand("restart"));

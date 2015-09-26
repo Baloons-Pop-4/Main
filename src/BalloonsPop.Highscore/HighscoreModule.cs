@@ -24,6 +24,7 @@ namespace BalloonsPop.Highscore
         {
             kernel.Bind<IHighscoreTable>().To<HighscoreTable>();
             kernel.Bind<IPlayerScore>().To<PlayerScore>();
+            kernel.Bind<IHighscoreSaver>().ToMethod(c => HighscoreSaver.GetInstance(c.Kernel));
         }
     }
 }
