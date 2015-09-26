@@ -2,23 +2,27 @@
 {
     using System;
 
+    using BalloonsPop.Core;
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.ConsoleUI.Contracts;
 
-    public class ConsoleEngine : Engine.Engine, IConsoleEngine
+    public class ConsoleEngine : EngineCore, IConsoleEngine
     {
         private IInputReader reader;
 
-        public ConsoleEngine(IConsoleUserInterface consoleUI, IUserInputValidator validator, IHighscoreTable highscoreTable, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
-            : base(consoleUI, validator, highscoreTable, commandFactory, gameModel, gameLogicProvider)
+        public ConsoleEngine(IConsoleUserInterface consoleUI, IUserInputValidator validator, IHighscoreTable highscoreTable, IHighscoreSaver highscoreSaver, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
+            : base(consoleUI, validator, highscoreTable, highscoreSaver, commandFactory, gameModel, gameLogicProvider)
         {
             this.reader = consoleUI as IInputReader;
+            this.context.Game.Field = this.context.LogicProvider.GenerateField();
         }
 
         public void Run()
         {
             this.context.Printer.PrintField(this.context.Game.Field);
             var command = string.Empty;
+
+            
 
             while (true)
             {
@@ -27,7 +31,7 @@
                 command = this.GetTrimmedUppercaseInput();
 
                 var commandList = this.GetCommandList(command);
-
+                // Console.Clear();
                 this.ExecuteCommandList(commandList);
             }
         }

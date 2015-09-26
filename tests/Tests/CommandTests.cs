@@ -2,8 +2,8 @@
 {
     using System;
     using BalloonsPop.Common.Contracts;
-    using BalloonsPop.Engine.Commands;
-    using BalloonsPop.Engine.Contexts;
+    using BalloonsPop.Core.Commands;
+    using BalloonsPop.Core.Contexts;
     using Tests.MockClasses;
 
 

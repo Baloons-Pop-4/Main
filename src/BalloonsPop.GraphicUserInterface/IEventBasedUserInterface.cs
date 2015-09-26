@@ -7,5 +7,7 @@
     public interface IEventBasedUserInterface : IPrinter
     {
         event EventHandler Raise;
+
+        void Show();
     }
 }
