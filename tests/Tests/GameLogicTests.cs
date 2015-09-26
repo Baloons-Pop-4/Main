@@ -2,21 +2,24 @@
 {
     using System;
     using BalloonsPop.Common.Validators;
-    using BalloonsPop.Engine;
+    using BalloonsPop.Core;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using BalloonsPop.Common.Contracts;
     using System.Linq;
     using BalloonsPop.Common.Gadgets;
-    using BalloonsPop.Engine.Memento;
+    using BalloonsPop.Core.Memento;
+
+    using BalloonsPop.LogicProvider;
+    using BalloonsPop.GameModels;
 
     [TestClass]
     public class GameLogicTests
     {
-        private GameLogic gameLogicProvider;
+        private LogicProvider gameLogicProvider;
 
         public GameLogicTests()
         {
-            this.gameLogicProvider = new GameLogic(MatrixValidator.GetInstance);
+            this.gameLogicProvider = new LogicProvider(new MatrixValidator(), new RandomNumberGenerator());
         }
 
         [TestMethod]
@@ -128,7 +131,8 @@
         [TestMethod]
         public void TestIfPopBalloonsPopsOnlyTheBalloonsOnTheSameRowAndColumn()
         {
-            var game = new Game(this.gameLogicProvider.GenerateField());
+            var game = new GameModel();
+            game.Field = this.gameLogicProvider.GenerateField();
             var storedField = game.Clone().Field;
 
             for (int i = 0, j = 5; i < 5; i++)

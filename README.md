@@ -19,7 +19,7 @@ They can be found [here](REQUIREMENTS.md).
 * Konstantin Simeonov ([TelerikAcademy](http://telerikacademy.com/Users/kon.simeonov), [GitHub](https://github.com/KonstantinSimeonov))
 * Ivaylo Arnaudov ([TelerikAcademy](http://telerikacademy.com/Users/ivaylo.arnaudov), [GitHub](https://github.com/arnaudoff))
 * Martin Atanasov ([TelerikAcademy](https://telerikacademy.com/Users/jumarto), [GitHub](https://github.com/juvemar))
-
+* Daniela Simeonova ([TelerikAcademy] (https://telerikacademy.com/Users/danisio), [GitHub] (https://github.com/danisio))
 ##Contributing
 
 - Add your name to the [contributors](#contributors) section following the existing pattern. 
@@ -30,3 +30,4 @@ They can be found [here](REQUIREMENTS.md).
 Note that according to the [requirements](REQUIREMENTS.md), you must have contributed to the project in at least **7 different days** in order for you to be considered a contributor by the trainers. 
 
 ##Documentation
+Can be found [here](./RefactoringDocumentation.md)

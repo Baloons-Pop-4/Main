@@ -2,13 +2,13 @@
 {
     using System;
     using BalloonsPop.Common.Validators;
-    using BalloonsPop.Engine;
+    using BalloonsPop.Core;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class MatrixValidatorTests
     {
-        private MatrixValidator validator = MatrixValidator.GetInstance;
+        private MatrixValidator validator = new MatrixValidator();
 
         [TestMethod]
         public void TestIfIsInsideMethodReturnsFalseForTooSmallRow()

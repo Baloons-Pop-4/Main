@@ -72,13 +72,29 @@
       <Project>{dd61bf23-6994-4ebb-aaa3-cb280765e833}</Project>
       <Name>BalloonsPop.ConsoleUI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\BalloonsPop.Engine\BalloonsPop.Engine.csproj">
+    <ProjectReference Include="..\..\src\BalloonsPop.Core\BalloonsPop.Core.csproj">
       <Project>{b4ff3beb-43d3-4d4e-963e-50108922d688}</Project>
-      <Name>BalloonsPop.Engine</Name>
+      <Name>BalloonsPop.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\BalloonsPop.GameModels\BalloonsPop.GameModels.csproj">
+      <Project>{95de20c4-4653-44d9-91c3-8944b4753faa}</Project>
+      <Name>BalloonsPop.GameModels</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\BalloonsPop.GraphicUserInterface\BalloonsPop.GraphicUserInterface.csproj">
       <Project>{9a2a0f78-59a1-4acd-8fc0-4fff55d963aa}</Project>
       <Name>BalloonsPop.GraphicUserInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\BalloonsPop.Highscore\BalloonsPop.Highscore.csproj">
+      <Project>{8e28d39b-5915-48d9-8419-a7b0cb995e81}</Project>
+      <Name>BalloonsPop.Highscore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\BalloonsPop.LogicProvider\BalloonsPop.LogicProvider.csproj">
+      <Project>{e735039b-49cc-4cc2-a57a-49c1ef91290a}</Project>
+      <Name>BalloonsPop.LogicProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\BalloonsPop.Validation\BalloonsPop.Validation.csproj">
+      <Project>{8d75c4c3-63e8-4b33-aac5-9b9b2eda4ee9}</Project>
+      <Name>BalloonsPop.Validation</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

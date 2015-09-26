@@ -3,9 +3,9 @@
     using System;
 
     using BalloonsPop.Common.Contracts;
-    using BalloonsPop.Engine;
+    using BalloonsPop.Core;
 
-    public class EventEngine : Engine, IEventEngine
+    public class EventEngine : EngineCore, IEventEngine
     {
         public EventEngine(
             IEventBasedUserInterface ui,
@@ -13,9 +13,10 @@
             ICommandFactory commandFactory,
             IGameModel gameModel,
             IGameLogicProvider gameLogicProvider,
-            IHighscoreTable scoreTable
+            IHighscoreTable scoreTable,
+            IHighscoreSaver saver
             )
-            : base(ui, validator, scoreTable, commandFactory, gameModel, gameLogicProvider)
+            : base(ui, validator, scoreTable, saver, commandFactory, gameModel, gameLogicProvider)
         {
             ui.Raise += new EventHandler(this.HandleUserInput);
         }

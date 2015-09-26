@@ -4,18 +4,8 @@
 
     public class MatrixValidator : IMatrixValidator
     {
-        private static readonly MatrixValidator Instance = new MatrixValidator();
-
-        private MatrixValidator()
+        public MatrixValidator()
         {
-        }
-
-        public static MatrixValidator GetInstance
-        {
-            get
-            {
-                return Instance;
-            }
         }
 
         public bool IsInsideMatrix<T>(T[,] matrix, int row, int col)

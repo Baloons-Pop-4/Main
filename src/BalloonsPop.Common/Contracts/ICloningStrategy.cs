@@ -1,4 +1,4 @@
-﻿namespace BalloonsPop.Engine.Memento.CloningStrategies
+﻿namespace BalloonsPop.Core.Memento.CloningStrategies
 {
     /// <summary>
     /// The public interface for all implemented cloning routines.
