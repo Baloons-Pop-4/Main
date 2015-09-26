@@ -1,4 +1,4 @@
-﻿namespace BalloonsPop.Core
+﻿namespace BalloonsPop.Highscore
 {
     using BalloonsPop.Common.Contracts;
     using System.Collections.Generic;
@@ -8,7 +8,7 @@
     {
         private const string FilePath = "highscore.bin";
 
-        public void Save(List<PlayerScore> highscoreTable)
+        public void Save(List<IPlayerScore> highscoreTable)
         {
             using (Stream stream = File.Open(FilePath, FileMode.Create))
             {

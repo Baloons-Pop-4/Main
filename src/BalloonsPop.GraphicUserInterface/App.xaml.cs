@@ -12,7 +12,7 @@ namespace BalloonsPop.GraphicUserInterface
     using BalloonsPop.Common.Validators;
     using BalloonsPop.Core;
     using BalloonsPop.Core.Commands;
-    using BalloonsPop.GraphicUserInterface;
+    using BalloonsPop.GameModels;
 
     using Ninject;
     using Ninject.Modules;
@@ -33,9 +33,9 @@ namespace BalloonsPop.GraphicUserInterface
             kernel.Bind<IEventBasedUserInterface>().To<MainWindow>();
             kernel.Bind<ICommandFactory>().To<CommandFactory>();
             kernel.Bind<IMatrixValidator>().To<MatrixValidator>();
-            kernel.Bind<IGameLogicProvider>().To<LogicProvider>();
+            kernel.Bind<IGameLogicProvider>().To<BalloonsPop.LogicProvider.LogicProvider>();
             kernel.Bind<IHighscoreTable>().To<HighscoreTable>();
-            
+            kernel.Bind<IGameModel>().To<GameModel>();
             
 
             //var graphicUi = new MainWindow();
@@ -43,10 +43,10 @@ namespace BalloonsPop.GraphicUserInterface
             var factory = kernel.Get<ICommandFactory>();
             var validator = kernel.Get<IMatrixValidator>();
             var logicProvider = kernel.Get<IGameLogicProvider>();
-            var model = new GameModel(logicProvider.GenerateField());
+            var model = kernel.Get<IGameModel>();
             var table = kernel.Get<IHighscoreTable>();
 
-            this.engine = new EventEngine(graphicUi, new UserInputValidator(), factory, model, logicProvider, table);
+            this.engine = new EventEngine(graphicUi, new UserInputValidator(), factory, model, logicProvider, table, kernel.Get<IHighscoreSaver>());
 
             graphicUi.Show();
         }

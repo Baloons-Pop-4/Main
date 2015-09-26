@@ -50,15 +50,16 @@
     <Compile Include="Contracts\IContext.cs" />
     <Compile Include="Contracts\IGameLogicProvider.cs" />
     <Compile Include="Contracts\IGameModel.cs" />
+    <Compile Include="Contracts\IHighscoreSaver.cs" />
     <Compile Include="Contracts\IHighscoreTable.cs" />
     <Compile Include="Contracts\IMatrixValidator.cs" />
     <Compile Include="Contracts\IMemory.cs" />
     <Compile Include="Contracts\IPlayerScore.cs" />
     <Compile Include="Contracts\IPrinter.cs" />
+    <Compile Include="Contracts\IRandomNumberGenerator.cs" />
     <Compile Include="Contracts\IStateSaver.cs" />
     <Compile Include="Contracts\IUserInputValidator.cs" />
     <Compile Include="Contracts\IValidationFactory.cs" />
-    <Compile Include="Contracts\PlayerScore.cs" />
     <Compile Include="Gadgets\FluentSwitch.cs" />
     <Compile Include="Gadgets\IEnumerableExtension.cs" />
     <Compile Include="Gadgets\QueriableMatrix.cs" />

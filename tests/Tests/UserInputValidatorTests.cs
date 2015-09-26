@@ -7,7 +7,7 @@
     [TestClass]
     public class UserInputValidatorTests
     {
-        private UserInputValidator validator = UserInputValidator.GetInstance;
+        private UserInputValidator validator = new UserInputValidator();
 
         [TestMethod]
         public void TestIfIsValidUserMoveReturnsTrueForValidMoves()

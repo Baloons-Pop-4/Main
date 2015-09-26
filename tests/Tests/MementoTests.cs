@@ -11,11 +11,14 @@
     using Tests.MockClasses;
     using System.Runtime.Serialization;
 
+    using BalloonsPop.LogicProvider;
+    using BalloonsPop.GameModels;
+
     [TestClass]
     public class MementoTests
     {
         private readonly IStateSaver<IGameModel> memento = new Saver<IGameModel>();
-        private readonly IGameLogicProvider logic = new LogicProvider(MatrixValidator.GetInstance);
+        private readonly IGameLogicProvider logic = new LogicProvider(new MatrixValidator(), new RandomNumberGenerator());
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
@@ -27,8 +30,8 @@
         [TestMethod]
         public void TestIfMementoReturnsTheSameStateItAccepter()
         {
-            var game = new GameModel(logic.GenerateField());
-
+            var game = new GameModel();
+            game.Field = logic.GenerateField();
             this.memento.SaveState(game);
 
             var stateFromMemento = this.memento.GetState();
@@ -43,8 +46,8 @@
         [TestMethod]
         public void TestIfConstructorWithParametersHasTheSameBehaviorAsTheSetter()
         {
-            var game = new GameModel(logic.GenerateField());
-
+            var game = new GameModel();
+            game.Field = logic.GenerateField();
             this.memento.SaveState(game);
             var memento2 = new Saver<IGameModel>();
             memento2.SaveState(game);
@@ -61,8 +64,8 @@
         [TestMethod]
         public void TestIfMementoProvidesDeepCopy()
         {
-            var game = new GameModel(logic.GenerateField());
-
+            var game = new GameModel();
+            game.Field = logic.GenerateField();
             this.memento.SaveState(game);
 
             var stateFromMemento = this.memento.GetState();
@@ -90,8 +93,8 @@
         [TestMethod]
         public void TestIfGetterEncapsulatesTheCurrentState()
         {
-            var game = new GameModel(this.logic.GenerateField());
-
+            var game = new GameModel();
+            game.Field = logic.GenerateField();
             this.memento.SaveState(game);
             var state = this.memento.GetState();
 

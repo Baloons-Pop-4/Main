@@ -27,13 +27,14 @@
             highscores.Load();
             
             var consoleUI = new ConsoleUI();
-            var highscoreTable = kernel.Get<IHighscoreTable>(); // new HighscoreTable();
+            var highscoreTable = kernel.Get<IHighscoreTable>();
+            var highscoreSaver = kernel.Get<IHighscoreSaver>();
             var commandFactory = new CommandFactory();
             var gameLogicProvider = kernel.Get<IGameLogicProvider>();// new LogicProvider(new MatrixValidator());
             var gameModel = kernel.Get<IGameModel>();// new GameModel(gameLogicProvider.GenerateField());
             var userInputValidator = kernel.Get<IUserInputValidator>();
             
-            var engine = new ConsoleEngine(consoleUI, userInputValidator, highscoreTable, commandFactory, gameModel, gameLogicProvider);
+            var engine = new ConsoleEngine(consoleUI, userInputValidator, highscoreTable, highscoreSaver, commandFactory, gameModel, gameLogicProvider);
             engine.Run();
         }
     }
