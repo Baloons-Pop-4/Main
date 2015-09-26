@@ -1,10 +1,10 @@
-﻿namespace BalloonsPop.Core
+﻿namespace BalloonsPop.Highscore
 {
     using System.Collections.Generic;
     using BalloonsPop.Common.Contracts;
 
     public interface IHighscoreSavingStrategy
     {
-        void Save(List<PlayerScore> highscoreTable);
+        void Save(List<IPlayerScore> highscoreTable);
     }
 }
