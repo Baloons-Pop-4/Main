@@ -1,7 +1,5 @@
 ﻿namespace BalloonsPop.GraphicUserInterface
 {
-    using BalloonsPop.Common.Contracts;
-
     using BalloonsPop.Bundling;
     using Ninject;
 
