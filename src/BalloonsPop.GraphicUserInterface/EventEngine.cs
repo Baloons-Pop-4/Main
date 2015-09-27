@@ -2,23 +2,15 @@
 {
     using System;
 
-    using BalloonsPop.Common.Contracts;
     using BalloonsPop.Core;
 
     public class EventEngine : EngineCore, IEventEngine
     {
-        public EventEngine(
-            IEventBasedUserInterface ui,
-            IUserInputValidator validator,
-            ICommandFactory commandFactory,
-            IGameModel gameModel,
-            IGameLogicProvider gameLogicProvider,
-            IHighscoreTable scoreTable,
-            IHighscoreSaver saver
-            )
-            : base(ui, validator, scoreTable, saver, commandFactory, gameModel, gameLogicProvider)
+        public EventEngine(WpfBundle dependencyBundle)
+            :base(dependencyBundle)
         {
-            ui.Raise += new EventHandler(this.HandleUserInput);
+            dependencyBundle.Gui.Raise += new EventHandler(this.HandleUserInput);
+            this.context.Game.Field = this.context.LogicProvider.GenerateField();    
         }
 
         public void HandleUserInput(object sender, EventArgs e)

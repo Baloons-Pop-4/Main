@@ -40,23 +40,55 @@
 
         protected IContext context;
 
-        [Inject]
-        public EngineCore(IPrinter printer, IUserInputValidator validator, IHighscoreTable highScoreTable, IHighscoreSaver highscoreSaver, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
+
+        protected EngineCore(ICoreBundle dependencyBundle)
+            : this(
+                                     dependencyBundle.Printer,
+                                     dependencyBundle.UserInputValidator,
+                                     dependencyBundle.HighScoreTable,
+                                     dependencyBundle.HighscoreSaver,
+                                     dependencyBundle.CommandFactory,
+                                     dependencyBundle.GameModel,
+                                     dependencyBundle.LogicProvider
+
+                    )
         {
+        }
+
+
+
+
+
+
+
+        protected EngineCore(
+                            IPrinter printer,
+                            IUserInputValidator validator,
+                            IHighscoreTable highScoreTable,
+                            IHighscoreSaver highscoreSaver,
+                            ICommandFactory commandFactory,
+                            IGameModel gameModel,
+                            IGameLogicProvider gameLogicProvider
+                            )
+        {
+            
+            this.context = new Context()
+            {
+                Printer = printer,
+                Game = gameModel,
+                HighscoreTable = highScoreTable,
+                LogicProvider = gameLogicProvider,
+                Memento = new Saver<IGameModel>(),
+                
+            };
+
             this.validator = validator;
             this.commandFactory = commandFactory;
             this.highscoreSaver = highscoreSaver;
             //this.game = gameModel;
             //this.gameLogicProvider = gameLogicProvider;
 
-            this.context = new Context()
-            {
-                Game = gameModel,
-                HighscoreTable = highScoreTable,
-                LogicProvider = gameLogicProvider,
-                Memento = new Saver<IGameModel>(),
-                Printer = printer
-            };
+            
         }
 
 

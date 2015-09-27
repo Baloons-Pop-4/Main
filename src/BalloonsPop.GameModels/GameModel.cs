@@ -5,8 +5,6 @@
     using BalloonsPop.Common.Gadgets;
     using System.Linq;
 
-    // using Ninject;
-
     public class GameModel : IGameModel
     {
         private IBalloon[,] field;
