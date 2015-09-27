@@ -1,10 +1,8 @@
 #Baloons-Pop-4
 
-[![Join the chat at https://gitter.im/Baloons-Pop-4/Main](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Baloons-Pop-4/Main?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 A repository containing our teamwork project for the course "High quality code" 2015 @ TelerikAcademy.
 
-[![Build status](https://ci.appveyor.com/api/projects/status/uw04fu9l78mo525i/branch/master?svg=true)](https://ci.appveyor.com/project/arnaudoff/main/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/uw04fu9l78mo525i/branch/master?svg=true)](https://ci.appveyor.com/project/arnaudoff/main/branch/master) [![Join the chat at https://gitter.im/Baloons-Pop-4/Main](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Baloons-Pop-4/Main?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ##Description
 
