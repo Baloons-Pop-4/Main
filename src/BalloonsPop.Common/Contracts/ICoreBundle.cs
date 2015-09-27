@@ -3,13 +3,17 @@
     public interface ICoreBundle
     {
         IPrinter Printer { get; set; }
+        
         IUserInputValidator UserInputValidator { get; set; }
 
         IHighscoreTable HighScoreTable { get; set; }
+        
         IHighscoreSaver HighscoreSaver { get; set; }
 
         ICommandFactory CommandFactory { get; set; }
+        
         IGameModel GameModel { get; set; }
+        
         IGameLogicProvider LogicProvider { get; set; }
     }
 }

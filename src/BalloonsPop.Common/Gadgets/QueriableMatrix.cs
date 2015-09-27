@@ -9,9 +9,6 @@
     /// <typeparam name="T"></typeparam>
     public class QueriableMatrix<T> : IEnumerable<T>
     {
-        // The actual matrix
-        public T[,] Value { get; set; }
-
         // Wrapping constructor
         public QueriableMatrix(T[,] matrix)
         {
@@ -23,6 +20,9 @@
             : this(new T[rows, cols])
         {
         }
+
+        // The actual matrix
+        public T[,] Value { get; set; }
 
         public T[][] TakeColumns()
         {

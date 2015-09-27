@@ -1,9 +1,8 @@
 ﻿namespace BalloonsPop.Common.Validators
 {
+    using BalloonsPop.Common.Contracts;
     using Ninject;
     using Ninject.Modules;
-
-    using BalloonsPop.Common.Contracts;
 
     public class ValidationModule : NinjectModule
     {

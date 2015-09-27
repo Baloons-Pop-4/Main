@@ -4,10 +4,10 @@
 
     public class UserInputValidator : IUserInputValidator
     {
-        private const char COMMA = ',';
-        private const char DOT = '.';
-        private const int VALID_INPUT_LENGTH = 3;
-        private const int MAX_ROW_INPUT_VALUE = 4;
+        private const char Comma = ',';
+        private const char Dot = '.';
+        private const int ValidInputLength = 3;
+        private const int MaxRowInputValue = 4;
 
         public UserInputValidator()
         {
@@ -15,7 +15,7 @@
 
         public bool IsValidUserMove(string userInput)
         {
-            bool hasCorrectLength = userInput.Length == VALID_INPUT_LENGTH;
+            bool hasCorrectLength = userInput.Length == ValidInputLength;
 
             if (!hasCorrectLength)
             {
@@ -23,7 +23,7 @@
             }
 
             bool firstCharIsDigit = char.IsDigit(userInput[2]);
-            bool secondCharIsValid = char.IsWhiteSpace(userInput[1]) || userInput[1] == DOT || userInput[1] == COMMA;
+            bool secondCharIsValid = char.IsWhiteSpace(userInput[1]) || userInput[1] == Dot || userInput[1] == Comma;
             bool thirdCharIsDigit = char.IsDigit(userInput[2]);
 
             return firstCharIsDigit && secondCharIsValid && thirdCharIsDigit && this.IsValidRowMove(userInput[0]);
@@ -31,7 +31,7 @@
 
         private bool IsValidRowMove(char notParsedRow)
         {
-            bool isValidRow = (notParsedRow - 48) <= MAX_ROW_INPUT_VALUE;
+            bool isValidRow = (notParsedRow - 48) <= MaxRowInputValue;
             return isValidRow;
         }
     }

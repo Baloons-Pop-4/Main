@@ -14,12 +14,13 @@
         }
 
         public T SwitchArgument { get; private set; }
+        
         public bool FallThrough { get; set; }
 
         // case with key comparison, allows traditional switch cases
         public Switch<T> Case(T key, Action function)
         {
-            return this.Case(Object.Equals(this.SwitchArgument, key), function);
+            return this.Case(object.Equals(this.SwitchArgument, key), function);
         }
 
         // case with predicates, adds flexibility to the switch statement
@@ -43,7 +44,7 @@
         // default case, trivial switch command
         public void Default(Action function)
         {
-            Case(x => true, function);
+            this.Case(x => true, function);
         }
     }
 }
