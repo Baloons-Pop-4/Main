@@ -132,7 +132,7 @@
                                    var userRow = int.Parse(userCommand[0].ToString());
                                    var userColumn = int.Parse(userCommand[2].ToString());
 
-                                   if (this.context.Game.Field[userRow, userColumn].isPopped)
+                                   if (this.context.Game.Field[userRow, userColumn].IsPopped)
                                    {
                                        this.context.Message = CANNOT_POP_MISSING_BALLOON;
                                        commandList.Add(this.commandFactory.CreateCommand("message"));

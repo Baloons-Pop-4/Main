@@ -119,7 +119,7 @@ namespace BalloonsPop.GraphicUserInterface
             {
                 for (int col = 0, colsCount = matrix.GetLength(1); col < colsCount; col++)
                 {
-                    var sourceNumber = matrix[row, col].isPopped ? 0 : matrix[row, col].Number;
+                    var sourceNumber = matrix[row, col].IsPopped ? 0 : matrix[row, col].Number;
                     this.SetSource(this.balloonField[row, col], sourceNumber);
                 }
             }

@@ -7,6 +7,6 @@
     {
         public byte Number { get; set; }
 
-        public bool isPopped { get; set; }
+        public bool IsPopped { get; set; }
     }
 }

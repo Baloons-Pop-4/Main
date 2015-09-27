@@ -67,7 +67,7 @@
         {
             var asColumns = new QueriableMatrix<IBalloon>(field)
                                         .TakeColumns()
-                                        .Select(column => column.OrderBy(x => (x.isPopped ? -1 : 0)).ToArray())
+                                        .Select(column => column.OrderBy(x => (x.IsPopped ? -1 : 0)).ToArray())
                                         .ToArray();
 
             for (int i = 0; i < field.GetLength(1); i++)
@@ -104,7 +104,7 @@
 
         public bool GameIsOver(IBalloon[,] matrix)
         {
-            var fieldIsEmpty = new QueriableMatrix<IBalloon>(matrix).All(balloon => balloon.isPopped);
+            var fieldIsEmpty = new QueriableMatrix<IBalloon>(matrix).All(balloon => balloon.IsPopped);
 
             return fieldIsEmpty;
         }
@@ -131,7 +131,7 @@
 
         private void Pop(IBalloon balloon)
         {
-            balloon.isPopped = true;
+            balloon.IsPopped = true;
         }
     }
 }
