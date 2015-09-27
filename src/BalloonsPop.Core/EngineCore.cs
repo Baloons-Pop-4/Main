@@ -70,8 +70,6 @@
             this.highscoreSaver = highscoreSaver;
         }
 
-
-
         protected virtual IList<ICommand> GetCommandList(string userCommand)
         {
             var commandList = new List<ICommand>();
