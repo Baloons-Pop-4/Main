@@ -16,11 +16,13 @@
         private const int FIELD_COLS = 9;
         private const int MIN_BALLOON_VALUE = 1;
         private const int MAX_BALLOON_VALUE = 4;
+        private const string BALLOON_POP_SOUND_NAME = "BalloonPopSound";
 
         private static readonly int[][] PopDirections = new int[][] { new int[] { 0, 1 }, new int[] { 0, -1 }, new int[] { 1, 0 }, new int[] { -1, 0 } };
 
         //private byte[,] field;
-     
+        private SoundsPlayer soundsPlayer = new SoundsPlayer();
+
         private IRandomNumberGenerator rng;
 
         private IMatrixValidator matrixValidator;
@@ -126,12 +128,13 @@
         private IBalloon GetRandomBalloonValue()
         {
             var randomBalloonValue = (byte)this.rng.Next(MIN_BALLOON_VALUE, MAX_BALLOON_VALUE + 1);
-            return new Balloon() { Number = randomBalloonValue};
+            return new Balloon() { Number = randomBalloonValue };
         }
 
         private void Pop(IBalloon balloon)
         {
             balloon.isPopped = true;
+            soundsPlayer.PlaySound(BALLOON_POP_SOUND_NAME);
         }
     }
 }

@@ -22,6 +22,8 @@
         protected const string NOT_IN_TOP_FIVE = "I am sorry you are not skillful enough for TopFive chart!";
         protected const string MOVE_PROMPT = "Enter a row and column: ";
         protected const string ON_EXIT_MESSAGE = "Good Bye!";
+        private const string VICTORY_SOUND_NAME = "VictorySound";
+        private const string WRONG_INPUT_SOUND_NAME = "WrongInputSound";
         #endregion
 
         protected string[,] highScoreChart;
@@ -38,6 +40,7 @@
 
         //private IMemento<IGameModel> memento = new Memento<IGameModel>();
 
+        private SoundsPlayer soundsPlayer = new SoundsPlayer();
         protected IContext context;
 
         [Inject]
@@ -102,6 +105,7 @@
 
                                    if (this.context.Game.Field[userRow, userColumn].isPopped)
                                    {
+                                       soundsPlayer.PlaySound(WRONG_INPUT_SOUND_NAME);
                                        this.context.Message = CANNOT_POP_MISSING_BALLOON;
                                        commandList.Add(this.commandFactory.CreateCommand("message"));
                                    }
@@ -114,6 +118,7 @@
 
                                    if (this.context.LogicProvider.GameIsOver(this.context.Game.Field))
                                    {
+                                       soundsPlayer.PlaySound(VICTORY_SOUND_NAME);
                                        this.context.Message = "Gratz, completed in " + this.context.Game.UserMovesCount + " moves.";
                                        if (this.context.HighscoreTable.CanAddPlayer(this.context.Game.UserMovesCount))
                                        {
