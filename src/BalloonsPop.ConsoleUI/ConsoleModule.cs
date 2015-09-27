@@ -8,20 +8,20 @@
 
     public class ConsoleModule : NinjectModule
     {
-        public IInputReader Reader { get; set; }
-        public IPrinter Prinet { get; set; }
 
-        public IKernel Kernel { get; set; } 
+        public IKernel AppKernel { get; set; } 
 
         public ConsoleModule(IKernel kernel)
         {
-            this.Kernel = kernel;
+            this.AppKernel = kernel;
         }
 
         public override void Load()
         {
-            this.Kernel.Bind<IInputReader>().To<ConsoleUI>();
-            this.Kernel.Bind<IPrinter>().To<ConsoleUI>();
+            var consoleUi = new ConsoleUI();
+
+            this.AppKernel.Bind<IInputReader>().ToMethod(ctx => consoleUi).InSingletonScope();
+            this.AppKernel.Bind<IPrinter>().ToMethod(ctx => consoleUi).InSingletonScope();
         }
     }
 }

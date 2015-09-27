@@ -1,9 +1,7 @@
 ﻿namespace BalloonsPop.ConsoleUI
 {
     using System;
-    using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Validators;
-    using BalloonsPop.Core;
     using BalloonsPop.Core.Commands;
 
     using BalloonsPop.GameModels;
@@ -28,9 +26,10 @@
                                  new ConsoleModule(kernel)
                                  )
                 .LoadAll();            
-            // var engine = new ConsoleEngine(consoleUI, userInputValidator, highscoreTable, highscoreSaver, commandFactory, gameModel, gameLogicProvider);
+
             var bundle = new ConsoleBundle(kernel);
             var engine = new ConsoleEngine(bundle);
+
             engine.Run();
         }
     }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BalloonsPop.Core.Commands
+﻿namespace BalloonsPop.Core.Commands
 {
     using BalloonsPop.Common.Contracts;
 
@@ -13,16 +7,16 @@ namespace BalloonsPop.Core.Commands
 
     public class CommandModule : NinjectModule
     {
-        public IKernel Kernel { get; set; } 
+        public IKernel AppKernel { get; set; } 
 
         public CommandModule(IKernel kernel)
         {
-            this.Kernel = kernel;
+            this.AppKernel = kernel;
         }
 
         public override void Load()
         {
-            this.Kernel.Bind<ICommandFactory>().To<CommandFactory>();
+            this.AppKernel.Bind<ICommandFactory>().To<CommandFactory>();
         }
     }
 }

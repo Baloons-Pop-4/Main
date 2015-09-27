@@ -8,12 +8,14 @@ using System.Windows;
 
 namespace BalloonsPop.GraphicUserInterface
 {
+    using BalloonsPop.Bundling;
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Validators;
     using BalloonsPop.Core;
     using BalloonsPop.Core.Commands;
     using BalloonsPop.GameModels;
-
+    using BalloonsPop.LogicProvider;
+    using BalloonsPop.Highscore;
     using Ninject;
     using Ninject.Modules;
 
@@ -22,7 +24,7 @@ namespace BalloonsPop.GraphicUserInterface
     /// </summary>
     public partial class App : Application
     {
-        private EngineCore engine;
+        private EventEngine engine;
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -30,25 +32,27 @@ namespace BalloonsPop.GraphicUserInterface
 
             var kernel = new StandardKernel();
 
-            kernel.Bind<IEventBasedUserInterface>().To<MainWindow>();
-            kernel.Bind<ICommandFactory>().To<CommandFactory>();
-            kernel.Bind<IMatrixValidator>().To<MatrixValidator>();
-            kernel.Bind<IGameLogicProvider>().To<BalloonsPop.LogicProvider.LogicProvider>();
-            kernel.Bind<IHighscoreTable>().To<HighscoreTable>();
-            kernel.Bind<IGameModel>().To<GameModel>();
+            DependancyBinder.Instance
+                .RegisterModules(
+                                 new ModelsModule(kernel),
+                                 new LogicModule(kernel),
+                                 new ValidationModule(kernel),
+                                 new CommandModule(kernel),
+                                 new HighscoreModule(kernel),
+                                 new WpfModule(kernel)
+                                 )
+                .LoadAll();            
+            var li = new List<string>();
+            var bundle = new WpfBundle(kernel);
+            var engine = new EventEngine(bundle);
+
+
+
+            // this.engine = new EventEngine(graphicUi, new UserInputValidator(), factory, model, logicProvider, table, kernel.Get<IHighscoreSaver>());
             
+            this.engine = engine;
 
-            //var graphicUi = new MainWindow();
-            var graphicUi = kernel.Get<IEventBasedUserInterface>();
-            var factory = kernel.Get<ICommandFactory>();
-            var validator = kernel.Get<IMatrixValidator>();
-            var logicProvider = kernel.Get<IGameLogicProvider>();
-            var model = kernel.Get<IGameModel>();
-            var table = kernel.Get<IHighscoreTable>();
-
-            this.engine = new EventEngine(graphicUi, new UserInputValidator(), factory, model, logicProvider, table, kernel.Get<IHighscoreSaver>());
-
-            graphicUi.Show();
+            bundle.Gui.Show();
         }
     }
 }

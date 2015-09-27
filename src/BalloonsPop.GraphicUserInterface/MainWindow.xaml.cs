@@ -34,6 +34,13 @@ namespace BalloonsPop.GraphicUserInterface
 
         public event EventHandler Raise;
 
+        //private static MainWindow instance = new MainWindow();
+
+        //public static IEventBasedUserInterface GetInstance()
+        //{
+        //    return instance;
+        //}
+
         public MainWindow()
         {
             InitializeComponent();
@@ -54,6 +61,8 @@ namespace BalloonsPop.GraphicUserInterface
         {
             var field = new Image[5, 10];
 
+            
+
             for (int row = 0, rowsCount = 5; row < rowsCount; row++)
             {
                 for (int col = 0, colsCount = 10; col < colsCount; col++)
@@ -72,6 +81,8 @@ namespace BalloonsPop.GraphicUserInterface
                     //this.SetPositionInGrid(this.balloonField[row, col], row, col);
 
                     this.InitializeImageFielCell(row, col, field);
+
+                    
                 }
             }
 
@@ -101,6 +112,9 @@ namespace BalloonsPop.GraphicUserInterface
 
         public void PrintField(IBalloon[,] matrix)
         {
+           
+            // MessageBox.Show("kichka");
+
             for (int row = 0, rowsCount = matrix.GetLength(0); row < rowsCount; row++)
             {
                 for (int col = 0, colsCount = matrix.GetLength(1); col < colsCount; col++)
@@ -170,6 +184,7 @@ namespace BalloonsPop.GraphicUserInterface
         {
             var uri = this.GetBalloonImageUri(this.colors[balloonNumber]);
             img.Source = new BitmapImage(uri);
+            GetBalloonImageUri("white");
         }
 
         private Uri GetBalloonImageUri(string color)
@@ -213,6 +228,11 @@ namespace BalloonsPop.GraphicUserInterface
         {
             block.TextAlignment = TextAlignment.Center;
             block.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown(348944);
         }
     }
 }
