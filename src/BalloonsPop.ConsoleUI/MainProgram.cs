@@ -1,20 +1,22 @@
 ﻿namespace BalloonsPop.ConsoleUI
 {
-    using System;
+    using BalloonsPop.Bundling;
+    using BalloonsPop.Common.Contracts;
+    using BalloonsPop.Common.Gadgets;
     using BalloonsPop.Common.Validators;
     using BalloonsPop.Core.Commands;
-
     using BalloonsPop.GameModels;
-    using BalloonsPop.LogicProvider;
     using BalloonsPop.Highscore;
-    using BalloonsPop.Bundling;
-
+    using BalloonsPop.LogicProvider;
     using Ninject;
 
     public class MainProgram
     {
+        private static readonly ILogger logger = LogHelper.GetLogger();
+
         public static void Main()
         {
+            logger.Info("Start initialization");
             var kernel = new StandardKernel();
 
             DependancyBinder.Instance
@@ -30,6 +32,7 @@
             var bundle = new ConsoleBundle(kernel);
             var engine = new ConsoleEngine(bundle);
 
+            logger.Info("Starting the game");
             engine.Run();
         }
     }
