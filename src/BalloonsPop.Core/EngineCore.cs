@@ -68,10 +68,6 @@
             this.validator = validator;
             this.commandFactory = commandFactory;
             this.highscoreSaver = highscoreSaver;
-            //this.game = gameModel;
-            //this.gameLogicProvider = gameLogicProvider;
-
-
         }
 
 
