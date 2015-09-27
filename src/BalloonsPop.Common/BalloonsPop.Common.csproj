@@ -43,11 +43,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\IBalloon.cs" />
+    <Compile Include="Contracts\IBundler.cs" />
     <Compile Include="Contracts\ICloneableObject.cs" />
     <Compile Include="Contracts\ICloningStrategy.cs" />
     <Compile Include="Contracts\ICommand.cs" />
     <Compile Include="Contracts\ICommandFactory.cs" />
     <Compile Include="Contracts\IContext.cs" />
+    <Compile Include="Contracts\ICoreBundle.cs" />
     <Compile Include="Contracts\IGameLogicProvider.cs" />
     <Compile Include="Contracts\IGameModel.cs" />
     <Compile Include="Contracts\IHighscoreSaver.cs" />

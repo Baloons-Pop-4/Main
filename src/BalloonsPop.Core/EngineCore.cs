@@ -40,8 +40,35 @@
 
         protected IContext context;
 
-        [Inject]
-        public EngineCore(IPrinter printer, IUserInputValidator validator, IHighscoreTable highScoreTable, IHighscoreSaver highscoreSaver, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
+
+        public EngineCore(ICoreBundle dependencyBundle)
+            : this(
+                dependencyBundle.Printer,
+                dependencyBundle.UserInputValidator,
+                dependencyBundle.HighScoreTable,
+                dependencyBundle.HighscoreSaver,
+                dependencyBundle.CommandFactory,
+                dependencyBundle.GameModel,
+                dependencyBundle.LogicProvider
+                    )
+        {
+        }
+
+
+
+
+
+
+
+        public EngineCore(
+                            IPrinter printer,
+                            IUserInputValidator validator,
+                            IHighscoreTable highScoreTable,
+                            IHighscoreSaver highscoreSaver,
+                            ICommandFactory commandFactory,
+                            IGameModel gameModel,
+                            IGameLogicProvider gameLogicProvider
+                            )
         {
             this.validator = validator;
             this.commandFactory = commandFactory;

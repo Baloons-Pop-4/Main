@@ -205,6 +205,7 @@ namespace BalloonsPop.GraphicUserInterface
             textBlock.Text = content;
             this.StyleTextBlock(textBlock);
             border.Child = textBlock;
+
             return border;
         }
 

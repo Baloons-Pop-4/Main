@@ -10,6 +10,13 @@
     {
         private IInputReader reader;
 
+        public ConsoleEngine(IConsoleBundle depenencyBundle)
+            :base(depenencyBundle)
+        {
+            this.reader = depenencyBundle.Reader;
+            this.context.Game.Field = this.context.LogicProvider.GenerateField();
+        }
+
         public ConsoleEngine(IConsoleUserInterface consoleUI, IUserInputValidator validator, IHighscoreTable highscoreTable, IHighscoreSaver highscoreSaver, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
             : base(consoleUI, validator, highscoreTable, highscoreSaver, commandFactory, gameModel, gameLogicProvider)
         {

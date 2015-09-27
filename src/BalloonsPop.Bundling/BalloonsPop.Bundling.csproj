@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B4FF3BEB-43D3-4D4E-963E-50108922D688}</ProjectGuid>
+    <ProjectGuid>{DF25E530-7B05-4280-B08B-0FB4A71186EA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BalloonsPop.Core</RootNamespace>
-    <AssemblyName>BalloonsPop.Core</AssemblyName>
+    <RootNamespace>BalloonsPop.Bundling</RootNamespace>
+    <AssemblyName>BalloonsPop.Bundling</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,7 +33,6 @@
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,25 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\CommandFactory.cs" />
-    <Compile Include="Commands\CommandFactoryModule.cs" />
-    <Compile Include="Commands\ExitCommand.cs" />
-    <Compile Include="Commands\PopBalloonCommand.cs" />
-    <Compile Include="Commands\PrintFieldCommand.cs" />
-    <Compile Include="Commands\PrintHighscoreCommand.cs" />
-    <Compile Include="Commands\PrintMessageCommand.cs" />
-    <Compile Include="Commands\RestartCommand.cs" />
-    <Compile Include="Commands\SaveCommand.cs" />
-    <Compile Include="Commands\UndoCommand.cs" />
-    <Compile Include="Contexts\Context.cs" />
-    <Compile Include="EngineCore.cs" />
-    <Compile Include="HighscoreTable.cs" />
-    <Compile Include="Memento\CloningStrategies\CustomCloning.cs" />
-    <Compile Include="Memento\CloningStrategies\DotNetCloning.cs" />
-    <Compile Include="Memento\CloningStrategies\ReflectionCloning.cs" />
-    <Compile Include="Memento\CloningStrategies\SerializationCloning.cs" />
-    <Compile Include="Memento\Memory.cs" />
-    <Compile Include="Memento\Saver.cs" />
+    <Compile Include="CoreBundle.cs" />
+    <Compile Include="DependancyBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -69,16 +51,12 @@
       <Project>{8c8b1419-0948-4d28-b57a-8d4f68d3bc0c}</Project>
       <Name>BalloonsPop.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BalloonsPop.Highscore\BalloonsPop.Highscore.csproj">
-      <Project>{8e28d39b-5915-48d9-8419-a7b0cb995e81}</Project>
-      <Name>BalloonsPop.Highscore</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

@@ -45,8 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleBundle.cs" />
+    <Compile Include="ConsoleModule.cs" />
     <Compile Include="ConsoleUI.cs" />
     <Compile Include="ConsoleEngine.cs" />
+    <Compile Include="Contracts\IConsoleBundle.cs" />
     <Compile Include="Contracts\IConsoleEngine.cs" />
     <Compile Include="Contracts\IConsoleUserInterface.cs" />
     <Compile Include="Contracts\IInputReader.cs" />
@@ -58,6 +61,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BalloonsPop.Bundling\BalloonsPop.Bundling.csproj">
+      <Project>{df25e530-7b05-4280-b08b-0fb4a71186ea}</Project>
+      <Name>BalloonsPop.Bundling</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BalloonsPop.Common\BalloonsPop.Common.csproj">
       <Project>{8c8b1419-0948-4d28-b57a-8d4f68d3bc0c}</Project>
       <Name>BalloonsPop.Common</Name>
