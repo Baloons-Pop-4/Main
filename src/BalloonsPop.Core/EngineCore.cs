@@ -24,6 +24,7 @@
         protected const string ON_EXIT_MESSAGE = "Good Bye!";
         private const string VICTORY_SOUND_NAME = "VictorySound";
         private const string WRONG_INPUT_SOUND_NAME = "WrongInputSound";
+        private const string BALLOON_POP_SOUND_NAME = "BalloonPopSound";
         #endregion
 
         protected string[,] highScoreChart;
@@ -113,6 +114,7 @@
                                    {
                                        this.context.UserRow = userRow;
                                        this.context.UserCol = userColumn;
+                                       soundsPlayer.PlaySound(BALLOON_POP_SOUND_NAME);
                                        commandList.Add(this.commandFactory.CreateCommand("pop"));
                                    }
 
