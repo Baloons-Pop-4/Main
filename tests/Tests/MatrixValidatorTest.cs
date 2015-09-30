@@ -1,9 +1,8 @@
 ﻿namespace Tests
 {
     using System;
-    using BalloonsPop.Common.Validators;
-    using BalloonsPop.Core;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using BalloonsPop.Validation;
 
     [TestClass]
     public class MatrixValidatorTests

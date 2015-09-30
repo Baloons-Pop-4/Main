@@ -1,18 +1,14 @@
 ﻿namespace Tests
 {
     using System;
-    using BalloonsPop.Common.Validators;
-    using BalloonsPop.Core;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using BalloonsPop.Core.Memento;
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
     using System.Linq;
-    using Tests.MockClasses;
-    using System.Runtime.Serialization;
-
     using BalloonsPop.LogicProvider;
     using BalloonsPop.GameModels;
+    using BalloonsPop.Validation;
 
     [TestClass]
     public class MementoTests
@@ -37,7 +33,7 @@
             var stateFromMemento = this.memento.GetState();
 
             var areEqual = new QueriableMatrix<IBalloon>(game.Field)
-                                .Join(new QueriableMatrix<IBalloon>(stateFromMemento.Field), x => x, y => y, (x, y) => (x.isPopped == y.isPopped) && (x.Number == y.Number))
+                                .Join(new QueriableMatrix<IBalloon>(stateFromMemento.Field), x => x, y => y, (x, y) => (x.IsPopped == y.IsPopped) && (x.Number == y.Number))
                                 .All(x => x);
 
             Assert.IsTrue(areEqual);
@@ -55,7 +51,7 @@
             var stateFromMemento = this.memento.GetState();
 
             var areEqual = new QueriableMatrix<IBalloon>(memento2.GetState().Field)
-                                .Join(new QueriableMatrix<IBalloon>(stateFromMemento.Field), x => x, y => y, (x, y) => (x.isPopped == y.isPopped) && (x.Number == y.Number))
+                                .Join(new QueriableMatrix<IBalloon>(stateFromMemento.Field), x => x, y => y, (x, y) => (x.IsPopped == y.IsPopped) && (x.Number == y.Number))
                                 .All(x => x);
 
             Assert.IsTrue(areEqual);
@@ -70,7 +66,7 @@
 
             var stateFromMemento = this.memento.GetState();
 
-            game.Field[0, 0].isPopped = true;
+            game.Field[0, 0].IsPopped = true;
 
             Assert.IsFalse(ReferenceEquals(game.Field, stateFromMemento.Field));
 
@@ -80,7 +76,7 @@
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    if(game.Field[i,j].isPopped != stateFromMemento.Field[i, j].isPopped)
+                    if(game.Field[i,j].IsPopped != stateFromMemento.Field[i, j].IsPopped)
                     {
                         areEqual = false;
                     }

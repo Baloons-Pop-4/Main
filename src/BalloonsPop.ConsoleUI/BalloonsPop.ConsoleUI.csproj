@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
@@ -45,8 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleBundle.cs" />
+    <Compile Include="ConsoleModule.cs" />
     <Compile Include="ConsoleUI.cs" />
     <Compile Include="ConsoleEngine.cs" />
+    <Compile Include="Contracts\IConsoleBundle.cs" />
     <Compile Include="Contracts\IConsoleEngine.cs" />
     <Compile Include="Contracts\IConsoleUserInterface.cs" />
     <Compile Include="Contracts\IInputReader.cs" />
@@ -58,6 +64,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BalloonsPop.Bundling\BalloonsPop.Bundling.csproj">
+      <Project>{df25e530-7b05-4280-b08b-0fb4a71186ea}</Project>
+      <Name>BalloonsPop.Bundling</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BalloonsPop.Common\BalloonsPop.Common.csproj">
       <Project>{8c8b1419-0948-4d28-b57a-8d4f68d3bc0c}</Project>
       <Name>BalloonsPop.Common</Name>
@@ -77,6 +87,10 @@
     <ProjectReference Include="..\BalloonsPop.LogicProvider\BalloonsPop.LogicProvider.csproj">
       <Project>{e735039b-49cc-4cc2-a57a-49c1ef91290a}</Project>
       <Name>BalloonsPop.LogicProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BalloonsPop.Validation\BalloonsPop.Validation.csproj">
+      <Project>{8d75c4c3-63e8-4b33-aac5-9b9b2eda4ee9}</Project>
+      <Name>BalloonsPop.Validation</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

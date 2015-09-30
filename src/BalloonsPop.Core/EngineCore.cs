@@ -1,13 +1,12 @@
 ﻿namespace BalloonsPop.Core
 {
     using System;
+
     using BalloonsPop.Common.Gadgets;
     using BalloonsPop.Common.Contracts;
     using System.Collections.Generic;
     using BalloonsPop.Core.Memento;
     using BalloonsPop.Core.Contexts;
-
-    using Ninject;
     using BalloonsPop.Highscore;
 
     public class EngineCore
@@ -35,35 +34,46 @@
 
         protected IHighscoreSaver highscoreSaver;
 
-        //private IGameModel game;
-
-        //private IGameLogicProvider gameLogicProvider;
-
-        //private IMemento<IGameModel> memento = new Memento<IGameModel>();
-
         private SoundsPlayer soundsPlayer = new SoundsPlayer();
+
         protected IContext context;
 
-        [Inject]
-        public EngineCore(IPrinter printer, IUserInputValidator validator, IHighscoreTable highScoreTable, IHighscoreSaver highscoreSaver, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
+        protected EngineCore(ICoreBundle dependencyBundle)
+            : this(
+                   dependencyBundle.Printer,
+                   dependencyBundle.UserInputValidator,
+                   dependencyBundle.HighScoreTable,
+                   dependencyBundle.HighscoreSaver,
+                   dependencyBundle.CommandFactory,
+                   dependencyBundle.GameModel,
+                   dependencyBundle.LogicProvider)
         {
-            this.validator = validator;
-            this.commandFactory = commandFactory;
-            this.highscoreSaver = highscoreSaver;
-            //this.game = gameModel;
-            //this.gameLogicProvider = gameLogicProvider;
+        }
+
+        protected EngineCore(
+                            IPrinter printer,
+                            IUserInputValidator validator,
+                            IHighscoreTable highScoreTable,
+                            IHighscoreSaver highscoreSaver,
+                            ICommandFactory commandFactory,
+                            IGameModel gameModel,
+                            IGameLogicProvider gameLogicProvider)
+        {
 
             this.context = new Context()
             {
+                Printer = printer,
                 Game = gameModel,
                 HighscoreTable = highScoreTable,
                 LogicProvider = gameLogicProvider,
                 Memento = new Saver<IGameModel>(),
-                Printer = printer
+
             };
+
+            this.validator = validator;
+            this.commandFactory = commandFactory;
+            this.highscoreSaver = highscoreSaver;
         }
-
-
 
         protected virtual IList<ICommand> GetCommandList(string userCommand)
         {
@@ -104,7 +114,7 @@
                                    var userRow = int.Parse(userCommand[0].ToString());
                                    var userColumn = int.Parse(userCommand[2].ToString());
 
-                                   if (this.context.Game.Field[userRow, userColumn].isPopped)
+                                   if (this.context.Game.Field[userRow, userColumn].IsPopped)
                                    {
                                        soundsPlayer.PlaySound(WRONG_INPUT_SOUND_NAME);
                                        this.context.Message = CANNOT_POP_MISSING_BALLOON;
@@ -140,71 +150,6 @@
                                        commandList.Add(this.commandFactory.CreateCommand("field"));
                                    }
                                });
-
-            //switch (userCommand)
-            //{
-            //    case RESTART:
-
-            //        commandList.Add(this.commandFactory.CreateCommand("save"));
-            //        commandList.Add(this.commandFactory.CreateCommand("restart"));
-            //        commandList.Add(this.commandFactory.CreateCommand("field"));
-            //        break;
-
-            //    case TOP:
-            //        commandList.Add(this.commandFactory.CreateCommand("highscore"));
-            //        break;
-
-            //    case EXIT:
-            //        this.context.Message = ON_EXIT_MESSAGE;
-            //        commandList.Add(this.commandFactory.CreateCommand("message"));
-            //        commandList.Add(this.commandFactory.CreateCommand("exit"));
-
-            //        break;
-
-            //    case "UNDO":
-
-            //        commandList.Add(this.commandFactory.CreateCommand("undo"));
-            //        commandList.Add(this.commandFactory.CreateCommand("field"));
-            //        break;
-
-            //    default:
-            //        commandList.Add(this.commandFactory.CreateCommand("save"));
-
-            //        if (!this.validator.IsValidUserMove(userCommand))
-            //        {
-            //            this.context.Message = WRONG_INPUT;
-            //            commandList.Add(this.commandFactory.CreateCommand("message"));
-            //            break;
-            //        }
-
-            //        var userRow = int.Parse(userCommand[0].ToString());
-            //        var userColumn = int.Parse(userCommand[2].ToString());
-
-            //        if (this.context.Game.Field[userRow, userColumn] == 0)
-            //        {
-            //            this.context.Message = CANNOT_POP_MISSING_BALLOON;
-            //            commandList.Add(this.commandFactory.CreateCommand("message"));
-            //        }
-            //        else
-            //        {
-            //            this.context.UserRow = userRow;
-            //            this.context.UserCol = userColumn;
-            //            commandList.Add(this.commandFactory.CreateCommand("pop"));
-            //        }
-
-            //        if (this.context.LogicProvider.GameIsOver(this.context.Game.Field))
-            //        {
-            //            this.context.Message = "Gratz, completed in " + this.context.Game.UserMovesCount + " moves";
-            //            commandList.Add(this.commandFactory.CreateCommand("message"));
-            //            commandList.Add(this.commandFactory.CreateCommand("restart"));
-            //        }
-            //        else
-            //        {
-            //            commandList.Add(this.commandFactory.CreateCommand("field"));
-            //        }
-
-            //        break;
-            //}
 
             return commandList;
         }

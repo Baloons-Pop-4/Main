@@ -1,38 +1,57 @@
 ﻿namespace BalloonsPop.Validation
 {
     using BalloonsPop.Common.Contracts;
+    using System.Text.RegularExpressions;
 
+    /// <summary>
+    /// Concrete implementation of the IUserInputValidator interface, using regular expression.
+    /// </summary>
     public class UserInputValidator : IUserInputValidator
     {
-        private const char COMMA = ',';
-        private const char DOT = '.';
-        private const int VALID_INPUT_LENGTH = 3;
-        private const int MAX_ROW_INPUT_VALUE = 4;
+        private const string ValidationPattern = "[0-4][^(a-z|0-9)][0-9]";
+        private static readonly Regex validationRegex = new Regex(ValidationPattern, RegexOptions.IgnoreCase);
 
-        public UserInputValidator()
+        private const int ValidInputLength = 3;
+        private const int MaxRowInputValue = 4;
+
+        /// <summary>
+        /// Returns true when the provided string is a valid player move.
+        /// </summary>
+        /// <param name="playerMove">The player move as string.</param>
+        /// <returns></returns>
+        public bool IsValidUserMove(string playerMove)
         {
+            return HasCorrectLength(playerMove) && IsValidCommand(playerMove) && IsValidRowMove(playerMove[0]);
         }
 
-        public bool IsValidUserMove(string userInput)
+        /// <summary>
+        /// Returns true if the player move has the appropriate length.
+        /// </summary>
+        /// <param name="playerMove">The player move as string.</param>
+        /// <returns></returns>
+        private static bool HasCorrectLength(string playerMove)
         {
-            bool hasCorrectLength = userInput.Length == VALID_INPUT_LENGTH;
-
-            if (!hasCorrectLength)
-            {
-                return false;
-            }
-
-            bool firstCharIsDigit = char.IsDigit(userInput[2]);
-            bool secondCharIsValid = char.IsWhiteSpace(userInput[1]) || userInput[1] == DOT || userInput[1] == COMMA;
-            bool thirdCharIsDigit = char.IsDigit(userInput[2]);
-
-            return firstCharIsDigit && secondCharIsValid && thirdCharIsDigit && this.IsValidRowMove(userInput[0]);
+            return playerMove.Length == ValidInputLength;
         }
 
-        private bool IsValidRowMove(char notParsedRow)
+        /// <summary>
+        /// Returns true if the player move matches the specified pattern.
+        /// </summary>
+        /// <param name="playerMove">The player move as string.</param>
+        /// <returns></returns>
+        private static bool IsValidCommand(string playerMove)
         {
-            bool isValidRow = (notParsedRow - 48) <= MAX_ROW_INPUT_VALUE;
-            return isValidRow;
+            return validationRegex.Match(playerMove).Length > 0;
+        }
+
+        /// <summary>
+        /// Returns true if the row coordinate of the player move falls within the allowed range.
+        /// </summary>
+        /// <param name="playerMove">The player move as string.</param>
+        /// <returns></returns>
+        private static bool IsValidRowMove(char playerMove)
+        {
+            return (playerMove - 48) <= MaxRowInputValue;
         }
     }
 }

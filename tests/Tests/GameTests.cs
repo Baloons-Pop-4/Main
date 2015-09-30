@@ -1,7 +1,7 @@
 ﻿namespace Tests
 {
     using System;
-    using BalloonsPop.Common.Validators;
+    using BalloonsPop.Validation;
     using BalloonsPop.Core;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using BalloonsPop.Common.Contracts;

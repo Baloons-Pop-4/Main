@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BalloonsPop.Common.Validators
+﻿namespace BalloonsPop.Validation
 {
+    using BalloonsPop.Common.Contracts;
+
     using Ninject;
     using Ninject.Modules;
 
-    using BalloonsPop.Common.Contracts;
-
+    /// <summary>
+    /// Custom module that binds the validators to the interface types.
+    /// </summary>
     public class ValidationModule : NinjectModule
     {
         private static IKernel kernel;
@@ -20,6 +17,9 @@ namespace BalloonsPop.Common.Validators
             kernel = bindingKernel;
         }
 
+        /// <summary>
+        /// Binds the validators to the respective interfaces.
+        /// </summary>
         public override void Load()
         {
             kernel.Bind<IMatrixValidator>().To<MatrixValidator>();

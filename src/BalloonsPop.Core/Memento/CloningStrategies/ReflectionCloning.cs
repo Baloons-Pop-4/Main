@@ -3,6 +3,8 @@
     using System;
     using System.Reflection;
 
+    using BalloonsPop.Common.Contracts;
+
     /// <summary>
     /// Provides object cloning via System.Reflection. The cloned type has to provide a parameterless constructor and setters for all properties.
     /// </summary>

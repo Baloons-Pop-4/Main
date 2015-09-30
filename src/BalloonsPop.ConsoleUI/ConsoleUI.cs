@@ -101,7 +101,7 @@
 
         private void PrintBalloon(IBalloon balloon)
         {
-            if (balloon.isPopped)
+            if (balloon.IsPopped)
             {
                 Console.Write(EMPTY_CELL);
             }

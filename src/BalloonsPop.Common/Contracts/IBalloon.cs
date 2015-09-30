@@ -3,6 +3,7 @@
     public interface IBalloon
     {
         byte Number { get; set; }
-        bool isPopped { get; set; }
+        
+        bool IsPopped { get; set; }
     }
 }
