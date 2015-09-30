@@ -5,6 +5,9 @@
     using Ninject;
     using Ninject.Modules;
 
+    /// <summary>
+    /// Custom module that binds the validators to the interface types.
+    /// </summary>
     public class ValidationModule : NinjectModule
     {
         private static IKernel kernel;
@@ -14,6 +17,9 @@
             kernel = bindingKernel;
         }
 
+        /// <summary>
+        /// Binds the validators to the respective interfaces.
+        /// </summary>
         public override void Load()
         {
             kernel.Bind<IMatrixValidator>().To<MatrixValidator>();
