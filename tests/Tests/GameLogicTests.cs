@@ -1,16 +1,13 @@
 ﻿namespace Tests
 {
     using System;
-    using BalloonsPop.Common.Validators;
-    using BalloonsPop.Core;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using BalloonsPop.Common.Contracts;
     using System.Linq;
     using BalloonsPop.Common.Gadgets;
-    using BalloonsPop.Core.Memento;
-
     using BalloonsPop.LogicProvider;
     using BalloonsPop.GameModels;
+    using BalloonsPop.Validation;
 
     [TestClass]
     public class GameLogicTests

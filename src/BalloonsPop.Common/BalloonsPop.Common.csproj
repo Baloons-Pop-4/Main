@@ -72,9 +72,6 @@
     <Compile Include="Gadgets\LogHelper.cs" />
     <Compile Include="Gadgets\QueriableMatrix.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Validators\MatrixValidator.cs" />
-    <Compile Include="Validators\UserInputValidator.cs" />
-    <Compile Include="Validators\ValidationModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

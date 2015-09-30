@@ -10,7 +10,7 @@ namespace BalloonsPop.GraphicUserInterface
 {
     using BalloonsPop.Bundling;
     using BalloonsPop.Common.Contracts;
-    using BalloonsPop.Common.Validators;
+    using BalloonsPop.Validation;
     using BalloonsPop.Core;
     using BalloonsPop.Core.Commands;
     using BalloonsPop.GameModels;

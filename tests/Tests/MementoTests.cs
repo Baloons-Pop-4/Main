@@ -1,18 +1,14 @@
 ﻿namespace Tests
 {
     using System;
-    using BalloonsPop.Common.Validators;
-    using BalloonsPop.Core;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using BalloonsPop.Core.Memento;
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
     using System.Linq;
-    using Tests.MockClasses;
-    using System.Runtime.Serialization;
-
     using BalloonsPop.LogicProvider;
     using BalloonsPop.GameModels;
+    using BalloonsPop.Validation;
 
     [TestClass]
     public class MementoTests
