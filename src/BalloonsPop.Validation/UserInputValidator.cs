@@ -1,13 +1,15 @@
 ﻿namespace BalloonsPop.Validation
 {
     using BalloonsPop.Common.Contracts;
+    using System.Text.RegularExpressions;
 
     public class UserInputValidator : IUserInputValidator
     {
-        private const char COMMA = ',';
-        private const char DOT = '.';
-        private const int VALID_INPUT_LENGTH = 3;
-        private const int MAX_ROW_INPUT_VALUE = 4;
+        private const string ValidationPattern = "[0-4][^(a-z|0-9)][0-9]";
+        private static readonly Regex validationRegex = new Regex(ValidationPattern, RegexOptions.IgnoreCase);
+
+        private const int ValidInputLength = 3;
+        private const int MaxRowInputValue = 4;
 
         public UserInputValidator()
         {
@@ -15,24 +17,22 @@
 
         public bool IsValidUserMove(string userInput)
         {
-            bool hasCorrectLength = userInput.Length == VALID_INPUT_LENGTH;
-
-            if (!hasCorrectLength)
-            {
-                return false;
-            }
-
-            bool firstCharIsDigit = char.IsDigit(userInput[2]);
-            bool secondCharIsValid = char.IsWhiteSpace(userInput[1]) || userInput[1] == DOT || userInput[1] == COMMA;
-            bool thirdCharIsDigit = char.IsDigit(userInput[2]);
-
-            return firstCharIsDigit && secondCharIsValid && thirdCharIsDigit && this.IsValidRowMove(userInput[0]);
+            return HasCorrectLength(userInput) && IsValidCommand(userInput) && IsValidRowMove(userInput[0]);
         }
 
-        private bool IsValidRowMove(char notParsedRow)
+        private static bool HasCorrectLength(string input)
         {
-            bool isValidRow = (notParsedRow - 48) <= MAX_ROW_INPUT_VALUE;
-            return isValidRow;
+            return input.Length == ValidInputLength;
+        }
+
+        private static bool IsValidCommand(string command)
+        {
+            return validationRegex.Match(command).Length > 0;
+        }
+
+        private static bool IsValidRowMove(char notParsedRow)
+        {
+            return (notParsedRow - 48) <= MaxRowInputValue;
         }
     }
 }

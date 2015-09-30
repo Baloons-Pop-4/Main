@@ -88,6 +88,10 @@
       <Project>{e735039b-49cc-4cc2-a57a-49c1ef91290a}</Project>
       <Name>BalloonsPop.LogicProvider</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BalloonsPop.Validation\BalloonsPop.Validation.csproj">
+      <Project>{8d75c4c3-63e8-4b33-aac5-9b9b2eda4ee9}</Project>
+      <Name>BalloonsPop.Validation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

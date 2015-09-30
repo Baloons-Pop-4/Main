@@ -3,7 +3,7 @@
     using BalloonsPop.Bundling;
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
-    using BalloonsPop.Common.Validators;
+    using BalloonsPop.Validation;
     using BalloonsPop.Core.Commands;
     using BalloonsPop.GameModels;
     using BalloonsPop.Highscore;

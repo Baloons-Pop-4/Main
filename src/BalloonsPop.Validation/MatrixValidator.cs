@@ -10,10 +10,15 @@
 
         public bool IsInsideMatrix<T>(T[,] matrix, int row, int col)
         {
-            var rowIsInRange = 0 <= row && row < matrix.GetLength(0);
-            var colIsInRange = 0 <= col && col < matrix.GetLength(1);
+            var rowIsInRange = IsInRange(0, matrix.GetLength(0), row);
+            var colIsInRange = IsInRange(0, matrix.GetLength(1), col);
 
             return rowIsInRange && colIsInRange;
+        }
+
+        private static bool IsInRange(int start, int end, int value)
+        {
+            return start <= value && value < end;
         }
     }
 }
