@@ -71,6 +71,7 @@
     <Compile Include="Gadgets\Log4NetWrapper.cs" />
     <Compile Include="Gadgets\LogHelper.cs" />
     <Compile Include="Gadgets\QueriableMatrix.cs" />
+    <Compile Include="Gadgets\SoundsPlayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

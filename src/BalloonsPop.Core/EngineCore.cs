@@ -21,6 +21,9 @@
         protected const string NOT_IN_TOP_FIVE = "I am sorry you are not skillful enough for TopFive chart!";
         protected const string MOVE_PROMPT = "Enter a row and column: ";
         protected const string ON_EXIT_MESSAGE = "Good Bye!";
+        private const string VICTORY_SOUND_NAME = "VictorySound";
+        private const string WRONG_INPUT_SOUND_NAME = "WrongInputSound";
+        private const string BALLOON_POP_SOUND_NAME = "BalloonPopSound";
         #endregion
 
         protected string[,] highScoreChart;
@@ -30,6 +33,8 @@
         protected ICommandFactory commandFactory;
 
         protected IHighscoreSaver highscoreSaver;
+
+        private SoundsPlayer soundsPlayer = new SoundsPlayer();
 
         protected IContext context;
 
@@ -111,6 +116,7 @@
 
                                    if (this.context.Game.Field[userRow, userColumn].IsPopped)
                                    {
+                                       soundsPlayer.PlaySound(WRONG_INPUT_SOUND_NAME);
                                        this.context.Message = CANNOT_POP_MISSING_BALLOON;
                                        commandList.Add(this.commandFactory.CreateCommand("message"));
                                    }
@@ -118,11 +124,13 @@
                                    {
                                        this.context.UserRow = userRow;
                                        this.context.UserCol = userColumn;
+                                       soundsPlayer.PlaySound(BALLOON_POP_SOUND_NAME);
                                        commandList.Add(this.commandFactory.CreateCommand("pop"));
                                    }
 
                                    if (this.context.LogicProvider.GameIsOver(this.context.Game.Field))
                                    {
+                                       soundsPlayer.PlaySound(VICTORY_SOUND_NAME);
                                        this.context.Message = "Gratz, completed in " + this.context.Game.UserMovesCount + " moves.";
                                        if (this.context.HighscoreTable.CanAddPlayer(this.context.Game.UserMovesCount))
                                        {

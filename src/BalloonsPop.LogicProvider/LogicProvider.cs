@@ -24,6 +24,7 @@
      
         private readonly IRandomNumberGenerator rng;
 
+
         private readonly IMatrixValidator matrixValidator;
 
         public LogicProvider(IMatrixValidator matrixValidator, IRandomNumberGenerator rng)
