@@ -4,7 +4,7 @@
 
     public class ClickEventArgs : EventArgs
     {
-        private string commandToPass;
+        private readonly string commandToPass;
 
         public ClickEventArgs(string commandToPass)
         {

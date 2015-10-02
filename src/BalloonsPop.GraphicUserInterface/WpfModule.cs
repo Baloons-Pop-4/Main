@@ -4,6 +4,7 @@
     using Ninject.Modules;
 
     using BalloonsPop.Common.Contracts;
+    using BalloonsPop.GraphicUserInterface.Contracts;
 
     public class WpfModule : NinjectModule
     {

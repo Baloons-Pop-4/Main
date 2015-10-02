@@ -1,4 +1,4 @@
-﻿namespace BalloonsPop.GraphicUserInterface
+﻿namespace BalloonsPop.GraphicUserInterface.Contracts
 {
     using System;
 

@@ -1,23 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace BalloonsPop.GraphicUserInterface
 {
     using BalloonsPop.Bundling;
-    using BalloonsPop.Common.Contracts;
     using BalloonsPop.Validation;
-    using BalloonsPop.Core;
     using BalloonsPop.Core.Commands;
     using BalloonsPop.GameModels;
     using BalloonsPop.LogicProvider;
     using BalloonsPop.Highscore;
     using Ninject;
-    using Ninject.Modules;
 
     /// <summary>
     /// Interaction logic for App.xaml
@@ -42,7 +36,7 @@ namespace BalloonsPop.GraphicUserInterface
                                  new WpfModule(kernel)
                                  )
                 .LoadAll();            
-            var li = new List<string>();
+
             var bundle = new WpfBundle(kernel);
             var engine = new EventEngine(bundle);
 

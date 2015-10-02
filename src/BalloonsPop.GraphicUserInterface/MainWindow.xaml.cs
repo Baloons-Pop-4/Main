@@ -8,6 +8,7 @@
     using System.Windows.Media.Imaging;
 
     using BalloonsPop.Common.Contracts;
+    using BalloonsPop.GraphicUserInterface.Contracts;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
