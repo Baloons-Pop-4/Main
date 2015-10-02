@@ -50,6 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CloningStrategiesTests\ReflectionCloningTests.cs" />
     <Compile Include="CloningStrategiesTests\SerializationStrategyTests.cs" />
     <Compile Include="CloningStrategiesTests\DotNetCloningTests.cs" />
     <Compile Include="CommandTests.cs" />
