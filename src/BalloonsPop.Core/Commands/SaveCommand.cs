@@ -1,6 +1,7 @@
-﻿using BalloonsPop.Common.Contracts;
-namespace BalloonsPop.Core.Commands
+﻿namespace BalloonsPop.Core.Commands
 {
+    using BalloonsPop.Common.Contracts;
+
     public class SaveCommand : ICommand
     {
         public SaveCommand()

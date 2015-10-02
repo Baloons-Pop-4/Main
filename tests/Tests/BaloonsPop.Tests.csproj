@@ -50,7 +50,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CloningStrategiesTests\ReflectionCloningTests.cs" />
+    <Compile Include="CloningStrategiesTests\SerializationStrategyTests.cs" />
+    <Compile Include="CloningStrategiesTests\DotNetCloningTests.cs" />
     <Compile Include="CommandTests.cs" />
+    <Compile Include="Gadget tests\FluentSwitchTest.cs" />
     <Compile Include="Gadget tests\QueriableMatrixTests.cs" />
     <Compile Include="GameLogicTests.cs" />
     <Compile Include="GameTests.cs" />

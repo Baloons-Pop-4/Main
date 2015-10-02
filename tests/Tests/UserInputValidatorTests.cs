@@ -1,8 +1,8 @@
 ﻿namespace Tests
 {
     using System;
-    using BalloonsPop.Common.Validators;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using BalloonsPop.Validation;
 
     [TestClass]
     public class UserInputValidatorTests
@@ -34,7 +34,7 @@
         [TestMethod]
         public void TestIfIsValidUserMoveReturnsFalseForMovesWithInvalidContent()
         {
-            var movesWithInvalidContent = new string[] { "101", ".1.", "999", "aaa", "---", "1-1"};
+            var movesWithInvalidContent = new string[] { "101", ".1.", "999", "aaa", "---", "1o1"};
 
             foreach (var move in movesWithInvalidContent)
             {

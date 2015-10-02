@@ -3,6 +3,7 @@
     public interface IValidationFactory
     {
         IMatrixValidator CreateMatrixValidator();
+       
         IUserInputValidator CreateUserInputValidator();
     }
 }

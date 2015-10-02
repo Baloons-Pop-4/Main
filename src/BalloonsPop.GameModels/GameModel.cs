@@ -5,8 +5,6 @@
     using BalloonsPop.Common.Gadgets;
     using System.Linq;
 
-    // using Ninject;
-
     public class GameModel : IGameModel
     {
         private IBalloon[,] field;
@@ -54,7 +52,7 @@
         public IGameModel Clone()
         {
             var clonedField = new QueriableMatrix<IBalloon>(this.field)
-                                        .Select(balloon => new Balloon() { Number = balloon.Number, isPopped = balloon.isPopped })
+                                        .Select(balloon => new Balloon() { Number = balloon.Number, IsPopped = balloon.IsPopped })
                                         .ToMatrix(this.field.GetLength(0), this.field.GetLength(1));
 
             return new GameModel() { field = clonedField };

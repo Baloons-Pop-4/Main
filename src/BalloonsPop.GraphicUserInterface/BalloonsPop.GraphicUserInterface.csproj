@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
@@ -56,6 +59,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="WpfBundle.cs" />
+    <Compile Include="WpfModule.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -109,6 +114,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BalloonsPop.Bundling\BalloonsPop.Bundling.csproj">
+      <Project>{df25e530-7b05-4280-b08b-0fb4a71186ea}</Project>
+      <Name>BalloonsPop.Bundling</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BalloonsPop.Common\BalloonsPop.Common.csproj">
       <Project>{8c8b1419-0948-4d28-b57a-8d4f68d3bc0c}</Project>
       <Name>BalloonsPop.Common</Name>
@@ -121,9 +130,17 @@
       <Project>{95de20c4-4653-44d9-91c3-8944b4753faa}</Project>
       <Name>BalloonsPop.GameModels</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BalloonsPop.Highscore\BalloonsPop.Highscore.csproj">
+      <Project>{8e28d39b-5915-48d9-8419-a7b0cb995e81}</Project>
+      <Name>BalloonsPop.Highscore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BalloonsPop.LogicProvider\BalloonsPop.LogicProvider.csproj">
       <Project>{e735039b-49cc-4cc2-a57a-49c1ef91290a}</Project>
       <Name>BalloonsPop.LogicProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BalloonsPop.Validation\BalloonsPop.Validation.csproj">
+      <Project>{8d75c4c3-63e8-4b33-aac5-9b9b2eda4ee9}</Project>
+      <Name>BalloonsPop.Validation</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

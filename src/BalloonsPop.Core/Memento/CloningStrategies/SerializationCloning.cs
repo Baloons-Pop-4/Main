@@ -2,8 +2,9 @@
 {
     using System;
     using System.IO;
-    using System.Linq;
     using System.Runtime.Serialization.Formatters.Binary;
+
+    using BalloonsPop.Common.Contracts;
 
     /// <summary>
     /// Provides object cloning via System.Runtime.Serialization. The type of the object needs to be marked as serializable with the respective attribute.

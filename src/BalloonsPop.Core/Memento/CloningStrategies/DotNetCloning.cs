@@ -2,6 +2,8 @@
 {
     using System;
 
+    using BalloonsPop.Common.Contracts;
+
     /// <summary>
     /// Provides cloning via .NET's ICloneable interface.
     /// </summary>
