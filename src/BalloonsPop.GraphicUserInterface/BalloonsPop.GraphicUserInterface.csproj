@@ -72,7 +72,6 @@
     <Compile Include="ClickEventArgs.cs" />
     <Compile Include="EventEngine.cs" />
     <Compile Include="IEventBasedUserInterface.cs" />
-    <Compile Include="IEventEngine.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -149,6 +148,9 @@
     <Resource Include="Images\red.png" />
     <Resource Include="Images\white.png" />
     <Resource Include="Images\yellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Contracts\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

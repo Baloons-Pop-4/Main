@@ -4,7 +4,7 @@
 
     using BalloonsPop.Core;
 
-    public class EventEngine : EngineCore, IEventEngine
+    public class EventEngine : EngineCore
     {
         public EventEngine(WpfBundle dependencyBundle)
             :base(dependencyBundle)
