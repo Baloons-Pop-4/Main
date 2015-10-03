@@ -9,8 +9,6 @@
     [TestClass]
     public class FluentSwitchTest
     {
-        private Switch<string> fluentSwitch;
-
         [TestMethod]
         public void TestIfSwitchMatchesWithValuesOfTheSameType()
         {

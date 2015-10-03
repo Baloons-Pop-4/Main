@@ -72,6 +72,11 @@
             internal string Field2;
             internal double[] Field3;
 
+            public override int GetHashCode()
+            {
+                return base.GetHashCode();
+            }
+
             public override bool Equals(object obj)
             {
                 if (obj as SerializableClass == null)
