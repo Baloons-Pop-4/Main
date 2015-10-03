@@ -1,8 +1,9 @@
 ﻿namespace BalloonsPop.Highscore
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
+
     using BalloonsPop.Common.Contracts;
 
     public class HighscoreTable : IHighscoreTable

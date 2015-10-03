@@ -2,16 +2,16 @@
 {
     using System;
 
-    using BalloonsPop.Core;
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.ConsoleUI.Contracts;
+    using BalloonsPop.Core;
 
     public class ConsoleEngine : EngineCore, IConsoleEngine
     {
         private IInputReader reader;
 
         public ConsoleEngine(IConsoleBundle depenencyBundle)
-            :base(depenencyBundle)
+            : base(depenencyBundle)
         {
             this.reader = depenencyBundle.Reader;
             this.context.Game.Field = this.context.LogicProvider.GenerateField();
@@ -29,16 +29,13 @@
             this.context.Printer.PrintField(this.context.Game.Field);
             var command = string.Empty;
 
-            
-
             while (true)
             {
-                this.context.Message = MOVE_PROMPT;
+                this.context.Message = EngineCore.MovePrompt;
                 this.commandFactory.CreateCommand("message").Execute(this.context);
                 command = this.GetTrimmedUppercaseInput();
 
                 var commandList = this.GetCommandList(command);
-                // Console.Clear();
                 this.ExecuteCommandList(commandList);
             }
         }

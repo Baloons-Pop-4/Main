@@ -1,7 +1,8 @@
 ﻿namespace BalloonsPop.Validation
 {
-    using BalloonsPop.Common.Contracts;
     using System.Text.RegularExpressions;
+
+    using BalloonsPop.Common.Contracts;
 
     /// <summary>
     /// Concrete implementation of the IUserInputValidator interface, using regular expression.
@@ -9,10 +10,10 @@
     public class UserInputValidator : IUserInputValidator
     {
         private const string ValidationPattern = "[0-4][^(a-z|0-9)][0-9]";
-        private static readonly Regex validationRegex = new Regex(ValidationPattern, RegexOptions.IgnoreCase);
-
         private const int ValidInputLength = 3;
         private const int MaxRowInputValue = 4;
+
+        private static readonly Regex ValidationRegex = new Regex(ValidationPattern, RegexOptions.IgnoreCase);
 
         /// <summary>
         /// Returns true when the provided string is a valid player move.
@@ -41,7 +42,7 @@
         /// <returns></returns>
         private static bool IsValidCommand(string playerMove)
         {
-            return validationRegex.Match(playerMove).Length > 0;
+            return ValidationRegex.Match(playerMove).Length > 0;
         }
 
         /// <summary>

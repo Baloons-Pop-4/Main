@@ -1,27 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using BalloonsPop.Common.Contracts;
-
-namespace Tests.MockClasses
+﻿namespace Tests.MockClasses
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using BalloonsPop.Common.Contracts;
+
     public class MockLogic : IGameLogicProvider
     {
-        public IDictionary<string, int> Calls { get; private set; }
-
         public MockLogic()
         {
             this.Calls = new Dictionary<string, int>() 
             {
-                {"GenerateField", 0},
-                {"PopBalloons", 0},
-                {"LetBalloonsFall", 0},
-                {"GameIsOver", 0},
+                { "GenerateField", 0 },
+                { "PopBalloons", 0 },
+                { "LetBalloonsFall", 0 },
+                { "GameIsOver", 0 },
             };
         }
+
+        public IDictionary<string, int> Calls { get; private set; }
 
         public IBalloon[,] GenerateField()
         {

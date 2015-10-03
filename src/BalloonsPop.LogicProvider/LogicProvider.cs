@@ -3,9 +3,9 @@
     using System;
     using System.Linq;
 
-    using BalloonsPop.GameModels;
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
+    using BalloonsPop.GameModels;
 
     public class LogicProvider : IGameLogicProvider
     {
@@ -65,7 +65,6 @@
                     field[j, i] = asColumns[i][j];
                 }
             }
-
         }
 
         public bool GameIsOver(IBalloon[,] matrix)
@@ -75,24 +74,24 @@
             return fieldIsEmpty;
         }
 
-        private void PopInDirection(IBalloon[,] field, int row, int col, int xUpdate, int yUpdate)
+        private void PopInDirection(IBalloon[,] field, int row, int col, int horizontalUpdate, int verticalUpdate)
         {
             var balloonType = field[row, col];
-            row += yUpdate;
-            col += xUpdate;
+            row += verticalUpdate;
+            col += horizontalUpdate;
 
             while (this.matrixValidator.IsInsideMatrix(field, row, col) && field[row, col].Number == balloonType.Number)
             {
                 this.Pop(field[row, col]);
-                row += yUpdate;
-                col += xUpdate;
+                row += verticalUpdate;
+                col += horizontalUpdate;
             }
         }
 
         private IBalloon GetRandomBalloonValue()
         {
             var randomBalloonValue = (byte)this.rng.Next(MinBalloonValue, MaxBalloonValue + 1);
-            return new Balloon() { Number = randomBalloonValue};
+            return new Balloon() { Number = randomBalloonValue };
         }
 
         private void Pop(IBalloon balloon)

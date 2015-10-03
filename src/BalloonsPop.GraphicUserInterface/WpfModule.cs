@@ -1,19 +1,19 @@
 ﻿namespace BalloonsPop.GraphicUserInterface
 {
+    using BalloonsPop.Common.Contracts;
+
     using Ninject;
     using Ninject.Modules;
 
-    using BalloonsPop.Common.Contracts;
-
     public class WpfModule : NinjectModule
     {
-        public IKernel AppKernel { get; set; }
-
         public WpfModule(IKernel kernel)
         {
             this.AppKernel = kernel;
         }
-        
+
+        public IKernel AppKernel { get; set; }
+
         public override void Load()
         {
             var window = new MainWindow();

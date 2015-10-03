@@ -23,7 +23,7 @@
 
         public void PushItem(T state)
         {
-            memory.Push(state);
+            this.memory.Push(state);
         }
 
         public T GetItem()

@@ -7,12 +7,12 @@
 
     public class CommandModule : NinjectModule
     {
-        public IKernel AppKernel { get; set; } 
-
         public CommandModule(IKernel kernel)
         {
             this.AppKernel = kernel;
         }
+
+        public IKernel AppKernel { get; set; } 
 
         public override void Load()
         {

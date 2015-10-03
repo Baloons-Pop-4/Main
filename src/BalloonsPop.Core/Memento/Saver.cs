@@ -52,7 +52,7 @@
 
             foreach (var cloningStrategy in cloningStratgies)
             {
-                if(cloningStrategy.IsMatch(obj))
+                if (cloningStrategy.IsMatch(obj))
                 {
                     result = cloningStrategy.Clone(obj);
                     hasMatched = true;
@@ -60,7 +60,7 @@
                 }
             }
 
-            if(!hasMatched)
+            if (!hasMatched)
             {
                 throw new ArgumentException("Me no can clone dis T_T");
             }

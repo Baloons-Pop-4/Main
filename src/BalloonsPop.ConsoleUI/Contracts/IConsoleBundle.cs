@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BalloonsPop.ConsoleUI.Contracts
+﻿namespace BalloonsPop.ConsoleUI.Contracts
 {
+    using System;
+    using System.Linq;
+
     using BalloonsPop.Common.Contracts;
 
     public interface IConsoleBundle : ICoreBundle

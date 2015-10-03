@@ -1,75 +1,37 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Tests.CloningStrategiesTests
+﻿namespace Tests.CloningStrategiesTests
 {
+    using System;
     using System.Runtime.Serialization;
+
     using BalloonsPop.Core.Memento.CloningStrategies;
 
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class SerializationStrategyTests
     {
-        [Serializable]
-        internal class SerializableClass
+        private SerializableClass testObject;
+        private NonSerializableClass testObject2;
+        private SerializationCloning<SerializableClass> serializationCloning;
+        private SerializationCloning<NonSerializableClass> serializationCloning2;
+
+        public SerializationStrategyTests()
         {
-            internal int field;
-            internal string field2;
-            internal double[] field3;
-
-            public override bool Equals(object obj)
-            {
-                if(obj as SerializableClass == null)
-                {
-                    return false;
-                }
-
-                var asSerializableClass = obj as SerializableClass;
-
-                if(asSerializableClass.field3.Length != this.field3.Length)
-                {
-                    return false;
-                }
-
-                for (int i = 0, length = asSerializableClass.field3.Length; i < length; i++)
-                {
-                    if(asSerializableClass.field3[i] != this.field3[i])
-                    {
-                        return false;
-                    }
-                }
-
-                return asSerializableClass.field == this.field && asSerializableClass.field2 == this.field2;
-            }
         }
-
-        internal class NonSerializableClass
-        { }
-
-        SerializableClass testObject;
-        NonSerializableClass testObject2;
-        SerializationCloning<SerializableClass> serializationCloning;
-        SerializationCloning<NonSerializableClass> serializationCloning2;
 
         [TestInitialize]
         public void TestInit()
         {
             this.testObject = new SerializableClass()
             {
-                field = 3,
-                field2 = "gosho",
-                field3 = new double[] { 1, 3.4, 5.1, -5.9, 1010101 }
+                Field = 3,
+                Field2 = "gosho",
+                Field3 = new double[] { 1, 3.4, 5.1, -5.9, 1010101 }
             };
 
             this.serializationCloning = new SerializationCloning<SerializableClass>();
             this.serializationCloning2 = new SerializationCloning<NonSerializableClass>();
             this.testObject2 = new NonSerializableClass();
-        }
-
-        public SerializationStrategyTests()
-        {
         }
 
         [TestMethod]
@@ -101,6 +63,43 @@ namespace Tests.CloningStrategiesTests
         public void TestIfIsMatchMethodReturnFalseWithNonSerializableClass()
         {
             Assert.IsFalse(this.serializationCloning2.IsMatch(this.testObject2));
+        }
+
+        [Serializable]
+        internal class SerializableClass
+        {
+            internal int Field;
+            internal string Field2;
+            internal double[] Field3;
+
+            public override bool Equals(object obj)
+            {
+                if (obj as SerializableClass == null)
+                {
+                    return false;
+                }
+
+                var asSerializableClass = obj as SerializableClass;
+
+                if (asSerializableClass.Field3.Length != this.Field3.Length)
+                {
+                    return false;
+                }
+
+                for (int i = 0, length = asSerializableClass.Field3.Length; i < length; i++)
+                {
+                    if (asSerializableClass.Field3[i] != this.Field3[i])
+                    {
+                        return false;
+                    }
+                }
+
+                return asSerializableClass.Field == this.Field && asSerializableClass.Field2 == this.Field2;
+            }
+        }
+
+        internal class NonSerializableClass
+        {
         }
     }
 }

@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using BalloonsPop.Common.Contracts;
-
-namespace Tests.MockClasses
+﻿namespace Tests.MockClasses
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using BalloonsPop.Common.Contracts;
+
     public class MockPrinter : IPrinter
     {
-        public readonly Dictionary<string, int> methodCallCounts = new Dictionary<string, int>()
+        public readonly Dictionary<string, int> MethodCallCounts = new Dictionary<string, int>()
         {
-            {"message", 0},
-            {"field", 0},
-            {"highscore", 0}
+            { "message", 0 },
+            { "field", 0 },
+            { "highscore", 0 }
         };
 
         public MockPrinter()
@@ -23,17 +21,17 @@ namespace Tests.MockClasses
 
         public void PrintMessage(string message)
         {
-            this.methodCallCounts["message"]++;
+            this.MethodCallCounts["message"]++;
         }
 
         public void PrintField(IBalloon[,] matrix)
         {
-            this.methodCallCounts["field"]++;
+            this.MethodCallCounts["field"]++;
         }
 
         public void PrintHighscore(IHighscoreTable table)
         {
-            this.methodCallCounts["highscore"]++;
+            this.MethodCallCounts["highscore"]++;
         }
     }
 }

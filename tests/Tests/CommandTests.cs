@@ -1,13 +1,13 @@
 ﻿namespace Tests
 {
     using System;
+
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Core.Commands;
     using BalloonsPop.Core.Contexts;
-    using Tests.MockClasses;
-
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Tests.MockClasses;
 
     [TestClass]
     public class CommandTests
@@ -37,7 +37,7 @@
         [TestMethod]
         public void TestIfAnExceptionIsThrowWithInvalidCommandKeys()
         {
-            var invalidKeys = new string[] { "jksdfjds", "redo", "quit", "pop_all", "cheat", "throw", "" };
+            var invalidKeys = new string[] { "jksdfjds", "redo", "quit", "pop_all", "cheat", "throw", string.Empty };
 
             foreach (var key in invalidKeys)
             {
@@ -102,9 +102,9 @@
 
             var printFieldCommand = this.commandFactory.CreateCommand("field");
 
-            printFieldCommand.Execute(context);
+            printFieldCommand.Execute(this.context);
 
-            Assert.AreEqual(1, (this.context.Printer as MockPrinter).methodCallCounts["field"]);
+            Assert.AreEqual(1, (this.context.Printer as MockPrinter).MethodCallCounts["field"]);
         }
 
         [TestMethod]
@@ -114,9 +114,9 @@
 
             var printHighscoreCommand = this.commandFactory.CreateCommand("top");
 
-            printHighscoreCommand.Execute(context);
+            printHighscoreCommand.Execute(this.context);
 
-            Assert.AreEqual(1, (this.context.Printer as MockPrinter).methodCallCounts["highscore"]);
+            Assert.AreEqual(1, (this.context.Printer as MockPrinter).MethodCallCounts["highscore"]);
         }
 
         [TestMethod]
@@ -128,13 +128,13 @@
 
             printMessageCommand.Execute(this.context);
 
-            Assert.AreEqual(1, (this.context.Printer as MockPrinter).methodCallCounts["message"]);
+            Assert.AreEqual(1, (this.context.Printer as MockPrinter).MethodCallCounts["message"]);
         }
 
         [TestMethod]
         public void TestIfSaveCommandUsesTheMementoSetter()
         {
-            this.context = new Context() { Game = new GameMock(), Memento = new MockSaver()};
+            this.context = new Context() { Game = new GameMock(), Memento = new MockSaver() };
 
             var saveCommand = this.commandFactory.CreateCommand("save");
 

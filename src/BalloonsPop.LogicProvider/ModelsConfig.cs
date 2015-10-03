@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BalloonsPop.LogicProvider
+﻿namespace BalloonsPop.LogicProvider
 {
+    using System;
+    using System.Linq;
+
     using BalloonsPop.Common.Contracts;
 
     using Ninject;
@@ -14,7 +11,6 @@ namespace BalloonsPop.LogicProvider
     public class LogicModule : NinjectModule
     {
         // private static IKernel kernel = new StandardKernel();
-
         private static IKernel kernel;
 
         public LogicModule(IKernel bindingKernel)

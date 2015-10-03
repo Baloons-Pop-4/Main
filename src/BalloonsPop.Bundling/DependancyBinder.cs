@@ -6,9 +6,12 @@
 
     public sealed class DependancyBinder
     {
-        public IList<NinjectModule> Modules { get; set; }
-
         private static DependancyBinder instance = new DependancyBinder();
+
+        private DependancyBinder()
+        {
+            this.Modules = new List<NinjectModule>();
+        }
 
         public static DependancyBinder Instance
         {
@@ -18,10 +21,7 @@
             }
         }
 
-        private DependancyBinder()
-        {
-            this.Modules = new List<NinjectModule>();
-        }
+        public IList<NinjectModule> Modules { get; set; }
 
         public DependancyBinder RegisterModule(NinjectModule module)
         {

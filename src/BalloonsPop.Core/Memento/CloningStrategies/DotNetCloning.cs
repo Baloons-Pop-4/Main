@@ -21,7 +21,7 @@
 
         public T Clone(T obj)
         {
-            return (T)((obj as ICloneable).Clone());
+            return (T)(obj as ICloneable).Clone();
         }
     }
 }

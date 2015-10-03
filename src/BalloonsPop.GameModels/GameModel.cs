@@ -1,9 +1,10 @@
 ﻿namespace BalloonsPop.GameModels
 {
     using System;
+    using System.Linq;
+
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
-    using System.Linq;
 
     public class GameModel : IGameModel
     {

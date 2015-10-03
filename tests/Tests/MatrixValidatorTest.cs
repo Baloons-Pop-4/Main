@@ -1,8 +1,10 @@
 ﻿namespace Tests
 {
     using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     using BalloonsPop.Validation;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class MatrixValidatorTests
@@ -12,25 +14,25 @@
         [TestMethod]
         public void TestIfIsInsideMethodReturnsFalseForTooSmallRow()
         {
-            Assert.IsFalse(validator.IsInsideMatrix(new byte[2, 5], -1, 2));
+            Assert.IsFalse(this.validator.IsInsideMatrix(new byte[2, 5], -1, 2));
         }
 
         [TestMethod]
         public void TestIfInsideMethodReturnsFalseForTooLargeRow()
         {
-            Assert.IsFalse(validator.IsInsideMatrix(new byte[2, 5], 2, 2));
+            Assert.IsFalse(this.validator.IsInsideMatrix(new byte[2, 5], 2, 2));
         }
 
         [TestMethod]
         public void TestIfInsideMethodReturnsFalseForTooSmallCol()
         {
-            Assert.IsFalse(validator.IsInsideMatrix(new byte[2, 5], 2, -1));
+            Assert.IsFalse(this.validator.IsInsideMatrix(new byte[2, 5], 2, -1));
         }
 
         [TestMethod]
         public void TestIfInsideMethodReturnsFalseForTooLargeCol()
         {
-            Assert.IsFalse(validator.IsInsideMatrix(new byte[2, 5], 0, 5));
+            Assert.IsFalse(this.validator.IsInsideMatrix(new byte[2, 5], 0, 5));
         }
     }
 }

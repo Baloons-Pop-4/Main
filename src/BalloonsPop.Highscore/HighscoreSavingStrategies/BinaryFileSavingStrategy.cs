@@ -1,8 +1,9 @@
 ﻿namespace BalloonsPop.Highscore
 {
-    using BalloonsPop.Common.Contracts;
     using System.Collections.Generic;
     using System.IO;
+
+    using BalloonsPop.Common.Contracts;
 
     public class BinaryFileSavingStrategy : IHighscoreSavingStrategy
     {

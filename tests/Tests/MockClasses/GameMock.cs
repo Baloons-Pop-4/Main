@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using BalloonsPop.Common.Contracts;
-
-namespace Tests.MockClasses
+﻿namespace Tests.MockClasses
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using BalloonsPop.Common.Contracts;
+
     public class GameMock : IGameModel
     {
         private IBalloon[,] field = new IBalloon[5, 10];
@@ -16,8 +14,8 @@ namespace Tests.MockClasses
         {
             this.Calls = new Dictionary<string, int>() 
             {
-                {"ResetMoves",0},
-                {"IncrementMoves",0},
+                { "ResetMoves", 0 },
+                { "IncrementMoves", 0 },
             };
         }
 
@@ -29,6 +27,7 @@ namespace Tests.MockClasses
             {
                 return this.field;
             }
+
             set
             {
                 this.field = value;

@@ -7,7 +7,7 @@
     public class EventEngine : EngineCore, IEventEngine
     {
         public EventEngine(WpfBundle dependencyBundle)
-            :base(dependencyBundle)
+            : base(dependencyBundle)
         {
             dependencyBundle.Gui.Raise += new EventHandler(this.HandleUserInput);
             this.context.Game.Field = this.context.LogicProvider.GenerateField();    

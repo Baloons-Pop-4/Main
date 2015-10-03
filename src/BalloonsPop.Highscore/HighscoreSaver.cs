@@ -1,13 +1,15 @@
 ﻿namespace BalloonsPop.Highscore
 {
     using System;
-    using BalloonsPop.Common.Contracts;
     using System.Collections.Generic;
+
+    using BalloonsPop.Common.Contracts;
+
     using Ninject;
 
     public sealed class HighscoreSaver : IHighscoreSaver
     {
-        private static readonly Lazy<HighscoreSaver> instance =
+        private static readonly Lazy<HighscoreSaver> Instance =
             new Lazy<HighscoreSaver>(
                 () => new HighscoreSaver(new XmlFileSavingStrategy()));
 
@@ -20,17 +22,17 @@
 
         public static HighscoreSaver GetInstance(IKernel kernelForInjection)
         {
-            if (instance.IsValueCreated == false)
+            if (Instance.IsValueCreated == false)
             {
-                kernelForInjection.Inject(instance.Value);
+                kernelForInjection.Inject(Instance.Value);
             }
 
-            return instance.Value;
+            return Instance.Value;
         }
 
         public void Save(List<IPlayerScore> highscoreTable)
         {
-            highscoreSavingStrategy.Save(highscoreTable);
+            this.highscoreSavingStrategy.Save(highscoreTable);
         }
     }
 }

@@ -5,6 +5,11 @@
 
     public class CoreBundle : ICoreBundle
     {
+        public CoreBundle(IKernel kernel)
+        {
+            kernel.Inject(this);
+        }
+
         [Inject]
         public IPrinter Printer { get; set; }
 
@@ -25,10 +30,5 @@
 
         [Inject]
         public IGameLogicProvider LogicProvider { get; set; }
-
-        public CoreBundle(IKernel kernel)
-        {
-            kernel.Inject(this);
-        }
     }
 }

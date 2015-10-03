@@ -1,13 +1,15 @@
 ﻿namespace Tests
 {
     using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using BalloonsPop.Common.Contracts;
     using System.Linq;
+
+    using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
-    using BalloonsPop.LogicProvider;
     using BalloonsPop.GameModels;
+    using BalloonsPop.LogicProvider;
     using BalloonsPop.Validation;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class GameLogicTests
@@ -79,7 +81,7 @@
         [TestMethod]
         public void TestIfGameIsOverReturnsTrueWithAnEmptyField()
         {
-            var sampleEmptyField = new QueriableMatrix<byte>(5, 10).Select(x => new Balloon() { IsPopped = true}).ToMatrix(5, 10);
+            var sampleEmptyField = new QueriableMatrix<byte>(5, 10).Select(x => new Balloon() { IsPopped = true }).ToMatrix(5, 10);
             Assert.IsTrue(this.gameLogicProvider.GameIsOver(sampleEmptyField));
         }
 
@@ -90,8 +92,7 @@
             var sampleEmptyField = new QueriableMatrix<byte>(5, 10).Select(x => new Balloon()).ToMatrix(5, 10);
             for (int i = 0; i < 50; i++)
             {
-                
-                sampleEmptyField[rng.Next(0, 5), rng.Next(0, 10)] = new Balloon() { Number = (byte)rng.Next(1, 5)};
+                sampleEmptyField[rng.Next(0, 5), rng.Next(0, 10)] = new Balloon() { Number = (byte)rng.Next(1, 5) };
 
                 Assert.IsFalse(this.gameLogicProvider.GameIsOver(sampleEmptyField));
             }
@@ -207,7 +208,7 @@
                 balloonsField[i, j].IsPopped = true;
             }
 
-            gameLogicProvider.LetBalloonsFall(cloned);
+            this.gameLogicProvider.LetBalloonsFall(cloned);
 
             var areEqual = new QueriableMatrix<IBalloon>(balloonsField).Join(new QueriableMatrix<IBalloon>(cloned), x => x.IsPopped, y => y.IsPopped, (x, y) => !(x.IsPopped ^ y.IsPopped)).All(x => x);
 
