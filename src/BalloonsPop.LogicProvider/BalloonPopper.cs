@@ -6,6 +6,9 @@
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
 
+    /// <summary>
+    /// Provides methods for popping ballons in a balloon field.
+    /// </summary>
     internal class BalloonPopper : IBalloonPopper
     {
         private static readonly int[][] PopDirections = new int[][]
@@ -18,11 +21,21 @@
 
         private readonly IMatrixValidator matrixValidator;
 
+        /// <summary>
+        /// Constructor for the BalloonPopper class.
+        /// </summary>
+        /// <param name="matrixValidator">An object that provides validations for matrix operations.</param>
         public BalloonPopper(IMatrixValidator matrixValidator)
         {
             this.matrixValidator = matrixValidator;
         }
 
+        /// <summary>
+        /// Pops the balloons on the same row and column that have the same color.
+        /// </summary>
+        /// <param name="field">The balloon field in which a ballon will be popped.</param>
+        /// <param name="row">The zero-based number row of the ballon to be popped.</param>
+        /// <param name="column">The zero-based number column of the ballon to be popped.</param>
         public void PopBalloons(IBalloon[,] field, int row, int column)
         {
             foreach (var dir in PopDirections)
@@ -33,6 +46,10 @@
             this.Pop(field[row, column]);
         }
 
+        /// <summary>
+        /// Lets the balloon fall to the "ground", simulating gravity.
+        /// </summary>
+        /// <param name="field">The balloon field in which the balloons will be let to fall.</param>
         public void LetBalloonsFall(IBalloon[,] field)
         {
             var asColumns = new QueriableMatrix<IBalloon>(field)
@@ -49,13 +66,6 @@
             }
         }
 
-        public bool GameIsOver(IBalloon[,] matrix)
-        {
-            var fieldIsEmpty = new QueriableMatrix<IBalloon>(matrix).All(balloon => balloon.IsPopped);
-
-            return fieldIsEmpty;
-        }
-
         private void PopInDirection(IBalloon[,] field, int row, int col, int horizontalUpdate, int verticalUpdate)
         {
             var balloonType = field[row, col];
@@ -69,8 +79,6 @@
                 col += horizontalUpdate;
             }
         }
-
-
 
         private void Pop(IBalloon balloon)
         {
