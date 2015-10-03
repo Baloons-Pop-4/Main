@@ -29,7 +29,7 @@
 
         protected ICommandFactory commandFactory;
 
-        protected IHighscoreHandler highscoreHandler;
+        protected IHighscoreHandlingStrategy highscoreHandlingStrategy;
 
         protected IContext context;
 
@@ -38,7 +38,7 @@
                    dependencyBundle.Printer,
                    dependencyBundle.UserInputValidator,
                    dependencyBundle.HighScoreTable,
-                   dependencyBundle.HighscoreHandler,
+                   dependencyBundle.HighscoreHandlingStrategy,
                    dependencyBundle.CommandFactory,
                    dependencyBundle.GameModel,
                    dependencyBundle.LogicProvider)
@@ -49,7 +49,7 @@
                             IPrinter printer,
                             IUserInputValidator validator,
                             IHighscoreTable highScoreTable,
-                            IHighscoreHandler highscoreHandler,
+                            IHighscoreHandlingStrategy highscoreHandlingStrategy,
                             ICommandFactory commandFactory,
                             IGameModel gameModel,
                             IGameLogicProvider gameLogicProvider)
@@ -64,8 +64,8 @@
             };
 
             this.validator = validator;
+            this.highscoreHandlingStrategy = highscoreHandlingStrategy;
             this.commandFactory = commandFactory;
-            this.highscoreHandler = highscoreHandler;
         }
 
         protected virtual IList<ICommand> GetCommandList(string userCommand)
@@ -101,7 +101,7 @@
                                    this.context.Message = OnExitMessage;
                                    commandList.Add(this.commandFactory.CreateCommand("message"));
                                    commandList.Add(this.commandFactory.CreateCommand("exit"));
-                                   this.highscoreHandler.Save(this.context.HighscoreTable);
+                                   this.highscoreHandlingStrategy.Save(this.context.HighscoreTable);
                                })
                                .Case(
                                !this.validator.IsValidUserMove(userCommand), 
@@ -138,7 +138,6 @@
                                            Console.WriteLine("Type in your name: ");
                                            string username = Console.ReadLine();
 
-                                           // TODO: Do that through the interface, it couples to PlayerScore now
                                            this.context.HighscoreTable.AddPlayer(new PlayerScore(username, this.context.Game.UserMovesCount, DateTime.Now));
                                        }
 

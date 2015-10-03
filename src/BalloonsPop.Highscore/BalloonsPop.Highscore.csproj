@@ -50,12 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HighscoreModule.cs" />
-    <Compile Include="HighscoreHandler.cs" />
-    <Compile Include="HighscoreHandlingStrategies\IHighscoreHandlingStrategy.cs" />
     <Compile Include="HighscoreHandlingStrategies\JsonHandlingStrategy.cs" />
     <Compile Include="HighscoreHandlingStrategies\XmlHandlingStrategy.cs" />
     <Compile Include="HighscoreTable.cs" />
-    <Compile Include="PlayerScore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

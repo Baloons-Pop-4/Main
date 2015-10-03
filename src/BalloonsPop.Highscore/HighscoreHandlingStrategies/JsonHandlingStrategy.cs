@@ -6,6 +6,7 @@
     using BalloonsPop.Common.Contracts;
 
     using Newtonsoft.Json;
+    using System;
 
     public class JsonHandlingStrategy : IHighscoreHandlingStrategy
     {
@@ -19,9 +20,17 @@
 
         public IHighscoreTable Load()
         {
-            string json = File.ReadAllText(FilePath);
-            var copy = JsonConvert.DeserializeObject<List<IPlayerScore>>(json);
-            return new HighscoreTable(copy);
+            try
+            {
+                string json = File.ReadAllText(FilePath);
+                var playerScores = JsonConvert.DeserializeObject<List<PlayerScore>>(json);
+                return new HighscoreTable(playerScores);
+            }
+            catch (Exception e)
+            {
+                // Call Logger.Warn() here -> "No highscore.json, falling back to empty highscore table."
+                return new HighscoreTable();
+            }
         }
     }
 }

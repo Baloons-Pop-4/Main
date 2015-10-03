@@ -23,21 +23,21 @@ namespace BalloonsPop.Highscore
         /// <summary>
         /// A list of players (player scores) that actually represent a table.
         /// </summary>
-        private List<IPlayerScore> table;
+        private List<PlayerScore> table;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HighscoreTable"/> class.
         /// </summary>
         public HighscoreTable()
         {
-            this.Table = new List<IPlayerScore>();
+            this.Table = new List<PlayerScore>();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HighscoreTable"/> class.
         /// </summary>
         /// <param name="table">An already filled list of players.</param>
-        public HighscoreTable(List<IPlayerScore> table)
+        public HighscoreTable(List<PlayerScore> table)
         {
             this.Table = table;
         }
@@ -45,7 +45,7 @@ namespace BalloonsPop.Highscore
         /// <summary>
         /// Gets a list of <see cref="IPlayerScore"/> entries, hence the actual table.
         /// </summary>
-        public List<IPlayerScore> Table
+        public List<PlayerScore> Table
         {
             get
             {
@@ -75,7 +75,7 @@ namespace BalloonsPop.Highscore
         /// Adds a player to a <see cref="HighscoreTable"/>.
         /// </summary>
         /// <param name="score">An instance of a class that implements the <see cref="IPlayerScore"/> interface.</param>
-        public void AddPlayer(IPlayerScore score)
+        public void AddPlayer(PlayerScore score)
         {
             this.table.Add(score);
             this.table.Sort();

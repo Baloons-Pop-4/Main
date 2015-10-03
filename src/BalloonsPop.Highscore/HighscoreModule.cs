@@ -4,6 +4,7 @@
     using System.Linq;
 
     using BalloonsPop.Common.Contracts;
+    using BalloonsPop.Highscore.HighscoreHandlingStrategies;
 
     using Ninject;
     using Ninject.Modules;
@@ -19,9 +20,8 @@
 
         public override void Load()
         {
-            kernel.Bind<IHighscoreTable>().ToConstructor(x => new HighscoreTable());
-            kernel.Bind<IPlayerScore>().To<PlayerScore>();
-            kernel.Bind<IHighscoreHandler>().ToMethod(c => HighscoreHandler.GetInstance(c.Kernel));
+            kernel.Bind<IHighscoreHandlingStrategy>().To<XmlHandlingStrategy>();
+            kernel.Bind<IHighscoreTable>().ToMethod(x => kernel.Get<IHighscoreHandlingStrategy>().Load());
         }
     }
 }
