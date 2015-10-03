@@ -17,8 +17,8 @@
             this.context.Game.Field = this.context.LogicProvider.GenerateField();
         }
 
-        public ConsoleEngine(IConsoleUserInterface consoleUI, IUserInputValidator validator, IHighscoreTable highscoreTable, IHighscoreSaver highscoreSaver, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
-            : base(consoleUI, validator, highscoreTable, highscoreSaver, commandFactory, gameModel, gameLogicProvider)
+        public ConsoleEngine(IConsoleUserInterface consoleUI, IUserInputValidator validator, IHighscoreTable highscoreTable, IHighscoreHandler highscoreHandler, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
+            : base(consoleUI, validator, highscoreTable, highscoreHandler, commandFactory, gameModel, gameLogicProvider)
         {
             this.reader = consoleUI as IInputReader;
             this.context.Game.Field = this.context.LogicProvider.GenerateField();

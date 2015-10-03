@@ -33,6 +33,10 @@
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
@@ -46,10 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HighscoreModule.cs" />
-    <Compile Include="HighscoreSaver.cs" />
-    <Compile Include="HighscoreSavingStrategies\BinaryFileSavingStrategy.cs" />
-    <Compile Include="HighscoreSavingStrategies\IHighscoreSavingStrategy.cs" />
-    <Compile Include="HighscoreSavingStrategies\XmlFileSavingStrategy.cs" />
+    <Compile Include="HighscoreHandler.cs" />
+    <Compile Include="HighscoreHandlingStrategies\IHighscoreHandlingStrategy.cs" />
+    <Compile Include="HighscoreHandlingStrategies\JsonHandlingStrategy.cs" />
+    <Compile Include="HighscoreHandlingStrategies\XmlHandlingStrategy.cs" />
     <Compile Include="HighscoreTable.cs" />
     <Compile Include="PlayerScore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

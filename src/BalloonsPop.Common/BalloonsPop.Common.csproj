@@ -55,7 +55,7 @@
     <Compile Include="Contracts\ICoreBundle.cs" />
     <Compile Include="Contracts\IGameLogicProvider.cs" />
     <Compile Include="Contracts\IGameModel.cs" />
-    <Compile Include="Contracts\IHighscoreSaver.cs" />
+    <Compile Include="Contracts\IHighscoreHandler.cs" />
     <Compile Include="Contracts\IHighscoreTable.cs" />
     <Compile Include="Contracts\ILogger.cs" />
     <Compile Include="Contracts\IMatrixValidator.cs" />

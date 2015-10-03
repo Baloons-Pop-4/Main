@@ -19,9 +19,9 @@
 
         public override void Load()
         {
-            kernel.Bind<IHighscoreTable>().To<HighscoreTable>();
+            kernel.Bind<IHighscoreTable>().ToConstructor(x => new HighscoreTable());
             kernel.Bind<IPlayerScore>().To<PlayerScore>();
-            kernel.Bind<IHighscoreSaver>().ToMethod(c => HighscoreSaver.GetInstance(c.Kernel));
+            kernel.Bind<IHighscoreHandler>().ToMethod(c => HighscoreHandler.GetInstance(c.Kernel));
         }
     }
 }

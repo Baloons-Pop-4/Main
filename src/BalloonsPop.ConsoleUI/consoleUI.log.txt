@@ -39,3 +39,26 @@ UTC Date - 2015-09-30 03:17:51,454; [c:\Users\Pc\Desktop\Main\src\BalloonsPop.Co
 UTC Date - 2015-09-30 03:17:51,563; [c:\Users\Pc\Desktop\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Starting the game
 UTC Date - 2015-10-03 09:40:16,571; [c:\Users\Ivaylo\Documents\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Start initialization
 UTC Date - 2015-10-03 09:40:16,662; [c:\Users\Ivaylo\Documents\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Starting the game
+UTC Date - 2015-10-03 18:55:28,808; [c:\Users\Ivaylo\Documents\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Start initialization
+UTC Date - 2015-10-03 18:58:29,992; [c:\Users\Ivaylo\Documents\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Start initialization
+UTC Date - 2015-10-03 18:59:57,847; [c:\Users\Ivaylo\Documents\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Start initialization
+UTC Date - 2015-10-03 19:00:32,905; [c:\Users\Ivaylo\Documents\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Start initialization
+UTC Date - 2015-10-03 19:03:13,914; [c:\Users\Ivaylo\Documents\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Start initialization
+UTC Date - 2015-10-03 19:20:02,350; [c:\Users\Ivaylo\Documents\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Start initialization
+UTC Date - 2015-10-03 19:21:46,365; [c:\Users\Ivaylo\Documents\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Start initialization
+UTC Date - 2015-10-03 19:27:19,289; [c:\Users\Ivaylo\Documents\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Start initialization
+UTC Date - 2015-10-03 19:32:01,054; [c:\Users\Ivaylo\Documents\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Start initialization
+UTC Date - 2015-10-03 19:32:30,340; [c:\Users\Ivaylo\Documents\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Start initialization
+UTC Date - 2015-10-03 19:33:54,889; [c:\Users\Ivaylo\Documents\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Start initialization
+UTC Date - 2015-10-03 19:35:04,464; [c:\Users\Ivaylo\Documents\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Start initialization
+UTC Date - 2015-10-03 19:38:36,957; [c:\Users\Ivaylo\Documents\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Start initialization
+UTC Date - 2015-10-03 19:38:37,047; [c:\Users\Ivaylo\Documents\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Starting the game
+UTC Date - 2015-10-03 19:48:40,479; [c:\Users\Ivaylo\Documents\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Start initialization
+UTC Date - 2015-10-03 19:48:40,566; [c:\Users\Ivaylo\Documents\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Starting the game
+UTC Date - 2015-10-03 19:58:53,047; [c:\Users\Ivaylo\Documents\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Start initialization
+UTC Date - 2015-10-03 19:58:53,137; [c:\Users\Ivaylo\Documents\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Starting the game
+UTC Date - 2015-10-03 19:59:26,103; [c:\Users\Ivaylo\Documents\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Start initialization
+UTC Date - 2015-10-03 19:59:35,607; [c:\Users\Ivaylo\Documents\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Start initialization
+UTC Date - 2015-10-03 19:59:35,697; [c:\Users\Ivaylo\Documents\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Starting the game
+UTC Date - 2015-10-03 20:04:32,523; [c:\Users\Ivaylo\Documents\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Start initialization
+UTC Date - 2015-10-03 20:04:32,615; [c:\Users\Ivaylo\Documents\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Starting the game

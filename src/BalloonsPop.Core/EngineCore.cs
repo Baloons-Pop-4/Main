@@ -29,7 +29,7 @@
 
         protected ICommandFactory commandFactory;
 
-        protected IHighscoreSaver highscoreSaver;
+        protected IHighscoreHandler highscoreHandler;
 
         protected IContext context;
 
@@ -38,7 +38,7 @@
                    dependencyBundle.Printer,
                    dependencyBundle.UserInputValidator,
                    dependencyBundle.HighScoreTable,
-                   dependencyBundle.HighscoreSaver,
+                   dependencyBundle.HighscoreHandler,
                    dependencyBundle.CommandFactory,
                    dependencyBundle.GameModel,
                    dependencyBundle.LogicProvider)
@@ -49,7 +49,7 @@
                             IPrinter printer,
                             IUserInputValidator validator,
                             IHighscoreTable highScoreTable,
-                            IHighscoreSaver highscoreSaver,
+                            IHighscoreHandler highscoreHandler,
                             ICommandFactory commandFactory,
                             IGameModel gameModel,
                             IGameLogicProvider gameLogicProvider)
@@ -65,7 +65,7 @@
 
             this.validator = validator;
             this.commandFactory = commandFactory;
-            this.highscoreSaver = highscoreSaver;
+            this.highscoreHandler = highscoreHandler;
         }
 
         protected virtual IList<ICommand> GetCommandList(string userCommand)
@@ -101,7 +101,7 @@
                                    this.context.Message = OnExitMessage;
                                    commandList.Add(this.commandFactory.CreateCommand("message"));
                                    commandList.Add(this.commandFactory.CreateCommand("exit"));
-                                   this.highscoreSaver.Save(this.context.HighscoreTable.Table);
+                                   this.highscoreHandler.Save(this.context.HighscoreTable);
                                })
                                .Case(
                                !this.validator.IsValidUserMove(userCommand), 

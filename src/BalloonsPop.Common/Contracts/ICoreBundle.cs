@@ -8,7 +8,7 @@
 
         IHighscoreTable HighScoreTable { get; set; }
         
-        IHighscoreSaver HighscoreSaver { get; set; }
+        IHighscoreHandler HighscoreHandler { get; set; }
 
         ICommandFactory CommandFactory { get; set; }
         
