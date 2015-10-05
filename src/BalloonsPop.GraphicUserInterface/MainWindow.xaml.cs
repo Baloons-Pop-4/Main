@@ -35,6 +35,14 @@
             this.balloonField = this.GetInitializedBalloonField();
         }
 
+        public Grid BalloonGrid
+        {
+            get
+            {
+                return this.BalloonField;
+            }
+        }
+
         // private static MainWindow instance = new MainWindow();
         // public static IEventBasedUserInterface GetInstance()
         // {

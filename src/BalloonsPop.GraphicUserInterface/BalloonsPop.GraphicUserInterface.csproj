@@ -59,6 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MainWindowController.cs" />
     <Compile Include="WpfBundle.cs" />
     <Compile Include="WpfModule.cs" />
     <Page Include="MainWindow.xaml">
