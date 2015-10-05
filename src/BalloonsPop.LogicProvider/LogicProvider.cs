@@ -8,10 +8,6 @@
 
     public class LogicProvider : IGameLogicProvider
     {
-        private readonly IBalloonFieldGenerator fieldGenerator;
-
-        private readonly IBalloonPopper balloonPopper;
-
         private static readonly int[][] PopDirections = new int[][]
         { 
             new int[] { 0, 1 },
@@ -19,6 +15,10 @@
             new int[] { 1, 0 },
             new int[] { -1, 0 }
         };
+
+        private readonly IBalloonFieldGenerator fieldGenerator;
+
+        private readonly IBalloonPopper balloonPopper;
 
         public LogicProvider(IMatrixValidator matrixValidator, IRandomNumberGenerator rng)
         {

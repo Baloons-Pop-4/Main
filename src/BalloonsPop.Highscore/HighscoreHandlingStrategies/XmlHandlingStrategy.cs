@@ -32,7 +32,6 @@
         public IHighscoreTable Load()
         {
             // var PlayerScore = kernel.Get<IPlayerScore>() ?
-
             XDocument highscoreDoc = XDocument.Load(FilePath);
             var playerScores = highscoreDoc.Descendants("players")
                     .Select(x => new PlayerScore(

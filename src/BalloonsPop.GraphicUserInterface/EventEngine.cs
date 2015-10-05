@@ -10,7 +10,7 @@
             : base(dependencyBundle)
         {
             dependencyBundle.Gui.Raise += new EventHandler(this.HandleUserInput);
-            this.context.Game.Field = this.context.LogicProvider.GenerateField();    
+            this.Context.Game.Field = this.Context.LogicProvider.GenerateField();    
         }
 
         public void HandleUserInput(object sender, EventArgs e)

@@ -23,15 +23,15 @@
         protected const string OnExitMessage = "Good Bye!";
         #endregion
 
-        protected string[,] highScoreChart;
+        private string[,] highScoreChart;
 
-        protected IUserInputValidator validator;
+        private IUserInputValidator validator;
 
-        protected ICommandFactory commandFactory;
+        private ICommandFactory commandFactory;
 
-        protected IHighscoreHandler highscoreHandler;
+        private IHighscoreHandler highscoreHandler;
 
-        protected IContext context;
+        private IContext context;
 
         protected EngineCore(ICoreBundle dependencyBundle)
             : this(
@@ -66,6 +66,66 @@
             this.validator = validator;
             this.commandFactory = commandFactory;
             this.highscoreHandler = highscoreHandler;
+        }
+
+        protected IContext Context
+        {
+            get
+            {
+                return this.context;
+            }
+            set
+            {
+                this.context = value;
+            }
+        }
+
+        protected IHighscoreHandler HighscoreHandler
+        {
+            get
+            {
+                return this.highscoreHandler;
+            }
+            set
+            {
+                this.highscoreHandler = value;
+            }
+        }
+
+        protected ICommandFactory CommandFactory
+        {
+            get
+            {
+                return this.commandFactory;
+            }
+            set
+            {
+                this.commandFactory = value;
+            }
+        }
+
+        protected IUserInputValidator Validator
+        {
+            get
+            {
+                return this.validator;
+            }
+            set
+            {
+                this.validator = value;
+            }
+        }
+
+        protected string[,] HighScoreChart
+        {
+            get
+            {
+                return this.highScoreChart;
+            }
+            set
+            {
+                this.highScoreChart = value;
+            }
         }
 
         protected virtual IList<ICommand> GetCommandList(string userCommand)
