@@ -20,7 +20,7 @@
 
         public override void Load()
         {
-            kernel.Bind<IHighscoreHandlingStrategy>().To<XmlHandlingStrategy>();
+            kernel.Bind<IHighscoreHandlingStrategy>().To<XmlHandlingStrategy>().WithConstructorArgument("highscore.xml");
             kernel.Bind<IHighscoreTable>().ToMethod(x => kernel.Get<IHighscoreHandlingStrategy>().Load());
         }
     }
