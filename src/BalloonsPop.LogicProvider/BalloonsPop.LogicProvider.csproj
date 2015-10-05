@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BalloonPopper.cs" />
+    <Compile Include="FieldGenerator.cs" />
     <Compile Include="LogicProvider.cs" />
     <Compile Include="ModelsConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

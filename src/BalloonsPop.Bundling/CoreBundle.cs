@@ -5,6 +5,11 @@
 
     public class CoreBundle : ICoreBundle
     {
+        public CoreBundle(IKernel kernel)
+        {
+            kernel.Inject(this);
+        }
+
         [Inject]
         public IPrinter Printer { get; set; }
 
@@ -15,7 +20,7 @@
         public IHighscoreTable HighScoreTable { get; set; }
 
         [Inject]
-        public IHighscoreSaver HighscoreSaver { get; set; }
+        public IHighscoreHandlingStrategy HighscoreHandlingStrategy { get; set; }
 
         [Inject]
         public ICommandFactory CommandFactory { get; set; }
@@ -25,10 +30,5 @@
 
         [Inject]
         public IGameLogicProvider LogicProvider { get; set; }
-
-        public CoreBundle(IKernel kernel)
-        {
-            kernel.Inject(this);
-        }
     }
 }

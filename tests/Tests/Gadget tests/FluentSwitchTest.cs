@@ -1,15 +1,14 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Tests.Gadget_tests
+﻿namespace Tests.Gadget_tests
 {
+    using System;
+
     using BalloonsPop.Common.Gadgets;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class FluentSwitchTest
     {
-        Switch<string> fluentSwitch;
-
         [TestMethod]
         public void TestIfSwitchMatchesWithValuesOfTheSameType()
         {
@@ -81,6 +80,7 @@ namespace Tests.Gadget_tests
                 .Case("stringy", () => { methodCalls++; })
                 .Case(true, () => { methodCalls++; })
                 .Case(arg => true, () => { methodCalls++; test.FallThrough = false; })
+
                 // shouldn't call any of these methods
                 .Case(false, () => { })
                 .Case(true, () => { methodCalls++; test.FallThrough = true; })

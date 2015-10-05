@@ -1,9 +1,10 @@
 ﻿namespace Tests
 {
     using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using BalloonsPop.Common.Gadgets;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class QueriableMatrixTests
@@ -13,16 +14,16 @@
         {
             var matrix = new int[,] 
             {
-                {1,2,3,4},
-                {5,6,7,8},
-                {9, 10, 11, 12}
+                { 1, 2, 3, 4 },
+                { 5, 6, 7, 8 },
+                { 9, 10, 11, 12 }
             };
 
-            var qMatrix = new QueriableMatrix<int>(3, 4);
+            var queriableMatrix = new QueriableMatrix<int>(3, 4);
 
-            qMatrix.Value = matrix;
+            queriableMatrix.Value = matrix;
 
-            Assert.AreEqual(matrix, qMatrix.Value);
+            Assert.AreEqual(matrix, queriableMatrix.Value);
         }
 
         [TestMethod]
@@ -30,16 +31,16 @@
         {
             var matrix = new int[,] 
             {
-                {1,2,3,4},
-                {5,6,7,8},
-                {9, 10, 11, 12}
+                { 1, 2, 3, 4 },
+                { 5, 6, 7, 8 },
+                { 9, 10, 11, 12 }
             };
 
-            var qMatrix = new QueriableMatrix<int>(matrix);
+            var queriableMatrix = new QueriableMatrix<int>(matrix);
 
             var counter = 1;
 
-            foreach (var cell in qMatrix)
+            foreach (var cell in queriableMatrix)
             {
                 Assert.AreEqual(cell, counter++);
             }
@@ -50,14 +51,14 @@
         {
             var matrix = new int[,] 
             {
-                {1,2,3},
-                {5,6,7},
-                {9, 10, 11}
+                { 1, 2, 3 },
+                { 5, 6, 7 },
+                { 9, 10, 11 }
             };
 
-            var qMatrix = new QueriableMatrix<int>(matrix);
+            var queriableMatrix = new QueriableMatrix<int>(matrix);
 
-            var actual = qMatrix.TakeColumns();
+            var actual = queriableMatrix.TakeColumns();
 
             var expected = new int[][] 
             { 
@@ -75,5 +76,4 @@
             }
         }
     }
-
 }

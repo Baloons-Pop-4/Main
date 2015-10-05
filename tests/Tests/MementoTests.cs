@@ -1,14 +1,16 @@
 ﻿namespace Tests
 {
     using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using BalloonsPop.Core.Memento;
+    using System.Linq;
+
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
-    using System.Linq;
-    using BalloonsPop.LogicProvider;
+    using BalloonsPop.Core.Memento;
     using BalloonsPop.GameModels;
+    using BalloonsPop.LogicProvider;
     using BalloonsPop.Validation;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class MementoTests
@@ -27,7 +29,7 @@
         public void TestIfMementoReturnsTheSameStateItAccepter()
         {
             var game = new GameModel();
-            game.Field = logic.GenerateField();
+            game.Field = this.logic.GenerateField();
             this.memento.SaveState(game);
 
             var stateFromMemento = this.memento.GetState();
@@ -43,7 +45,7 @@
         public void TestIfConstructorWithParametersHasTheSameBehaviorAsTheSetter()
         {
             var game = new GameModel();
-            game.Field = logic.GenerateField();
+            game.Field = this.logic.GenerateField();
             this.memento.SaveState(game);
             var memento2 = new Saver<IGameModel>();
             memento2.SaveState(game);
@@ -61,7 +63,7 @@
         public void TestIfMementoProvidesDeepCopy()
         {
             var game = new GameModel();
-            game.Field = logic.GenerateField();
+            game.Field = this.logic.GenerateField();
             this.memento.SaveState(game);
 
             var stateFromMemento = this.memento.GetState();
@@ -76,7 +78,7 @@
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    if(game.Field[i,j].IsPopped != stateFromMemento.Field[i, j].IsPopped)
+                    if (game.Field[i, j].IsPopped != stateFromMemento.Field[i, j].IsPopped)
                     {
                         areEqual = false;
                     }
@@ -90,7 +92,7 @@
         public void TestIfGetterEncapsulatesTheCurrentState()
         {
             var game = new GameModel();
-            game.Field = logic.GenerateField();
+            game.Field = this.logic.GenerateField();
             this.memento.SaveState(game);
             var state = this.memento.GetState();
 
@@ -104,7 +106,6 @@
             var moves2 = game.UserMovesCount;
 
             Assert.AreNotEqual(moves, moves2);
-
         }
     }
 }

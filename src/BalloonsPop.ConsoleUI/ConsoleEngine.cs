@@ -2,43 +2,47 @@
 {
     using System;
 
-    using BalloonsPop.Core;
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.ConsoleUI.Contracts;
+    using BalloonsPop.Core;
 
     public class ConsoleEngine : EngineCore, IConsoleEngine
     {
         private IInputReader reader;
 
         public ConsoleEngine(IConsoleBundle depenencyBundle)
-            :base(depenencyBundle)
+            : base(depenencyBundle)
         {
             this.reader = depenencyBundle.Reader;
-            this.context.Game.Field = this.context.LogicProvider.GenerateField();
+            this.Context.Game.Field = this.Context.LogicProvider.GenerateField();
         }
 
-        public ConsoleEngine(IConsoleUserInterface consoleUI, IUserInputValidator validator, IHighscoreTable highscoreTable, IHighscoreSaver highscoreSaver, ICommandFactory commandFactory, IGameModel gameModel, IGameLogicProvider gameLogicProvider)
-            : base(consoleUI, validator, highscoreTable, highscoreSaver, commandFactory, gameModel, gameLogicProvider)
+        public ConsoleEngine(
+            IConsoleUserInterface consoleUI,
+            IUserInputValidator validator,
+            IHighscoreTable highscoreTable,
+            IHighscoreHandlingStrategy highscoreHandlingStrategy,
+            ICommandFactory commandFactory,
+            IGameModel gameModel,
+            IGameLogicProvider gameLogicProvider)
+            : base(consoleUI, validator, highscoreTable, highscoreHandlingStrategy, commandFactory, gameModel, gameLogicProvider)
         {
             this.reader = consoleUI as IInputReader;
-            this.context.Game.Field = this.context.LogicProvider.GenerateField();
+            this.Context.Game.Field = this.Context.LogicProvider.GenerateField();
         }
 
         public void Run()
         {
-            this.context.Printer.PrintField(this.context.Game.Field);
+            this.Context.Printer.PrintField(this.Context.Game.Field);
             var command = string.Empty;
-
-            
 
             while (true)
             {
-                this.context.Message = MOVE_PROMPT;
-                this.commandFactory.CreateCommand("message").Execute(this.context);
+                this.Context.Message = EngineCore.MovePrompt;
+                this.CommandFactory.CreateCommand("message").Execute(this.Context);
                 command = this.GetTrimmedUppercaseInput();
 
                 var commandList = this.GetCommandList(command);
-                // Console.Clear();
                 this.ExecuteCommandList(commandList);
             }
         }

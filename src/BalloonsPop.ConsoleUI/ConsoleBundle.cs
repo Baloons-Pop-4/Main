@@ -1,7 +1,7 @@
 ﻿namespace BalloonsPop
 {
-    using BalloonsPop.ConsoleUI.Contracts;
     using BalloonsPop.Bundling;
+    using BalloonsPop.ConsoleUI.Contracts;
     using Ninject;
 
     public class ConsoleBundle : CoreBundle, IConsoleBundle

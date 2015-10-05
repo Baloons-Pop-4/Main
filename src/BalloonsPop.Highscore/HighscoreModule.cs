@@ -1,15 +1,13 @@
-﻿using Ninject.Modules;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BalloonsPop.Highscore
+﻿namespace BalloonsPop.Highscore
 {
-    using Ninject;
+    using System;
+    using System.Linq;
 
     using BalloonsPop.Common.Contracts;
+    using BalloonsPop.Highscore.HighscoreHandlingStrategies;
+
+    using Ninject;
+    using Ninject.Modules;
 
     public class HighscoreModule : NinjectModule
     {
@@ -22,9 +20,8 @@ namespace BalloonsPop.Highscore
 
         public override void Load()
         {
-            kernel.Bind<IHighscoreTable>().To<HighscoreTable>();
-            kernel.Bind<IPlayerScore>().To<PlayerScore>();
-            kernel.Bind<IHighscoreSaver>().ToMethod(c => HighscoreSaver.GetInstance(c.Kernel));
+            kernel.Bind<IHighscoreHandlingStrategy>().To<XmlHandlingStrategy>().WithConstructorArgument("highscore.xml");
+            kernel.Bind<IHighscoreTable>().ToMethod(x => kernel.Get<IHighscoreHandlingStrategy>().Load());
         }
     }
 }

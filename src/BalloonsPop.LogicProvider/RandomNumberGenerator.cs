@@ -9,7 +9,7 @@
 
         public int Next(int min, int max)
         {
-            return rnd.Next(min, max);
+            return this.rnd.Next(min, max);
         }
     }
 }

@@ -10,7 +10,7 @@
 
         public void Execute(IContext context)
         {
-            if(context.Memento.HasStates)
+            if (context.Memento.HasStates)
             {
                 context.Game.Field = context.Memento.GetState().Field;
             }

@@ -21,60 +21,87 @@
         private readonly string[] colors = new string[] { "white", "red", "blue", "green", "yellow" };
 
         private string imageFolderPath;
+
         // private string userName;
         private Image[,] balloonField;
 
-        public event EventHandler Raise;
-
-        //private static MainWindow instance = new MainWindow();
-
-        //public static IEventBasedUserInterface GetInstance()
-        //{
-        //    return instance;
-        //}
-
         public MainWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
+
             // this.userName = this.ReadUserInput();
             this.InitializeImagePath();
             this.InitializeHighscoreGrid();
             this.balloonField = this.GetInitializedBalloonField();
         }
 
+        // private static MainWindow instance = new MainWindow();
+        // public static IEventBasedUserInterface GetInstance()
+        // {
+        // return instance;
+        // }
+        public event EventHandler Raise;
+
+        public void PrintMessage(string message)
+        {
+            MessageBox.Show(message);
+        }
+
+        public void PrintField(IBalloon[,] matrix)
+        {
+            // MessageBox.Show("kichka");
+            for (int row = 0, rowsCount = matrix.GetLength(0); row < rowsCount; row++)
+            {
+                for (int col = 0, colsCount = matrix.GetLength(1); col < colsCount; col++)
+                {
+                    var sourceNumber = matrix[row, col].IsPopped ? 0 : matrix[row, col].Number;
+                    this.SetSource(this.balloonField[row, col], sourceNumber);
+                }
+            }
+        }
+
+        public string ReadUserInput()
+        {
+            var enterUserNameDialog = new PromptWindow();
+            enterUserNameDialog.ShowDialog();
+
+            return enterUserNameDialog.UserName;
+        }
+
+        public void PrintHighscore(IHighscoreTable table)
+        {
+            // TODO: Implement this method
+            throw new NotImplementedException("Implement highscore printing, u lazy ginger");
+        }
+
         private void InitializeImagePath()
         {
             var currentDir = Environment.CurrentDirectory;
 
-            imageFolderPath = currentDir.Substring(0, currentDir.IndexOf("bin"));
+            this.imageFolderPath = currentDir.Substring(0, currentDir.IndexOf("bin"));
         }
 
         private Image[,] GetInitializedBalloonField()
         {
             var field = new Image[5, 10];
 
-
-
             for (int row = 0, rowsCount = 5; row < rowsCount; row++)
             {
                 for (int col = 0, colsCount = 10; col < colsCount; col++)
                 {
-                    //this.balloonField[row, col] = new Image();
+                    // this.balloonField[row, col] = new Image();
 
-                    //var coordinatesAsString = row + " " + col;
+                    // var coordinatesAsString = row + " " + col;
 
-                    //this.balloonField[row, col].MouseDown += (sender, e) =>
-                    //{
-                    //    this.Raise(sender, new ClickEventArgs(coordinatesAsString));
-                    //};
+                    // this.balloonField[row, col].MouseDown += (sender, e) =>
+                    // {
+                    // this.Raise(sender, new ClickEventArgs(coordinatesAsString));
+                    // };
 
-                    //this.SetBalloonImageSize(this.balloonField[row, col]);
-                    //this.BalloonField.Children.Add(this.balloonField[row, col]);
-                    //this.SetPositionInGrid(this.balloonField[row, col], row, col);
-
+                    // this.SetBalloonImageSize(this.balloonField[row, col]);
+                    // this.BalloonField.Children.Add(this.balloonField[row, col]);
+                    // this.SetPositionInGrid(this.balloonField[row, col], row, col);
                     this.InitializeImageFielCell(row, col, field);
-
-
                 }
             }
 
@@ -95,33 +122,6 @@
             this.SetBalloonImageSize(field[row, col]);
             this.BalloonField.Children.Add(field[row, col]);
             this.SetPositionInGrid(field[row, col], row, col);
-        }
-
-        public void PrintMessage(string message)
-        {
-            MessageBox.Show(message);
-        }
-
-        public void PrintField(IBalloon[,] matrix)
-        {
-
-            // MessageBox.Show("kichka");
-
-            for (int row = 0, rowsCount = matrix.GetLength(0); row < rowsCount; row++)
-            {
-                for (int col = 0, colsCount = matrix.GetLength(1); col < colsCount; col++)
-                {
-                    var sourceNumber = matrix[row, col].IsPopped ? 0 : matrix[row, col].Number;
-                    this.SetSource(this.balloonField[row, col], sourceNumber);
-                }
-            }
-        }
-
-        public void PrintHighscore(IHighscoreTable table)
-        {
-            // TODO: Implement this method
-            throw new NotImplementedException("Implement highscore printing, u lazy ginger");
-
         }
 
         private void InitializeHighscoreGrid()
@@ -149,21 +149,13 @@
             this.SetPositionInGrid(wrappedPlayer, row, col);
         }
 
-        public string ReadUserInput()
-        {
-            var enterUserNameDialog = new PromptWindow();
-            enterUserNameDialog.ShowDialog();
-
-            return enterUserNameDialog.UserName;
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var senderAsButton = sender as Button;
 
             senderAsButton.Content = "Restart";
 
-            Raise(sender, new ClickEventArgs("RESTART"));
+            this.Raise(sender, new ClickEventArgs("RESTART"));
         }
 
         private void SetBalloonImageSize(Image img)
@@ -176,7 +168,7 @@
         {
             var uri = this.GetBalloonImageUri(this.colors[balloonNumber]);
             img.Source = new BitmapImage(uri);
-            GetBalloonImageUri("white");
+            this.GetBalloonImageUri("white");
         }
 
         private Uri GetBalloonImageUri(string color)

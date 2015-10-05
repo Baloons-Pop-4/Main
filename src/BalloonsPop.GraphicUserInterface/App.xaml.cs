@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
-
-namespace BalloonsPop.GraphicUserInterface
+﻿namespace BalloonsPop.GraphicUserInterface
 {
+    using System;
+    using System.Linq;
+    using System.Windows;
+
     using BalloonsPop.Bundling;
-    using BalloonsPop.Validation;
     using BalloonsPop.Core.Commands;
     using BalloonsPop.GameModels;
-    using BalloonsPop.LogicProvider;
     using BalloonsPop.Highscore;
+    using BalloonsPop.LogicProvider;
+    using BalloonsPop.Validation;
+
     using Ninject;
 
     /// <summary>
@@ -33,17 +33,13 @@ namespace BalloonsPop.GraphicUserInterface
                                  new ValidationModule(kernel),
                                  new CommandModule(kernel),
                                  new HighscoreModule(kernel),
-                                 new WpfModule(kernel)
-                                 )
+                                 new WpfModule(kernel))
                 .LoadAll();            
 
             var bundle = new WpfBundle(kernel);
             var engine = new EventEngine(bundle);
 
-
-
             // this.engine = new EventEngine(graphicUi, new UserInputValidator(), factory, model, logicProvider, table, kernel.Get<IHighscoreSaver>());
-            
             this.engine = engine;
 
             bundle.Gui.Show();

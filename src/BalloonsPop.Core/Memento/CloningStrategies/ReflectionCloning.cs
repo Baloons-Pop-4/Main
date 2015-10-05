@@ -24,15 +24,14 @@
         {
             var copy = Activator.CreateInstance<T>();
 
-            var piList = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            var propertyList = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
-            foreach (var pi in piList)
+            foreach (var prop in propertyList)
             {
-                if (pi.GetValue(copy, null) != pi.GetValue(obj, null))
+                if (prop.GetValue(copy, null) != prop.GetValue(obj, null))
                 {
-                    pi.SetValue(copy, pi.GetValue(obj, null), null);
+                    prop.SetValue(copy, prop.GetValue(obj, null), null);
                 }
-
             }
 
             return copy;

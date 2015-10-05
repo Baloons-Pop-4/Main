@@ -1,32 +1,19 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Tests.CloningStrategiesTests
+﻿namespace Tests.CloningStrategiesTests
 {
+    using System;
+
     using BalloonsPop.Core.Memento.CloningStrategies;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class ReflectionCloningTests
     {
-        internal class ClasWithEmptyConstructor
-        {
-            public ClasWithEmptyConstructor()
-            {
+        private ReflectionCloning<ClasWithEmptyConstructor> validReflectionCloning;
+        private ReflectionCloning<ClassWithNoEmptyConstructor> invalidReflectionCloning;
 
-            }
-        }
-
-        internal class ClassWithNoEmptyConstructor
-        {
-            public ClassWithNoEmptyConstructor(bool someVariable)
-            {}
-        }
-
-        ReflectionCloning<ClasWithEmptyConstructor> validReflectionCloning;
-        ReflectionCloning<ClassWithNoEmptyConstructor> invalidReflectionCloning;
-
-        ClasWithEmptyConstructor validTestObj;
-        ClassWithNoEmptyConstructor invalidTestObj;
+        private ClasWithEmptyConstructor validTestObj;
+        private ClassWithNoEmptyConstructor invalidTestObj;
 
         [TestInitialize]
         public void TestInit()
@@ -48,6 +35,20 @@ namespace Tests.CloningStrategiesTests
         public void TestIfIsMatchReturnsFalseForTypesWithNoEmptyConstructor()
         {
             Assert.IsFalse(this.invalidReflectionCloning.IsMatch(this.invalidTestObj));
+        }
+
+        internal class ClasWithEmptyConstructor
+        {
+            public ClasWithEmptyConstructor()
+            {
+            }
+        }
+
+        internal class ClassWithNoEmptyConstructor
+        {
+            public ClassWithNoEmptyConstructor(bool someVariable)
+            {
+            }
         }
     }
 }

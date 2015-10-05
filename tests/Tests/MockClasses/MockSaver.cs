@@ -1,28 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using BalloonsPop.Common.Contracts;
-
-namespace Tests.MockClasses
+﻿namespace Tests.MockClasses
 {
+    using System;
+    using System.Linq;
+
+    using BalloonsPop.Common.Contracts;
+
     public class MockSaver : IStateSaver<IGameModel>
     {
-        public int CallsToSetCount { get; private set; }
-        public int CallsToGetCount { get; private set; }
-
         public MockSaver()
         {
             this.CallsToSetCount = 0;
         }
-       
-        public IGameModel GetState()
-        {
-            this.CallsToGetCount++;
-            return null;
-        }
+
+        public int CallsToSetCount { get; private set; }
+
+        public int CallsToGetCount { get; private set; }
 
         public bool HasStates
         {
@@ -30,6 +22,12 @@ namespace Tests.MockClasses
             {
                 return false;
             }
+        }
+
+        public IGameModel GetState()
+        {
+            this.CallsToGetCount++;
+            return null;
         }
 
         public void SaveState(IGameModel obj)

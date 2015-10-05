@@ -1,44 +1,44 @@
 ﻿namespace BalloonsPop.Core
 {
     using System;
-
-    using BalloonsPop.Common.Gadgets;
-    using BalloonsPop.Common.Contracts;
     using System.Collections.Generic;
-    using BalloonsPop.Core.Memento;
+
+    using BalloonsPop.Common.Contracts;
+    using BalloonsPop.Common.Gadgets;
     using BalloonsPop.Core.Contexts;
-    using BalloonsPop.Highscore;
+    using BalloonsPop.Core.Memento;
+    //using BalloonsPop.Highscore;
 
     public class EngineCore
     {
         #region Constants
-        protected const string EXIT = "EXIT";
-        protected const string TOP = "TOP";
-        protected const string RESTART = "RESTART";
-        protected const string WRONG_INPUT = "Wrong input! Try Again!";
-        protected const string CANNOT_POP_MISSING_BALLOON = "Cannot pop missing ballon!";
-        protected const string WIN_MESSAGE_TEMPLATE = "Gratz ! You completed it in {0} moves.";
-        protected const string NOT_IN_TOP_FIVE = "I am sorry you are not skillful enough for TopFive chart!";
-        protected const string MOVE_PROMPT = "Enter a row and column: ";
-        protected const string ON_EXIT_MESSAGE = "Good Bye!";
+        protected const string Exit = "EXIT";
+        protected const string Top = "TOP";
+        protected const string Restart = "RESTART";
+        protected const string WrongInputMessage = "Wrong input! Try Again!";
+        protected const string CannotPopMissingBalloonMessage = "Cannot pop missing ballon!";
+        protected const string WinMessageTemplate = "Gratz ! You completed it in {0} moves.";
+        protected const string NotInTopFiveMessage = "I am sorry you are not skillful enough for TopFive chart!";
+        protected const string MovePrompt = "Enter a row and column: ";
+        protected const string OnExitMessage = "Good Bye!";
         #endregion
 
-        protected string[,] highScoreChart;
+        private string[,] highScoreChart;
 
-        protected IUserInputValidator validator;
+        private IUserInputValidator validator;
 
-        protected ICommandFactory commandFactory;
+        private ICommandFactory commandFactory;
 
-        protected IHighscoreSaver highscoreSaver;
+        private IHighscoreHandlingStrategy highscoreHandlingStrategy;
 
-        protected IContext context;
+        private IContext context;
 
         protected EngineCore(ICoreBundle dependencyBundle)
             : this(
                    dependencyBundle.Printer,
                    dependencyBundle.UserInputValidator,
                    dependencyBundle.HighScoreTable,
-                   dependencyBundle.HighscoreSaver,
+                   dependencyBundle.HighscoreHandlingStrategy,
                    dependencyBundle.CommandFactory,
                    dependencyBundle.GameModel,
                    dependencyBundle.LogicProvider)
@@ -49,12 +49,11 @@
                             IPrinter printer,
                             IUserInputValidator validator,
                             IHighscoreTable highScoreTable,
-                            IHighscoreSaver highscoreSaver,
+                            IHighscoreHandlingStrategy highscoreHandlingStrategy,
                             ICommandFactory commandFactory,
                             IGameModel gameModel,
                             IGameLogicProvider gameLogicProvider)
         {
-
             this.context = new Context()
             {
                 Printer = printer,
@@ -62,12 +61,71 @@
                 HighscoreTable = highScoreTable,
                 LogicProvider = gameLogicProvider,
                 Memento = new Saver<IGameModel>(),
-
             };
 
             this.validator = validator;
+            this.highscoreHandlingStrategy = highscoreHandlingStrategy;
             this.commandFactory = commandFactory;
-            this.highscoreSaver = highscoreSaver;
+        }
+
+        protected IContext Context
+        {
+            get
+            {
+                return this.context;
+            }
+            set
+            {
+                this.context = value;
+            }
+        }
+
+        protected IHighscoreHandlingStrategy HighscoreHandler
+        {
+            get
+            {
+                return this.highscoreHandlingStrategy;
+            }
+            set
+            {
+                this.highscoreHandlingStrategy = value;
+            }
+        }
+
+        protected ICommandFactory CommandFactory
+        {
+            get
+            {
+                return this.commandFactory;
+            }
+            set
+            {
+                this.commandFactory = value;
+            }
+        }
+
+        protected IUserInputValidator Validator
+        {
+            get
+            {
+                return this.validator;
+            }
+            set
+            {
+                this.validator = value;
+            }
+        }
+
+        protected string[,] HighScoreChart
+        {
+            get
+            {
+                return this.highScoreChart;
+            }
+            set
+            {
+                this.highScoreChart = value;
+            }
         }
 
         protected virtual IList<ICommand> GetCommandList(string userCommand)
@@ -75,31 +133,41 @@
             var commandList = new List<ICommand>();
 
             new Switch<string>(userCommand)
-                               .Case(RESTART, () =>
+                               .Case(
+                               Restart,
+                               () =>
                                {
                                    commandList.Add(this.commandFactory.CreateCommand("save"));
                                    commandList.Add(this.commandFactory.CreateCommand("restart"));
                                    commandList.Add(this.commandFactory.CreateCommand("field"));
                                })
-                               .Case(TOP, () =>
+                               .Case(
+                               Top,
+                               () =>
                                {
                                    commandList.Add(this.commandFactory.CreateCommand("top"));
                                })
-                               .Case("UNDO", () =>
+                               .Case(
+                               "UNDO",
+                               () =>
                                {
                                    commandList.Add(this.commandFactory.CreateCommand("undo"));
                                    commandList.Add(this.commandFactory.CreateCommand("field"));
                                })
-                               .Case(EXIT, () =>
+                               .Case(
+                               Exit,
+                               () =>
                                {
-                                   this.context.Message = ON_EXIT_MESSAGE;
+                                   this.context.Message = OnExitMessage;
                                    commandList.Add(this.commandFactory.CreateCommand("message"));
                                    commandList.Add(this.commandFactory.CreateCommand("exit"));
-                                   this.highscoreSaver.Save(this.context.HighscoreTable.Table);
+                                   this.highscoreHandlingStrategy.Save(this.context.HighscoreTable);
                                })
-                               .Case(!this.validator.IsValidUserMove(userCommand), () =>
+                               .Case(
+                               !this.validator.IsValidUserMove(userCommand), 
+                               () =>
                                {
-                                   this.context.Message = WRONG_INPUT;
+                                   this.context.Message = WrongInputMessage;
                                    commandList.Add(this.commandFactory.CreateCommand("message"));
                                })
                                .Default(() =>
@@ -111,7 +179,7 @@
 
                                    if (this.context.Game.Field[userRow, userColumn].IsPopped)
                                    {
-                                       this.context.Message = CANNOT_POP_MISSING_BALLOON;
+                                       this.context.Message = CannotPopMissingBalloonMessage;
                                        commandList.Add(this.commandFactory.CreateCommand("message"));
                                    }
                                    else
@@ -130,7 +198,6 @@
                                            Console.WriteLine("Type in your name: ");
                                            string username = Console.ReadLine();
 
-                                           // TODO: Do that through the interface, it couples to PlayerScore now
                                            this.context.HighscoreTable.AddPlayer(new PlayerScore(username, this.context.Game.UserMovesCount, DateTime.Now));
                                        }
 

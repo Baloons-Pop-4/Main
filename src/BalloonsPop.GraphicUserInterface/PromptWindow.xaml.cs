@@ -12,7 +12,7 @@
 
         public PromptWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         public string UserName
@@ -25,7 +25,7 @@
 
         private void Close(object sender, RoutedEventArgs e)
         {
-            userName = this.UsernameTextBox.Text;
+            this.userName = this.UsernameTextBox.Text;
             this.Close();
         }
     }

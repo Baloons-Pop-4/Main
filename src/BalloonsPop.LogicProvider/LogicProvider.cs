@@ -3,17 +3,11 @@
     using System;
     using System.Linq;
 
-    using BalloonsPop.GameModels;
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
 
     public class LogicProvider : IGameLogicProvider
     {
-        private const int FieldRows = 4;
-        private const int FieldCols = 9;
-        private const int MinBalloonValue = 1;
-        private const int MaxBalloonValue = 4;
-
         private static readonly int[][] PopDirections = new int[][]
         { 
             new int[] { 0, 1 },
@@ -21,51 +15,30 @@
             new int[] { 1, 0 },
             new int[] { -1, 0 }
         };
-     
-        private readonly IRandomNumberGenerator rng;
 
-        private readonly IMatrixValidator matrixValidator;
+        private readonly IBalloonFieldGenerator fieldGenerator;
+
+        private readonly IBalloonPopper balloonPopper;
 
         public LogicProvider(IMatrixValidator matrixValidator, IRandomNumberGenerator rng)
         {
-            this.matrixValidator = matrixValidator;
-            this.rng = rng;
+            this.balloonPopper = new BalloonPopper(matrixValidator);
+            this.fieldGenerator = new FieldGenerator(rng);
         }
 
         public IBalloon[,] GenerateField()
         {
-            var field = new QueriableMatrix<IBalloon>(new IBalloon[FieldRows + 1, FieldCols + 1])
-                            .Select(x => this.GetRandomBalloonValue())
-                            .ToMatrix(FieldRows + 1, FieldCols + 1);
-
-            return field;
+            return this.fieldGenerator.GenerateField();
         }
 
         public void PopBalloons(IBalloon[,] field, int row, int column)
         {
-            foreach (var dir in PopDirections)
-            {
-                this.PopInDirection(field, row, column, dir[0], dir[1]);
-            }
-
-            this.Pop(field[row, column]);
+            this.balloonPopper.PopBalloons(field, row, column);
         }
 
         public void LetBalloonsFall(IBalloon[,] field)
         {
-            var asColumns = new QueriableMatrix<IBalloon>(field)
-                                        .TakeColumns()
-                                        .Select(column => column.OrderBy(x => (x.IsPopped ? -1 : 0)).ToArray())
-                                        .ToArray();
-
-            for (int i = 0; i < field.GetLength(1); i++)
-            {
-                for (int j = 0; j < field.GetLength(0); j++)
-                {
-                    field[j, i] = asColumns[i][j];
-                }
-            }
-
+            this.balloonPopper.LetBalloonsFall(field);
         }
 
         public bool GameIsOver(IBalloon[,] matrix)
@@ -73,31 +46,6 @@
             var fieldIsEmpty = new QueriableMatrix<IBalloon>(matrix).All(balloon => balloon.IsPopped);
 
             return fieldIsEmpty;
-        }
-
-        private void PopInDirection(IBalloon[,] field, int row, int col, int xUpdate, int yUpdate)
-        {
-            var balloonType = field[row, col];
-            row += yUpdate;
-            col += xUpdate;
-
-            while (this.matrixValidator.IsInsideMatrix(field, row, col) && field[row, col].Number == balloonType.Number)
-            {
-                this.Pop(field[row, col]);
-                row += yUpdate;
-                col += xUpdate;
-            }
-        }
-
-        private IBalloon GetRandomBalloonValue()
-        {
-            var randomBalloonValue = (byte)this.rng.Next(MinBalloonValue, MaxBalloonValue + 1);
-            return new Balloon() { Number = randomBalloonValue};
-        }
-
-        private void Pop(IBalloon balloon)
-        {
-            balloon.IsPopped = true;
         }
     }
 }
