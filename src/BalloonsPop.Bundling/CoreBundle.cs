@@ -20,7 +20,7 @@
         public IHighscoreTable HighScoreTable { get; set; }
 
         [Inject]
-        public IHighscoreHandler HighscoreHandler { get; set; }
+        public IHighscoreHandlingStrategy HighscoreHandlingStrategy { get; set; }
 
         [Inject]
         public ICommandFactory CommandFactory { get; set; }

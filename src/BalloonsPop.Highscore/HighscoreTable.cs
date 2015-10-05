@@ -15,41 +15,29 @@ namespace BalloonsPop.Highscore
     /// </summary>
     public class HighscoreTable : IHighscoreTable
     {
-        /// <summary>
-        /// The max amount of players allowed to exist in a <see cref="HighscoreTable"/>.
-        /// </summary>
-        private const int HighscoreMaxPlayers = 5;
+        public const int MaxPlayers = 5;
 
         /// <summary>
         /// A list of players (player scores) that actually represent a table.
         /// </summary>
-        private List<IPlayerScore> table;
+        private List<PlayerScore> table;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HighscoreTable"/> class.
         /// </summary>
-        public HighscoreTable()
+        public HighscoreTable(List<PlayerScore> playerScores = null)
         {
-            this.Table = new List<IPlayerScore>();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HighscoreTable"/> class.
-        /// </summary>
-        /// <param name="table">An already filled list of players.</param>
-        public HighscoreTable(List<IPlayerScore> table)
-        {
-            this.Table = table;
+            this.Table = playerScores ?? new List<PlayerScore>();
         }
 
         /// <summary>
         /// Gets a list of <see cref="IPlayerScore"/> entries, hence the actual table.
         /// </summary>
-        public List<IPlayerScore> Table
+        public List<PlayerScore> Table
         {
             get
             {
-                return this.table;
+                return new List<PlayerScore>(this.table);
             }
 
             private set
@@ -65,7 +53,7 @@ namespace BalloonsPop.Highscore
         /// <returns>Whether the player can be added or not.</returns>
         public bool CanAddPlayer(int movesCount)
         {
-            bool listAcceptsEntries = this.table.Count < HighscoreMaxPlayers;
+            bool listAcceptsEntries = this.table.Count < HighscoreTable.MaxPlayers;
             bool hasLowerMoves = this.table.Any(x => movesCount < x.Moves);
 
             return listAcceptsEntries || hasLowerMoves;
@@ -75,12 +63,12 @@ namespace BalloonsPop.Highscore
         /// Adds a player to a <see cref="HighscoreTable"/>.
         /// </summary>
         /// <param name="score">An instance of a class that implements the <see cref="IPlayerScore"/> interface.</param>
-        public void AddPlayer(IPlayerScore score)
+        public void AddPlayer(PlayerScore score)
         {
             this.table.Add(score);
             this.table.Sort();
 
-            if (this.table.Count > HighscoreMaxPlayers)
+            if (this.table.Count > HighscoreTable.MaxPlayers)
             {
                 this.table.RemoveAt(this.table.Count - 1);
             }

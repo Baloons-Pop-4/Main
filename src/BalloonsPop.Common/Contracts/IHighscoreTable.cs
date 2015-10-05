@@ -4,10 +4,10 @@
 
     public interface IHighscoreTable
     {
-        List<IPlayerScore> Table { get;  }
+        List<PlayerScore> Table { get;  }
 
         bool CanAddPlayer(int movesCount);
 
-        void AddPlayer(IPlayerScore score);
+        void AddPlayer(PlayerScore score);
     }
 }

@@ -58,6 +58,7 @@
     <Compile Include="Gadget tests\QueriableMatrixTests.cs" />
     <Compile Include="GameLogicTests.cs" />
     <Compile Include="GameTests.cs" />
+    <Compile Include="HighscoreTests\HighscoreTableTests.cs" />
     <Compile Include="MatrixValidatorTest.cs" />
     <Compile Include="MementoTests.cs" />
     <Compile Include="MockClasses\GameMock.cs" />

@@ -1,9 +1,9 @@
 ﻿namespace BalloonsPop.Common.Contracts
 {
-    using System.Collections.Generic;
-
-    public interface IHighscoreHandler
+    public interface IHighscoreHandlingStrategy
     {
+        string FileName { get; }
+
         void Save(IHighscoreTable table);
 
         IHighscoreTable Load();

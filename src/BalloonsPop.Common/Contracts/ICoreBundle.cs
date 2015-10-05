@@ -7,8 +7,8 @@
         IUserInputValidator UserInputValidator { get; set; }
 
         IHighscoreTable HighScoreTable { get; set; }
-        
-        IHighscoreHandler HighscoreHandler { get; set; }
+
+        IHighscoreHandlingStrategy HighscoreHandlingStrategy { get; set; }
 
         ICommandFactory CommandFactory { get; set; }
         

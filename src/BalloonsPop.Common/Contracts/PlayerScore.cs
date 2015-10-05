@@ -2,16 +2,14 @@
 // All rights reserved. The Baloons-Pop-4 team.
 // </copyright>
 
-namespace BalloonsPop.Highscore
+namespace BalloonsPop.Common.Contracts
 {
     using System;
-
-    using BalloonsPop.Common.Contracts;
 
     /// <summary>
     /// A class that has the required properties of a player score.
     /// </summary>
-    public class PlayerScore : IPlayerScore
+    public class PlayerScore : IComparable<PlayerScore>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayerScore"/> class.
@@ -46,7 +44,7 @@ namespace BalloonsPop.Highscore
         /// </summary>
         /// <param name="other">A <see cref="PlayerScore"/> instance to compare to.</param>
         /// <returns>The result from the comparison.</returns>
-        public int CompareTo(IPlayerScore other)
+        public int CompareTo(PlayerScore other)
         {
             return this.Moves.CompareTo(other.Moves);
         }

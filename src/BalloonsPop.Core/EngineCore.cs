@@ -7,7 +7,7 @@
     using BalloonsPop.Common.Gadgets;
     using BalloonsPop.Core.Contexts;
     using BalloonsPop.Core.Memento;
-    using BalloonsPop.Highscore;
+    //using BalloonsPop.Highscore;
 
     public class EngineCore
     {
@@ -29,7 +29,7 @@
 
         private ICommandFactory commandFactory;
 
-        private IHighscoreHandler highscoreHandler;
+        private IHighscoreHandlingStrategy highscoreHandlingStrategy;
 
         private IContext context;
 
@@ -38,7 +38,7 @@
                    dependencyBundle.Printer,
                    dependencyBundle.UserInputValidator,
                    dependencyBundle.HighScoreTable,
-                   dependencyBundle.HighscoreHandler,
+                   dependencyBundle.HighscoreHandlingStrategy,
                    dependencyBundle.CommandFactory,
                    dependencyBundle.GameModel,
                    dependencyBundle.LogicProvider)
@@ -49,7 +49,7 @@
                             IPrinter printer,
                             IUserInputValidator validator,
                             IHighscoreTable highScoreTable,
-                            IHighscoreHandler highscoreHandler,
+                            IHighscoreHandlingStrategy highscoreHandlingStrategy,
                             ICommandFactory commandFactory,
                             IGameModel gameModel,
                             IGameLogicProvider gameLogicProvider)
@@ -64,8 +64,8 @@
             };
 
             this.validator = validator;
+            this.highscoreHandlingStrategy = highscoreHandlingStrategy;
             this.commandFactory = commandFactory;
-            this.highscoreHandler = highscoreHandler;
         }
 
         protected IContext Context
@@ -80,15 +80,15 @@
             }
         }
 
-        protected IHighscoreHandler HighscoreHandler
+        protected IHighscoreHandlingStrategy HighscoreHandler
         {
             get
             {
-                return this.highscoreHandler;
+                return this.highscoreHandlingStrategy;
             }
             set
             {
-                this.highscoreHandler = value;
+                this.highscoreHandlingStrategy = value;
             }
         }
 
@@ -161,7 +161,7 @@
                                    this.context.Message = OnExitMessage;
                                    commandList.Add(this.commandFactory.CreateCommand("message"));
                                    commandList.Add(this.commandFactory.CreateCommand("exit"));
-                                   this.highscoreHandler.Save(this.context.HighscoreTable);
+                                   this.highscoreHandlingStrategy.Save(this.context.HighscoreTable);
                                })
                                .Case(
                                !this.validator.IsValidUserMove(userCommand), 
@@ -198,7 +198,6 @@
                                            Console.WriteLine("Type in your name: ");
                                            string username = Console.ReadLine();
 
-                                           // TODO: Do that through the interface, it couples to PlayerScore now
                                            this.context.HighscoreTable.AddPlayer(new PlayerScore(username, this.context.Game.UserMovesCount, DateTime.Now));
                                        }
 
