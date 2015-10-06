@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="663">
     <Grid>
-        <Button x:Name="StartGameButton" Content="Start" HorizontalAlignment="Left" Margin="242,235,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="StartBtn" Content="Start" HorizontalAlignment="Left" Margin="242,235,0,0" VerticalAlignment="Top" Width="75"/>
         <Grid x:Name="BalloonField" Height="200" Margin="347,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="293">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>

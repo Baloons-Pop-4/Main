@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BalloonsPop.GraphicUserInterface
+﻿namespace BalloonsPop.GraphicUserInterface
 {
     using System;
     using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
-    using System.Windows.Media.Imaging;
-
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
     using BalloonsPop.GraphicUserInterface.Contracts;
@@ -58,21 +50,13 @@ namespace BalloonsPop.GraphicUserInterface
             var imagesDir = currentDir.Substring(0, currentDir.IndexOf("bin"));
             this.sourcePathTemplate = imagesDir + "Images\\{0}.png";
 
-            this.Window.StartButton.Click += (s, e) =>
+            this.Window.CommandButtons.ForEach(button =>
+            {
+                button.Value.Click += (s, e) => 
                 {
-                    this.Window.StartButton.Content = "Restart";
-                    this.Raise(s, new UserCommandArgs("restart"));
+                    this.Raise(s, new UserCommandArgs(button.Key));
                 };
-
-            this.Window.UndoButton.Click += (s, e) =>
-                {
-                    this.Raise(s, new UserCommandArgs("undo"));
-                };
-
-            this.Window.ExitButton.Click += (s, e) =>
-                {
-                    this.Raise(s, new UserCommandArgs("exit"));
-                };
+            });
         }
 
         public void PrintField(IBalloon[,] matrix)

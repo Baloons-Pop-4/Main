@@ -1,23 +1,43 @@
 ﻿namespace BalloonsPop.GraphicUserInterface
 {
     using System;
-    using System.Linq;
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Media;
-    using System.Windows.Media.Imaging;
-
-    using BalloonsPop.Common.Contracts;
-    using BalloonsPop.GraphicUserInterface.Contracts;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using BalloonsPop.Common.Contracts;
+using BalloonsPop.GraphicUserInterface.Contracts;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window//, IEventBasedUserInterface
     {
+        private const string ExitButtonKey = "exit";
+        private const string RestartButtonKey = "restart";
+        private const string UndoButtonKey = "undo";
+
+        private readonly IDictionary<string, Button> commandButtons;
+
         public MainWindow()
         {
             this.InitializeComponent();
+            this.commandButtons = new Dictionary<string, Button>()
+            {
+                { ExitButtonKey, this.ExitBtn },
+                { RestartButtonKey, this.StartBtn },
+                { UndoButtonKey, this.UndoBtn }
+            };
+        }
+
+        public IDictionary<string, Button> CommandButtons
+        {
+            get
+            {
+                return this.commandButtons;
+            }
         }
 
         public Grid BalloonGrid
@@ -32,7 +52,7 @@
         {
             get
             {
-                return this.StartGameButton;
+                return this.commandButtons[RestartButtonKey];
             }
         }
 
@@ -40,7 +60,7 @@
         {
             get
             {
-                return this.ExitBtn;
+                return this.commandButtons[ExitButtonKey];
             }
         }
 
@@ -48,7 +68,7 @@
         {
             get
             {
-                return this.UndoBtn;
+                return this.commandButtons[UndoButtonKey];
             }
         }
 
@@ -85,10 +105,5 @@
                 this.UserMovesCount.Text = value;
             }
         }
-
-        //private void Button_Click_1(object sender, RoutedEventArgs e)
-        //{
-        //    Application.Current.Shutdown(348944);
-        //}
     }
 }
