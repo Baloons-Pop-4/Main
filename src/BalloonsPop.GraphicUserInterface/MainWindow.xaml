@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="905">
     <Grid>
-        <Button Content="Start" HorizontalAlignment="Left" Margin="118,235,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button x:Name="StartGameButton" Content="Start" HorizontalAlignment="Left" Margin="242,235,0,0" VerticalAlignment="Top" Width="75"/>
         <Grid x:Name="BalloonField" Height="200" Margin="345,10,148,0" VerticalAlignment="Top">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
@@ -40,7 +40,8 @@
                 <ColumnDefinition Width="50"></ColumnDefinition>
             </Grid.ColumnDefinitions>
         </Grid>
-        <Button Content="Exit" HorizontalAlignment="Left" Margin="279,235,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+        <Button Content="Exit" HorizontalAlignment="Left" Margin="242,275,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+        <TextBox x:Name="MessageContainer" HorizontalAlignment="Left" Height="75" Margin="28,230,0,0" TextWrapping="Wrap" Text="Welcome to Balloons Popping!" VerticalAlignment="Top" Width="181" RenderTransformOrigin="-0.004,0.463"/>
 
     </Grid>
 </Window>

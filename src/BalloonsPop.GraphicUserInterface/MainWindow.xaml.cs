@@ -13,7 +13,7 @@
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, IEventBasedUserInterface
+    public partial class MainWindow : Window//, IEventBasedUserInterface
     {
         private const int BalloonImgHeight = 40;
         private const int BalloonImgWidth = 30;
@@ -30,9 +30,9 @@
             this.InitializeComponent();
 
             // this.userName = this.ReadUserInput();
-            this.InitializeImagePath();
-            this.InitializeHighscoreGrid();
-            this.balloonField = this.GetInitializedBalloonField();
+            //this.InitializeImagePath();
+            //this.InitializeHighscoreGrid();
+            //this.balloonField = this.GetInitializedBalloonField();
         }
 
         public Grid BalloonGrid
@@ -47,7 +47,7 @@
         {
             get
             {
-                return this.StartButton;
+                return this.StartGameButton;
             }
         }
 
@@ -59,166 +59,179 @@
             }
         }
 
-        public event EventHandler Raise;
-
-        public void PrintMessage(string message)
+        public string Message
         {
-            MessageBox.Show(message);
-        }
-
-        public void PrintField(IBalloon[,] matrix)
-        {
-            for (int row = 0, rowsCount = matrix.GetLength(0); row < rowsCount; row++)
+            get
             {
-                for (int col = 0, colsCount = matrix.GetLength(1); col < colsCount; col++)
-                {
-                    var sourceNumber = matrix[row, col].IsPopped ? 0 : matrix[row, col].Number;
-                    this.SetSource(this.balloonField[row, col], sourceNumber);
-                }
+                return this.MessageContainer.Text;
+            }
+
+            set
+            {
+                this.MessageContainer.Text = value;
             }
         }
 
-        public string ReadUserInput()
-        {
-            var enterUserNameDialog = new PromptWindow();
-            enterUserNameDialog.ShowDialog();
+        //public event EventHandler Raise;
 
-            return enterUserNameDialog.UserName;
-        }
+        //public void PrintMessage(string message)
+        //{
+        //    MessageBox.Show(message);
+        //}
 
-        public void PrintHighscore(IHighscoreTable table)
-        {
-            // TODO: Implement this method
-            throw new NotImplementedException("Implement highscore printing, u lazy ginger");
-        }
+        //public void PrintField(IBalloon[,] matrix)
+        //{
+        //    for (int row = 0, rowsCount = matrix.GetLength(0); row < rowsCount; row++)
+        //    {
+        //        for (int col = 0, colsCount = matrix.GetLength(1); col < colsCount; col++)
+        //        {
+        //            var sourceNumber = matrix[row, col].IsPopped ? 0 : matrix[row, col].Number;
+        //            this.SetSource(this.balloonField[row, col], sourceNumber);
+        //        }
+        //    }
+        //}
 
-        private void InitializeImagePath()
-        {
-            var currentDir = Environment.CurrentDirectory;
+        //public string ReadUserInput()
+        //{
+        //    var enterUserNameDialog = new PromptWindow();
+        //    enterUserNameDialog.ShowDialog();
 
-            this.imageFolderPath = currentDir.Substring(0, currentDir.IndexOf("bin"));
-        }
+        //    return enterUserNameDialog.UserName;
+        //}
 
-        private Image[,] GetInitializedBalloonField()
-        {
-            var field = new Image[5, 10];
+        //public void PrintHighscore(IHighscoreTable table)
+        //{
+        //    // TODO: Implement this method
+        //    throw new NotImplementedException("Implement highscore printing, u lazy ginger");
+        //}
 
-            for (int row = 0, rowsCount = 5; row < rowsCount; row++)
-            {
-                for (int col = 0, colsCount = 10; col < colsCount; col++)
-                {
-                    this.InitializeImageFielCell(row, col, field);
-                }
-            }
+        //private void InitializeImagePath()
+        //{
+        //    var currentDir = Environment.CurrentDirectory;
 
-            return field;
-        }
+        //    this.imageFolderPath = currentDir.Substring(0, currentDir.IndexOf("bin"));
+        //}
 
-        private void InitializeImageFielCell(int row, int col, Image[,] field)
-        {
-            field[row, col] = new Image();
+        //private Image[,] GetInitializedBalloonField()
+        //{
+        //    var field = new Image[5, 10];
 
-            var coordinatesAsString = row + " " + col;
+        //    for (int row = 0, rowsCount = 5; row < rowsCount; row++)
+        //    {
+        //        for (int col = 0, colsCount = 10; col < colsCount; col++)
+        //        {
+        //            this.InitializeImageFielCell(row, col, field);
+        //        }
+        //    }
 
-            field[row, col].MouseDown += (sender, e) =>
-            {
-                this.Raise(sender, new ClickEventArgs(coordinatesAsString));
-            };
+        //    return field;
+        //}
 
-            this.SetBalloonImageSize(field[row, col]);
-            this.BalloonField.Children.Add(field[row, col]);
-            this.SetPositionInGrid(field[row, col], row, col);
-        }
+        //private void InitializeImageFielCell(int row, int col, Image[,] field)
+        //{
+        //    field[row, col] = new Image();
 
-        private void InitializeHighscoreGrid()
-        {
-            var wrappedPlayer = this.GetTextBlockWithBorder("Player");
-            var wrappedPoints = this.GetTextBlockWithBorder("Points");
+        //    var coordinatesAsString = row + " " + col;
 
-            this.HighscoreTable.Children.Add(wrappedPlayer);
-            this.SetPositionInGrid(wrappedPlayer, 0, 1);
+        //    field[row, col].MouseDown += (sender, e) =>
+        //    {
+        //        this.Raise(sender, new ClickEventArgs(coordinatesAsString));
+        //    };
 
-            this.HighscoreTable.Children.Add(wrappedPoints);
-            this.SetPositionInGrid(wrappedPoints, 0, 2);
-        }
+        //    this.SetBalloonImageSize(field[row, col]);
+        //    this.BalloonField.Children.Add(field[row, col]);
+        //    this.SetPositionInGrid(field[row, col], row, col);
+        //}
 
-        private void FillHighscoreGridRow(string playerName, string playerPoints, int row)
-        {
-            this.FillHighscoreGridField(playerName, row, 1);
-            this.FillHighscoreGridField(playerPoints, row, 2);
-        }
+        //private void InitializeHighscoreGrid()
+        //{
+        //    var wrappedPlayer = this.GetTextBlockWithBorder("Player");
+        //    var wrappedPoints = this.GetTextBlockWithBorder("Points");
 
-        private void FillHighscoreGridField(string content, int row, int col)
-        {
-            var wrappedPlayer = this.GetTextBlockWithBorder(content);
-            this.HighscoreTable.Children.Add(wrappedPlayer);
-            this.SetPositionInGrid(wrappedPlayer, row, col);
-        }
+        //    this.HighscoreTable.Children.Add(wrappedPlayer);
+        //    this.SetPositionInGrid(wrappedPlayer, 0, 1);
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var senderAsButton = sender as Button;
+        //    this.HighscoreTable.Children.Add(wrappedPoints);
+        //    this.SetPositionInGrid(wrappedPoints, 0, 2);
+        //}
 
-            senderAsButton.Content = "Restart";
+        //private void FillHighscoreGridRow(string playerName, string playerPoints, int row)
+        //{
+        //    this.FillHighscoreGridField(playerName, row, 1);
+        //    this.FillHighscoreGridField(playerPoints, row, 2);
+        //}
 
-            this.Raise(sender, new ClickEventArgs("RESTART"));
-        }
+        //private void FillHighscoreGridField(string content, int row, int col)
+        //{
+        //    var wrappedPlayer = this.GetTextBlockWithBorder(content);
+        //    this.HighscoreTable.Children.Add(wrappedPlayer);
+        //    this.SetPositionInGrid(wrappedPlayer, row, col);
+        //}
 
-        private void SetBalloonImageSize(Image img)
-        {
-            img.Height = BalloonImgHeight;
-            img.Width = BalloonImgWidth;
-        }
+        ////private void Button_Click(object sender, RoutedEventArgs e)
+        ////{
+        ////    var senderAsButton = sender as Button;
 
-        private void SetSource(Image img, int balloonNumber)
-        {
-            var uri = this.GetBalloonImageUri(this.colors[balloonNumber]);
-            img.Source = new BitmapImage(uri);
-            this.GetBalloonImageUri("white");
-        }
+        ////    senderAsButton.Content = "Restart";
 
-        private Uri GetBalloonImageUri(string color)
-        {
-            var uri = new Uri(this.imageFolderPath + @"Images\" + color + ".png");
-            return uri;
-        }
+        ////    this.Raise(sender, new ClickEventArgs("RESTART"));
+        ////}
 
-        private void SetPositionInGrid(UIElement element, int row, int col)
-        {
-            Grid.SetRow(element, row);
-            Grid.SetColumn(element, col);
-        }
+        //private void SetBalloonImageSize(Image img)
+        //{
+        //    img.Height = BalloonImgHeight;
+        //    img.Width = BalloonImgWidth;
+        //}
 
-        private Border GetTextBlockWithBorder(string content)
-        {
-            return this.AddTextBlockToBorder(this.GetBorder(), content);
-        }
+        //private void SetSource(Image img, int balloonNumber)
+        //{
+        //    var uri = this.GetBalloonImageUri(this.colors[balloonNumber]);
+        //    img.Source = new BitmapImage(uri);
+        //    this.GetBalloonImageUri("white");
+        //}
 
-        private Border GetBorder()
-        {
-            var result = new Border();
+        //private Uri GetBalloonImageUri(string color)
+        //{
+        //    var uri = new Uri(this.imageFolderPath + @"Images\" + color + ".png");
+        //    return uri;
+        //}
 
-            result.BorderThickness = new Thickness(1, 2, 1, 2);
-            result.BorderBrush = Brushes.Coral;
+        //private void SetPositionInGrid(UIElement element, int row, int col)
+        //{
+        //    Grid.SetRow(element, row);
+        //    Grid.SetColumn(element, col);
+        //}
 
-            return result;
-        }
+        //private Border GetTextBlockWithBorder(string content)
+        //{
+        //    return this.AddTextBlockToBorder(this.GetBorder(), content);
+        //}
 
-        private Border AddTextBlockToBorder(Border border, string content)
-        {
-            var textBlock = new TextBlock();
-            textBlock.Text = content;
-            this.StyleTextBlock(textBlock);
-            border.Child = textBlock;
+        //private Border GetBorder()
+        //{
+        //    var result = new Border();
 
-            return border;
-        }
+        //    result.BorderThickness = new Thickness(1, 2, 1, 2);
+        //    result.BorderBrush = Brushes.Coral;
 
-        private void StyleTextBlock(TextBlock block)
-        {
-            block.TextAlignment = TextAlignment.Center;
-            block.VerticalAlignment = System.Windows.VerticalAlignment.Center;
-        }
+        //    return result;
+        //}
+
+        //private Border AddTextBlockToBorder(Border border, string content)
+        //{
+        //    var textBlock = new TextBlock();
+        //    textBlock.Text = content;
+        //    this.StyleTextBlock(textBlock);
+        //    border.Child = textBlock;
+
+        //    return border;
+        //}
+
+        //private void StyleTextBlock(TextBlock block)
+        //{
+        //    block.TextAlignment = TextAlignment.Center;
+        //    block.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+        //}
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {

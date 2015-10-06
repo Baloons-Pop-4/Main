@@ -36,6 +36,11 @@ namespace BalloonsPop.GraphicUserInterface
             this.Manipulator = manipulator;
             this.ResourceProvider = resourceProvider;
             this.sourcePathTemplate = this.ResourceProvider.GetBalloonImagesPath() + "Images\\{0}.png";
+            this.Window.StartButton.Click += (s, e) =>
+                {
+                    this.Window.StartButton.Content = "Restart";
+                    this.Raise(s, new ClickEventArgs("restart"));
+                };
         }
 
         public void PrintField(IBalloon[,] matrix)
@@ -53,7 +58,7 @@ namespace BalloonsPop.GraphicUserInterface
                 for (int col = 0; col < colsCount; col++)
                 {
                     var colorNumber = matrix[row, col].IsPopped ? 0 : matrix[row, col].Number;
-                    var sourcePath = string.Format(this.sourcePathTemplate, colorNumber);
+                    var sourcePath = string.Format(this.sourcePathTemplate, colors[colorNumber]);
                     this.Manipulator.SetSource(this.balloons[row, col], sourcePath);
                 }
             }
@@ -71,10 +76,14 @@ namespace BalloonsPop.GraphicUserInterface
 
                     var commandToPassForButton = i + " " + j;
 
+                    this.Manipulator.SetPositionInGrid(this.balloons[i, j], i, j);
+
                     this.balloons[i, j].MouseDown += (s, e) =>
                     {
                         this.Raise(s, new ClickEventArgs(commandToPassForButton));
                     };
+
+                    this.Window.BalloonGrid.Children.Add(this.balloons[i, j]);
                 }
             }
         }
@@ -88,12 +97,12 @@ namespace BalloonsPop.GraphicUserInterface
 
         public void PrintMessage(string message)
         {
-            throw new NotImplementedException();
+            this.Window.Message = message;
         }
 
         public void PrintHighscore(IHighscoreTable table)
         {
-            throw new NotImplementedException();
+            this.Window.Message = "ggwp";
         }
     }
 }

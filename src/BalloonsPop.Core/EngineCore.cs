@@ -132,7 +132,7 @@
         {
             var commandList = new List<ICommand>();
 
-            new Switch<string>(userCommand)
+            new Switch<string>(userCommand.ToUpper())
                                .Case(
                                Restart,
                                () =>
