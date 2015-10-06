@@ -14,27 +14,50 @@ namespace BalloonsPop.GraphicUserInterface
     using System.Windows.Media.Imaging;
 
     using BalloonsPop.Common.Contracts;
+    using BalloonsPop.Common.Gadgets;
     using BalloonsPop.GraphicUserInterface.Contracts;
 
     using BalloonsPop.GraphicUserInterface.Gadgets;
 
     public class MainWindowController : IEventBasedUserInterface
     {
+        private const int BalloonImgHeight = 40;
+        private const int BalloonImgWidth = 30;
+
         private readonly string[] colors = new string[] { "white", "red", "blue", "green", "yellow" };
 
         private readonly string sourcePathTemplate;
+
+        private static readonly Border highscoreGridBorder = new Border()
+            {
+                BorderThickness = new Thickness(1, 2, 1, 2),
+                BorderBrush = Brushes.Coral
+            };
+
+        private static readonly TextBlock highscoreCellContent = new TextBlock()
+            {
+                TextAlignment = TextAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center
+            };
+
+        private static readonly Image balloonImage = new Image()
+            {
+                Height = BalloonImgHeight,
+                Width = BalloonImgWidth
+            };
 
         private Image[,] balloons;
 
         public MainWindow Window { get; private set; }
 
-        public WpfResourceProvider ResourceProvider { get; private set; }
-
-        public MainWindowController(MainWindow window, WpfResourceProvider resourceProvider)
+        public MainWindowController(MainWindow window)
         {
             this.Window = window;
-            this.ResourceProvider = resourceProvider;
-            this.sourcePathTemplate = this.ResourceProvider.GetBalloonImagesPath() + "Images\\{0}.png";
+
+            var currentDir = Environment.CurrentDirectory;
+            var imagesDir = currentDir.Substring(0, currentDir.IndexOf("bin"));
+            this.sourcePathTemplate = imagesDir + "Images\\{0}.png";
+
             this.Window.StartButton.Click += (s, e) =>
                 {
                     this.Window.StartButton.Content = "Restart";
@@ -71,7 +94,7 @@ namespace BalloonsPop.GraphicUserInterface
             {
                 for (int j = 0; j < colsCount; j++)
                 {
-                    this.balloons[i, j] = this.ResourceProvider.GetBalloonImage();
+                    this.balloons[i, j] = balloonImage.Clone();
 
                     var commandToPassForButton = i + " " + j;
 
@@ -83,7 +106,7 @@ namespace BalloonsPop.GraphicUserInterface
                         this.Raise(s, new ClickEventArgs(commandToPassForButton));
                     };
 
-                    this.balloons[i, j].WrapIn(this.Window.BalloonGrid);
+                    this.balloons[i, j].AddAsChildTo(this.Window.BalloonGrid);
 
                     //this.Window.BalloonGrid.Children.Add(this.balloons[i, j]);
                 }
@@ -104,31 +127,30 @@ namespace BalloonsPop.GraphicUserInterface
 
         public void PrintHighscore(IHighscoreTable table)
         {
-            var row = 0;
             this.Window.Rankings.Children.Clear();
-            foreach (var score in table.Table)
+
+            var tableAsMapList = table.ToStringList();
+
+            int rowIndex = 0;
+
+            tableAsMapList.ForEach(record =>
             {
-                var border1 = this.ResourceProvider.GetBorder();
-                var border2 = this.ResourceProvider.GetBorder();
-                var border3 = this.ResourceProvider.GetBorder();
+                int colIndex = 0;
 
-                var playerName = this.ResourceProvider.GetTextBlock(score.Name);
-                var playerScore = this.ResourceProvider.GetTextBlock(score.Moves.ToString());
-                var playerRank = this.ResourceProvider.GetTextBlock((row + 1).ToString());
+                record.ForEach(infoField =>
+                {
+                    infoField
+                        .WrapInTextBox(highscoreCellContent.Clone())
+                        .WrapInBorder(highscoreGridBorder.Clone())
+                        .SetGridRow(rowIndex)
+                        .SetGridCol(colIndex++)
+                        .AddAsChildTo(this.Window.Rankings);
 
-                border1.Child = playerName;
-                border2.Child = playerScore;
-                border3.Child = playerRank;
+                    //colIndex++;
+                });
 
-                border3.SetGridRow(row).SetGridCol(0);
-                border1.SetGridRow(row).SetGridCol(1);
-                border2.SetGridRow(row).SetGridCol(2);
-
-                this.Window.Rankings.Children.Add(border3);
-                this.Window.Rankings.Children.Add(border1);
-                this.Window.Rankings.Children.Add(border2);
-                row++;
-            }
+                rowIndex++;
+            });
         }
     }
 }

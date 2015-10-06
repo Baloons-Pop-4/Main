@@ -60,11 +60,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Gadgets\IHighscoreTableExtensions.cs" />
+    <Compile Include="Gadgets\StringExtensions.cs" />
     <Compile Include="Gadgets\WpfElementExtensions.cs" />
     <Compile Include="MainWindowController.cs" />
     <Compile Include="WpfBundle.cs" />
     <Compile Include="WpfModule.cs" />
-    <Compile Include="WpfResourceProvider.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

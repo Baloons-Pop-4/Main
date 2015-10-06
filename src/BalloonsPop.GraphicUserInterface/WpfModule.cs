@@ -17,7 +17,7 @@
         public override void Load()
         {
             var window = new MainWindow();
-            var controller = new MainWindowController(window, new WpfResourceProvider());
+            var controller = new MainWindowController(window);
 
             this.AppKernel.Bind<IEventBasedUserInterface>().ToMethod(ctx => controller).InSingletonScope();
             this.AppKernel.Bind<IPrinter>().ToMethod(ctx => controller).InSingletonScope();

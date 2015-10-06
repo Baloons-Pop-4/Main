@@ -6,23 +6,21 @@
 
     public static class IHighscoreTableExtensions
     {
-        private const string PlayerScoreKey = "score";
-        private const string PlayerNameKey = "name";
-        private const string PlayerTimeKey = "time";
-
-        public static IList<IDictionary<string, string>> ToStringList(this IHighscoreTable table)
+        public static IList<IList<string>> ToStringList(this IHighscoreTable table)
         {
-            var result = new List<IDictionary<string, string>>();
+            var result = new List<IList<string>>();
+
+            var index = 1;
 
             foreach (var record in table.Table)
             {
-                var recordAsMap = new Dictionary<string, string>();
+                var currentRecord = new List<string>();
 
-                recordAsMap.Add(PlayerScoreKey, record.Moves.ToString());
-                recordAsMap.Add(PlayerNameKey, record.Name);
-                recordAsMap.Add(PlayerTimeKey, record.Time.ToString());
-
-                result.Add(recordAsMap);
+                currentRecord.Add((index++).ToString());
+                currentRecord.Add(record.Name);
+                currentRecord.Add(record.Moves.ToString());
+                
+                result.Add(currentRecord);
             }
 
             return result;
