@@ -36,7 +36,7 @@
             var field = new QueriableMatrix<IBalloon>(new IBalloon[FieldRows + 1, FieldCols + 1])
                             .Select(x => this.GetRandomBalloonValue())
                             .ToMatrix(FieldRows + 1, FieldCols + 1);
-
+            // field[0, 0].IsPopped = false;
             return field;
         }
 

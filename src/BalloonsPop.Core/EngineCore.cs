@@ -174,8 +174,8 @@
                                {
                                    commandList.Add(this.commandFactory.CreateCommand("save"));
 
-                                   var userRow = int.Parse(userCommand[0].ToString());
-                                   var userColumn = int.Parse(userCommand[2].ToString());
+                                   var userRow = userCommand[0].ToInt32();
+                                   var userColumn = userCommand[2].ToInt32();
 
                                    if (this.context.Game.Field[userRow, userColumn].IsPopped)
                                    {
@@ -189,25 +189,8 @@
                                        commandList.Add(this.commandFactory.CreateCommand("pop"));
                                    }
 
-                                   if (this.context.LogicProvider.GameIsOver(this.context.Game.Field))
-                                   {
-                                       this.context.Message = "Gratz, completed in " + this.context.Game.UserMovesCount + " moves.";
-                                       if (this.context.HighscoreTable.CanAddPlayer(this.context.Game.UserMovesCount))
-                                       {
-                                           // TODO: Abstract to work with all types of UIs, not just the console?
-                                           Console.WriteLine("Type in your name: ");
-                                           string username = Console.ReadLine();
-
-                                           this.context.HighscoreTable.AddPlayer(new PlayerScore(username, this.context.Game.UserMovesCount, DateTime.Now));
-                                       }
-
-                                       commandList.Add(this.commandFactory.CreateCommand("message"));
-                                       commandList.Add(this.commandFactory.CreateCommand("restart"));
-                                   }
-                                   else
-                                   {
-                                       commandList.Add(this.commandFactory.CreateCommand("field"));
-                                   }
+                                   commandList.Add(this.commandFactory.CreateCommand("gameover"));
+                                   commandList.Add(this.commandFactory.CreateCommand("field"));
                                });
 
             return commandList;
