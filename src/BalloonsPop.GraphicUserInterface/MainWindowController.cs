@@ -13,43 +13,17 @@
 
     public class MainWindowController : IEventBasedUserInterface
     {
-        private const int BalloonImgHeight = 40;
-        private const int BalloonImgWidth = 30;
-
-        private readonly string[] colors = new string[] { "white", "red", "blue", "green", "yellow" };
-
-        private readonly string sourcePathTemplate;
-
-        private static readonly Border highscoreGridBorder = new Border()
-            {
-                BorderThickness = new Thickness(1, 2, 1, 2),
-                BorderBrush = Brushes.Coral
-            };
-
-        private static readonly TextBlock highscoreCellContent = new TextBlock()
-            {
-                TextAlignment = TextAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center
-            };
-
-        private static readonly Image balloonImage = new Image()
-            {
-                Height = BalloonImgHeight,
-                Width = BalloonImgWidth
-            };
-
         private Image[,] balloons;
 
         public MainWindow Window { get; private set; }
 
-        public MainWindowController(MainWindow window)
+        public IBalloonsWpfResourceProvider Resources { get; private set; }
+
+        public MainWindowController(MainWindow window, IBalloonsWpfResourceProvider resources)
         {
             this.Window = window;
 
-            var currentDir = Environment.CurrentDirectory;
-            var imagesDir = currentDir.Substring(0, currentDir.IndexOf("bin"));
-            this.sourcePathTemplate = imagesDir + "Images\\{0}.png";
-
+            this.Resources = resources;
             this.Window.CommandButtons.ForEach(button =>
             {
                 button.Value.Click += (s, e) =>
@@ -74,7 +48,7 @@
                 for (int col = 0; col < colsCount; col++)
                 {
                     var colorNumber = matrix[row, col].IsPopped ? 0 : matrix[row, col].Number;
-                    var sourcePath = string.Format(this.sourcePathTemplate, colors[colorNumber]);
+                    var sourcePath = string.Format(this.Resources.ImagePathTemplate, this.Resources.Colors[colorNumber]);
                     this.balloons[row, col].SetSource(sourcePath);
                 }
             }
@@ -90,7 +64,7 @@
             {
                 for (int j = 0; j < colsCount; j++)
                 {
-                    this.balloons[i, j] = balloonImage.Clone();
+                    this.balloons[i, j] = this.Resources.BalloonImage.Clone();
 
                     var commandToPassForButton = i + " " + j;
 
@@ -146,8 +120,8 @@
                 record.ForEach(infoField =>
                 {
                     infoField
-                        .WrapInTextBox(highscoreCellContent.Clone())
-                        .WrapInBorder(highscoreGridBorder.Clone())
+                        .WrapInTextBox(this.Resources.HighscoreGridCell.Clone())
+                        .WrapInBorder(this.Resources.HighscoreGridBorder.Clone())
                         .SetGridRow(rowIndex)
                         .SetGridCol(colIndex++)
                         .AddAsChildTo(this.Window.Rankings);

@@ -61,10 +61,12 @@
     </ApplicationDefinition>
     <Compile Include="Commands\WpfCommandModule.cs" />
     <Compile Include="Commands\WpfExitCommand.cs" />
+    <Compile Include="Contracts\IBalloonsWpfResourceProvider.cs" />
     <Compile Include="Gadgets\IHighscoreTableExtensions.cs" />
     <Compile Include="Gadgets\StringExtensions.cs" />
     <Compile Include="Gadgets\WpfElementExtensions.cs" />
     <Compile Include="MainWindowController.cs" />
+    <Compile Include="Resources.cs" />
     <Compile Include="WpfBundle.cs" />
     <Compile Include="WpfModule.cs" />
     <Page Include="MainWindow.xaml">
