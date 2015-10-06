@@ -48,6 +48,7 @@
             this.RegisterCommand("undo", () => new UndoCommand());
             this.RegisterCommand("pop", () => new PopBalloonCommand());
             this.RegisterCommand("save", () => new SaveCommand());
+            this.RegisterCommand("gameover", () => new GameOverHandlingCommand());
         }
     }
 }

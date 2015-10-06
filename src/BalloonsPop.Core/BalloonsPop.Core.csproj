@@ -49,6 +49,7 @@
     <Compile Include="Commands\CommandFactory.cs" />
     <Compile Include="Commands\CommandFactoryModule.cs" />
     <Compile Include="Commands\ExitCommand.cs" />
+    <Compile Include="Commands\GameOverHandlingCommand.cs" />
     <Compile Include="Commands\PopBalloonCommand.cs" />
     <Compile Include="Commands\PrintFieldCommand.cs" />
     <Compile Include="Commands\PrintHighscoreCommand.cs" />
