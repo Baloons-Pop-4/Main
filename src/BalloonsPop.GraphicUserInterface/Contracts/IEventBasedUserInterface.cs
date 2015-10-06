@@ -6,7 +6,7 @@
 
     public interface IEventBasedUserInterface : IPrinter
     {
-        event EventHandler Raise;
+        event EventHandler RaiseCommand;
 
         void Show();
     }

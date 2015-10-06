@@ -32,6 +32,8 @@ using BalloonsPop.GraphicUserInterface.Contracts;
             };
         }
 
+        public EventHandler Raise;
+
         public IDictionary<string, Button> CommandButtons
         {
             get

@@ -52,9 +52,9 @@
 
             this.Window.CommandButtons.ForEach(button =>
             {
-                button.Value.Click += (s, e) => 
+                button.Value.Click += (s, e) =>
                 {
-                    this.Raise(s, new UserCommandArgs(button.Key));
+                    this.Window.Raise(s, new UserCommandArgs(button.Key));
                 };
             });
         }
@@ -99,7 +99,7 @@
                         .SetGridCol(j)
                         .MouseDown += (s, e) =>
                     {
-                        this.Raise(s, new UserCommandArgs(commandToPassForButton));
+                        this.Window.Raise(s, new UserCommandArgs(commandToPassForButton));
                     };
 
                     this.balloons[i, j].AddAsChildTo(this.Window.BalloonGrid);
@@ -109,7 +109,17 @@
             }
         }
 
-        public event EventHandler Raise;
+        public event EventHandler RaiseCommand
+        {
+            add
+            {
+                this.Window.Raise += value;
+            }
+            remove
+            {
+                this.Window.Raise -= value;
+            }
+        }
 
         public void Show()
         {

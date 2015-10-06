@@ -9,7 +9,7 @@
         public EventEngine(WpfBundle dependencyBundle)
             : base(dependencyBundle)
         {
-            dependencyBundle.Gui.Raise += new EventHandler(this.HandleUserInput);
+            dependencyBundle.Gui.RaiseCommand += new EventHandler(this.HandleUserInput);
             this.Context.Game.Field = this.Context.LogicProvider.GenerateField();    
         }
 
