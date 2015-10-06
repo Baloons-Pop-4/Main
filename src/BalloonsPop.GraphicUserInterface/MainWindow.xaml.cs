@@ -43,11 +43,22 @@
             }
         }
 
-        // private static MainWindow instance = new MainWindow();
-        // public static IEventBasedUserInterface GetInstance()
-        // {
-        // return instance;
-        // }
+        public Button StartButton
+        {
+            get
+            {
+                return this.StartButton;
+            }
+        }
+
+        public Button ExitButton
+        {
+            get
+            {
+                return this.ExitButton;
+            }
+        }
+
         public event EventHandler Raise;
 
         public void PrintMessage(string message)
@@ -57,7 +68,6 @@
 
         public void PrintField(IBalloon[,] matrix)
         {
-            // MessageBox.Show("kichka");
             for (int row = 0, rowsCount = matrix.GetLength(0); row < rowsCount; row++)
             {
                 for (int col = 0, colsCount = matrix.GetLength(1); col < colsCount; col++)
@@ -97,18 +107,6 @@
             {
                 for (int col = 0, colsCount = 10; col < colsCount; col++)
                 {
-                    // this.balloonField[row, col] = new Image();
-
-                    // var coordinatesAsString = row + " " + col;
-
-                    // this.balloonField[row, col].MouseDown += (sender, e) =>
-                    // {
-                    // this.Raise(sender, new ClickEventArgs(coordinatesAsString));
-                    // };
-
-                    // this.SetBalloonImageSize(this.balloonField[row, col]);
-                    // this.BalloonField.Children.Add(this.balloonField[row, col]);
-                    // this.SetPositionInGrid(this.balloonField[row, col], row, col);
                     this.InitializeImageFielCell(row, col, field);
                 }
             }

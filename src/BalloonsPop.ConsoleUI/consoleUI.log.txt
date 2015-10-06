@@ -96,3 +96,5 @@ UTC Date - 2015-10-05 14:40:55,210; [c:\Users\Ivaylo\Documents\Main\src\Balloons
 UTC Date - 2015-10-05 15:48:09,603; [c:\Users\Pc\Desktop\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Start initialization
 UTC Date - 2015-10-05 15:48:09,714; [c:\Users\Pc\Desktop\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Starting the game
 >>>>>>> master
+UTC Date - 2015-10-05 21:34:51,296; [c:\Users\Pc\Desktop\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Start initialization
+UTC Date - 2015-10-05 21:34:51,411; [c:\Users\Pc\Desktop\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Starting the game

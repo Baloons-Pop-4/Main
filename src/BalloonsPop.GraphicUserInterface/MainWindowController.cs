@@ -16,91 +16,84 @@ namespace BalloonsPop.GraphicUserInterface
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.GraphicUserInterface.Contracts;
 
-    public class MainWindowController
+    public class MainWindowController : IEventBasedUserInterface
     {
-        private const int BalloonImgHeight = 40;
-        private const int BalloonImgWidth = 30;
-
         private readonly string[] colors = new string[] { "white", "red", "blue", "green", "yellow" };
 
-        private string imageFolderPath;
+        private readonly string sourcePathTemplate;
+
+        private Image[,] balloons;
 
         public MainWindow Window { get; private set; }
 
-        public MainWindowController(MainWindow window)
+        public WpfManipulator Manipulator { get; private set; }
+
+        public WpfResourceProvider ResourceProvider { get; private set; }
+
+        public MainWindowController(MainWindow window, WpfManipulator manipulator, WpfResourceProvider resourceProvider)
         {
             this.Window = window;
-            this.imageFolderPath = GetBalloonImagesPath();
+            this.Manipulator = manipulator;
+            this.ResourceProvider = resourceProvider;
+            this.sourcePathTemplate = this.ResourceProvider.GetBalloonImagesPath() + "Images\\{0}.png";
         }
 
-        public Image GetBalloonImage()
+        public void PrintField(IBalloon[,] matrix)
         {
-            var img = new Image()
+            var rowsCount = matrix.GetLength(0);
+            var colsCount = matrix.GetLength(1);
+
+            if (this.balloons == null)
             {
-                Height = BalloonImgHeight,
-                Width = BalloonImgWidth
-            };
+                this.InitializeBalloonImageMatrix(rowsCount, colsCount);
+            }
 
-            return img;
-        }
-
-        private static string GetBalloonImagesPath()
-        {
-            var currentDir = Environment.CurrentDirectory;
-            var result = currentDir.Substring(0, currentDir.IndexOf("bin"));
-
-            return result;
-        }
-
-        private void SetSource(Image img, int balloonNumber)
-        {
-            var uri = this.GetBalloonImageUri(this.colors[balloonNumber]);
-            img.Source = new BitmapImage(uri);
-            // this.GetBalloonImageUri("white");
-        }
-
-        private Uri GetBalloonImageUri(string color)
-        {
-            var uri = new Uri(this.imageFolderPath + @"Images\" + color + ".png");
-            return uri;
-        }
-
-        private void SetPositionInGrid(UIElement element, int row, int col)
-        {
-            Grid.SetRow(element, row);
-            Grid.SetColumn(element, col);
-        }
-
-        private Border GetTextBlockWithBorder(string content)
-        {
-            return this.AddTextBlockToBorder(this.GetBorder(), content);
-        }
-
-        private Border GetBorder()
-        {
-            var result = new Border()
+            for (int row = 0; row < rowsCount; row++)
             {
-                BorderThickness = new Thickness(1, 2, 1, 2),
-                BorderBrush = Brushes.Coral
-            };
-
-            return result;
+                for (int col = 0; col < colsCount; col++)
+                {
+                    var colorNumber = matrix[row, col].IsPopped ? 0 : matrix[row, col].Number;
+                    var sourcePath = string.Format(this.sourcePathTemplate, colorNumber);
+                    this.Manipulator.SetSource(this.balloons[row, col], sourcePath);
+                }
+            }
         }
 
-        private Border AddTextBlockToBorder(Border border, string content)
+        private void InitializeBalloonImageMatrix(int rowsCount, int colsCount)
         {
-            var textBlock = new TextBlock();
-            textBlock.Text = content;
-            this.StyleTextBlock(textBlock);
-            border.Child = textBlock;
+            this.balloons = new Image[rowsCount, colsCount];
 
-            return border;
+            for (int i = 0; i < rowsCount; i++)
+            {
+                for (int j = 0; j < colsCount; j++)
+                {
+                    this.balloons[i, j] = this.ResourceProvider.GetBalloonImage();
+
+                    var commandToPassForButton = i + " " + j;
+
+                    this.balloons[i, j].MouseDown += (s, e) =>
+                    {
+                        this.Raise(s, new ClickEventArgs(commandToPassForButton));
+                    };
+                }
+            }
         }
 
-        private void StyleTextBlock(TextBlock block)
+        public event EventHandler Raise;
+
+        public void Show()
         {
-            block.TextAlignment = TextAlignment.Center;
-            block.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+            this.Window.Show();
+        }
+
+        public void PrintMessage(string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PrintHighscore(IHighscoreTable table)
+        {
+            throw new NotImplementedException();
         }
     }
 }
