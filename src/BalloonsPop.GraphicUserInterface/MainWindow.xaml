@@ -46,6 +46,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="454,238,0,0" TextWrapping="Wrap" Text="Player :" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="454,275,0,0" TextWrapping="Wrap" Text="Moves :" VerticalAlignment="Top"/>
         <TextBlock x:Name="CurrentMoves" HorizontalAlignment="Left" Margin="505,275,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
+        <Button x:Name="UndoBtn" Content="Undo" HorizontalAlignment="Left" Margin="322,235,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.133,0.591"/>
 
     </Grid>
 </Window>

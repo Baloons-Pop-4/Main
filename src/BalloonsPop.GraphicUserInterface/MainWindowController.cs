@@ -63,6 +63,11 @@ namespace BalloonsPop.GraphicUserInterface
                     this.Window.StartButton.Content = "Restart";
                     this.Raise(s, new ClickEventArgs("restart"));
                 };
+
+            this.Window.UndoButton.Click += (s, e) =>
+                {
+                    this.Raise(s, new ClickEventArgs("undo"));
+                };
         }
 
         public void PrintField(IBalloon[,] matrix)

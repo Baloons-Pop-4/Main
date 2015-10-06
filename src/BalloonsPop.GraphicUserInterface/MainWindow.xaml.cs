@@ -15,16 +15,6 @@
     /// </summary>
     public partial class MainWindow : Window//, IEventBasedUserInterface
     {
-        private const int BalloonImgHeight = 40;
-        private const int BalloonImgWidth = 30;
-
-        private readonly string[] colors = new string[] { "white", "red", "blue", "green", "yellow" };
-
-        private string imageFolderPath;
-
-        // private string userName;
-        private Image[,] balloonField;
-
         public MainWindow()
         {
             this.InitializeComponent();
@@ -51,6 +41,14 @@
             get
             {
                 return this.ExitButton;
+            }
+        }
+
+        public Button UndoButton
+        {
+            get
+            {
+                return this.UndoBtn;
             }
         }
 
