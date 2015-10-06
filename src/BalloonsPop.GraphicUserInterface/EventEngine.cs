@@ -15,7 +15,7 @@
 
         public void HandleUserInput(object sender, EventArgs e)
         {
-            var castedArguments = e as ClickEventArgs;
+            var castedArguments = e as UserCommandArgs;
 
             if (castedArguments == null)
             {

@@ -75,7 +75,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ClickEventArgs.cs" />
+    <Compile Include="UserCommandArgs.cs" />
     <Compile Include="EventEngine.cs" />
     <Compile Include="Contracts\IEventBasedUserInterface.cs" />
     <Compile Include="MainWindow.xaml.cs">

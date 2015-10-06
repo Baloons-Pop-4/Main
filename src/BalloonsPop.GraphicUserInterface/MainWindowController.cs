@@ -61,17 +61,17 @@ namespace BalloonsPop.GraphicUserInterface
             this.Window.StartButton.Click += (s, e) =>
                 {
                     this.Window.StartButton.Content = "Restart";
-                    this.Raise(s, new ClickEventArgs("restart"));
+                    this.Raise(s, new UserCommandArgs("restart"));
                 };
 
             this.Window.UndoButton.Click += (s, e) =>
                 {
-                    this.Raise(s, new ClickEventArgs("undo"));
+                    this.Raise(s, new UserCommandArgs("undo"));
                 };
 
             this.Window.ExitButton.Click += (s, e) =>
                 {
-                    this.Raise(s, new ClickEventArgs("exit"));
+                    this.Raise(s, new UserCommandArgs("exit"));
                 };
         }
 
@@ -115,7 +115,7 @@ namespace BalloonsPop.GraphicUserInterface
                         .SetGridCol(j)
                         .MouseDown += (s, e) =>
                     {
-                        this.Raise(s, new ClickEventArgs(commandToPassForButton));
+                        this.Raise(s, new UserCommandArgs(commandToPassForButton));
                     };
 
                     this.balloons[i, j].AddAsChildTo(this.Window.BalloonGrid);
