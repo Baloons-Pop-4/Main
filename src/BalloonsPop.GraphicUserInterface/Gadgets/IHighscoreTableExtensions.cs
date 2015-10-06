@@ -6,7 +6,7 @@
 
     public static class IHighscoreTableExtensions
     {
-        public static IList<IList<string>> ToStringList(this IHighscoreTable table)
+        public static IList<IList<string>> ToStringLists(this IHighscoreTable table)
         {
             var result = new List<IList<string>>();
 

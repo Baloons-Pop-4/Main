@@ -20,8 +20,10 @@ namespace BalloonsPop.GraphicUserInterface.Commands
             this.AppKernel.Bind<ICommandFactory>().ToMethod(x =>
             {
                 var newCmdFactory = new CommandFactory();
+
                 newCmdFactory.UnregisterCommand("exit"); 
-                newCmdFactory.RegisterCommand("exit", () => new WpfExitCommand()); 
+                newCmdFactory.RegisterCommand("exit", () => new WpfExitCommand());
+ 
                 return newCmdFactory;
             });
         }

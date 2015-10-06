@@ -7,29 +7,11 @@
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Markup;
-    using System.Windows.Media;
     using System.Windows.Media.Imaging;
     using System.Xml;
 
     public static class WpfElementExtensions
     {
-        public static Panel WrapIn(this UIElement wrapee, Panel wrapper)
-        {
-            wrapper.Children.Add(wrapee);
-
-            return wrapper;
-        }
-
-        public static Panel WrapIn(this UIElementCollection wrapees, Panel wrapper)
-        {
-            foreach (var item in wrapees)
-            {
-                wrapper.Children.Add(item as UIElement);
-            }
-
-            return wrapper;
-        }
-
         public static Border WrapInBorder(this UIElement wrapee, Border border)
         {
             if(wrapee == null)

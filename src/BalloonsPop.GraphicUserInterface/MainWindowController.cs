@@ -141,7 +141,7 @@ namespace BalloonsPop.GraphicUserInterface
         {
             this.Window.Rankings.Children.Clear();
 
-            var tableAsMapList = table.ToStringList();
+            var tableAsMapList = table.ToStringLists();
 
             int rowIndex = 0;
 
@@ -158,7 +158,6 @@ namespace BalloonsPop.GraphicUserInterface
                         .SetGridCol(colIndex++)
                         .AddAsChildTo(this.Window.Rankings);
 
-                    //colIndex++;
                 });
 
                 rowIndex++;
