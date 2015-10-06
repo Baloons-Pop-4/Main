@@ -40,7 +40,7 @@
         {
             get
             {
-                return this.ExitButton;
+                return this.ExitBtn;
             }
         }
 
@@ -73,9 +73,22 @@
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        public string UserMoves
         {
-            Application.Current.Shutdown(348944);
+            get
+            {
+                return this.UserMovesCount.Text;
+            }
+
+            set
+            {
+                this.UserMovesCount.Text = value;
+            }
         }
+
+        //private void Button_Click_1(object sender, RoutedEventArgs e)
+        //{
+        //    Application.Current.Shutdown(348944);
+        //}
     }
 }

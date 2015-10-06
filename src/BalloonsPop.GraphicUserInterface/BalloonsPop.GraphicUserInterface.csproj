@@ -59,6 +59,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\WpfCommandModule.cs" />
+    <Compile Include="Commands\WpfExitCommand.cs" />
     <Compile Include="Gadgets\IHighscoreTableExtensions.cs" />
     <Compile Include="Gadgets\StringExtensions.cs" />
     <Compile Include="Gadgets\WpfElementExtensions.cs" />

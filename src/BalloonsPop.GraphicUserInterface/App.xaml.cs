@@ -3,14 +3,13 @@
     using System;
     using System.Linq;
     using System.Windows;
-
     using BalloonsPop.Bundling;
     using BalloonsPop.Core.Commands;
     using BalloonsPop.GameModels;
+    using BalloonsPop.GraphicUserInterface.Commands;
     using BalloonsPop.Highscore;
     using BalloonsPop.LogicProvider;
     using BalloonsPop.Validation;
-
     using Ninject;
 
     /// <summary>
@@ -31,7 +30,7 @@
                                  new ModelsModule(kernel),
                                  new LogicModule(kernel),
                                  new ValidationModule(kernel),
-                                 new CommandModule(kernel),
+                                 new WpfCommandModule(kernel),
                                  new HighscoreModule(kernel),
                                  new WpfModule(kernel))
                 .LoadAll();            

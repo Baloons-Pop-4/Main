@@ -68,6 +68,11 @@ namespace BalloonsPop.GraphicUserInterface
                 {
                     this.Raise(s, new ClickEventArgs("undo"));
                 };
+
+            this.Window.ExitButton.Click += (s, e) =>
+                {
+                    this.Raise(s, new ClickEventArgs("exit"));
+                };
         }
 
         public void PrintField(IBalloon[,] matrix)
@@ -89,6 +94,8 @@ namespace BalloonsPop.GraphicUserInterface
                     this.balloons[row, col].SetSource(sourcePath);
                 }
             }
+
+            this.Window.UserMoves = 3.ToString();
         }
 
         private void InitializeBalloonImageMatrix(int rowsCount, int colsCount)
