@@ -16,6 +16,8 @@ namespace BalloonsPop.GraphicUserInterface
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.GraphicUserInterface.Contracts;
 
+    using BalloonsPop.GraphicUserInterface.Gadgets;
+
     public class MainWindowController : IEventBasedUserInterface
     {
         private readonly string[] colors = new string[] { "white", "red", "blue", "green", "yellow" };
@@ -26,14 +28,11 @@ namespace BalloonsPop.GraphicUserInterface
 
         public MainWindow Window { get; private set; }
 
-        public WpfManipulator Manipulator { get; private set; }
-
         public WpfResourceProvider ResourceProvider { get; private set; }
 
-        public MainWindowController(MainWindow window, WpfManipulator manipulator, WpfResourceProvider resourceProvider)
+        public MainWindowController(MainWindow window, WpfResourceProvider resourceProvider)
         {
             this.Window = window;
-            this.Manipulator = manipulator;
             this.ResourceProvider = resourceProvider;
             this.sourcePathTemplate = this.ResourceProvider.GetBalloonImagesPath() + "Images\\{0}.png";
             this.Window.StartButton.Click += (s, e) =>
@@ -59,7 +58,7 @@ namespace BalloonsPop.GraphicUserInterface
                 {
                     var colorNumber = matrix[row, col].IsPopped ? 0 : matrix[row, col].Number;
                     var sourcePath = string.Format(this.sourcePathTemplate, colors[colorNumber]);
-                    this.Manipulator.SetSource(this.balloons[row, col], sourcePath);
+                    this.balloons[row, col].SetSource(sourcePath);
                 }
             }
         }
@@ -76,14 +75,17 @@ namespace BalloonsPop.GraphicUserInterface
 
                     var commandToPassForButton = i + " " + j;
 
-                    this.Manipulator.SetPositionInGrid(this.balloons[i, j], i, j);
-
-                    this.balloons[i, j].MouseDown += (s, e) =>
+                    this.balloons[i, j]
+                        .SetGridRow(i)
+                        .SetGridCol(j)
+                        .MouseDown += (s, e) =>
                     {
                         this.Raise(s, new ClickEventArgs(commandToPassForButton));
                     };
 
-                    this.Window.BalloonGrid.Children.Add(this.balloons[i, j]);
+                    this.balloons[i, j].WrapIn(this.Window.BalloonGrid);
+
+                    //this.Window.BalloonGrid.Children.Add(this.balloons[i, j]);
                 }
             }
         }
@@ -102,7 +104,31 @@ namespace BalloonsPop.GraphicUserInterface
 
         public void PrintHighscore(IHighscoreTable table)
         {
-            this.Window.Message = "ggwp";
+            var row = 0;
+            this.Window.Rankings.Children.Clear();
+            foreach (var score in table.Table)
+            {
+                var border1 = this.ResourceProvider.GetBorder();
+                var border2 = this.ResourceProvider.GetBorder();
+                var border3 = this.ResourceProvider.GetBorder();
+
+                var playerName = this.ResourceProvider.GetTextBlock(score.Name);
+                var playerScore = this.ResourceProvider.GetTextBlock(score.Moves.ToString());
+                var playerRank = this.ResourceProvider.GetTextBlock((row + 1).ToString());
+
+                border1.Child = playerName;
+                border2.Child = playerScore;
+                border3.Child = playerRank;
+
+                border3.SetGridRow(row).SetGridCol(0);
+                border1.SetGridRow(row).SetGridCol(1);
+                border2.SetGridRow(row).SetGridCol(2);
+
+                this.Window.Rankings.Children.Add(border3);
+                this.Window.Rankings.Children.Add(border1);
+                this.Window.Rankings.Children.Add(border2);
+                row++;
+            }
         }
     }
 }

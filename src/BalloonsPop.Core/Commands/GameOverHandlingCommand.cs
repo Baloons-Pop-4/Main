@@ -14,9 +14,10 @@
                 {
                     // TODO: Abstract to work with all types of UIs, not just the console?
                     context.Printer.PrintMessage("Type in your name: ");
-                    string username = Console.ReadLine();
+                    string username = "bay ivan";
 
                     context.HighscoreTable.AddPlayer(new PlayerScore(username, context.Game.UserMovesCount, DateTime.Now));
+                    context.Printer.PrintHighscore(context.HighscoreTable);
                 }
 
                 new RestartCommand().Execute(context);
