@@ -8,14 +8,28 @@
     using BalloonsPop.GraphicUserInterface.Contracts;
     using BalloonsPop.GraphicUserInterface.Gadgets;
 
+    /// <summary>
+    /// Implements the IEventBasedUserInterface and updates the view on command of the engine.
+    /// </summary>
     public class MainWindowController : IEventBasedUserInterface
     {
         private Image[,] balloons;
 
+        /// <summary>
+        /// Returns the view which the current instance of the controller is responsible for managing.
+        /// </summary>
         public MainWindow Window { get; private set; }
 
+        /// <summary>
+        /// Returns the resource provider which the current instance of the controller is using.
+        /// </summary>
         public IBalloonsWpfResourceProvider Resources { get; private set; }
 
+        /// <summary>
+        /// Public constructor that initializes a newly created controller instance with view and resource provider.
+        /// </summary>
+        /// <param name="window">The view which the newly created instance is responsible for managing.</param>
+        /// <param name="resources">The resource provider which the newly created instance will query for resources.</param>
         public MainWindowController(MainWindow window, IBalloonsWpfResourceProvider resources)
         {
             this.Window = window;
@@ -30,6 +44,10 @@
             });
         }
 
+        /// <summary>
+        /// Introduces updates on the view bases on the provided IBalloon two-dimensional array.
+        /// </summary>
+        /// <param name="matrix">The array which is used as a blueprint for introducing changes to the view.</param>
         public void PrintField(IBalloon[,] matrix)
         {
             var rowsCount = matrix.GetLength(0);
@@ -74,12 +92,13 @@
                     };
 
                     this.balloons[i, j].AddAsChildTo(this.Window.BalloonGrid);
-
-                    //this.Window.BalloonGrid.Children.Add(this.balloons[i, j]);
                 }
             }
         }
 
+        /// <summary>
+        /// Used to add and remove methods from the view's event handler.
+        /// </summary>
         public event EventHandler RaiseCommand
         {
             add
@@ -92,16 +111,27 @@
             }
         }
 
+        /// <summary>
+        /// Displays the view and returns without waiting for the view to close.
+        /// </summary>
         public void Show()
         {
             this.Window.Show();
         }
 
+        /// <summary>
+        /// Updates the view's message section.
+        /// </summary>
+        /// <param name="message">The message to be shown to the user.</param>
         public void PrintMessage(string message)
         {
             this.Window.Message = message;
         }
 
+        /// <summary>
+        /// Updates the ranking of the view based on the provided IHighscoreTable instance.
+        /// </summary>
+        /// <param name="table">The highscore table on which the introduced changes are based.</param>
         public void PrintHighscore(IHighscoreTable table)
         {
             this.Window.Rankings.Children.Clear();

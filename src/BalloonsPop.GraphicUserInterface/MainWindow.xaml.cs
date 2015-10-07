@@ -1,19 +1,15 @@
 ﻿namespace BalloonsPop.GraphicUserInterface
 {
     using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using BalloonsPop.Common.Contracts;
-using BalloonsPop.GraphicUserInterface.Contracts;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Windows;
+    using System.Windows.Controls;
 
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// The application's graphic interface model.
     /// </summary>
-    public partial class MainWindow : Window//, IEventBasedUserInterface
+    public partial class MainWindow : Window
     {
         private const string ExitButtonKey = "exit";
         private const string RestartButtonKey = "restart";
@@ -32,8 +28,14 @@ using BalloonsPop.GraphicUserInterface.Contracts;
             };
         }
 
+        /// <summary>
+        /// Raises an event when the user clicks on one of the window's controls.
+        /// </summary>
         public EventHandler Raise;
 
+        /// <summary>
+        /// Provides readonly indexers access to the button controls of the current window's instance.
+        /// </summary>
         public IDictionary<string, Button> CommandButtons
         {
             get
@@ -42,6 +44,9 @@ using BalloonsPop.GraphicUserInterface.Contracts;
             }
         }
 
+        /// <summary>
+        /// Provides readonly access to the balloon field of the current window's instance.
+        /// </summary>
         public Grid BalloonGrid
         {
             get
@@ -50,6 +55,9 @@ using BalloonsPop.GraphicUserInterface.Contracts;
             }
         }
 
+        /// <summary>
+        /// Provides readonly access to the start button control.
+        /// </summary>
         public Button StartButton
         {
             get
@@ -58,6 +66,9 @@ using BalloonsPop.GraphicUserInterface.Contracts;
             }
         }
 
+        /// <summary>
+        /// Provides readonly access to the exit button control.
+        /// </summary>
         public Button ExitButton
         {
             get
@@ -66,6 +77,9 @@ using BalloonsPop.GraphicUserInterface.Contracts;
             }
         }
 
+        /// <summary>
+        /// Provides readonly access to the undo button control.
+        /// </summary>
         public Button UndoButton
         {
             get
@@ -74,6 +88,9 @@ using BalloonsPop.GraphicUserInterface.Contracts;
             }
         }
 
+        /// <summary>
+        /// Provides get/set access to the message displayed to the user.
+        /// </summary>
         public string Message
         {
             get
@@ -87,6 +104,9 @@ using BalloonsPop.GraphicUserInterface.Contracts;
             }
         }
 
+        /// <summary>
+        /// Provides readonly access to the grid with rankings.
+        /// </summary>
         public Grid Rankings
         {
             get
@@ -95,6 +115,9 @@ using BalloonsPop.GraphicUserInterface.Contracts;
             }
         }
 
+        /// <summary>
+        /// Provides get/set access to the displayed user moves.
+        /// </summary>
         public string UserMoves
         {
             get

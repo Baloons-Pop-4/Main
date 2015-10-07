@@ -5,8 +5,16 @@
 
     using BalloonsPop.Common.Contracts;
 
+    /// <summary>
+    /// Provides additional functionality for the IHighscoreTable type.
+    /// </summary>
     public static class IHighscoreTableExtensions
     {
+        /// <summary>
+        /// Converts the calling IHighscoreTable to a List<List<string>>.
+        /// </summary>
+        /// <param name="table">The table that will be converted to string lists.</param>
+        /// <returns>Returns a list represantation of the table. Each row containts the following info as string: index, player name and score</returns>
         public static IList<IList<string>> ToStringLists(this IHighscoreTable table)
         {
             if(table == null)

@@ -9,12 +9,22 @@ using Ninject;
 
 namespace BalloonsPop.GraphicUserInterface.Commands
 {
+    /// <summary>
+    /// Extends the core CommandModule and exports a module consisting of core commands and additional commands defined by the wpf application.
+    /// </summary>
     public class WpfCommandModule : CommandModule
     {
+        /// <summary>
+        /// Public contructor that sets this modules kernel.
+        /// </summary>
+        /// <param name="kernel">The kernel which the current instance of the module will use for binding.</param>
         public WpfCommandModule(IKernel kernel)
             : base(kernel)
         { }
 
+        /// <summary>
+        /// Provides loading for the wpf module exports.
+        /// </summary>
         public override void Load()
         {
             this.AppKernel.Bind<ICommandFactory>().ToMethod(x =>
