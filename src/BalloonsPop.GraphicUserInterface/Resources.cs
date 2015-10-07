@@ -56,22 +56,6 @@
             }
         }
 
-        public int BalloonImageHeight
-        {
-            get
-            {
-                return BalloonImgHeight;
-            }
-        }
-
-        public int BalloonImageWidth
-        {
-            get
-            {
-                return BalloonImgWidth;
-            }
-        }
-
         public TextBlock HighscoreGridCell
         {
             get

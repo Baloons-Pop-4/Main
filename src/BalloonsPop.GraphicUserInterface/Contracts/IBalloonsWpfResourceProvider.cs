@@ -8,10 +8,6 @@
 
         string ImagePathTemplate { get; }
 
-        int BalloonImageHeight { get; }
-
-        int BalloonImageWidth { get; }
-
         TextBlock HighscoreGridCell { get; }
 
         Border HighscoreGridBorder { get; }
