@@ -6,6 +6,9 @@
     using System.Windows.Media;
     using BalloonsPop.GraphicUserInterface.Contracts;
 
+    /// <summary>
+    /// Provides various resources for the constructrion and manipulation of the MainWindow class.
+    /// </summary>
     public class Resources : IBalloonsWpfResourceProvider
     {
         private const int BalloonImgHeight = 40;
@@ -40,6 +43,9 @@
             this.sourcePathTemplate = imagesDir + "Images\\{0}.png";
         }
 
+        /// <summary>
+        /// Returns an array of strings that represent the five different balloon colors(white for popped, red, blue, green, yellow).
+        /// </summary>
         public string[] Colors
         {
             get
@@ -48,6 +54,9 @@
             }
         }
 
+        /// <summary>
+        /// Returns the absolute path to the folder with balloon images.
+        /// </summary>
         public string ImagePathTemplate
         {
             get
@@ -56,6 +65,9 @@
             }
         }
 
+        /// <summary>
+        /// Returns a TextBlock element styled to be a cell in the highscore grid.
+        /// </summary>
         public TextBlock HighscoreGridCell
         {
             get
@@ -64,6 +76,9 @@
             }
         }
 
+        /// <summary>
+        /// Returns a Border element styled to be a border of a cell in the highscore grid.
+        /// </summary>
         public Border HighscoreGridBorder
         {
             get
@@ -72,6 +87,9 @@
             }
         }
 
+        /// <summary>
+        /// Returns an image resized and styled to be a balloon visualization.
+        /// </summary>
         public Image BalloonImage
         {
             get
