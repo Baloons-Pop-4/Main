@@ -33,8 +33,8 @@
             var window = new MainWindow();
             var controller = new MainWindowController(window, new Resources());
 
-            this.AppKernel.Bind<IEventBasedUserInterface>().ToMethod(ctx => controller).InSingletonScope();
-            this.AppKernel.Bind<IPrinter>().ToMethod(ctx => controller).InSingletonScope();
+            this.AppKernel.Bind<IEventBasedUserInterface>().ToMethod(ctx => controller);
+            this.AppKernel.Bind<IPrinter>().ToMethod(ctx => controller);
         }
     }
 }

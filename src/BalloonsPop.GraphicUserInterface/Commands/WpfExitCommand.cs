@@ -8,13 +8,15 @@
     /// </summary>
     public class WpfExitCommand : ICommand
     {
+        private const int WpfExitCode = 348944;
+
         /// <summary>
         /// Executes the exit command in a provided context.
         /// </summary>
         /// <param name="context">The execution context for the command.</param>
         public void Execute(IContext context)
         {
-            Application.Current.Shutdown(348944);
+            Application.Current.Shutdown(WpfExitCode);
         }
     }
 }
