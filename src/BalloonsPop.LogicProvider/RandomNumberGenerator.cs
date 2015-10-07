@@ -7,9 +7,9 @@
     {
         private Random rnd = new Random();
 
-        public int Next(int min, int max)
+        public byte Next(int min, int max)
         {
-            return this.rnd.Next(min, max);
+            return (byte)this.rnd.Next(min, max);
         }
     }
 }

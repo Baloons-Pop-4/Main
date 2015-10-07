@@ -4,15 +4,12 @@
 
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
-    using BalloonsPop.GameModels;
 
     /// <summary>
     /// Provides balloon field generation.
     /// </summary>
     internal class FieldGenerator : IBalloonFieldRandomizer
     {
-        private const int FieldRows = 4;
-        private const int FieldCols = 9;
         private const int MinBalloonValue = 1;
         private const int MaxBalloonValue = 4;
 
@@ -36,7 +33,7 @@
             new QueriableMatrix<IBalloon>(field)
                 .ForEach(x => 
                         { 
-                            x.Number = (byte)this.rng.Next(1, 5); 
+                            x.Number = this.rng.Next(MinBalloonValue, MaxBalloonValue + 1); 
                             x.IsPopped = false; 
                         });
         }

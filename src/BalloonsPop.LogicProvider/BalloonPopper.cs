@@ -11,12 +11,46 @@
     /// </summary>
     internal class BalloonPopper : IBalloonPopper
     {
-        private static readonly int[][] PopDirections = new int[][]
+        private struct Vector
+        {
+            private int x;
+            private int y;
+
+            public int X
+            {
+                get
+                {
+                    return x;
+                }
+            }
+            
+            public int Y
+            {
+                get
+                {
+                    return y;
+                }
+            }
+
+            public Vector(int x, int y)
+            {
+                this.x = x;
+                this.y = y;
+            }
+
+            public static Vector operator +(Vector left, Vector right)
+            {
+                var result = new Vector(left.X + right.X, left.Y + right.Y);
+                return result;
+            }
+        }
+
+        private static readonly Vector[] PopDirections = new Vector[]
         { 
-            new int[] { 0, 1 },
-            new int[] { 0, -1 },
-            new int[] { 1, 0 },
-            new int[] { -1, 0 }
+            new Vector(0, 1),
+            new Vector(0, -1),
+            new Vector(-1, 0),
+            new Vector(1, 0)
         };
 
         private readonly IMatrixValidator matrixValidator;
@@ -40,10 +74,10 @@
         {
             foreach (var dir in PopDirections)
             {
-                this.PopInDirection(field, row, column, dir[0], dir[1]);
+                this.PopInDirection(field, new Vector(column, row), dir);
             }
 
-            this.Pop(field[row, column]);
+            field[row, column].IsPopped = true;
         }
 
         /// <summary>
@@ -66,23 +100,20 @@
             }
         }
 
-        private void PopInDirection(IBalloon[,] field, int row, int col, int horizontalUpdate, int verticalUpdate)
+        private void PopInDirection(IBalloon[,] field, Vector point, Vector update)
         {
-            var balloonType = field[row, col];
-            row += verticalUpdate;
-            col += horizontalUpdate;
+            var balloonType = field[point.Y, point.X];
+            point += update;
 
-            while (this.matrixValidator.IsInsideMatrix(field, row, col) && field[row, col].Number == balloonType.Number)
+            for (var p = point; this.matrixValidator.IsInsideMatrix(field, p.Y, p.X); p+=update)
             {
-                this.Pop(field[row, col]);
-                row += verticalUpdate;
-                col += horizontalUpdate;
-            }
-        }
+                if(field[p.Y, p.X].Number != balloonType.Number)
+                {
+                    break;
+                }
 
-        private void Pop(IBalloon balloon)
-        {
-            balloon.IsPopped = true;
+                field[p.Y, p.X].IsPopped = true;
+            }
         }
     }
 }

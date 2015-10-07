@@ -8,14 +8,6 @@
 
     public class LogicProvider : IGameLogicProvider
     {
-        private static readonly int[][] PopDirections = new int[][]
-        { 
-            new int[] { 0, 1 },
-            new int[] { 0, -1 },
-            new int[] { 1, 0 },
-            new int[] { -1, 0 }
-        };
-
         private readonly IBalloonFieldRandomizer fieldRandomizer;
 
         private readonly IBalloonPopper balloonPopper;
