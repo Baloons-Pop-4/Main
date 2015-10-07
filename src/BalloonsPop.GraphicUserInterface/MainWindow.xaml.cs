@@ -31,7 +31,7 @@
         /// <summary>
         /// Raises an event when the user clicks on one of the window's controls.
         /// </summary>
-        public EventHandler Raise;
+        public EventHandler Raise { get; set; }
 
         /// <summary>
         /// Provides readonly indexers access to the button controls of the current window's instance.

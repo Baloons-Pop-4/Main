@@ -16,16 +16,6 @@
         private Image[,] balloons;
 
         /// <summary>
-        /// Returns the view which the current instance of the controller is responsible for managing.
-        /// </summary>
-        public MainWindow Window { get; private set; }
-
-        /// <summary>
-        /// Returns the resource provider which the current instance of the controller is using.
-        /// </summary>
-        public IBalloonsWpfResourceProvider Resources { get; private set; }
-
-        /// <summary>
         /// Public constructor that initializes a newly created controller instance with view and resource provider.
         /// </summary>
         /// <param name="window">The view which the newly created instance is responsible for managing.</param>
@@ -43,6 +33,32 @@
                 };
             });
         }
+
+        /// <summary>
+        /// Used to add and remove methods from the view's event handler.
+        /// </summary>
+        public event EventHandler RaiseCommand
+        {
+            add
+            {
+                this.Window.Raise += value;
+            }
+
+            remove
+            {
+                this.Window.Raise -= value;
+            }
+        }
+
+        /// <summary>
+        /// Returns the view which the current instance of the controller is responsible for managing.
+        /// </summary>
+        public MainWindow Window { get; private set; }
+
+        /// <summary>
+        /// Returns the resource provider which the current instance of the controller is using.
+        /// </summary>
+        public IBalloonsWpfResourceProvider Resources { get; private set; }
 
         /// <summary>
         /// Introduces updates on the view bases on the provided IBalloon two-dimensional array.
@@ -69,46 +85,6 @@
             }
 
             this.Window.UserMoves = 3.ToString();
-        }
-
-        private void InitializeBalloonImageMatrix(int rowsCount, int colsCount)
-        {
-            this.balloons = new Image[rowsCount, colsCount];
-
-            for (int i = 0; i < rowsCount; i++)
-            {
-                for (int j = 0; j < colsCount; j++)
-                {
-                    this.balloons[i, j] = this.Resources.BalloonImage.Clone();
-
-                    var commandToPassForButton = i + " " + j;
-
-                    this.balloons[i, j]
-                        .SetGridRow(i)
-                        .SetGridCol(j)
-                        .MouseDown += (s, e) =>
-                    {
-                        this.Window.Raise(s, new UserCommandArgs(commandToPassForButton));
-                    };
-
-                    this.balloons[i, j].AddAsChildTo(this.Window.BalloonGrid);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Used to add and remove methods from the view's event handler.
-        /// </summary>
-        public event EventHandler RaiseCommand
-        {
-            add
-            {
-                this.Window.Raise += value;
-            }
-            remove
-            {
-                this.Window.Raise -= value;
-            }
         }
 
         /// <summary>
@@ -152,11 +128,35 @@
                         .SetGridRow(rowIndex)
                         .SetGridCol(colIndex++)
                         .AddAsChildTo(this.Window.Rankings);
-
                 });
 
                 rowIndex++;
             });
+        }
+
+        private void InitializeBalloonImageMatrix(int rowsCount, int colsCount)
+        {
+            this.balloons = new Image[rowsCount, colsCount];
+
+            for (int i = 0; i < rowsCount; i++)
+            {
+                for (int j = 0; j < colsCount; j++)
+                {
+                    this.balloons[i, j] = this.Resources.BalloonImage.Clone();
+
+                    var commandToPassForButton = i + " " + j;
+
+                    this.balloons[i, j]
+                        .SetGridRow(i)
+                        .SetGridCol(j)
+                        .MouseDown += (s, e) =>
+                    {
+                        this.Window.Raise(s, new UserCommandArgs(commandToPassForButton));
+                    };
+
+                    this.balloons[i, j].AddAsChildTo(this.Window.BalloonGrid);
+                }
+            }
         }
     }
 }
