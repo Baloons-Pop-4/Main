@@ -38,7 +38,6 @@
             var bundle = new WpfBundle(kernel);
             var engine = new EventEngine(bundle);
 
-            // this.engine = new EventEngine(graphicUi, new UserInputValidator(), factory, model, logicProvider, table, kernel.Get<IHighscoreSaver>());
             this.engine = engine;
 
             bundle.Gui.Show();

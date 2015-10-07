@@ -75,6 +75,7 @@
     <Compile Include="WpfUiTests\ExtensionsTests\IHighscoreTableExtensionsTests.cs" />
     <Compile Include="WpfUiTests\ExtensionsTests\StringExtensionsTests.cs" />
     <Compile Include="WpfUiTests\ExtensionsTests\WpfExtensionsTests.cs" />
+    <Compile Include="WpfUiTests\UserCommandArgsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\BalloonsPop.Common\BalloonsPop.Common.csproj">
