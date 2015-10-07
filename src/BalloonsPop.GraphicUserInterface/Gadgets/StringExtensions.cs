@@ -9,7 +9,12 @@
         {
             if(text == null)
             {
-                throw new NullReferenceException("Cannot wrap null string!");
+                throw new NullReferenceException("Provided string was null");
+            }
+
+            if(box == null)
+            {
+                throw new NullReferenceException("Wrapper element was null");
             }
 
             box.Text = text;
