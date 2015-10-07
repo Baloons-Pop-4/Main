@@ -1,5 +1,6 @@
 ﻿namespace BalloonsPop.GraphicUserInterface.Gadgets
 {
+    using System;
     using System.Collections.Generic;
 
     using BalloonsPop.Common.Contracts;
@@ -8,6 +9,11 @@
     {
         public static IList<IList<string>> ToStringLists(this IHighscoreTable table)
         {
+            if(table == null)
+            {
+                throw new NullReferenceException("Provided table was null");
+            }
+
             var result = new List<IList<string>>();
 
             var index = 1;

@@ -2,13 +2,10 @@
 {
     using System;
     using System.Linq;
-    using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Media;
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
     using BalloonsPop.GraphicUserInterface.Contracts;
-
     using BalloonsPop.GraphicUserInterface.Gadgets;
 
     public class MainWindowController : IEventBasedUserInterface

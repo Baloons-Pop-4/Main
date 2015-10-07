@@ -35,7 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="PresentationFramework.Classic" />
     <Reference Include="System" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -67,6 +72,9 @@
     <Compile Include="MockClasses\MockUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserInputValidatorTests.cs" />
+    <Compile Include="WpfUiTests\ExtensionsTests\IHighscoreTableExtensionsTests.cs" />
+    <Compile Include="WpfUiTests\ExtensionsTests\StringExtensionsTests.cs" />
+    <Compile Include="WpfUiTests\ExtensionsTests\WpfExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\BalloonsPop.Common\BalloonsPop.Common.csproj">
