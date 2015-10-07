@@ -14,33 +14,33 @@
         private const int BalloonImgHeight = 40;
         private const int BalloonImgWidth = 30;
 
-        private readonly string[] colors = new string[] { "white", "red", "blue", "green", "yellow" };
+        private static readonly string[] ColorNames = new string[] { "white", "red", "blue", "green", "yellow" };
 
-        private readonly string sourcePathTemplate;
-
-        private static readonly Border highscoreGridBorder = new Border()
+        private static readonly Border HighscoreGridBorderElement = new Border()
             {
                 BorderThickness = new Thickness(1, 2, 1, 2),
                 BorderBrush = Brushes.Coral
             };
 
-        private static readonly TextBlock highscoreCellContent = new TextBlock()
+        private static readonly TextBlock HighscoreCellContentElement = new TextBlock()
             {
                 TextAlignment = TextAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center
             };
 
-        private static readonly Image balloonImage = new Image()
+        private static readonly Image BalloonImageElement = new Image()
             {
                 Height = BalloonImgHeight,
                 Width = BalloonImgWidth
             };
 
+        private static string sourcePathTemplate;
+
         public Resources()
         {
             var currentDir = Environment.CurrentDirectory;
             var imagesDir = currentDir.Substring(0, currentDir.IndexOf("bin"));
-            this.sourcePathTemplate = imagesDir + "Images\\{0}.png";
+            sourcePathTemplate = imagesDir + "Images\\{0}.png";
         }
 
         /// <summary>
@@ -50,7 +50,7 @@
         {
             get
             {
-                return colors;
+                return ColorNames;
             }
         }
 
@@ -72,7 +72,7 @@
         {
             get
             {
-                return highscoreCellContent;
+                return HighscoreCellContentElement;
             }
         }
 
@@ -83,7 +83,7 @@
         {
             get
             {
-                return highscoreGridBorder;
+                return HighscoreGridBorderElement;
             }
         }
 
@@ -94,7 +94,7 @@
         {
             get
             {
-                return balloonImage;
+                return BalloonImageElement;
             }
         }
     }

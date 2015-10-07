@@ -1,9 +1,10 @@
 ﻿namespace BalloonsPop.GraphicUserInterface
 {
-    using Ninject;
-    using Ninject.Modules;
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.GraphicUserInterface.Contracts;
+
+    using Ninject;
+    using Ninject.Modules;
 
     /// <summary>
     /// This class inherits the NinjectModule class and provides loading with a provided kernel for the exports of the wpf project.

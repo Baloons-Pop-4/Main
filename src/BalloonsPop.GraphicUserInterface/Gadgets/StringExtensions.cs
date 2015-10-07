@@ -16,12 +16,12 @@
         /// <returns>Returns the same box it was passed as argument.</returns>
         public static TextBlock WrapInTextBox(this string text, TextBlock box)
         {
-            if(text == null)
+            if (text == null)
             {
                 throw new NullReferenceException("Provided string was null");
             }
 
-            if(box == null)
+            if (box == null)
             {
                 throw new NullReferenceException("Wrapper element was null");
             }

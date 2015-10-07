@@ -1,6 +1,5 @@
 ﻿namespace BalloonsPop.GraphicUserInterface.Gadgets
 {
-
     using System;
     using System.IO;
     using System.Linq;
@@ -92,12 +91,12 @@
         /// <returns>The same Image that invoked the method.</returns>
         public static Image SetSource(this Image image, string path)
         {
-            if(image == null)
+            if (image == null)
             {
                 throw new NullReferenceException("Caller image was null");
             }
 
-            if(string.IsNullOrWhiteSpace(path))
+            if (string.IsNullOrWhiteSpace(path))
             {
                 throw new ArgumentException("Provided path was empty");
             }
@@ -120,7 +119,7 @@
                 throw new NullReferenceException("Caller element was null");
             }
 
-            if(container == null)
+            if (container == null)
             {
                 throw new NullReferenceException("Provided container was null");
             }
@@ -139,7 +138,7 @@
         public static T Clone<T>(this T uiElement)
             where T : UIElement
         {
-            if(uiElement == null)
+            if (uiElement == null)
             {
                 throw new NullReferenceException("Caller element was null");
             }
@@ -149,7 +148,7 @@
             var reader = new StringReader(elementAsString);
             var xmlReader = XmlReader.Create(reader);
 
-            return (T)(XamlReader.Load(xmlReader));
+            return (T)XamlReader.Load(xmlReader);
         }
     }
 }
