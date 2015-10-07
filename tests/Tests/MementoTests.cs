@@ -29,7 +29,7 @@
         public void TestIfMementoReturnsTheSameStateItAccepter()
         {
             var game = new GameModel();
-            game.Field = this.logic.GenerateField();
+            this.logic.RandomizeBalloonField(game.Field);
             this.memento.SaveState(game);
 
             var stateFromMemento = this.memento.GetState();
@@ -45,7 +45,7 @@
         public void TestIfConstructorWithParametersHasTheSameBehaviorAsTheSetter()
         {
             var game = new GameModel();
-            game.Field = this.logic.GenerateField();
+            this.logic.RandomizeBalloonField(game.Field);
             this.memento.SaveState(game);
             var memento2 = new Saver<IGameModel>();
             memento2.SaveState(game);
@@ -63,7 +63,7 @@
         public void TestIfMementoProvidesDeepCopy()
         {
             var game = new GameModel();
-            game.Field = this.logic.GenerateField();
+            this.logic.RandomizeBalloonField(game.Field);
             this.memento.SaveState(game);
 
             var stateFromMemento = this.memento.GetState();
@@ -92,7 +92,7 @@
         public void TestIfGetterEncapsulatesTheCurrentState()
         {
             var game = new GameModel();
-            game.Field = this.logic.GenerateField();
+            this.logic.RandomizeBalloonField(game.Field);
             this.memento.SaveState(game);
             var state = this.memento.GetState();
 

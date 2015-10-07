@@ -14,7 +14,7 @@
             : base(depenencyBundle)
         {
             this.reader = depenencyBundle.Reader;
-            this.Context.Game.Field = this.Context.LogicProvider.GenerateField();
+            this.Context.LogicProvider.RandomizeBalloonField(this.Context.Game.Field);
         }
 
         public ConsoleEngine(
@@ -27,8 +27,8 @@
             IGameLogicProvider gameLogicProvider)
             : base(consoleUI, validator, highscoreTable, highscoreHandlingStrategy, commandFactory, gameModel, gameLogicProvider)
         {
-            this.reader = consoleUI as IInputReader;
-            this.Context.Game.Field = this.Context.LogicProvider.GenerateField();
+            this.reader = consoleUI;
+            //this.Context.Game.Field = this.Context.LogicProvider.GenerateField();
         }
 
         public void Run()

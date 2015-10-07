@@ -17,7 +17,7 @@
             : base(dependencyBundle)
         {
             dependencyBundle.Gui.RaiseCommand += new EventHandler(this.HandleUserInput);
-            this.Context.Game.Field = this.Context.LogicProvider.GenerateField();    
+            this.Context.LogicProvider.RandomizeBalloonField(this.Context.Game.Field);    
         }
 
         /// <summary>

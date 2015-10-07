@@ -22,43 +22,30 @@
         }
 
         [TestMethod]
-        public void TestIfGenerateFieldReturnAByteMatrix()
-        {
-            var field = this.gameLogicProvider.GenerateField();
-            Assert.AreEqual(typeof(IBalloon[,]), field.GetType());
-        }
-
-        [TestMethod]
-        public void TestIfGenerateFieldRetunrsAByteMatrixOfCorrectSize()
-        {
-            var field = this.gameLogicProvider.GenerateField();
-
-            Assert.AreEqual(5, field.GetLength(0));
-            Assert.AreEqual(10, field.GetLength(1));
-        }
-
-        [TestMethod]
         public void TestIfGenerateFieldReturnsFieldThatAreSignificantlyDifferentFromEachOther()
         {
-            var field1 = (IBalloon[,])this.gameLogicProvider.GenerateField().Clone();
-            var field2 = this.gameLogicProvider.GenerateField();
+            var game = new GameModel().Field;
+            this.gameLogicProvider.RandomizeBalloonField(game);
+            var first = new GameModel().Field;
+
+            this.gameLogicProvider.RandomizeBalloonField(first);
 
             var differenceCount = 0;
 
-            for (int i = 0; i < field1.GetLength(0); i++)
+            for (int i = 0; i < game.GetLength(0); i++)
             {
-                for (int k = 0; k < field1.GetLength(1); k++)
+                for (int k = 0; k < game.GetLength(1); k++)
                 {
-                    if (field1[i, k].Number != field2[i, k].Number)
+                    if (game[i, k].Number != first[i, k].Number)
                     {
                         differenceCount++;
                     }
                 }
             }
 
-            var numberOfCells = field1.GetLength(0) * field1.GetLength(1);
+            var numberOfCells = game.GetLength(0) * game.GetLength(1);
 
-            Assert.IsTrue(differenceCount > numberOfCells / 3);
+            Assert.IsTrue(differenceCount > (numberOfCells / 3));
         }
 
         [TestMethod]
@@ -66,9 +53,11 @@
         {
             for (int i = 0; i < 10; i++)
             {
-                var field = this.gameLogicProvider.GenerateField();
+                var game = new GameModel();
 
-                foreach (var cell in field)
+                this.gameLogicProvider.RandomizeBalloonField(game.Field);
+
+                foreach (var cell in game.Field)
                 {
                     if (cell.Number <= 0 || 5 <= cell.Number)
                     {
@@ -101,9 +90,11 @@
         [TestMethod]
         public void TestIfGameIsOverReturnsFalseWithFullField()
         {
-            var field = this.gameLogicProvider.GenerateField();
+            var game = new GameModel();
 
-            Assert.IsFalse(this.gameLogicProvider.GameIsOver(field));
+            this.gameLogicProvider.RandomizeBalloonField(game.Field);
+
+            Assert.IsFalse(this.gameLogicProvider.GameIsOver(game.Field));
         }
 
         [TestMethod]
@@ -130,7 +121,7 @@
         public void TestIfPopBalloonsPopsOnlyTheBalloonsOnTheSameRowAndColumn()
         {
             var game = new GameModel();
-            game.Field = this.gameLogicProvider.GenerateField();
+            this.gameLogicProvider.RandomizeBalloonField(game.Field);
             var storedField = game.Clone().Field;
 
             for (int i = 0, j = 5; i < 5; i++)
@@ -199,7 +190,8 @@
         [TestMethod]
         public void TestIfLetBalloonsFallMethodCorrectlyMovesTheBalloons()
         {
-            var balloonsField = this.gameLogicProvider.GenerateField();
+            var balloonsField = new GameModel().Field;
+            this.gameLogicProvider.RandomizeBalloonField(balloonsField);
 
             var cloned = (IBalloon[,])balloonsField.Clone();
 

@@ -1,13 +1,13 @@
 ﻿namespace BalloonsPop.Common.Contracts
 {
-    public interface IGameLogicProvider : IBalloonFieldGenerator, IBalloonPopper
+    public interface IGameLogicProvider : IBalloonFieldRandomizer, IBalloonPopper
     {
         bool GameIsOver(IBalloon[,] field);
     }
 
-    public interface IBalloonFieldGenerator
+    public interface IBalloonFieldRandomizer
     {
-        IBalloon[,] GenerateField();
+        void RandomizeBalloonField(IBalloon[,] field);
     }
 
     public interface IBalloonPopper

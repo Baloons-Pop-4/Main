@@ -33,17 +33,16 @@
         [TestMethod]
         public void TestIfFieldPropertyReturnTheSameFieldItIsSetTo()
         {
-            var field = new LogicProvider(new MatrixValidator(), new RandomNumberGenerator()).GenerateField();
+            var field = new IBalloon[5, 10];
             var gameModel = new GameModel();
             gameModel.Field = field;
-            Assert.AreEqual(field, gameModel.Field);
+            Assert.AreSame(field, gameModel.Field);
         }
 
         [TestMethod]
         public void TestIfInitialMovesCountIsZero()
         {
             var gameModel = new GameModel();
-            gameModel.Field = new LogicProvider(new MatrixValidator(), new RandomNumberGenerator()).GenerateField();
             Assert.AreEqual(0, gameModel.UserMovesCount);
         }
 

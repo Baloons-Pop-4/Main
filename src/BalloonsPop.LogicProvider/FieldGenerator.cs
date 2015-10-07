@@ -9,7 +9,7 @@
     /// <summary>
     /// Provides balloon field generation.
     /// </summary>
-    internal class FieldGenerator : IBalloonFieldGenerator
+    internal class FieldGenerator : IBalloonFieldRandomizer
     {
         private const int FieldRows = 4;
         private const int FieldCols = 9;
@@ -31,19 +31,14 @@
         /// Generates a random matrix of balloons that are not popped.
         /// </summary>
         /// <returns></returns>
-        public IBalloon[,] GenerateField()
+        public void RandomizeBalloonField(IBalloon[,] field)
         {
-            var field = new QueriableMatrix<IBalloon>(new IBalloon[FieldRows + 1, FieldCols + 1])
-                            .Select(x => this.GetRandomBalloonValue())
-                            .ToMatrix(FieldRows + 1, FieldCols + 1);
-            // field[0, 0].IsPopped = false;
-            return field;
-        }
-
-        private IBalloon GetRandomBalloonValue()
-        {
-            var randomBalloonValue = (byte)this.rng.Next(MinBalloonValue, MaxBalloonValue + 1);
-            return new Balloon() { Number = randomBalloonValue };
+            new QueriableMatrix<IBalloon>(field)
+                .ForEach(x => 
+                        { 
+                            x.Number = (byte)this.rng.Next(1, 5); 
+                            x.IsPopped = false; 
+                        });
         }
     }
 }

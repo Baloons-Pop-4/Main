@@ -10,7 +10,7 @@
 
         public void Execute(IContext context)
         {
-            context.Game.Field = context.LogicProvider.GenerateField();
+            context.LogicProvider.RandomizeBalloonField(context.Game.Field);
             context.Game.ResetUserMoves();
         }
     }

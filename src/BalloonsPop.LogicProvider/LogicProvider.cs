@@ -16,19 +16,19 @@
             new int[] { -1, 0 }
         };
 
-        private readonly IBalloonFieldGenerator fieldGenerator;
+        private readonly IBalloonFieldRandomizer fieldRandomizer;
 
         private readonly IBalloonPopper balloonPopper;
 
         public LogicProvider(IMatrixValidator matrixValidator, IRandomNumberGenerator rng)
         {
             this.balloonPopper = new BalloonPopper(matrixValidator);
-            this.fieldGenerator = new FieldGenerator(rng);
+            this.fieldRandomizer = new FieldGenerator(rng);
         }
 
-        public IBalloon[,] GenerateField()
+        public void RandomizeBalloonField(IBalloon[,] field)
         {
-            return this.fieldGenerator.GenerateField();
+            this.fieldRandomizer.RandomizeBalloonField(field);
         }
 
         public void PopBalloons(IBalloon[,] field, int row, int column)

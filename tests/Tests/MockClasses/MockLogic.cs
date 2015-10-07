@@ -21,10 +21,9 @@
 
         public IDictionary<string, int> Calls { get; private set; }
 
-        public IBalloon[,] GenerateField()
+        public void RandomizeBalloonField(IBalloon[,] field)
         {
             this.Calls["GenerateField"]++;
-            return null;
         }
 
         public void PopBalloons(IBalloon[,] field, int row, int col)

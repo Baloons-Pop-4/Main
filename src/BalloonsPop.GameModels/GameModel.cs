@@ -14,7 +14,7 @@
 
         public GameModel()
         {
-            this.field = new IBalloon[5, 10];
+            this.field = new QueriableMatrix<IBalloon>(5, 10).Select(x => new Balloon()).ToMatrix(5, 10);
             this.userMovesCount = 0;
         }
 
