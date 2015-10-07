@@ -13,7 +13,6 @@
     {
         private const int BalloonImgHeight = 40;
         private const int BalloonImgWidth = 30;
-        private const string ImagesRelativePath = "{0}Images\\{0}.png";
         private const string ExectutionFolderName = "bin";
 
         private static readonly string[] ColorNames = new string[] { "white", "red", "blue", "green", "yellow" };
@@ -42,7 +41,7 @@
         {
             int indexOfExecutionFolderName = Environment.CurrentDirectory.IndexOf(ExectutionFolderName);
             var imagesDir = Environment.CurrentDirectory.Substring(0, indexOfExecutionFolderName);
-            sourcePathTemplate =  string.Format(ImagesRelativePath, imagesDir);
+            sourcePathTemplate = imagesDir + "Images\\{0}.png";;
         }
 
         /// <summary>
