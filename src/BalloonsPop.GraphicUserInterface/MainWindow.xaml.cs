@@ -1,221 +1,111 @@
 ﻿namespace BalloonsPop.GraphicUserInterface
 {
     using System;
-    using System.Linq;
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Media;
-    using System.Windows.Media.Imaging;
-
-    using BalloonsPop.Common.Contracts;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using BalloonsPop.Common.Contracts;
+using BalloonsPop.GraphicUserInterface.Contracts;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, IEventBasedUserInterface
+    public partial class MainWindow : Window//, IEventBasedUserInterface
     {
-        private const int BalloonImgHeight = 40;
-        private const int BalloonImgWidth = 30;
+        private const string ExitButtonKey = "exit";
+        private const string RestartButtonKey = "restart";
+        private const string UndoButtonKey = "undo";
 
-        private readonly string[] colors = new string[] { "white", "red", "blue", "green", "yellow" };
-
-        private string imageFolderPath;
-
-        // private string userName;
-        private Image[,] balloonField;
+        private readonly IDictionary<string, Button> commandButtons;
 
         public MainWindow()
         {
             this.InitializeComponent();
-
-            // this.userName = this.ReadUserInput();
-            this.InitializeImagePath();
-            this.InitializeHighscoreGrid();
-            this.balloonField = this.GetInitializedBalloonField();
-        }
-
-        // private static MainWindow instance = new MainWindow();
-        // public static IEventBasedUserInterface GetInstance()
-        // {
-        // return instance;
-        // }
-        public event EventHandler Raise;
-
-        public void PrintMessage(string message)
-        {
-            MessageBox.Show(message);
-        }
-
-        public void PrintField(IBalloon[,] matrix)
-        {
-            // MessageBox.Show("kichka");
-            for (int row = 0, rowsCount = matrix.GetLength(0); row < rowsCount; row++)
+            this.commandButtons = new Dictionary<string, Button>()
             {
-                for (int col = 0, colsCount = matrix.GetLength(1); col < colsCount; col++)
-                {
-                    var sourceNumber = matrix[row, col].IsPopped ? 0 : matrix[row, col].Number;
-                    this.SetSource(this.balloonField[row, col], sourceNumber);
-                }
-            }
-        }
-
-        public string ReadUserInput()
-        {
-            var enterUserNameDialog = new PromptWindow();
-            enterUserNameDialog.ShowDialog();
-
-            return enterUserNameDialog.UserName;
-        }
-
-        public void PrintHighscore(IHighscoreTable table)
-        {
-            // TODO: Implement this method
-            throw new NotImplementedException("Implement highscore printing, u lazy ginger");
-        }
-
-        private void InitializeImagePath()
-        {
-            var currentDir = Environment.CurrentDirectory;
-
-            this.imageFolderPath = currentDir.Substring(0, currentDir.IndexOf("bin"));
-        }
-
-        private Image[,] GetInitializedBalloonField()
-        {
-            var field = new Image[5, 10];
-
-            for (int row = 0, rowsCount = 5; row < rowsCount; row++)
-            {
-                for (int col = 0, colsCount = 10; col < colsCount; col++)
-                {
-                    // this.balloonField[row, col] = new Image();
-
-                    // var coordinatesAsString = row + " " + col;
-
-                    // this.balloonField[row, col].MouseDown += (sender, e) =>
-                    // {
-                    // this.Raise(sender, new ClickEventArgs(coordinatesAsString));
-                    // };
-
-                    // this.SetBalloonImageSize(this.balloonField[row, col]);
-                    // this.BalloonField.Children.Add(this.balloonField[row, col]);
-                    // this.SetPositionInGrid(this.balloonField[row, col], row, col);
-                    this.InitializeImageFielCell(row, col, field);
-                }
-            }
-
-            return field;
-        }
-
-        private void InitializeImageFielCell(int row, int col, Image[,] field)
-        {
-            field[row, col] = new Image();
-
-            var coordinatesAsString = row + " " + col;
-
-            field[row, col].MouseDown += (sender, e) =>
-            {
-                this.Raise(sender, new ClickEventArgs(coordinatesAsString));
+                { ExitButtonKey, this.ExitBtn },
+                { RestartButtonKey, this.StartBtn },
+                { UndoButtonKey, this.UndoBtn }
             };
-
-            this.SetBalloonImageSize(field[row, col]);
-            this.BalloonField.Children.Add(field[row, col]);
-            this.SetPositionInGrid(field[row, col], row, col);
         }
 
-        private void InitializeHighscoreGrid()
+        public EventHandler Raise;
+
+        public IDictionary<string, Button> CommandButtons
         {
-            var wrappedPlayer = this.GetTextBlockWithBorder("Player");
-            var wrappedPoints = this.GetTextBlockWithBorder("Points");
-
-            this.HighscoreTable.Children.Add(wrappedPlayer);
-            this.SetPositionInGrid(wrappedPlayer, 0, 1);
-
-            this.HighscoreTable.Children.Add(wrappedPoints);
-            this.SetPositionInGrid(wrappedPoints, 0, 2);
+            get
+            {
+                return this.commandButtons;
+            }
         }
 
-        private void FillHighscoreGridRow(string playerName, string playerPoints, int row)
+        public Grid BalloonGrid
         {
-            this.FillHighscoreGridField(playerName, row, 1);
-            this.FillHighscoreGridField(playerPoints, row, 2);
+            get
+            {
+                return this.BalloonField;
+            }
         }
 
-        private void FillHighscoreGridField(string content, int row, int col)
+        public Button StartButton
         {
-            var wrappedPlayer = this.GetTextBlockWithBorder(content);
-            this.HighscoreTable.Children.Add(wrappedPlayer);
-            this.SetPositionInGrid(wrappedPlayer, row, col);
+            get
+            {
+                return this.commandButtons[RestartButtonKey];
+            }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public Button ExitButton
         {
-            var senderAsButton = sender as Button;
-
-            senderAsButton.Content = "Restart";
-
-            this.Raise(sender, new ClickEventArgs("RESTART"));
+            get
+            {
+                return this.commandButtons[ExitButtonKey];
+            }
         }
 
-        private void SetBalloonImageSize(Image img)
+        public Button UndoButton
         {
-            img.Height = BalloonImgHeight;
-            img.Width = BalloonImgWidth;
+            get
+            {
+                return this.commandButtons[UndoButtonKey];
+            }
         }
 
-        private void SetSource(Image img, int balloonNumber)
+        public string Message
         {
-            var uri = this.GetBalloonImageUri(this.colors[balloonNumber]);
-            img.Source = new BitmapImage(uri);
-            this.GetBalloonImageUri("white");
+            get
+            {
+                return this.MessageContainer.Text;
+            }
+
+            set
+            {
+                this.MessageContainer.Text = value;
+            }
         }
 
-        private Uri GetBalloonImageUri(string color)
+        public Grid Rankings
         {
-            var uri = new Uri(this.imageFolderPath + @"Images\" + color + ".png");
-            return uri;
+            get
+            {
+                return this.HighscoreTable;
+            }
         }
 
-        private void SetPositionInGrid(UIElement element, int row, int col)
+        public string UserMoves
         {
-            Grid.SetRow(element, row);
-            Grid.SetColumn(element, col);
-        }
+            get
+            {
+                return this.UserMovesCount.Text;
+            }
 
-        private Border GetTextBlockWithBorder(string content)
-        {
-            return this.AddTextBlockToBorder(this.GetBorder(), content);
-        }
-
-        private Border GetBorder()
-        {
-            var result = new Border();
-
-            result.BorderThickness = new Thickness(1, 2, 1, 2);
-            result.BorderBrush = Brushes.Coral;
-
-            return result;
-        }
-
-        private Border AddTextBlockToBorder(Border border, string content)
-        {
-            var textBlock = new TextBlock();
-            textBlock.Text = content;
-            this.StyleTextBlock(textBlock);
-            border.Child = textBlock;
-
-            return border;
-        }
-
-        private void StyleTextBlock(TextBlock block)
-        {
-            block.TextAlignment = TextAlignment.Center;
-            block.VerticalAlignment = System.Windows.VerticalAlignment.Center;
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown(348944);
+            set
+            {
+                this.UserMovesCount.Text = value;
+            }
         }
     }
 }

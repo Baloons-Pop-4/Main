@@ -33,12 +33,24 @@
             return queriableMatrix;
         }
 
-        // public static void ForEach<T>(this IEnumerable<T> collection, Action<T> action)
-        // {
-        //     foreach (var item in collection)
-        //     {
-        //         action(item);
-        //     }
-        // }
+         public static IEnumerable<T> ForEach<T>(this IEnumerable<T> collection, Action<T> action)
+         {
+             if(collection == null)
+             {
+                 throw new NullReferenceException("Cannot foreach a null collection");
+             }
+
+             if(action == null)
+             {
+                 throw new NullReferenceException("Cannot execute null method on a collection");
+             }
+
+             foreach (var item in collection)
+             {
+                 action(item);
+             }
+
+             return collection;
+         }
     }
 }

@@ -4,18 +4,18 @@
 
     using BalloonsPop.Core;
 
-    public class EventEngine : EngineCore, IEventEngine
+    public class EventEngine : EngineCore
     {
         public EventEngine(WpfBundle dependencyBundle)
             : base(dependencyBundle)
         {
-            dependencyBundle.Gui.Raise += new EventHandler(this.HandleUserInput);
+            dependencyBundle.Gui.RaiseCommand += new EventHandler(this.HandleUserInput);
             this.Context.Game.Field = this.Context.LogicProvider.GenerateField();    
         }
 
         public void HandleUserInput(object sender, EventArgs e)
         {
-            var castedArguments = e as ClickEventArgs;
+            var castedArguments = e as UserCommandArgs;
 
             if (castedArguments == null)
             {

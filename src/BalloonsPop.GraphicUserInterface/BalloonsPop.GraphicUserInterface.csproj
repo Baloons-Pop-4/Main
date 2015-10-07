@@ -59,6 +59,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\WpfCommandModule.cs" />
+    <Compile Include="Commands\WpfExitCommand.cs" />
+    <Compile Include="Contracts\IBalloonsWpfResourceProvider.cs" />
+    <Compile Include="Gadgets\IHighscoreTableExtensions.cs" />
+    <Compile Include="Gadgets\StringExtensions.cs" />
+    <Compile Include="Gadgets\WpfElementExtensions.cs" />
+    <Compile Include="MainWindowController.cs" />
+    <Compile Include="Resources.cs" />
     <Compile Include="WpfBundle.cs" />
     <Compile Include="WpfModule.cs" />
     <Page Include="MainWindow.xaml">
@@ -69,23 +77,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ClickEventArgs.cs" />
+    <Compile Include="UserCommandArgs.cs" />
     <Compile Include="EventEngine.cs" />
-    <Compile Include="IEventBasedUserInterface.cs" />
-    <Compile Include="IEventEngine.cs" />
+    <Compile Include="Contracts\IEventBasedUserInterface.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="PromptWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PromptWindow.xaml.cs">
-      <DependentUpon>PromptWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -150,6 +150,7 @@
     <Resource Include="Images\white.png" />
     <Resource Include="Images\yellow.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

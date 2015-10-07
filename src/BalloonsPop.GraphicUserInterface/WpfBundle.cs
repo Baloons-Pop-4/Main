@@ -1,6 +1,7 @@
 ﻿namespace BalloonsPop.GraphicUserInterface
 {
     using BalloonsPop.Bundling;
+    using BalloonsPop.GraphicUserInterface.Contracts;
     using Ninject;
 
     public class WpfBundle : CoreBundle
