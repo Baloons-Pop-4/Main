@@ -6,6 +6,8 @@
     {
         ICommand CreateCommand(string commandName);
 
+        bool ContainsKey(string commandKey);
+
         void RegisterCommand(string commandKey, Func<ICommand> commandProvidingMethod);
 
         void UnregisterCommand(string commandKey);
