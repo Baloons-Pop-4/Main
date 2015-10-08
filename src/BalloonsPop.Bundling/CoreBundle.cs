@@ -38,5 +38,8 @@
 
         [Inject]
         public IGameLogicProvider LogicProvider { get; set; }
+
+        [Inject]
+        public IStateSaver<IGameModel> GameSaver { get; set; }
     }
 }

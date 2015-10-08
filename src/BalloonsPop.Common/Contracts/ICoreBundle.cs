@@ -15,5 +15,7 @@
         IGameModel GameModel { get; set; }
         
         IGameLogicProvider LogicProvider { get; set; }
+
+        IStateSaver<IGameModel> GameSaver { get; set; }
     }
 }

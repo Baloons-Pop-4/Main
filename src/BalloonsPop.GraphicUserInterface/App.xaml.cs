@@ -4,7 +4,9 @@
     using System.Linq;
     using System.Windows;
     using BalloonsPop.Bundling;
+    using BalloonsPop.Common.Contracts;
     using BalloonsPop.Core.Commands;
+    using BalloonsPop.Core.Memento;
     using BalloonsPop.GameModels;
     using BalloonsPop.GraphicUserInterface.Commands;
     using BalloonsPop.Highscore;
@@ -34,6 +36,8 @@
                                  new HighscoreModule(kernel),
                                  new WpfModule(kernel))
                 .LoadAll();            
+
+            kernel.Bind<IStateSaver<IGameModel>>().To<Saver<IGameModel>>();
 
             var bundle = new WpfBundle(kernel);
             var engine = new EventEngine(bundle);

@@ -4,6 +4,7 @@
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
     using BalloonsPop.Core.Commands;
+    using BalloonsPop.Core.Memento;
     using BalloonsPop.GameModels;
     using BalloonsPop.Highscore;
     using BalloonsPop.LogicProvider;
@@ -27,7 +28,9 @@
                     new CommandModule(kernel),
                     new HighscoreModule(kernel),
                     new ConsoleModule(kernel))
-                .LoadAll();            
+                .LoadAll();
+
+            kernel.Bind<IStateSaver<IGameModel>>().To<Saver<IGameModel>>();
 
             var bundle = new ConsoleBundle(kernel);
             var engine = new ConsoleEngine(bundle);

@@ -41,9 +41,14 @@
                    dependencyBundle.HighscoreHandlingStrategy,
                    dependencyBundle.CommandFactory,
                    dependencyBundle.GameModel,
-                   dependencyBundle.LogicProvider)
+                   dependencyBundle.LogicProvider,
+                   dependencyBundle.GameSaver
+            )
         {
         }
+
+        protected EngineCore(IContext ctx, IUserInputValidator inputValidator, ICommandFactory cmdFactory)
+        { }
 
         protected EngineCore(
                             IPrinter printer,
@@ -52,7 +57,9 @@
                             IHighscoreHandlingStrategy highscoreHandlingStrategy,
                             ICommandFactory commandFactory,
                             IGameModel gameModel,
-                            IGameLogicProvider gameLogicProvider)
+                            IGameLogicProvider gameLogicProvider,
+                            IStateSaver<IGameModel> gameSaver
+            )
         {
             this.context = new Context()
             {
@@ -60,7 +67,7 @@
                 Game = gameModel,
                 HighscoreTable = highScoreTable,
                 LogicProvider = gameLogicProvider,
-                Memento = new Saver<IGameModel>(),
+                Memento = gameSaver
             };
 
             this.validator = validator;
