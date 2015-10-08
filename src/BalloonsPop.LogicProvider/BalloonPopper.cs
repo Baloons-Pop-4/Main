@@ -11,40 +11,6 @@
     /// </summary>
     internal class BalloonPopper : IBalloonPopper
     {
-        private struct Vector
-        {
-            private int x;
-            private int y;
-
-            public int X
-            {
-                get
-                {
-                    return x;
-                }
-            }
-            
-            public int Y
-            {
-                get
-                {
-                    return y;
-                }
-            }
-
-            public Vector(int x, int y)
-            {
-                this.x = x;
-                this.y = y;
-            }
-
-            public static Vector operator +(Vector left, Vector right)
-            {
-                var result = new Vector(left.X + right.X, left.Y + right.Y);
-                return result;
-            }
-        }
-
         private static readonly Vector[] PopDirections = new Vector[]
         { 
             new Vector(0, 1),
@@ -105,14 +71,48 @@
             var balloonType = field[point.Y, point.X];
             point += update;
 
-            for (var p = point; this.matrixValidator.IsInsideMatrix(field, p.Y, p.X); p+=update)
+            for (var p = point; this.matrixValidator.IsInsideMatrix(field, p.Y, p.X); p += update)
             {
-                if(field[p.Y, p.X].Number != balloonType.Number)
+                if (field[p.Y, p.X].Number != balloonType.Number)
                 {
                     break;
                 }
 
                 field[p.Y, p.X].IsPopped = true;
+            }
+        }
+
+        private struct Vector
+        {
+            private int x;
+            private int y;
+
+            public Vector(int x, int y)
+            {
+                this.x = x;
+                this.y = y;
+            }
+
+            public int X
+            {
+                get
+                {
+                    return this.x;
+                }
+            }
+
+            public int Y
+            {
+                get
+                {
+                    return this.y;
+                }
+            }
+
+            public static Vector operator +(Vector left, Vector right)
+            {
+                var result = new Vector(left.X + right.X, left.Y + right.Y);
+                return result;
             }
         }
     }
