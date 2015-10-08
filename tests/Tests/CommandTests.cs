@@ -86,7 +86,8 @@
                 LogicProvider = mockLogic,
                 Game = mockGame
             };
-
+            this.commandFactory.UnregisterCommand("restart");
+            this.commandFactory.RegisterCommand("restart", () => new RestartCommand());
             var restartCmd = this.commandFactory.CreateCommand("restart");
 
             restartCmd.Execute(context);

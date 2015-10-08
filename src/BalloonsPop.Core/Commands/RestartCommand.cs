@@ -4,10 +4,6 @@
 
     public class RestartCommand : ICommand
     {
-        public RestartCommand()
-        {
-        }
-
         public void Execute(IContext context)
         {
             context.LogicProvider.RandomizeBalloonField(context.Game.Field);

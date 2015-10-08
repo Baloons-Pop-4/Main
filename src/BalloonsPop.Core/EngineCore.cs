@@ -79,9 +79,10 @@
                                Restart,
                                () =>
                                {
-                                   commandList.Add(this.commandFactory.CreateCommand("save"));
+                                   //commandList.Add(this.commandFactory.CreateCommand("save"));
+                                   //commandList.Add(this.commandFactory.CreateCommand("restart"));
+                                   //commandList.Add(this.commandFactory.CreateCommand("field"));
                                    commandList.Add(this.commandFactory.CreateCommand("restart"));
-                                   commandList.Add(this.commandFactory.CreateCommand("field"));
                                })
                                .Case(
                                Top,

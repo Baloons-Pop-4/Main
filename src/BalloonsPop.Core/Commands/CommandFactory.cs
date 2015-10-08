@@ -40,7 +40,7 @@
 
         private void RegisterDefaults()
         {
-            this.RegisterCommand("restart", () => new RestartCommand());
+            this.RegisterCommand("restart", () => new CompositeRestart());
             this.RegisterCommand("top", () => new PrintHighscoreCommand());
             this.RegisterCommand("message", () => new PrintMessageCommand());
             this.RegisterCommand("field", () => new PrintFieldCommand());
