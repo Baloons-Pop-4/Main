@@ -11,6 +11,7 @@
     using BalloonsPop.Validation;
 
     using Ninject;
+    using BalloonsPop.Core.Contexts;
 
     public class MainProgram
     {
@@ -32,8 +33,9 @@
                     new ConsoleModule(kernel))
                 .LoadAll();
 
+            var ctx = new Context(kernel);
             var bundle = new ConsoleBundle(kernel);
-            var engine = new ConsoleEngine(bundle);
+            var engine = new ConsoleEngine(ctx, bundle);
 
             Logger.Info("Starting the game");
             engine.Run();

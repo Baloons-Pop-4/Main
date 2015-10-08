@@ -1,18 +1,18 @@
 ﻿namespace BalloonsPop.ConsoleUI
 {
     using System;
-
-    using BalloonsPop.ConsoleUI.Contracts;
-    using BalloonsPop.Core;
+using BalloonsPop.Common.Contracts;
+using BalloonsPop.ConsoleUI.Contracts;
+using BalloonsPop.Core;
 
     public class ConsoleEngine : EngineCore, IConsoleEngine
     {
         private IInputReader reader;
 
-        public ConsoleEngine(IConsoleBundle depenencyBundle)
-            : base(depenencyBundle)
+        public ConsoleEngine(IContext ctx, IConsoleBundle depBundle)
+            :base(ctx, depBundle.UserInputValidator, depBundle.CommandFactory)
         {
-            this.reader = depenencyBundle.Reader;
+            this.reader = depBundle.Reader;
         }
 
         public void Run()

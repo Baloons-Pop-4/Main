@@ -9,17 +9,6 @@ using BalloonsPop.Core;
     /// </summary>
     public class EventEngine : EngineCore
     {
-        /// <summary>
-        /// Public constructor that provides a wpf dependency bundle to the core.
-        /// </summary>
-        /// <param name="dependencyBundle">The bundle wrapping the core's dependencies.</param>
-        public EventEngine(WpfBundle dependencyBundle)
-            : base(dependencyBundle)
-        {
-            dependencyBundle.Gui.RaiseCommand += this.HandleUserInput;
-             
-        }
-
         public EventEngine(IContext ctx, WpfBundle depBundle)
             : base(ctx, depBundle.UserInputValidator, depBundle.CommandFactory)
         {

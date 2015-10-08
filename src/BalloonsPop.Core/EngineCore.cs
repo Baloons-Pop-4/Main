@@ -5,8 +5,6 @@
 
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
-    using BalloonsPop.Core.Contexts;
-    //using BalloonsPop.Highscore;
 
     public class EngineCore
     {
@@ -22,61 +20,17 @@
         protected const string OnExitMessage = "Good Bye!";
         #endregion
 
-        private string[,] highScoreChart;
-
         private IUserInputValidator validator;
 
         private ICommandFactory commandFactory;
 
-        private IHighscoreHandlingStrategy highscoreHandlingStrategy;
-
         private IContext context;
-
-        protected EngineCore(ICoreBundle dependencyBundle)
-            : this(
-                   dependencyBundle.Printer,
-                   dependencyBundle.UserInputValidator,
-                   dependencyBundle.HighScoreTable,
-                   dependencyBundle.HighscoreHandlingStrategy,
-                   dependencyBundle.CommandFactory,
-                   dependencyBundle.GameModel,
-                   dependencyBundle.LogicProvider,
-                   dependencyBundle.GameSaver
-            )
-        {
-        }
 
         protected EngineCore(IContext ctx, IUserInputValidator inputValidator, ICommandFactory cmdFactory)
         {
             this.Context = ctx;
             this.Validator = inputValidator;
             this.commandFactory = cmdFactory;
-            this.Context.LogicProvider.RandomizeBalloonField(this.Context.Game.Field);   
-        }
-
-        protected EngineCore(
-                            IPrinter printer,
-                            IUserInputValidator validator,
-                            IHighscoreTable highScoreTable,
-                            IHighscoreHandlingStrategy highscoreHandlingStrategy,
-                            ICommandFactory commandFactory,
-                            IGameModel gameModel,
-                            IGameLogicProvider gameLogicProvider,
-                            IStateSaver<IGameModel> gameSaver
-            )
-        {
-            this.context = new Context()
-            {
-                Printer = printer,
-                Game = gameModel,
-                HighscoreTable = highScoreTable,
-                LogicProvider = gameLogicProvider,
-                Memento = gameSaver
-            };
-
-            this.validator = validator;
-            this.highscoreHandlingStrategy = highscoreHandlingStrategy;
-            this.commandFactory = commandFactory;
             this.Context.LogicProvider.RandomizeBalloonField(this.Context.Game.Field);   
         }
 
@@ -89,18 +43,6 @@
             set
             {
                 this.context = value;
-            }
-        }
-
-        protected IHighscoreHandlingStrategy HighscoreHandler
-        {
-            get
-            {
-                return this.highscoreHandlingStrategy;
-            }
-            set
-            {
-                this.highscoreHandlingStrategy = value;
             }
         }
 
@@ -125,18 +67,6 @@
             set
             {
                 this.validator = value;
-            }
-        }
-
-        protected string[,] HighScoreChart
-        {
-            get
-            {
-                return this.highScoreChart;
-            }
-            set
-            {
-                this.highScoreChart = value;
             }
         }
 
