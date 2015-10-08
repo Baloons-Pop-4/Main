@@ -11,16 +11,7 @@
     public class EngineCore
     {
         #region Constants
-        protected const string Exit = "EXIT";
-        protected const string Top = "TOP";
-        protected const string Restart = "RESTART";
-        protected const string Undo = "UNDO";
         protected const string WrongInputMessage = "Wrong input! Try Again!";
-        protected const string CannotPopMissingBalloonMessage = "Cannot pop missing ballon!";
-        protected const string WinMessageTemplate = "Gratz ! You completed it in {0} moves.";
-        protected const string NotInTopFiveMessage = "I am sorry you are not skillful enough for TopFive chart!";
-        protected const string MovePrompt = "Enter a row and column: ";
-        protected const string OnExitMessage = "Good Bye!";
         #endregion
 
         private IUserInputValidator validator;
