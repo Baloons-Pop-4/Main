@@ -77,27 +77,30 @@
         {
             var commandList = new List<ICommand>();
 
-            bool isValidPopMove = this.validator.IsValidUserMove(userCommand) && !this.Context.Game.At(userCommand).IsPopped;
+            bool isValidPopMove = this.validator.IsValidUserMove(userCommand)
+                                    && !this.Context.Game.At(userCommand).IsPopped;
 
-            new Switch<string>(userCommand.ToUpper())
-                               .Case(isValidPopMove, () =>
-                               {
-                                   commandList.Add(this.commandFactory.CreateCommand("save"));
+            if (isValidPopMove)
+            {
+                commandList.Add(this.commandFactory.CreateCommand("save"));
 
-                                   this.context.UserRow = userCommand[0].ToInt32();
-                                   this.context.UserCol = userCommand[2].ToInt32();
-                                   commandList.Add(this.commandFactory.CreateCommand("pop"));
+                this.context.UserRow = userCommand[0].ToInt32();
+                this.context.UserCol = userCommand[2].ToInt32();
+                commandList.Add(this.commandFactory.CreateCommand("pop"));
 
 
-                                   commandList.Add(this.commandFactory.CreateCommand("gameover"));
-                                   commandList.Add(this.commandFactory.CreateCommand("field"));
-                               })
-                               .Case(this.CommandFactory.ContainsKey(userCommand.ToLower()), () => commandList.Add(this.CommandFactory.CreateCommand(userCommand.ToLower())))
-                               .Default(() =>
-                               {
-                                   this.context.Message = WrongInputMessage;
-                                   commandList.Add(this.commandFactory.CreateCommand("message"));
-                               });
+                commandList.Add(this.commandFactory.CreateCommand("gameover"));
+                commandList.Add(this.commandFactory.CreateCommand("field"));
+            }
+            else if (this.CommandFactory.ContainsKey(userCommand.ToLower()))
+            {
+                commandList.Add(this.CommandFactory.CreateCommand(userCommand.ToLower()));
+            }
+            else
+            {
+                this.context.Message = WrongInputMessage;
+                commandList.Add(this.commandFactory.CreateCommand("message"));
+            }
 
             return commandList;
         }

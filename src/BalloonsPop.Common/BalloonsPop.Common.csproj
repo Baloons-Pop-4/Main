@@ -66,7 +66,6 @@
     <Compile Include="Contracts\IUserInputValidator.cs" />
     <Compile Include="Contracts\IValidationFactory.cs" />
     <Compile Include="Contracts\PlayerScore.cs" />
-    <Compile Include="Gadgets\FluentSwitch.cs" />
     <Compile Include="Gadgets\IEnumerableExtension.cs" />
     <Compile Include="Gadgets\Log4NetWrapper.cs" />
     <Compile Include="Gadgets\LogHelper.cs" />
