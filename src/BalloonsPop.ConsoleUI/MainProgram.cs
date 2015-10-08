@@ -9,6 +9,7 @@
     using BalloonsPop.Highscore;
     using BalloonsPop.LogicProvider;
     using BalloonsPop.Validation;
+
     using Ninject;
 
     public class MainProgram
@@ -27,10 +28,9 @@
                     new ValidationModule(kernel),
                     new CommandModule(kernel),
                     new HighscoreModule(kernel),
+                    new SaverModule(kernel),
                     new ConsoleModule(kernel))
                 .LoadAll();
-
-            kernel.Bind<IStateSaver<IGameModel>>().To<Saver<IGameModel>>();
 
             var bundle = new ConsoleBundle(kernel);
             var engine = new ConsoleEngine(bundle);

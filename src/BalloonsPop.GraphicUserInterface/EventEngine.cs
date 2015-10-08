@@ -1,8 +1,8 @@
 ﻿namespace BalloonsPop.GraphicUserInterface
 {
     using System;
-
-    using BalloonsPop.Core;
+using BalloonsPop.Common.Contracts;
+using BalloonsPop.Core;
 
     /// <summary>
     /// Extends the EngineCore to compile with the application's graphic interface.
@@ -20,6 +20,11 @@
              
         }
 
+        public EventEngine(IContext ctx, WpfBundle depBundle)
+            : base(ctx, depBundle.UserInputValidator, depBundle.CommandFactory)
+        {
+            depBundle.Gui.RaiseCommand += this.HandleUserInput;
+        }
         /// <summary>
         /// The method which handles user input by delegating events in compatible form to the core.
         /// </summary>

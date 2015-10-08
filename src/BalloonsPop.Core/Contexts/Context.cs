@@ -1,7 +1,8 @@
 ﻿namespace BalloonsPop.Core.Contexts
 {
-    using System;
     using BalloonsPop.Common.Contracts;
+
+    using Ninject;
 
     public class Context : IContext
     {
@@ -9,15 +10,28 @@
         {
         }
 
+        public Context(IKernel appKernel)
+        {
+            appKernel.Inject(this);
+        }
+
+        [Inject]
         public IGameModel Game { get; set; }
 
+        [Inject]
         public IGameLogicProvider LogicProvider { get; set; }
 
+        [Inject]
         public IPrinter Printer { get; set; }
 
+        [Inject]
         public IStateSaver<IGameModel> Memento { get; set; }
 
-        public IHighscoreTable HighscoreTable { get; internal set; }
+        [Inject]
+        public IHighscoreTable HighscoreTable { get; set; }
+
+        [Inject]
+        public IHighscoreHandlingStrategy HighscoreHandling { get; set; }
 
         public string Message { get; set; }
 

@@ -13,6 +13,8 @@
     using BalloonsPop.LogicProvider;
     using BalloonsPop.Validation;
     using Ninject;
+    using BalloonsPop.Core.Contexts;
+    using BalloonsPop.Highscore.HighscoreHandlingStrategies;
 
     /// <summary>
     /// Interaction logic for App.xaml
@@ -34,13 +36,13 @@
                                  new ValidationModule(kernel),
                                  new WpfCommandModule(kernel),
                                  new HighscoreModule(kernel),
+                                 new SaverModule(kernel),
                                  new WpfModule(kernel))
                 .LoadAll();            
 
-            kernel.Bind<IStateSaver<IGameModel>>().To<Saver<IGameModel>>();
-
             var bundle = new WpfBundle(kernel);
-            var engine = new EventEngine(bundle);
+            var ctx = new Context(kernel);
+            var engine = new EventEngine(ctx, bundle);
 
             this.engine = engine;
 

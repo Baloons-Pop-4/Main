@@ -47,7 +47,12 @@
         }
 
         protected EngineCore(IContext ctx, IUserInputValidator inputValidator, ICommandFactory cmdFactory)
-        { }
+        {
+            this.Context = ctx;
+            this.Validator = inputValidator;
+            this.commandFactory = cmdFactory;
+            this.Context.LogicProvider.RandomizeBalloonField(this.Context.Game.Field);   
+        }
 
         protected EngineCore(
                             IPrinter printer,
@@ -168,7 +173,7 @@
                                    this.context.Message = OnExitMessage;
                                    commandList.Add(this.commandFactory.CreateCommand("message"));
                                    commandList.Add(this.commandFactory.CreateCommand("exit"));
-                                   this.highscoreHandlingStrategy.Save(this.context.HighscoreTable);
+                                   this.Context.HighscoreHandling.Save(this.context.HighscoreTable);
                                })
                                .Case(
                                !this.validator.IsValidUserMove(userCommand), 

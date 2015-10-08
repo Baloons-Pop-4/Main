@@ -12,6 +12,8 @@
 
         IHighscoreTable HighscoreTable { get; }
 
+        IHighscoreHandlingStrategy HighscoreHandling { get; }
+
         string Message { get; set; }
 
         int UserRow { get; set; }
