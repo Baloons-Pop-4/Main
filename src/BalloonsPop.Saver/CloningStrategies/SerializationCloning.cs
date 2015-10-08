@@ -1,4 +1,4 @@
-﻿namespace BalloonsPop.Core.Memento.CloningStrategies
+﻿namespace BalloonsPop.Saver.CloningStrategies
 {
     using System;
     using System.IO;

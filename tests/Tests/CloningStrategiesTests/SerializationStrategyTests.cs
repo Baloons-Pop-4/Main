@@ -3,7 +3,7 @@
     using System;
     using System.Runtime.Serialization;
 
-    using BalloonsPop.Core.Memento.CloningStrategies;
+    using BalloonsPop.Saver.CloningStrategies;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

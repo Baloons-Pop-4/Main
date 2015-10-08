@@ -88,6 +88,10 @@
       <Project>{e735039b-49cc-4cc2-a57a-49c1ef91290a}</Project>
       <Name>BalloonsPop.LogicProvider</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BalloonsPop.Saver\BalloonsPop.Saver.csproj">
+      <Project>{4cb227c2-6ba7-4bcc-a2d1-63ad18a478cc}</Project>
+      <Name>BalloonsPop.Saver</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BalloonsPop.Validation\BalloonsPop.Validation.csproj">
       <Project>{8d75c4c3-63e8-4b33-aac5-9b9b2eda4ee9}</Project>
       <Name>BalloonsPop.Validation</Name>

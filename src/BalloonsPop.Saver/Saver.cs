@@ -1,10 +1,10 @@
-﻿namespace BalloonsPop.Core.Memento
+﻿namespace BalloonsPop.Saver
 {
     using System;
     using System.Collections.Generic;
 
     using BalloonsPop.Common.Contracts;
-    using BalloonsPop.Core.Memento.CloningStrategies;
+    using BalloonsPop.Saver.CloningStrategies;
 
     public class Saver<T> : IStateSaver<T>
     {

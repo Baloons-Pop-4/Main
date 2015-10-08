@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalloonsPop.Bundling", "Bal
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalloonsPop.SoundPlayer", "BalloonsPop.SoundPlayer\BalloonsPop.SoundPlayer.csproj", "{3AE11565-145C-4B39-96BF-EB5AA3CE794A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalloonsPop.Saver", "BalloonsPop.Saver\BalloonsPop.Saver.csproj", "{4CB227C2-6BA7-4BCC-A2D1-63AD18A478CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -145,6 +147,16 @@ Global
 		{3AE11565-145C-4B39-96BF-EB5AA3CE794A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{3AE11565-145C-4B39-96BF-EB5AA3CE794A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{3AE11565-145C-4B39-96BF-EB5AA3CE794A}.Release|x86.ActiveCfg = Release|Any CPU
+		{4CB227C2-6BA7-4BCC-A2D1-63AD18A478CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CB227C2-6BA7-4BCC-A2D1-63AD18A478CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CB227C2-6BA7-4BCC-A2D1-63AD18A478CC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4CB227C2-6BA7-4BCC-A2D1-63AD18A478CC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4CB227C2-6BA7-4BCC-A2D1-63AD18A478CC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4CB227C2-6BA7-4BCC-A2D1-63AD18A478CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CB227C2-6BA7-4BCC-A2D1-63AD18A478CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CB227C2-6BA7-4BCC-A2D1-63AD18A478CC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4CB227C2-6BA7-4BCC-A2D1-63AD18A478CC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{4CB227C2-6BA7-4BCC-A2D1-63AD18A478CC}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

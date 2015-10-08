@@ -2,7 +2,7 @@
 {
     using System;
 
-    using BalloonsPop.Core.Memento.CloningStrategies;
+    using BalloonsPop.Saver.CloningStrategies;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

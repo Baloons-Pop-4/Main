@@ -1,4 +1,4 @@
-﻿namespace BalloonsPop.Core.Memento
+﻿namespace BalloonsPop.Saver
 {
     using System.Collections.Generic;
 
