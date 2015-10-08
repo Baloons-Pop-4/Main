@@ -4,8 +4,6 @@
     using System.Linq;
     using System.Windows;
     using BalloonsPop.Bundling;
-    using BalloonsPop.Common.Contracts;
-    using BalloonsPop.Core.Commands;
     using BalloonsPop.Saver;
     using BalloonsPop.GameModels;
     using BalloonsPop.GraphicUserInterface.Commands;
@@ -14,7 +12,6 @@
     using BalloonsPop.Validation;
     using Ninject;
     using BalloonsPop.Core.Contexts;
-    using BalloonsPop.Highscore.HighscoreHandlingStrategies;
 
     /// <summary>
     /// Interaction logic for App.xaml
