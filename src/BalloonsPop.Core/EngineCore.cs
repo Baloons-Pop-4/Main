@@ -66,6 +66,7 @@
             this.validator = validator;
             this.highscoreHandlingStrategy = highscoreHandlingStrategy;
             this.commandFactory = commandFactory;
+            this.Context.LogicProvider.RandomizeBalloonField(this.Context.Game.Field);   
         }
 
         protected IContext Context

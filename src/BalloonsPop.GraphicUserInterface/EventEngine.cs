@@ -16,8 +16,8 @@
         public EventEngine(WpfBundle dependencyBundle)
             : base(dependencyBundle)
         {
-            dependencyBundle.Gui.RaiseCommand += new EventHandler(this.HandleUserInput);
-            this.Context.LogicProvider.RandomizeBalloonField(this.Context.Game.Field);    
+            dependencyBundle.Gui.RaiseCommand += this.HandleUserInput;
+             
         }
 
         /// <summary>

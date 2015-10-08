@@ -14,7 +14,7 @@
             : base(depenencyBundle)
         {
             this.reader = depenencyBundle.Reader;
-            this.Context.LogicProvider.RandomizeBalloonField(this.Context.Game.Field);
+            //this.Context.LogicProvider.RandomizeBalloonField(this.Context.Game.Field);
         }
 
         public ConsoleEngine(
