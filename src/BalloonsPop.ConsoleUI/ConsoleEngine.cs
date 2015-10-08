@@ -1,16 +1,19 @@
 ﻿namespace BalloonsPop.ConsoleUI
 {
     using System;
-using BalloonsPop.Common.Contracts;
-using BalloonsPop.ConsoleUI.Contracts;
-using BalloonsPop.Core;
+    using BalloonsPop.Common.Contracts;
+    using BalloonsPop.ConsoleUI.Contracts;
+    using BalloonsPop.Core;
 
     public class ConsoleEngine : EngineCore, IConsoleEngine
     {
+        private const string MovePrompt = "Enter a row and column: ";
+        private const string PrintMessageCommandKey = "message";
+
         private IInputReader reader;
 
         public ConsoleEngine(IContext ctx, IConsoleBundle depBundle)
-            :base(ctx, depBundle.UserInputValidator, depBundle.CommandFactory)
+            : base(ctx, depBundle.UserInputValidator, depBundle.CommandFactory)
         {
             this.reader = depBundle.Reader;
         }
@@ -22,8 +25,8 @@ using BalloonsPop.Core;
 
             while (true)
             {
-                this.Context.Message = EngineCore.MovePrompt;
-                this.CommandFactory.CreateCommand("message").Execute(this.Context);
+                this.Context.Message = MovePrompt;
+                this.CommandFactory.CreateCommand(PrintMessageCommandKey).Execute(this.Context);
                 command = this.GetTrimmedUppercaseInput();
 
                 var commandList = this.GetCommandList(command);

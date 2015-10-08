@@ -12,6 +12,14 @@
     {
         #region Constants
         protected const string WrongInputMessage = "Wrong input! Try Again!";
+        protected const string Save = "save";
+        protected const string Pop = "pop";
+        protected const string GameOver = "gameover";
+        protected const string Field = "field";
+        protected const string Message = "message";
+
+        protected const int IndexOfRowDigit = 0;
+        protected const int IndexOfColumnDigit = 2;
         #endregion
 
         private IUserInputValidator validator;
@@ -73,15 +81,15 @@
 
             if (isValidPopMove)
             {
-                commandList.Add(this.commandFactory.CreateCommand("save"));
+                commandList.Add(this.commandFactory.CreateCommand(Save));
 
-                this.context.UserRow = userCommand[0].ToInt32();
-                this.context.UserCol = userCommand[2].ToInt32();
-                commandList.Add(this.commandFactory.CreateCommand("pop"));
+                this.context.UserRow = userCommand[IndexOfRowDigit].ToInt32();
+                this.context.UserCol = userCommand[IndexOfColumnDigit].ToInt32();
+                commandList.Add(this.commandFactory.CreateCommand(Pop));
 
 
-                commandList.Add(this.commandFactory.CreateCommand("gameover"));
-                commandList.Add(this.commandFactory.CreateCommand("field"));
+                commandList.Add(this.commandFactory.CreateCommand(GameOver));
+                commandList.Add(this.commandFactory.CreateCommand(Field));
             }
             else if (this.CommandFactory.ContainsKey(userCommand.ToLower()))
             {
@@ -90,7 +98,7 @@
             else
             {
                 this.context.Message = WrongInputMessage;
-                commandList.Add(this.commandFactory.CreateCommand("message"));
+                commandList.Add(this.commandFactory.CreateCommand(Message));
             }
 
             return commandList;
