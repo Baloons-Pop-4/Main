@@ -45,7 +45,7 @@
             this.RegisterCommand("message", () => new PrintMessageCommand());
             this.RegisterCommand("field", () => new PrintFieldCommand());
             this.RegisterCommand("exit", () => new ExitCommand());
-            this.RegisterCommand("undo", () => new UndoCommand());
+            this.RegisterCommand("undo", () => new CompositeUndoCommand());
             this.RegisterCommand("pop", () => new PopBalloonCommand());
             this.RegisterCommand("save", () => new SaveCommand());
             this.RegisterCommand("gameover", () => new GameOverHandlingCommand());

@@ -12,6 +12,7 @@
         protected const string Exit = "EXIT";
         protected const string Top = "TOP";
         protected const string Restart = "RESTART";
+        protected const string Undo = "UNDO";
         protected const string WrongInputMessage = "Wrong input! Try Again!";
         protected const string CannotPopMissingBalloonMessage = "Cannot pop missing ballon!";
         protected const string WinMessageTemplate = "Gratz ! You completed it in {0} moves.";
@@ -31,7 +32,7 @@
             this.Context = ctx;
             this.Validator = inputValidator;
             this.commandFactory = cmdFactory;
-            this.Context.LogicProvider.RandomizeBalloonField(this.Context.Game.Field);   
+            this.Context.LogicProvider.RandomizeBalloonField(this.Context.Game.Field);
         }
 
         protected IContext Context
@@ -75,39 +76,23 @@
             var commandList = new List<ICommand>();
 
             new Switch<string>(userCommand.ToUpper())
+                               .Case(Restart, () => commandList.Add(this.commandFactory.CreateCommand("restart")))
+                               .Case(Top,() => commandList.Add(this.commandFactory.CreateCommand("top")))
+                               .Case(Undo, () =>commandList.Add(this.commandFactory.CreateCommand("undo")))
+                               .Case(Exit, () => commandList.Add(this.CommandFactory.CreateCommand("exit")))
                                .Case(
-                               Restart,
-                               () =>
+                               cmdString =>
                                {
-                                   //commandList.Add(this.commandFactory.CreateCommand("save"));
-                                   //commandList.Add(this.commandFactory.CreateCommand("restart"));
-                                   //commandList.Add(this.commandFactory.CreateCommand("field"));
-                                   commandList.Add(this.commandFactory.CreateCommand("restart"));
-                               })
-                               .Case(
-                               Top,
-                               () =>
-                               {
-                                   commandList.Add(this.commandFactory.CreateCommand("top"));
-                               })
-                               .Case(
-                               "UNDO",
-                               () =>
-                               {
-                                   commandList.Add(this.commandFactory.CreateCommand("undo"));
-                                   commandList.Add(this.commandFactory.CreateCommand("field"));
-                               })
-                               .Case(
-                               Exit,
-                               () =>
-                               {
-                                   this.context.Message = OnExitMessage;
-                                   commandList.Add(this.commandFactory.CreateCommand("message"));
-                                   commandList.Add(this.commandFactory.CreateCommand("exit"));
-                                   this.Context.HighscoreHandling.Save(this.context.HighscoreTable);
-                               })
-                               .Case(
-                               !this.validator.IsValidUserMove(userCommand), 
+                                   if (!this.validator.IsValidUserMove(userCommand))
+                                   {
+                                       return true;
+                                   }
+
+                                   var userRow = userCommand[0].ToInt32();
+                                   var userColumn = userCommand[2].ToInt32();
+
+                                   return this.context.Game.Field[userRow, userColumn].IsPopped;
+                               },
                                () =>
                                {
                                    this.context.Message = WrongInputMessage;
@@ -120,17 +105,10 @@
                                    var userRow = userCommand[0].ToInt32();
                                    var userColumn = userCommand[2].ToInt32();
 
-                                   if (this.context.Game.Field[userRow, userColumn].IsPopped)
-                                   {
-                                       this.context.Message = CannotPopMissingBalloonMessage;
-                                       commandList.Add(this.commandFactory.CreateCommand("message"));
-                                   }
-                                   else
-                                   {
-                                       this.context.UserRow = userRow;
-                                       this.context.UserCol = userColumn;
-                                       commandList.Add(this.commandFactory.CreateCommand("pop"));
-                                   }
+                                   this.context.UserRow = userRow;
+                                   this.context.UserCol = userColumn;
+                                   commandList.Add(this.commandFactory.CreateCommand("pop"));
+
 
                                    commandList.Add(this.commandFactory.CreateCommand("gameover"));
                                    commandList.Add(this.commandFactory.CreateCommand("field"));

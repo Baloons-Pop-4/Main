@@ -2,26 +2,31 @@
 {
     using BalloonsPop.Common.Contracts;
     using System;
+    using System.Collections.Generic;
 
-    public class GameOverHandlingCommand : ICommand
+    public class GameOverHandlingCommand : CompositeCommand
     {
-        public void Execute(IContext context)
+        public GameOverHandlingCommand()
+        {
+            this.SubCommands = new List<ICommand>();
+        }
+
+        public override void Execute(IContext context)
         {
             if (context.LogicProvider.GameIsOver(context.Game.Field))
             {
-                context.Printer.PrintMessage("Gratz, completed in " + context.Game.UserMovesCount + " moves.");
+                context.Message = "Gratz, completed in " + context.Game.UserMovesCount + " moves.";
+                this.SubCommands.Add(new PrintMessageCommand());
                 if (context.HighscoreTable.CanAddPlayer(context.Game.UserMovesCount))
                 {
-                    // TODO: Abstract to work with all types of UIs, not just the console?
-                    context.Printer.PrintMessage("Type in your name: ");
-                    string username = "bay ivan";
-
-                    context.HighscoreTable.AddPlayer(new PlayerScore(username, context.Game.UserMovesCount, DateTime.Now));
-                    context.Printer.PrintHighscore(context.HighscoreTable);
+                    this.SubCommands.Add(new PrintHighscoreCommand());
+                    this.SubCommands.Add(new AddPlayerscoreCommand());
                 }
 
-                new RestartCommand().Execute(context);
+                this.SubCommands.Add(new CompositeRestart());
             }
+
+            base.Execute(context);
         }
     }
 }
