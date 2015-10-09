@@ -9,7 +9,7 @@
     /// <summary>
     /// The application's graphic interface model.
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class BalloonsView : Window
     {
         private const string ExitButtonKey = "exit";
         private const string RestartButtonKey = "restart";
@@ -17,7 +17,7 @@
 
         private readonly IDictionary<string, Button> commandButtons;
 
-        public MainWindow()
+        public BalloonsView()
         {
             this.InitializeComponent();
             this.commandButtons = new Dictionary<string, Button>()

@@ -72,7 +72,6 @@
     <Compile Include="MockClasses\MockLogic.cs" />
     <Compile Include="MockClasses\MockUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SoundPlayerTests.cs" />
     <Compile Include="UserInputValidatorTests.cs" />
     <Compile Include="WpfUiTests\ExtensionsTests\IHighscoreTableExtensionsTests.cs" />
     <Compile Include="WpfUiTests\ExtensionsTests\StringExtensionsTests.cs" />

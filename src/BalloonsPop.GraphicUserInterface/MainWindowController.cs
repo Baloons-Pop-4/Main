@@ -20,7 +20,7 @@
         /// </summary>
         /// <param name="window">The view which the newly created instance is responsible for managing.</param>
         /// <param name="resources">The resource provider which the newly created instance will query for resources.</param>
-        public MainWindowController(MainWindow window, IBalloonsWpfResourceProvider resources)
+        public MainWindowController(BalloonsView window, IBalloonsWpfResourceProvider resources)
         {
             this.Window = window;
 
@@ -53,7 +53,7 @@
         /// <summary>
         /// Returns the view which the current instance of the controller is responsible for managing.
         /// </summary>
-        public MainWindow Window { get; private set; }
+        public BalloonsView Window { get; private set; }
 
         /// <summary>
         /// Returns the resource provider which the current instance of the controller is using.

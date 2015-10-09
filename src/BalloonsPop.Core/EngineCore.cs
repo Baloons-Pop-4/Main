@@ -1,7 +1,6 @@
 ﻿namespace BalloonsPop.Core
 {
     using System;
-    using System.Collections.Generic;
 
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;

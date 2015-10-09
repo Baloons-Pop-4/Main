@@ -69,7 +69,7 @@
     <Compile Include="Resources.cs" />
     <Compile Include="WpfBundle.cs" />
     <Compile Include="WpfModule.cs" />
-    <Page Include="MainWindow.xaml">
+    <Page Include="BalloonsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -80,8 +80,8 @@
     <Compile Include="UserCommandArgs.cs" />
     <Compile Include="EventEngine.cs" />
     <Compile Include="Contracts\IEventBasedUserInterface.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="BalloonsView.xaml.cs">
+      <DependentUpon>BalloonsView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
