@@ -73,9 +73,11 @@
     <Compile Include="MockClasses\MockUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserInputValidatorTests.cs" />
+    <Compile Include="WpfUiTests\BalloonsViewTests.cs" />
     <Compile Include="WpfUiTests\ExtensionsTests\IHighscoreTableExtensionsTests.cs" />
     <Compile Include="WpfUiTests\ExtensionsTests\StringExtensionsTests.cs" />
     <Compile Include="WpfUiTests\ExtensionsTests\WpfExtensionsTests.cs" />
+    <Compile Include="WpfUiTests\MainWindowControllerTests.cs" />
     <Compile Include="WpfUiTests\ResourceTests.cs" />
     <Compile Include="WpfUiTests\UserCommandArgsTests.cs" />
   </ItemGroup>
