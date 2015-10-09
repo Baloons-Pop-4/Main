@@ -6,19 +6,20 @@
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
 
+    using BalloonsPop.Core.Gadgets;
+
     public class EngineCore
     {
         #region Constants
-        protected const string Exit = "EXIT";
-        protected const string Top = "TOP";
-        protected const string Restart = "RESTART";
-        protected const string Undo = "UNDO";
         protected const string WrongInputMessage = "Wrong input! Try Again!";
-        protected const string CannotPopMissingBalloonMessage = "Cannot pop missing ballon!";
-        protected const string WinMessageTemplate = "Gratz ! You completed it in {0} moves.";
-        protected const string NotInTopFiveMessage = "I am sorry you are not skillful enough for TopFive chart!";
-        protected const string MovePrompt = "Enter a row and column: ";
-        protected const string OnExitMessage = "Good Bye!";
+        protected const string Save = "save";
+        protected const string Pop = "pop";
+        protected const string GameOver = "gameover";
+        protected const string Field = "field";
+        protected const string Message = "message";
+
+        protected const int IndexOfRowDigit = 0;
+        protected const int IndexOfColumnDigit = 2;
         #endregion
 
         private IUserInputValidator validator;
@@ -75,44 +76,30 @@
         {
             var commandList = new List<ICommand>();
 
-            new Switch<string>(userCommand.ToUpper())
-                               .Case(Restart, () => commandList.Add(this.commandFactory.CreateCommand("restart")))
-                               .Case(Top,() => commandList.Add(this.commandFactory.CreateCommand("top")))
-                               .Case(Undo, () =>commandList.Add(this.commandFactory.CreateCommand("undo")))
-                               .Case(Exit, () => commandList.Add(this.CommandFactory.CreateCommand("exit")))
-                               .Case(
-                               cmdString =>
-                               {
-                                   if (!this.validator.IsValidUserMove(userCommand))
-                                   {
-                                       return true;
-                                   }
+            bool isValidPopMove = this.validator.IsValidUserMove(userCommand)
+                                    && !this.Context.Game.At(userCommand).IsPopped;
 
-                                   var userRow = userCommand[0].ToInt32();
-                                   var userColumn = userCommand[2].ToInt32();
+            if (isValidPopMove)
+            {
+                commandList.Add(this.commandFactory.CreateCommand(Save));
 
-                                   return this.context.Game.Field[userRow, userColumn].IsPopped;
-                               },
-                               () =>
-                               {
-                                   this.context.Message = WrongInputMessage;
-                                   commandList.Add(this.commandFactory.CreateCommand("message"));
-                               })
-                               .Default(() =>
-                               {
-                                   commandList.Add(this.commandFactory.CreateCommand("save"));
-
-                                   var userRow = userCommand[0].ToInt32();
-                                   var userColumn = userCommand[2].ToInt32();
-
-                                   this.context.UserRow = userRow;
-                                   this.context.UserCol = userColumn;
-                                   commandList.Add(this.commandFactory.CreateCommand("pop"));
+                this.context.UserRow = userCommand[IndexOfRowDigit].ToInt32();
+                this.context.UserCol = userCommand[IndexOfColumnDigit].ToInt32();
+                commandList.Add(this.commandFactory.CreateCommand(Pop));
 
 
-                                   commandList.Add(this.commandFactory.CreateCommand("gameover"));
-                                   commandList.Add(this.commandFactory.CreateCommand("field"));
-                               });
+                commandList.Add(this.commandFactory.CreateCommand(GameOver));
+                commandList.Add(this.commandFactory.CreateCommand(Field));
+            }
+            else if (this.CommandFactory.ContainsKey(userCommand.ToLower()))
+            {
+                commandList.Add(this.CommandFactory.CreateCommand(userCommand.ToLower()));
+            }
+            else
+            {
+                this.context.Message = WrongInputMessage;
+                commandList.Add(this.commandFactory.CreateCommand(Message));
+            }
 
             return commandList;
         }

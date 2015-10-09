@@ -19,7 +19,7 @@
             collection = null;
             Action<byte> action = null;
 
-            IEnumerableExtension.ForEach<byte>(collection, action);
+            IEnumerableExtensions.ForEach<byte>(collection, action);
         }
 
         [TestMethod]
@@ -30,7 +30,7 @@
             IEnumerable<byte> collection = new List<byte> { 1, 2, 3, 4 };
             Action<byte> action = null;
 
-            IEnumerableExtension.ForEach<byte>(collection, action);
+            IEnumerableExtensions.ForEach<byte>(collection, action);
         }
 
         [TestMethod]

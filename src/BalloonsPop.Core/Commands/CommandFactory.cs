@@ -25,6 +25,11 @@
             return this.commandMap[commandName]();
         }
 
+        public bool ContainsKey(string commandKey)
+        {
+            return this.commandMap.ContainsKey(commandKey);
+        }
+
         public void RegisterCommand(string commandKey, Func<ICommand> commandProvidingMethod)
         {
             if (!this.commandMap.ContainsKey(commandKey))
