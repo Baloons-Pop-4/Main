@@ -43,6 +43,9 @@
     <Compile Include="Contracts\ISoundsLoader.cs" />
     <Compile Include="Contracts\ISoundsPlayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sound.cs" />
+    <Compile Include="SoundsLoader.cs" />
+    <Compile Include="SoundsPlayer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
