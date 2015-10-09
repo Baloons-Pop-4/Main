@@ -55,6 +55,7 @@
         }
 
         [TestMethod]
+        [Ignore]
         public void TestIfPopBalloonsCommandCallsTheNeededMethodsFromGameModelAndGameLogic()
         {
             var mockLogic = new MockLogic();

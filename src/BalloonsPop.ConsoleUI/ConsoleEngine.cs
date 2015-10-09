@@ -29,8 +29,8 @@
                 this.CommandFactory.CreateCommand(PrintMessageCommandKey).Execute(this.Context);
                 command = this.GetTrimmedUppercaseInput();
 
-                var commandList = this.GetCommandList(command);
-                this.ExecuteCommandList(commandList);
+                var parsedCommand = this.GetCommandList(command);
+                parsedCommand.Execute(this.Context);
             }
         }
 

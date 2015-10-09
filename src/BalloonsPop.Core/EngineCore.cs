@@ -72,44 +72,30 @@
             }
         }
 
-        protected virtual IList<ICommand> GetCommandList(string userCommand)
+        protected virtual ICommand GetCommandList(string userCommand)
         {
-            var commandList = new List<ICommand>();
+            ICommand cmd = null;
 
             bool isValidPopMove = this.validator.IsValidUserMove(userCommand)
                                     && !this.Context.Game.At(userCommand).IsPopped;
 
             if (isValidPopMove)
             {
-                commandList.Add(this.commandFactory.CreateCommand(Save));
-
                 this.context.UserRow = userCommand[IndexOfRowDigit].ToInt32();
                 this.context.UserCol = userCommand[IndexOfColumnDigit].ToInt32();
-                commandList.Add(this.commandFactory.CreateCommand(Pop));
-
-
-                commandList.Add(this.commandFactory.CreateCommand(GameOver));
-                commandList.Add(this.commandFactory.CreateCommand(Field));
+                cmd = this.commandFactory.CreateCommand(Pop);
             }
             else if (this.CommandFactory.ContainsKey(userCommand.ToLower()))
             {
-                commandList.Add(this.CommandFactory.CreateCommand(userCommand.ToLower()));
+                cmd = this.CommandFactory.CreateCommand(userCommand.ToLower());
             }
             else
             {
                 this.context.Message = WrongInputMessage;
-                commandList.Add(this.commandFactory.CreateCommand(Message));
+                cmd = this.commandFactory.CreateCommand(Message);
             }
 
-            return commandList;
-        }
-
-        protected virtual void ExecuteCommandList(IList<ICommand> commandList)
-        {
-            foreach (var command in commandList)
-            {
-                command.Execute(this.context);
-            }
+            return cmd;
         }
     }
 }

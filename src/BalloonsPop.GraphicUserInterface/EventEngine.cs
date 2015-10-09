@@ -1,8 +1,8 @@
 ﻿namespace BalloonsPop.GraphicUserInterface
 {
     using System;
-using BalloonsPop.Common.Contracts;
-using BalloonsPop.Core;
+    using BalloonsPop.Common.Contracts;
+    using BalloonsPop.Core;
 
     /// <summary>
     /// Extends the EngineCore to compile with the application's graphic interface.
@@ -28,9 +28,9 @@ using BalloonsPop.Core;
                 throw new ArgumentException("Invalid event arguments are provided");
             }
 
-            var commands = this.GetCommandList(castedArguments.CommandToPass);
+            var parsedCommand = this.GetCommandList(castedArguments.CommandToPass);
 
-            this.ExecuteCommandList(commands);
+            parsedCommand.Execute(this.Context);
         }
     }
 }
