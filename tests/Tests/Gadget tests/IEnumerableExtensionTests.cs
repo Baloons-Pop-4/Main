@@ -39,7 +39,7 @@
             IEnumerable<byte> collection = new List<byte> { 1, 2, 3, 4, 5, 6 };
             Action<byte> action = x => x++;
 
-            IEnumerableExtension.ForEach<byte>(collection, action);
+            IEnumerableExtensions.ForEach<byte>(collection, action);
 
             Assert.IsNotNull(collection);
         }
@@ -51,7 +51,7 @@
             var collection2 = new List<byte>();
             Action<byte> action = x => collection2.Add(x);
 
-            IEnumerableExtension.ForEach<byte>(collection, action);
+            IEnumerableExtensions.ForEach<byte>(collection, action);
 
             Assert.AreEqual(collection.Count, collection2.Count);
 
