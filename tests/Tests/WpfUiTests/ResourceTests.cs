@@ -1,19 +1,17 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Markup;
-using System.Windows.Media;
-using BalloonsPop.GraphicUserInterface;
-using BalloonsPop.GraphicUserInterface.Contracts;
-using BalloonsPop.GraphicUserInterface.Gadgets;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Tests.WpfUiTests
+﻿namespace Tests.WpfUiTests
 {
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Markup;
+    using System.Windows.Media;
+    using BalloonsPop.GraphicUserInterface;
+    using BalloonsPop.GraphicUserInterface.Contracts;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class ResourceTests
     {
-        IBalloonsWpfResourceProvider resourceProvider;
+        private IBalloonsWpfResourceProvider resourceProvider;
 
         [TestInitialize]
         public void TestInit()
@@ -30,7 +28,7 @@ namespace Tests.WpfUiTests
                 BorderBrush = Brushes.Coral
             });
 
-            var actual = XamlWriter.Save(resourceProvider.HighscoreGridBorder);
+            var actual = XamlWriter.Save(this.resourceProvider.HighscoreGridBorder);
 
             Assert.AreEqual(expected, actual);
         }
@@ -44,7 +42,7 @@ namespace Tests.WpfUiTests
                 VerticalAlignment = VerticalAlignment.Center
             });
 
-            var actual = XamlWriter.Save(resourceProvider.HighscoreGridCell);
+            var actual = XamlWriter.Save(this.resourceProvider.HighscoreGridCell);
 
             Assert.AreEqual(expected, actual);
         }

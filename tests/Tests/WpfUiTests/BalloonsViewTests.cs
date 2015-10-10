@@ -1,9 +1,8 @@
-﻿using System;
-using BalloonsPop.GraphicUserInterface;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Tests.WpfUiTests
+﻿namespace Tests.WpfUiTests
 {
+    using BalloonsPop.GraphicUserInterface;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class BalloonsViewTests
     {
@@ -31,13 +30,11 @@ namespace Tests.WpfUiTests
         {
             string[] buttonsKeys = { BalloonsView.ExitButtonKey, BalloonsView.UndoButtonKey, BalloonsView.RestartButtonKey };
 
-
             bool correctRestartBtn = ReferenceEquals(this.view.CommandButtons[BalloonsView.RestartButtonKey], this.view.StartButton);
             bool correctUndoBtn = ReferenceEquals(this.view.CommandButtons[BalloonsView.UndoButtonKey], this.view.UndoButton);
             bool correctExitBtn = ReferenceEquals(this.view.CommandButtons[BalloonsView.ExitButtonKey], this.view.ExitButton);
 
             Assert.IsTrue(correctExitBtn && correctRestartBtn && correctUndoBtn);
-
         }
 
         [TestMethod]

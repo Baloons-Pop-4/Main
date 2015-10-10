@@ -1,12 +1,10 @@
 ﻿namespace Tests.HighscoreTests
 {
     using System;
-
-    using BalloonsPop.Highscore;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System.Collections.Generic;
     using BalloonsPop.Common.Contracts;
+    using BalloonsPop.Highscore;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// Summary description for HighscoreTableTests
@@ -70,6 +68,7 @@
             {
                 playerScores.Add(new PlayerScore(i.ToString(), i, DateTime.Now));
             }
+
             HighscoreTable table = new HighscoreTable(playerScores);
 
             bool canAddPlayer = table.CanAddPlayer(10);
@@ -85,6 +84,7 @@
             {
                 playerScores.Add(new PlayerScore(i.ToString(), i + 1, DateTime.Now));
             }
+
             HighscoreTable table = new HighscoreTable(playerScores);
 
             bool canAddPlayer = table.CanAddPlayer(0);

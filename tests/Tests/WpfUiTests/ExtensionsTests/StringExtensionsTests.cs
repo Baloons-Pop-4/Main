@@ -1,10 +1,9 @@
 ﻿namespace Tests.WpfUiTests.ExtensionsTests
 {
     using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System.Windows.Controls;
-
     using BalloonsPop.GraphicUserInterface.Gadgets;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class StringExtensionsTests

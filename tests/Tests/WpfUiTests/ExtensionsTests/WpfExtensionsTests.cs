@@ -2,22 +2,19 @@
 {
     using System;
     using System.Linq;
-    using System.Windows.Markup;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using System.Windows.Controls;
-    using BalloonsPop.GraphicUserInterface.Gadgets;
-    using System.IO;
     using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Markup;
+    using BalloonsPop.GraphicUserInterface.Gadgets;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class WPfExtensionsTests
     {
-        //[TestMethod]
-        //[ExpectedException(typeof(NullReferenceException))]
-        //public void TestIf()
-        //{
-
-        //}
+        //// [TestMethod]
+        //// [ExpectedException(typeof(NullReferenceException))]
+        //// public void TestIf()
+        //// {}
 
         [TestMethod]
         [ExpectedException(typeof(NullReferenceException))]
@@ -135,7 +132,7 @@
         public void TestIfSetSourceThrowsWithEmptyPath()
         {
             var img = new Image();
-            var emptyPaths = new string[] { "", null, "     " };
+            var emptyPaths = new string[] { string.Empty, null, "     " };
 
             var argumentExceptionsC0unt = 0;
 
@@ -162,15 +159,13 @@
             nullCaller.SetSource("somepathduzntrlymatter");
         }
 
-        //[TestMethod]
-        //public void TestIfSetSourceSetsPathCorrect()
-        //{
-        //    var image = new Image();
-        //    File.WriteAllText("dummyfile.png", "pokaji na tiya hora kak sa myatash");
-        //    image.SetSource("dummyfile.png");
-
-        //    // how the heck do i test dat shyt?
-        //}
+        //// [TestMethod]
+        //// public void TestIfSetSourceSetsPathCorrect() /* how the heck do i test dat shyt? */
+        //// {
+        ////     var image = new Image();
+        ////     File.WriteAllText("dummyfile.png", "pokaji na tiya hora kak sa myatash");
+        ////     image.SetSource("dummyfile.png");
+        //// }
 
         [TestMethod]
         [ExpectedException(typeof(NullReferenceException))]

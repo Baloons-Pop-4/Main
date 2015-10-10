@@ -20,7 +20,8 @@
         }
 
         public void PrintPlayerMoves(string moves)
-        {}
+        {
+        }
 
         public void PrintMessage(string message)
         {

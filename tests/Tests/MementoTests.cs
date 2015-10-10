@@ -2,14 +2,12 @@
 {
     using System;
     using System.Linq;
-
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
-    using BalloonsPop.Saver;
     using BalloonsPop.GameModels;
     using BalloonsPop.LogicProvider;
+    using BalloonsPop.Saver;
     using BalloonsPop.Validation;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]

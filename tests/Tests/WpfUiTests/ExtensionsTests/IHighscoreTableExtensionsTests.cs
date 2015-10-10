@@ -1,12 +1,12 @@
-﻿using System;
-using BalloonsPop.Common.Contracts;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BalloonsPop.GraphicUserInterface.Gadgets;
-using BalloonsPop.Highscore;
-using System.Collections.Generic;
-
-namespace Tests.WpfUiTests.ExtensionsTests
+﻿namespace Tests.WpfUiTests.ExtensionsTests
 {
+    using System;
+    using System.Collections.Generic;
+    using BalloonsPop.Common.Contracts;
+    using BalloonsPop.GraphicUserInterface.Gadgets;
+    using BalloonsPop.Highscore;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class IHighscoreTableExtensionsTests
     {
@@ -21,7 +21,6 @@ namespace Tests.WpfUiTests.ExtensionsTests
         [TestMethod]
         public void MyTestMethod()
         {
-            
         }
 
         [TestMethod]
@@ -31,9 +30,18 @@ namespace Tests.WpfUiTests.ExtensionsTests
 
             var sampleStringTable = new List<List<string>>() 
             {
-                new List<string>(){"tosho", "8"},
-                new List<string>(){"gosho", "28"},
-                new List<string>(){"pesho", "30"}
+                new List<string>()
+                {
+                    "tosho", "8"
+                },
+                new List<string>()
+                {
+                    "gosho", "28"
+                },
+                new List<string>()
+                {
+                    "pesho", "30"
+                }
             };
 
             foreach (var record in sampleStringTable)

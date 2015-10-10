@@ -68,9 +68,11 @@
         [Serializable]
         internal class SerializableClass
         {
-            internal int Field;
-            internal string Field2;
-            internal double[] Field3;
+            public int Field { get; set; }
+            
+            public string Field2 { get; set; }
+
+            public double[] Field3 { get; set; }
 
             public override int GetHashCode()
             {

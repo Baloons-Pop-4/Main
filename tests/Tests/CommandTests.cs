@@ -45,7 +45,7 @@
                 {
                     this.commandFactory.CreateCommand(key);
                 }
-                catch (ArgumentException)
+                catch (Exception)
                 {
                     continue;
                 }
