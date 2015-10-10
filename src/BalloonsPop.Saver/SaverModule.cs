@@ -11,7 +11,7 @@
     public class SaverModule : NinjectModule
     {
         /// <summary>
-        /// Public constructor which accepts a kernel that it later uses to bind exports.
+        /// Initializes a new instance of the <see cref="SaverModule" /> class which accepts a kernel that it later uses to bind exports.
         /// </summary>
         /// <param name="kernel">The kernel to which the AppKernel property will be set.</param>
         public SaverModule(IKernel kernel)
@@ -20,7 +20,7 @@
         }
 
         /// <summary>
-        /// The kernel which the instance of SaveModule will use to bind exports.
+        /// Gets or sets the kernel which the instance of SaveModule will use to bind exports.
         /// </summary>
         public IKernel AppKernel { get; set; }
 

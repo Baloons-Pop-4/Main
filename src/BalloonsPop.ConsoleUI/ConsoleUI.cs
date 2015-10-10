@@ -27,7 +27,6 @@
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Moves count: " + moves);
             Console.ForegroundColor = ConsoleColor.White;
-            
         }
 
         public void PrintMessage(string message)

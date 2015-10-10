@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BalloonsPop.Common.Contracts;
-
-namespace BalloonsPop.Core.Commands
+﻿namespace BalloonsPop.Core.Commands
 {
+    using System.Collections.Generic;
+    using BalloonsPop.Common.Contracts;
+
     public class CompositeUndoCommand : CompositeCommand
     {
         public CompositeUndoCommand()

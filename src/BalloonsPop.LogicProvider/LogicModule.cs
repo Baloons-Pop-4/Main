@@ -16,7 +16,7 @@
         private static IKernel kernel;
 
         /// <summary>
-        /// Public constructor which initializes the current instance with the provided kernel.
+        /// Initializes a new instance of the <see cref="LogicModule" /> class through injection with the provided kernel.
         /// </summary>
         /// <param name="bindingKernel"></param>
         public LogicModule(IKernel bindingKernel)

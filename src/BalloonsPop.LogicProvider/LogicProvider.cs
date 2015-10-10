@@ -16,7 +16,7 @@
         private readonly IBalloonPopper balloonPopper;
 
         /// <summary>
-        /// Public constructor that initializes the current instance with matrix validator and random number generator.
+        /// Initializes a new instance of the <see cref="LogicProvider" /> class with matrix validator and random number generator.
         /// </summary>
         /// <param name="matrixValidator">The matrix validator.</param>
         /// <param name="rng">The random byte generator.</param>

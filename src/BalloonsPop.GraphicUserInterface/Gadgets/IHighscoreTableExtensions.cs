@@ -11,7 +11,7 @@
     public static class IHighscoreTableExtensions
     {
         /// <summary>
-        /// Converts the calling IHighscoreTable to a List<List<string>>.
+        /// Converts the calling IHighscoreTable to a List<code><List<string></code>.
         /// </summary>
         /// <param name="table">The table that will be converted to string lists.</param>
         /// <returns>Returns a list represantation of the table. Each row containts the following info as string: index, player name and score</returns>

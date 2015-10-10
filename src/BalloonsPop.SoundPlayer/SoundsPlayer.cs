@@ -10,9 +10,10 @@
 
     public class SoundsPlayer : ISoundsPlayer
     {
+        private static readonly ILogger Logger = LogHelper.GetLogger();
+
         private IDictionary<string, ISound> sounds;
         private ISoundsLoader loader;
-        private static readonly ILogger Logger = LogHelper.GetLogger();
 
         public SoundsPlayer(ISoundsLoader loader)
         {
@@ -36,7 +37,6 @@
             {
                 Logger.Warn("Cannot load media file.", ex);
             }
-
         }
 
         public void RegisterSound(string soundName)

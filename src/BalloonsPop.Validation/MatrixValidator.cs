@@ -10,10 +10,10 @@
         /// <summary>
         /// Returns true if a a point with the coordinates(zero-based) [row, col] is inside the provided matrix, and false otherwise.
         /// </summary>
-        /// <typeparam name="T">Not constrainted.</typeparam>
+        /// <typeparam name="T">Not constrained.</typeparam>
         /// <param name="matrix">The matrix against which the coordinates will be checked.</param>
         /// <param name="row">The row part of the coordinates.</param>
-        /// <param name="col">The column part of the coordiantes.</param>
+        /// <param name="col">The column part of the coordinates.</param>
         /// <returns></returns>
         public bool IsInsideMatrix<T>(T[,] matrix, int row, int col)
         {

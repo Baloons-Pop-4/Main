@@ -10,7 +10,7 @@
     using System.Xml;
 
     /// <summary>
-    /// Provides additional functionality for wpf ui elements.
+    /// Provides additional functionality for wpf UI elements.
     /// </summary>
     public static class WpfElementExtensions
     {

@@ -10,7 +10,7 @@
     public class CoreBundle : ICoreBundle
     {
         /// <summary>
-        /// Public constructor which initializes the isntance through injection with the provided kernel.
+        /// Initializes a new instance of the <see cref="CoreBundle" /> class through injection with the provided kernel.
         /// </summary>
         /// <param name="kernel"></param>
         public CoreBundle(IKernel kernel)

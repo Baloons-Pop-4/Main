@@ -11,6 +11,7 @@
     {
         private const string DefaultPlayerName = "Player";
         private const string StartUpMessage = "Welcome to balloons pop!";
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="Context"/> class.
         /// Allows creating and initializing the context manually.
@@ -22,68 +23,68 @@
         }
 
         /// <summary>
-        /// Uses a Ninject kernel to inject the current instance.
+        /// Initializes a new instance of the <see cref="Context" /> class. Uses a Ninject kernel to inject the current instance.
         /// </summary>
         /// <param name="appKernel"></param>
         public Context(IKernel appKernel)
-            :this()
+            : this()
         {
             appKernel.Inject(this);
         }
 
         /// <summary>
-        /// Provides access to the game model.
+        /// Gets or sets an access to the game model.
         /// </summary>
         [Inject]
         public IGameModel Game { get; set; }
 
         /// <summary>
-        /// Provides access to the logic provider
+        /// Gets or sets an access to the logic provider
         /// </summary>
         [Inject]
         public IGameLogicProvider LogicProvider { get; set; }
 
         /// <summary>
-        /// Provides access to the printer.
+        /// Gets or sets an access to the printer.
         /// </summary>
         [Inject]
         public IPrinter Printer { get; set; }
 
         /// <summary>
-        /// Provides access to the state saver for the game object.
+        /// Gets or sets an access to the state saver for the game object.
         /// </summary>
         [Inject]
         public IStateSaver<IGameModel> Memento { get; set; }
 
         /// <summary>
-        /// Provides access to the applications high score table.
+        /// Gets or sets an access to the applications high score table.
         /// </summary>
         [Inject]
         public IHighscoreTable HighscoreTable { get; set; }
 
         /// <summary>
-        /// Provides access to the chosen high score handling strategy.
+        /// Gets or sets an access to the chosen high score handling strategy.
         /// </summary>
         [Inject]
         public IHighscoreHandlingStrategy HighscoreHandling { get; set; }
 
         /// <summary>
-        /// Provides the current "message" that describes the current state of the engine.
+        /// Gets or sets the current "message" that describes the current state of the engine.
         /// </summary>
         public string Message { get; set; }
 
         /// <summary>
-        /// Provides the nickname of the person currently playing the game.
+        /// Gets or sets the nickname of the person currently playing the game.
         /// </summary>
         public string PlayerName { get; set; }
 
         /// <summary>
-        /// Provides default(INT32) or, in case of valid pop input, the parsed row of the balloon.
+        /// Gets or sets default(INT32) or, in case of valid pop input, the parsed row of the balloon.
         /// </summary>
         public int UserRow { get; set; }
 
         /// <summary>
-        /// Provides default(INT32) or, in case of valid pop input, the parsed column of the balloon.
+        /// Gets or sets default(INT32) or, in case of valid pop input, the parsed column of the balloon.
         /// </summary>
         public int UserCol { get; set; }
     }

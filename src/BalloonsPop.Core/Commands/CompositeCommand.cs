@@ -8,8 +8,6 @@
 
     public abstract class CompositeCommand : ICommand
     {
-        public IList<ICommand> SubCommands { get; protected set; }
-
         protected CompositeCommand()
         {
             this.SubCommands = new List<ICommand>();
@@ -19,6 +17,8 @@
         {
             this.SubCommands = predefinedCommands;
         }
+
+        public IList<ICommand> SubCommands { get; protected set; }
 
         public virtual void Execute(IContext context)
         {

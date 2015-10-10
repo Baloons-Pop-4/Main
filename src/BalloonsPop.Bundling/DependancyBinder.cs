@@ -17,7 +17,7 @@
         }
 
         /// <summary>
-        /// Access to the singleton instance.
+        /// Gets access to the singleton instance.
         /// </summary>
         public static DependancyBinder Instance
         {
@@ -28,7 +28,7 @@
         }
 
         /// <summary>
-        /// Returns the list of the currently registered ninject modules.
+        /// Gets the list of the currently registered ninject modules.
         /// </summary>
         public IList<NinjectModule> Modules { get; private set; }
 

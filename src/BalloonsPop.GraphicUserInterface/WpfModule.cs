@@ -12,7 +12,7 @@
     public class WpfModule : NinjectModule
     {
         /// <summary>
-        /// Public constructor which accepts a kernel that it later uses to bind exports.
+        /// Initializes a new instance of the <see cref="WpfModule" /> class. It accepts a kernel which is used to bind exports.
         /// </summary>
         /// <param name="kernel">The kernel to which the AppKernel property will be set.</param>
         public WpfModule(IKernel kernel)
@@ -21,7 +21,7 @@
         }
 
         /// <summary>
-        /// The kernel which the instance of WpfModule will use to bind exports.
+        /// Gets or sets the kernel which the instance of WpfModule will use to bind exports.
         /// </summary>
         public IKernel AppKernel { get; set; }
 

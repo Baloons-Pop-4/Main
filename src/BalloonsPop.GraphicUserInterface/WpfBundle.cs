@@ -11,7 +11,7 @@
     public class WpfBundle : CoreBundle
     {
         /// <summary>
-        /// A constructor that uses a provided kernel to initialize the created instance.
+        /// Initializes a new instance of the <see cref="WpfBundle" /> class through injection with the provided kernel.
         /// </summary>
         /// <param name="kernel"></param>
         public WpfBundle(IKernel kernel)
@@ -21,7 +21,7 @@
         }
 
         /// <summary>
-        /// Provides access to the graphic interface exported by the wpf project.
+        /// Gets or sets access to the graphic interface exported by the wpf project.
         /// </summary>
         [Inject]
         public IEventBasedUserInterface Gui { get; set; }

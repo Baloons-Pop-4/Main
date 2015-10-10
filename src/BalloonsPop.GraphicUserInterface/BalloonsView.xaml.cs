@@ -29,12 +29,12 @@
         }
 
         /// <summary>
-        /// Raises an event when the user clicks on one of the window's controls.
+        /// Gets or sets an event when the user clicks on one of the window's controls.
         /// </summary>
         public EventHandler Raise { get; set; }
 
         /// <summary>
-        /// Provides readonly indexers access to the button controls of the current window's instance.
+        /// Gets readonly indexers access to the button controls of the current window's instance.
         /// </summary>
         public IDictionary<string, Button> CommandButtons
         {
@@ -45,7 +45,7 @@
         }
 
         /// <summary>
-        /// Provides readonly access to the balloon field of the current window's instance.
+        /// Gets access to the balloon field of the current window's instance.
         /// </summary>
         public Grid BalloonGrid
         {
@@ -56,7 +56,7 @@
         }
 
         /// <summary>
-        /// Provides readonly access to the start button control.
+        /// Gets access to the start button control.
         /// </summary>
         public Button StartButton
         {
@@ -67,7 +67,7 @@
         }
 
         /// <summary>
-        /// Provides readonly access to the exit button control.
+        /// Gets access to the exit button control.
         /// </summary>
         public Button ExitButton
         {
@@ -78,7 +78,7 @@
         }
 
         /// <summary>
-        /// Provides readonly access to the undo button control.
+        /// Gets access to the undo button control.
         /// </summary>
         public Button UndoButton
         {
@@ -89,7 +89,7 @@
         }
 
         /// <summary>
-        /// Provides get/set access to the message displayed to the user.
+        /// Gets or sets an access to the message displayed to the user.
         /// </summary>
         public string Message
         {
@@ -105,7 +105,7 @@
         }
 
         /// <summary>
-        /// Provides readonly access to the grid with rankings.
+        /// Gets access to the grid with rankings.
         /// </summary>
         public Grid Rankings
         {
@@ -124,7 +124,7 @@
         }
 
         /// <summary>
-        /// Provides get/set access to the displayed user moves.
+        /// Gets or sets an access to the displayed user moves.
         /// </summary>
         public string UserMoves
         {

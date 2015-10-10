@@ -8,8 +8,9 @@
 
     public class CommandFactory : ICommandFactory
     {
-        private readonly IDictionary<string, Func<ICommand>> commandMap;
         private static readonly ILogger Logger = LogHelper.GetLogger();
+
+        private readonly IDictionary<string, Func<ICommand>> commandMap;
 
         public CommandFactory()
         {

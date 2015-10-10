@@ -16,7 +16,7 @@
         private Image[,] balloons;
 
         /// <summary>
-        /// Public constructor that initializes a newly created controller instance with view and resource provider.
+        /// Initializes a new instance of the <see cref="MainWindowController" /> class with view and resource provider.
         /// </summary>
         /// <param name="window">The view which the newly created instance is responsible for managing.</param>
         /// <param name="resources">The resource provider which the newly created instance will query for resources.</param>
@@ -65,12 +65,12 @@
         }
 
         /// <summary>
-        /// Returns the view which the current instance of the controller is responsible for managing.
+        /// Gets the view which the current instance of the controller is responsible for managing.
         /// </summary>
         public BalloonsView Window { get; private set; }
 
         /// <summary>
-        /// Returns the resource provider which the current instance of the controller is using.
+        /// Gets the resource provider which the current instance of the controller is using.
         /// </summary>
         public IBalloonsWpfResourceProvider Resources { get; private set; }
 

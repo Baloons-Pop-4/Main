@@ -10,16 +10,16 @@
         private readonly string commandToPass;
 
         /// <summary>
-        /// Constructor for creation from command string.
+        /// Initializes a new instance of the <see cref="UserCommandArgs" /> class from command string.
         /// </summary>
-        /// <param name="commandToPass"></param>
+        /// <param name="commandToPass">The name of current command.</param>
         public UserCommandArgs(string commandToPass)
         {
             this.commandToPass = commandToPass;
         }
 
         /// <summary>
-        /// Provides read-only access to the encapsulated command.
+        /// Gets access to the encapsulated command.
         /// </summary>
         public string CommandToPass
         {
