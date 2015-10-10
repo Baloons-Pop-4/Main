@@ -12,6 +12,7 @@
             this.SubCommands = new List<ICommand>() 
             {
                 new SaveCommand(),
+                new PrintHighscoreCommand(),
                 new RestartCommand(),
                 new PrintFieldCommand()
             };

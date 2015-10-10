@@ -1,12 +1,11 @@
 ﻿namespace Tests
 {
     using System;
-
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Core.Commands;
     using BalloonsPop.Core.Contexts;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Moq;
     using Tests.MockClasses;
 
     [TestClass]
@@ -58,55 +57,63 @@
         [Ignore]
         public void TestIfPopBalloonsCommandCallsTheNeededMethodsFromGameModelAndGameLogic()
         {
-            var mockLogic = new MockLogic();
-            var mockGame = new GameMock();
+            var mockLogic = new Mock<IGameLogicProvider>();
+            mockLogic.Setup(x => x.PopBalloons(It.IsAny<IBalloon[,]>(), It.IsAny<int>(), It.IsAny<int>())).Verifiable();
+            var mockGame = new Mock<IGameModel>();
+            mockGame.Setup(x => x.Field).Verifiable();
 
             var context = new Context() 
             {
-                LogicProvider = mockLogic,
-                Game = mockGame
+                LogicProvider = mockLogic.Object,
+                Game = mockGame.Object
             };
 
             var popCmd = this.commandFactory.CreateCommand("pop");
 
             popCmd.Execute(context);
 
-            Assert.AreEqual(1, mockLogic.Calls["PopBalloons"]);
-            Assert.AreEqual(1, mockLogic.Calls["LetBalloonsFall"]);
-            Assert.AreEqual(1, mockGame.Calls["IncrementMoves"]);
+            mockLogic.Verify(x => x.PopBalloons(It.IsAny<IBalloon[,]>(), It.IsAny<int>(), It.IsAny<int>()), Times.Once);
+            mockLogic.Verify(x => x.LetBalloonsFall(It.IsAny<IBalloon[,]>()), Times.Once);
+            mockGame.Verify(x => x.Field, Times.Once);
         }
 
         [TestMethod]
         public void TestIfRestartCommandCallsTheNeededMethodsFromGameModelAndGameLogic()
         {
-            var mockLogic = new MockLogic();
-            var mockGame = new GameMock();
-
-            var context = new Context() 
+            var moqGame = new Mock<IGameModel>();
+            moqGame.Setup(x => x.ResetUserMoves()).Verifiable();
+            moqGame.SetupGet<IBalloon[,]>(x => x.Field).Returns(() => new IBalloon[5, 10]).Verifiable();
+            var moqLogic = new Mock<IGameLogicProvider>();
+            moqLogic.Setup(x => x.RandomizeBalloonField(It.IsAny<IBalloon[,]>())).Verifiable();
+           
+            var ctx = new Context()
             {
-                LogicProvider = mockLogic,
-                Game = mockGame
+                Game = moqGame.Object,
+                LogicProvider = moqLogic.Object
             };
-            this.commandFactory.UnregisterCommand("restart");
-            this.commandFactory.RegisterCommand("restart", () => new RestartCommand());
-            var restartCmd = this.commandFactory.CreateCommand("restart");
 
-            restartCmd.Execute(context);
+            new RestartCommand().Execute(ctx);
 
-            Assert.AreEqual(1, mockLogic.Calls["GenerateField"]);
-            Assert.AreEqual(1, mockGame.Calls["ResetMoves"]);
+            moqGame.Verify(x => x.ResetUserMoves(), Times.Once, "2 or 0");
+            moqLogic.Verify(x => x.RandomizeBalloonField(It.IsAny<IBalloon[,]>()), Times.Once, "no msg 4 u betch");
         }
 
         [TestMethod]
         public void TestIfPrintFieldCommandCallsThePrintFieldMethodOfTheUI()
         {
-            this.context = new Context() { Printer = new MockPrinter(), Game = new GameMock() };
+            var moqPrinter = new Mock<IPrinter>();
+            moqPrinter.Setup(x => x.PrintField(It.IsAny<IBalloon[,]>())).Verifiable();
+            var moqGame = new Mock<IGameModel>();
+            moqGame.SetupGet<IBalloon[,]>(x => x.Field).Verifiable();
+            this.context = new Context() { Printer = moqPrinter.Object, Game = moqGame.Object };
 
             var printFieldCommand = this.commandFactory.CreateCommand("field");
 
             printFieldCommand.Execute(this.context);
 
-            Assert.AreEqual(1, (this.context.Printer as MockPrinter).MethodCallCounts["field"]);
+            moqPrinter.Verify(x => x.PrintField(It.IsAny<IBalloon[,]>()), Times.Once);
+
+            // Assert.AreEqual(1, (this.context.Printer as MockPrinter).MethodCallCounts["field"]);
         }
 
         [TestMethod]

@@ -6,7 +6,7 @@
     {
         public void Execute(IContext context)
         {
-            new PrintHighscoreCommand().Execute(context);
+            
             context.LogicProvider.RandomizeBalloonField(context.Game.Field);
             context.Game.ResetUserMoves();
         }
