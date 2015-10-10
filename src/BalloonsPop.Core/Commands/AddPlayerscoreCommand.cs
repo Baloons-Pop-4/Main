@@ -8,7 +8,7 @@
     {
         public void Execute(IContext context)
         {
-            context.HighscoreTable.AddPlayer(new PlayerScore("bay ivan", context.Game.UserMovesCount, DateTime.Now));
+            context.HighscoreTable.AddPlayer(new PlayerScore(context.PlayerName, context.Game.UserMovesCount, DateTime.Now));
         }
     }
 }

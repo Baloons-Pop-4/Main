@@ -67,6 +67,11 @@
         public string Message { get; set; }
 
         /// <summary>
+        /// Provides the nickname of the person currently playing the game.
+        /// </summary>
+        public string PlayerName { get; set; }
+
+        /// <summary>
         /// Provides default(int) or, in case of valid pop input, the parsed row of the balloon.
         /// </summary>
         public int UserRow { get; set; }

@@ -19,8 +19,8 @@
                 this.SubCommands.Add(new PrintMessageCommand());
                 if (context.HighscoreTable.CanAddPlayer(context.Game.UserMovesCount))
                 {
-                    this.SubCommands.Add(new PrintHighscoreCommand());
                     this.SubCommands.Add(new AddPlayerscoreCommand());
+                    this.SubCommands.Add(new PrintHighscoreCommand());
                 }
 
                 this.SubCommands.Add(new CompositeRestart());

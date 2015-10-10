@@ -1,7 +1,7 @@
 ﻿namespace BalloonsPop.GraphicUserInterface.Contracts
 {
     using System;
-
+    using System.Windows.Controls;
     using BalloonsPop.Common.Contracts;
 
     /// <summary>
@@ -13,6 +13,11 @@
         /// Event which delegates the a user action interpreted as a command.
         /// </summary>
         event EventHandler RaiseCommand;
+
+        /// <summary>
+        /// Event which delegates the change of the user name to the engine.
+        /// </summary>
+        event TextChangedEventHandler ChangedUserName;
 
         /// <summary>
         /// Method that displays the applications graphic interface to the user.

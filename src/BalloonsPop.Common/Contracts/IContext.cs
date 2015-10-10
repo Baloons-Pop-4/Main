@@ -16,6 +16,8 @@
 
         string Message { get; set; }
 
+        string PlayerName { get; set; }
+
         int UserRow { get; set; }
 
         int UserCol { get; set; }

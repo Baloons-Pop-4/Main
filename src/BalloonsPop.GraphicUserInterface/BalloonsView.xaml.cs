@@ -115,6 +115,14 @@
             }
         }
 
+        public TextBox PlayerNicknameBox
+        {
+            get
+            {
+                return this.PlayerNameBox;
+            }
+        }
+
         /// <summary>
         /// Provides get/set access to the displayed user moves.
         /// </summary>

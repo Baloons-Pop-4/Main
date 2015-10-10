@@ -25,6 +25,7 @@
             this.Window = window;
 
             this.Resources = resources;
+
             this.Window.CommandButtons.ForEach(button =>
             {
                 button.Value.Click += (s, e) =>
@@ -47,6 +48,19 @@
             remove
             {
                 this.Window.Raise -= value;
+            }
+        }
+
+        public event TextChangedEventHandler ChangedUserName
+        {
+            add
+            {
+                this.Window.PlayerNicknameBox.TextChanged += value;
+            }
+            
+            remove
+            {
+                this.Window.PlayerNicknameBox.TextChanged -= value;
             }
         }
 
