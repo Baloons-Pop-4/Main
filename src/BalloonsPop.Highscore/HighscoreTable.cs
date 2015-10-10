@@ -15,6 +15,9 @@ namespace BalloonsPop.Highscore
     /// </summary>
     public class HighscoreTable : IHighscoreTable
     {
+        /// <summary>
+        /// The max amount of players the high score table can save.
+        /// </summary>
         public const int MaxPlayers = 5;
 
         /// <summary>
@@ -25,6 +28,7 @@ namespace BalloonsPop.Highscore
         /// <summary>
         /// Initializes a new instance of the <see cref="HighscoreTable"/> class.
         /// </summary>
+        /// <param name="playerScores">A list of player scores</param>
         public HighscoreTable(List<PlayerScore> playerScores = null)
         {
             this.Table = playerScores ?? new List<PlayerScore>();

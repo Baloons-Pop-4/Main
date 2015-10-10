@@ -1,4 +1,8 @@
-﻿namespace BalloonsPop.Highscore.HighscoreHandlingStrategies
+﻿// <copyright file="JsonHandlingStrategy.cs" company="TelerikAcademy">
+// All rights reserved. The Baloons-Pop-4 team.
+// </copyright>
+
+namespace BalloonsPop.Highscore.HighscoreHandlingStrategies
 {
     using System;
     using System.Collections.Generic;
@@ -8,15 +12,28 @@
 
     using Newtonsoft.Json;
 
+    /// <summary>
+    /// Implements high score handling (saving and loading) in a JSON format
+    /// </summary>
     public class JsonHandlingStrategy : IHighscoreHandlingStrategy
     {
+        /// <summary>
+        /// The name of the file to be written/read to/from.
+        /// </summary>
         private string fileName;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JsonHandlingStrategy"/> class.
+        /// </summary>
+        /// <param name="fileName">The name of the file to be used for loading and saving.</param>
         public JsonHandlingStrategy(string fileName)
         {
             this.FileName = fileName;
         }
 
+        /// <summary>
+        /// Gets the file name which is used for loading and saving the high score.
+        /// </summary>
         public string FileName
         {
             get
@@ -35,12 +52,20 @@
             }
         }
 
+        /// <summary>
+        /// Saves a <see cref="IHighscoreTable"/> to a JSON formatted file.
+        /// </summary>
+        /// <param name="table">The concrete implementation of a table.</param>
         public void Save(IHighscoreTable table)
         {
             string json = JsonConvert.SerializeObject(table.Table.ToArray(), Formatting.Indented);
             File.WriteAllText(this.FileName, json);
         }
 
+        /// <summary>
+        /// Loads a <see cref="IHighscoreTable"/> from a JSON formatted file.
+        /// </summary>
+        /// <returns>The high score table</returns>
         public IHighscoreTable Load()
         {
             try
