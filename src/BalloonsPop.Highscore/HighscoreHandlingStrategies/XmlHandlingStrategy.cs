@@ -89,7 +89,7 @@ namespace BalloonsPop.Highscore.HighscoreHandlingStrategies
 
                 return new HighscoreTable(playerScores);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // Call Logger.Warn() here -> "No highscore.xml, falling back to empty highscore table."
                 return new HighscoreTable();

@@ -8,7 +8,7 @@
     {
         public SoundPlayer CreateSoundMedia(string soundName)
         {
-            string path = BuildFilePath(soundName);
+            string path = this.BuildFilePath(soundName);
             var player = new SoundPlayer(path);
             return player;
         }

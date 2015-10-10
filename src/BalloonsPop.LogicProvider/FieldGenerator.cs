@@ -16,7 +16,7 @@
         private readonly IRandomNumberGenerator rng;
 
         /// <summary>
-        /// Constructor for the FieldGenerator class.
+        /// Initializes a new instance of the <see cref="FieldGenerator"/> class.
         /// </summary>
         /// <param name="rng">An object that provides generation of pseudo-random integers.</param>
         public FieldGenerator(IRandomNumberGenerator rng)
@@ -27,14 +27,14 @@
         /// <summary>
         /// Generates a random matrix of balloons that are not popped.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="field">The field.</param>
         public void RandomizeBalloonField(IBalloon[,] field)
         {
-            new QueriableMatrix<IBalloon>(field)
-                .ForEach(x => 
-                        { 
-                            x.Number = this.rng.Next(MinBalloonValue, MaxBalloonValue + 1); 
-                            x.IsPopped = false; 
+            new QueryableMatrix<IBalloon>(field)
+                .ForEach(x =>
+                        {
+                            x.Number = this.rng.Next(MinBalloonValue, MaxBalloonValue + 1);
+                            x.IsPopped = false;
                         });
         }
     }

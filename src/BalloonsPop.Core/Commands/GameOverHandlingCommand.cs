@@ -1,8 +1,7 @@
 ﻿namespace BalloonsPop.Core.Commands
 {
-    using BalloonsPop.Common.Contracts;
-    using System;
     using System.Collections.Generic;
+    using BalloonsPop.Common.Contracts;
 
     public class GameOverHandlingCommand : CompositeCommand
     {

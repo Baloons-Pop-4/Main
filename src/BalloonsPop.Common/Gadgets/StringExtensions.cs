@@ -10,9 +10,9 @@
         private const int DecimalCodeOfZero = 48;
 
         /// <summary>
-        /// Converts the provided string to an int32, throwing an exception in case of invalid string format.
+        /// Converts the provided string to an INT32, throwing an exception in case of invalid string format.
         /// </summary>
-        /// <param name="str">The string to be parsed to int.</param>
+        /// <param name="str">The string to be parsed to INT32.</param>
         /// <returns>The parsed integer value.</returns>
         public static int ToInt32(this string str)
         {
@@ -28,9 +28,9 @@
         }
 
         /// <summary>
-        /// Converts the provided char digit to an int32, throwing an exception in case of invalid string format.
+        /// Converts the provided char digit to an INT32, throwing an exception in case of invalid string format.
         /// </summary>
-        /// <param name="str">The string to be parsed to int.</param>
+        /// <param name="ch">The string to be parsed to INT32.</param>
         /// <returns>The parsed integer value.</returns>
         public static int ToInt32(this char ch)
         {

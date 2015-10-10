@@ -14,7 +14,7 @@
 
         public GameModel()
         {
-            this.field = new QueriableMatrix<IBalloon>(5, 10).Select(x => new Balloon()).ToMatrix(5, 10);
+            this.field = new QueryableMatrix<IBalloon>(5, 10).Select(x => new Balloon()).ToMatrix(5, 10);
             this.userMovesCount = 0;
         }
 
@@ -52,7 +52,7 @@
 
         public IGameModel Clone()
         {
-            var clonedField = new QueriableMatrix<IBalloon>(this.field)
+            var clonedField = new QueryableMatrix<IBalloon>(this.field)
                                         .Select(balloon => new Balloon() { Number = balloon.Number, IsPopped = balloon.IsPopped })
                                         .ToMatrix(this.field.GetLength(0), this.field.GetLength(1));
 

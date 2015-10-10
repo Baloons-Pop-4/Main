@@ -70,7 +70,7 @@
         [TestMethod]
         public void TestIfGameIsOverReturnsTrueWithAnEmptyField()
         {
-            var sampleEmptyField = new QueriableMatrix<byte>(5, 10).Select(x => new Balloon() { IsPopped = true }).ToMatrix(5, 10);
+            var sampleEmptyField = new QueryableMatrix<byte>(5, 10).Select(x => new Balloon() { IsPopped = true }).ToMatrix(5, 10);
             Assert.IsTrue(this.gameLogicProvider.GameIsOver(sampleEmptyField));
         }
 
@@ -78,7 +78,7 @@
         public void TestIfGameIsOverReturnsFalseWithANonemptyField()
         {
             var rng = new Random();
-            var sampleEmptyField = new QueriableMatrix<byte>(5, 10).Select(x => new Balloon()).ToMatrix(5, 10);
+            var sampleEmptyField = new QueryableMatrix<byte>(5, 10).Select(x => new Balloon()).ToMatrix(5, 10);
             for (int i = 0; i < 50; i++)
             {
                 sampleEmptyField[rng.Next(0, 5), rng.Next(0, 10)] = new Balloon() { Number = (byte)rng.Next(1, 5) };
@@ -100,7 +100,7 @@
         [TestMethod]
         public void TestIfPopBalloonsPopsTheBalloonsOnTheSameRowAndColumn()
         {
-            var field = new QueriableMatrix<byte>(5, 10).Select(x => new Balloon()).ToQueriableMatrix(5, 10);
+            var field = new QueryableMatrix<byte>(5, 10).Select(x => new Balloon()).ToQueryableMatrix(5, 10);
 
             for (int i = 0, j = 5; i < 5; i++)
             {
@@ -161,7 +161,7 @@
         [TestMethod]
         public void TestIfPopBalloonsPopsOnlyTargetBalloonWhenTheBalloonHasNoNeighborsOfTheSameType()
         {
-            var field = new QueriableMatrix<byte>(5, 10).Select(x => new Balloon()).ToMatrix(5, 10);
+            var field = new QueryableMatrix<byte>(5, 10).Select(x => new Balloon()).ToMatrix(5, 10);
 
             for (int i = 1; i < 4; i++)
             {
@@ -202,7 +202,7 @@
 
             this.gameLogicProvider.LetBalloonsFall(cloned);
 
-            var areEqual = new QueriableMatrix<IBalloon>(balloonsField).Join(new QueriableMatrix<IBalloon>(cloned), x => x.IsPopped, y => y.IsPopped, (x, y) => !(x.IsPopped ^ y.IsPopped)).All(x => x);
+            var areEqual = new QueryableMatrix<IBalloon>(balloonsField).Join(new QueryableMatrix<IBalloon>(cloned), x => x.IsPopped, y => y.IsPopped, (x, y) => !(x.IsPopped ^ y.IsPopped)).All(x => x);
 
             Assert.IsTrue(areEqual);
         }

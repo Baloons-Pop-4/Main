@@ -4,14 +4,13 @@
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
     using BalloonsPop.Core.Commands;
-    using BalloonsPop.Saver;
+    using BalloonsPop.Core.Contexts;
     using BalloonsPop.GameModels;
     using BalloonsPop.Highscore;
     using BalloonsPop.LogicProvider;
+    using BalloonsPop.Saver;
     using BalloonsPop.Validation;
-
     using Ninject;
-    using BalloonsPop.Core.Contexts;
 
     public class MainProgram
     {

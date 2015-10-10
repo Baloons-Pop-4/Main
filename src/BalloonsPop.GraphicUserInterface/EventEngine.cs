@@ -14,6 +14,7 @@
         {
             depBundle.Gui.RaiseCommand += this.HandleUserInput;
         }
+
         /// <summary>
         /// The method which handles user input by delegating events in compatible form to the core.
         /// </summary>

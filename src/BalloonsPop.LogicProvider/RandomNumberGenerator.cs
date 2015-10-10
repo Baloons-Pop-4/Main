@@ -15,7 +15,7 @@
         /// </summary>
         /// <param name="min">Minimum for result, inclusive.</param>
         /// <param name="max">Maximum for result, exclusive.</param>
-        /// <returns></returns>
+        /// <returns>A random byte number.</returns>
         public byte Next(int min, int max)
         {
             return (byte)this.rnd.Next(min, max);

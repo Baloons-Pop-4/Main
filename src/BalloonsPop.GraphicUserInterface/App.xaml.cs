@@ -1,17 +1,15 @@
 ﻿namespace BalloonsPop.GraphicUserInterface
 {
-    using System;
-    using System.Linq;
     using System.Windows;
     using BalloonsPop.Bundling;
-    using BalloonsPop.Saver;
+    using BalloonsPop.Core.Contexts;
     using BalloonsPop.GameModels;
     using BalloonsPop.GraphicUserInterface.Commands;
     using BalloonsPop.Highscore;
     using BalloonsPop.LogicProvider;
+    using BalloonsPop.Saver;
     using BalloonsPop.Validation;
     using Ninject;
-    using BalloonsPop.Core.Contexts;
 
     /// <summary>
     /// Interaction logic for App.xaml
