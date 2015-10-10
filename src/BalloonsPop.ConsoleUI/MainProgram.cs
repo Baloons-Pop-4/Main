@@ -18,7 +18,7 @@
 
         public static void Main()
         {
-            Logger.Info("Start initialization");
+            Logger.Info("Start initialization.");
             var kernel = new StandardKernel();
 
             DependancyBinder.Instance
@@ -36,7 +36,7 @@
             var bundle = new ConsoleBundle(kernel);
             var engine = new ConsoleEngine(ctx, bundle);
 
-            Logger.Info("Starting the game");
+            Logger.Info("Starting the game.");
             engine.Run();
         }
     }

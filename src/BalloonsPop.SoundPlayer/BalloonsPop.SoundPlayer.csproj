@@ -47,6 +47,12 @@
     <Compile Include="SoundsLoader.cs" />
     <Compile Include="SoundsPlayer.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BalloonsPop.Common\BalloonsPop.Common.csproj">
+      <Project>{8c8b1419-0948-4d28-b57a-8d4f68d3bc0c}</Project>
+      <Name>BalloonsPop.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

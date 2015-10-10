@@ -7,9 +7,8 @@ namespace BalloonsPop.Highscore.HighscoreHandlingStrategies
     using System;
     using System.Collections.Generic;
     using System.IO;
-
     using BalloonsPop.Common.Contracts;
-
+    using BalloonsPop.Common.Gadgets;
     using Newtonsoft.Json;
 
     /// <summary>
@@ -17,6 +16,8 @@ namespace BalloonsPop.Highscore.HighscoreHandlingStrategies
     /// </summary>
     public class JsonHandlingStrategy : IHighscoreHandlingStrategy
     {
+        private static readonly ILogger Logger = LogHelper.GetLogger();
+        
         /// <summary>
         /// The name of the file to be written/read to/from.
         /// </summary>
@@ -59,7 +60,15 @@ namespace BalloonsPop.Highscore.HighscoreHandlingStrategies
         public void Save(IHighscoreTable table)
         {
             string json = JsonConvert.SerializeObject(table.Table.ToArray(), Formatting.Indented);
-            File.WriteAllText(this.FileName, json);
+            try
+            {
+                File.WriteAllText(this.FileName, json);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Cannot save highscore in json file.", ex);
+                throw;
+            }
         }
 
         /// <summary>
@@ -76,7 +85,7 @@ namespace BalloonsPop.Highscore.HighscoreHandlingStrategies
             }
             catch (Exception)
             {
-                // Call Logger.Warn() here -> "No highscore.json, falling back to empty highscore table."
+                Logger.Warn("No highscore.json, falling back to empty highscore table.");
                 return new HighscoreTable();
             }
         }

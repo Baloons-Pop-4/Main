@@ -4,10 +4,12 @@
     using System.Collections.Generic;
 
     using BalloonsPop.Common.Contracts;
+    using BalloonsPop.Common.Gadgets;
 
     public class CommandFactory : ICommandFactory
     {
         private readonly IDictionary<string, Func<ICommand>> commandMap;
+        private static readonly ILogger Logger = LogHelper.GetLogger();
 
         public CommandFactory()
         {
@@ -17,9 +19,14 @@
 
         public ICommand CreateCommand(string commandName)
         {
-            if (!this.commandMap.ContainsKey(commandName))
+            try
             {
-                throw new ArgumentException("Invalid type of command requested!");
+                this.commandMap.ContainsKey(commandName);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Invalid type of command requested!", ex);
+                throw;
             }
 
             return this.commandMap[commandName]();

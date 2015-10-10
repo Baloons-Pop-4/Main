@@ -9,17 +9,20 @@ namespace BalloonsPop.Highscore.HighscoreHandlingStrategies
     using System.Xml.Linq;
 
     using BalloonsPop.Common.Contracts;
+    using BalloonsPop.Common.Gadgets;
 
     /// <summary>
     /// Implements high score handling (saving and loading) in an XML format
     /// </summary>
     public class XmlHandlingStrategy : IHighscoreHandlingStrategy
     {
+        private static readonly ILogger Logger = LogHelper.GetLogger();
+        
         /// <summary>
         /// The name of the file to be written/read to/from.
         /// </summary>
         private string fileName;
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlHandlingStrategy"/> class.
         /// </summary>
@@ -60,7 +63,7 @@ namespace BalloonsPop.Highscore.HighscoreHandlingStrategies
                 new XElement(
                     "highscoreTable",
                     new XElement(
-                        "players", 
+                        "players",
                         from player in table.Table
                         select new XElement(
                             "player",
@@ -68,7 +71,15 @@ namespace BalloonsPop.Highscore.HighscoreHandlingStrategies
                                 new XElement("moves", player.Moves),
                                 new XElement("time", player.Time)))));
 
-            highscoreDoc.Save(this.FileName);
+            try
+            {
+                highscoreDoc.Save(this.FileName);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Cannot save highscore in xml file.", ex);
+                throw;
+            }
         }
 
         /// <summary>
@@ -91,7 +102,7 @@ namespace BalloonsPop.Highscore.HighscoreHandlingStrategies
             }
             catch (Exception)
             {
-                // Call Logger.Warn() here -> "No highscore.xml, falling back to empty highscore table."
+                Logger.Warn("No highscore.xml, falling back to empty highscore table.");
                 return new HighscoreTable();
             }
         }

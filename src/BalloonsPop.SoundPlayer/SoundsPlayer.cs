@@ -1,7 +1,10 @@
 ﻿namespace BalloonsPop.SoundPlayer
 {
+    using System;
     using System.Collections.Generic;
     using System.Media;
+    using BalloonsPop.Common.Contracts;
+    using BalloonsPop.Common.Gadgets;
 
     using BalloonsPop.SoundPlayer.Contracts;
 
@@ -9,6 +12,7 @@
     {
         private IDictionary<string, ISound> sounds;
         private ISoundsLoader loader;
+        private static readonly ILogger Logger = LogHelper.GetLogger();
 
         public SoundsPlayer(ISoundsLoader loader)
         {
@@ -18,13 +22,21 @@
 
         public void PlaySound(string soundName)
         {
-            if (!this.sounds.ContainsKey(soundName))
+            try
             {
-                this.RegisterSound(soundName);
+                if (!this.sounds.ContainsKey(soundName))
+                {
+                    this.RegisterSound(soundName);
+                }
+
+                SoundPlayer player = this.loader.CreateSoundMedia(soundName);
+                player.Play();
+            }
+            catch (Exception ex)
+            {
+                Logger.Warn("Cannot load media file.", ex);
             }
 
-            SoundPlayer player = this.loader.CreateSoundMedia(soundName);
-            player.Play();
         }
 
         public void RegisterSound(string soundName)
