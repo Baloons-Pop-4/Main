@@ -22,6 +22,14 @@
             this.SetConsoleColorToDefault();
         }
 
+        public void PrintPlayerMoves(string moves)
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Moves count: " + moves);
+            Console.ForegroundColor = ConsoleColor.White;
+            
+        }
+
         public void PrintMessage(string message)
         {
             Console.WriteLine(message);
@@ -29,6 +37,7 @@
 
         public void PrintField(IBalloon[,] matrix)
         {
+            Console.Clear();
             this.PrintColumnIndeces();
 
             this.PrintDashedLine(1 + (matrix.GetLength(1) * 2));

@@ -4,6 +4,8 @@
     {
         void PrintMessage(string message);
 
+        void PrintPlayerMoves(string moves);
+
         void PrintField(IBalloon[,] matrix);
 
         void PrintHighscore(IHighscoreTable table);

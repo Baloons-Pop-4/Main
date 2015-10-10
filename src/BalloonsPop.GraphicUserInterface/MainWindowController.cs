@@ -109,6 +109,11 @@
             this.Window.Show();
         }
 
+        public void PrintPlayerMoves(string moves)
+        {
+            this.Window.UserMoves = moves;
+        }
+
         /// <summary>
         /// Updates the view's message section.
         /// </summary>

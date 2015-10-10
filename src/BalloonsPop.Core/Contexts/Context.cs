@@ -9,12 +9,16 @@
     /// </summary>
     public class Context : IContext
     {
+        private const string DefaultPlayerName = "Player";
+        private const string StartUpMessage = "Welcome to balloons pop!";
         /// <summary>
         /// Initializes a new instance of the <see cref="Context"/> class.
         /// Allows creating and initializing the context manually.
         /// </summary>
         public Context()
         {
+            this.PlayerName = DefaultPlayerName;
+            this.Message = StartUpMessage;
         }
 
         /// <summary>
@@ -22,6 +26,7 @@
         /// </summary>
         /// <param name="appKernel"></param>
         public Context(IKernel appKernel)
+            :this()
         {
             appKernel.Inject(this);
         }

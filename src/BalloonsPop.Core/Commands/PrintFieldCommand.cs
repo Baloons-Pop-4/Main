@@ -11,6 +11,7 @@
         public void Execute(IContext context)
         {
             context.Printer.PrintField(context.Game.Field);
+            context.Printer.PrintPlayerMoves(context.Game.UserMovesCount.ToString());
         }
     }
 }
