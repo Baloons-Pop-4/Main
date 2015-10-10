@@ -13,8 +13,15 @@
     [TestClass]
     public class MementoTests
     {
-        private readonly IStateSaver<IGameModel> memento = new Saver<IGameModel>();
-        private readonly IGameLogicProvider logic = new LogicProvider(new MatrixValidator(), new RandomNumberGenerator());
+        private IStateSaver<IGameModel> memento;
+        private IGameLogicProvider logic;
+
+        [TestInitialize]
+        public void TestInit()
+        {
+            this.memento = new Saver<IGameModel>();
+            this.logic  = new LogicProvider(new MatrixValidator(), new RandomNumberGenerator());
+        }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
@@ -104,6 +111,20 @@
             var moves2 = game.UserMovesCount;
 
             Assert.AreNotEqual(moves, moves2);
+        }
+
+        [TestMethod]
+        public void TestIfHasStatesReturnsTrueWhenThereArePushedStates()
+        {
+            var game = new GameModel();
+            this.memento.SaveState(game);
+            Assert.IsTrue(this.memento.HasStates);
+        }
+
+        [TestMethod]
+        public void TestIfHasStatesReturnsFalseWhenThereAreNoPushedStates()
+        {
+            Assert.IsFalse(this.memento.HasStates);
         }
     }
 }

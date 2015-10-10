@@ -6,7 +6,9 @@
     using BalloonsPop.Core.Contexts;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
+    using BalloonsPop.Highscore;
     using Tests.MockClasses;
+    using BalloonsPop.GameModels;
 
     [TestClass]
     public class CommandTests
@@ -15,9 +17,23 @@
 
         private IContext context;
 
-        public CommandTests()
+        [TestInitialize]
+        public void TestInit()
         {
             this.commandFactory = new CommandFactory();
+        }
+
+        [TestMethod]
+        public void TestIfContainsKeyReturnsTrueWhenCommandWithGivenKeyHasBeenAdded()
+        {
+            this.commandFactory.RegisterCommand("gosho", () => null);
+            Assert.IsTrue(this.commandFactory.ContainsKey("gosho"));
+        }
+
+        [TestMethod]
+        public void TestIfCountainsKeyReturnFalseWhenNoSuchCommandKeyIsRegistered()
+        {
+            Assert.IsFalse(this.commandFactory.ContainsKey("sdfdsf"));
         }
 
         [TestMethod]
@@ -54,13 +70,12 @@
         }
 
         [TestMethod]
-        [Ignore]
         public void TestIfPopBalloonsCommandCallsTheNeededMethodsFromGameModelAndGameLogic()
         {
             var mockLogic = new Mock<IGameLogicProvider>();
             mockLogic.Setup(x => x.PopBalloons(It.IsAny<IBalloon[,]>(), It.IsAny<int>(), It.IsAny<int>())).Verifiable();
             var mockGame = new Mock<IGameModel>();
-            mockGame.Setup(x => x.Field).Verifiable();
+            mockGame.SetupGet<IBalloon[,]>(x => x.Field).Returns(() => new IBalloon[5, 10]).Verifiable();
 
             var context = new Context() 
             {
@@ -68,13 +83,13 @@
                 Game = mockGame.Object
             };
 
-            var popCmd = this.commandFactory.CreateCommand("pop");
+            var popCmd = new PopBalloonCommand();
 
             popCmd.Execute(context);
 
             mockLogic.Verify(x => x.PopBalloons(It.IsAny<IBalloon[,]>(), It.IsAny<int>(), It.IsAny<int>()), Times.Once);
             mockLogic.Verify(x => x.LetBalloonsFall(It.IsAny<IBalloon[,]>()), Times.Once);
-            mockGame.Verify(x => x.Field, Times.Once);
+            //mockGame.Verify(x => x.Field, Times.Once);
         }
 
         [TestMethod]
@@ -114,6 +129,23 @@
             moqPrinter.Verify(x => x.PrintField(It.IsAny<IBalloon[,]>()), Times.Once);
 
             // Assert.AreEqual(1, (this.context.Printer as MockPrinter).MethodCallCounts["field"]);
+        }
+
+        [TestMethod]
+        public void TestIfAddHighscoreCommandAddsNewPlayerScoreToHighscoreTableInContext()
+        {
+            var ctx = new Context() 
+            {
+                HighscoreTable = new HighscoreTable(),
+                PlayerName = "Gosho",
+                Game = new GameModel()
+            };
+
+            new AddPlayerscoreCommand().Execute(ctx);
+
+            bool areEqual = true;
+
+            Assert.AreEqual("Gosho", ctx.HighscoreTable.Table[0].Name);
         }
 
         [TestMethod]
