@@ -20,12 +20,11 @@
         {
             if (!this.sounds.ContainsKey(soundName))
             {
-                RegisterSound(soundName);
+                this.RegisterSound(soundName);
             }
 
-            SoundPlayer player = loader.CreateSoundMedia(soundName);
+            SoundPlayer player = this.loader.CreateSoundMedia(soundName);
             player.Play();
-
         }
 
         public void RegisterSound(string soundName)

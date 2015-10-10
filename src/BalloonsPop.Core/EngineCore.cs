@@ -41,6 +41,7 @@
             {
                 return this.context;
             }
+
             set
             {
                 this.context = value;
@@ -53,6 +54,7 @@
             {
                 return this.commandFactory;
             }
+
             set
             {
                 this.commandFactory = value;
@@ -65,6 +67,7 @@
             {
                 return this.validator;
             }
+
             set
             {
                 this.validator = value;

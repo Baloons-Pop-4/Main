@@ -19,7 +19,7 @@
                 { 9, 10, 11, 12 }
             };
 
-            var queriableMatrix = new QueriableMatrix<int>(3, 4);
+            var queriableMatrix = new QueryableMatrix<int>(3, 4);
 
             queriableMatrix.Value = matrix;
 
@@ -36,7 +36,7 @@
                 { 9, 10, 11, 12 }
             };
 
-            var queriableMatrix = new QueriableMatrix<int>(matrix);
+            var queriableMatrix = new QueryableMatrix<int>(matrix);
 
             var counter = 1;
 
@@ -56,7 +56,7 @@
                 { 9, 10, 11 }
             };
 
-            var queriableMatrix = new QueriableMatrix<int>(matrix);
+            var queriableMatrix = new QueryableMatrix<int>(matrix);
 
             var actual = queriableMatrix.TakeColumns();
 

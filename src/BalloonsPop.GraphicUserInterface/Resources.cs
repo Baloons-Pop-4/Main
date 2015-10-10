@@ -41,7 +41,7 @@
         {
             int indexOfExecutionFolderName = Environment.CurrentDirectory.IndexOf(ExectutionFolderName);
             var imagesDir = Environment.CurrentDirectory.Substring(0, indexOfExecutionFolderName);
-            sourcePathTemplate = imagesDir + "Images\\{0}.png";;
+            sourcePathTemplate = imagesDir + "Images\\{0}.png";
         }
 
         /// <summary>

@@ -10,6 +10,7 @@
     public class Context : IContext
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="Context"/> class.
         /// Allows creating and initializing the context manually.
         /// </summary>
         public Context()
@@ -50,13 +51,13 @@
         public IStateSaver<IGameModel> Memento { get; set; }
 
         /// <summary>
-        /// Provides access to the applications highscore table.
+        /// Provides access to the applications high score table.
         /// </summary>
         [Inject]
         public IHighscoreTable HighscoreTable { get; set; }
 
         /// <summary>
-        /// Provides access to the chosen highscore handling strategy.
+        /// Provides access to the chosen high score handling strategy.
         /// </summary>
         [Inject]
         public IHighscoreHandlingStrategy HighscoreHandling { get; set; }
@@ -72,12 +73,12 @@
         public string PlayerName { get; set; }
 
         /// <summary>
-        /// Provides default(int) or, in case of valid pop input, the parsed row of the balloon.
+        /// Provides default(INT32) or, in case of valid pop input, the parsed row of the balloon.
         /// </summary>
         public int UserRow { get; set; }
 
         /// <summary>
-        /// Provides default(int) or, in case of valid pop input, the parsed column of the balloon.
+        /// Provides default(INT32) or, in case of valid pop input, the parsed column of the balloon.
         /// </summary>
         public int UserCol { get; set; }
     }

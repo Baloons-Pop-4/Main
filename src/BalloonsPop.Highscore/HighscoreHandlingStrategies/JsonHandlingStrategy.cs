@@ -74,7 +74,7 @@ namespace BalloonsPop.Highscore.HighscoreHandlingStrategies
                 var playerScores = JsonConvert.DeserializeObject<List<PlayerScore>>(json);
                 return new HighscoreTable(playerScores);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // Call Logger.Warn() here -> "No highscore.json, falling back to empty highscore table."
                 return new HighscoreTable();

@@ -16,6 +16,7 @@
             depBundle.Gui.RaiseCommand += this.HandleUserInput;
             depBundle.Gui.ChangedUserName += this.SetPlayerNameInContext;
         }
+
         /// <summary>
         /// The method which handles user input by delegating events in compatible form to the core.
         /// </summary>

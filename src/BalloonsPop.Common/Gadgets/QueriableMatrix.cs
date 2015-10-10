@@ -7,16 +7,16 @@
     /// The wrapper class that serves as adapter.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class QueriableMatrix<T> : IEnumerable<T>
+    public class QueryableMatrix<T> : IEnumerable<T>
     {
         // Wrapping constructor
-        public QueriableMatrix(T[,] matrix)
+        public QueryableMatrix(T[,] matrix)
         {
             this.Value = matrix;
         }
 
         // Constructor for creating a new matrix and wrapping it automatically
-        public QueriableMatrix(int rows, int cols)
+        public QueryableMatrix(int rows, int cols)
             : this(new T[rows, cols])
         {
         }

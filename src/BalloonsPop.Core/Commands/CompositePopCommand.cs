@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using BalloonsPop.Common.Contracts;
-
-namespace BalloonsPop.Core.Commands
+﻿namespace BalloonsPop.Core.Commands
 {
+    using System.Collections.Generic;
+    using BalloonsPop.Common.Contracts;
+
     public class CompositePopCommand : CompositeCommand
     {
         public CompositePopCommand()

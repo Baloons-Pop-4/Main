@@ -7,7 +7,7 @@
     using BalloonsPop.Common.Gadgets;
 
     /// <summary>
-    /// Implements IGameLogicProvider and defines operation on IGameModel type and it's properties and provides instances acces to them.
+    /// Implements IGameLogicProvider and defines operation on IGameModel type and it's properties and provides instances access to them.
     /// </summary>
     public class LogicProvider : IGameLogicProvider
     {
@@ -16,7 +16,7 @@
         private readonly IBalloonPopper balloonPopper;
 
         /// <summary>
-        /// Public constructore that initializes the current instance with matrix validator and random number generator.
+        /// Public constructor that initializes the current instance with matrix validator and random number generator.
         /// </summary>
         /// <param name="matrixValidator">The matrix validator.</param>
         /// <param name="rng">The random byte generator.</param>
@@ -39,8 +39,8 @@
         /// Provides popping logic based on field, row and column.
         /// </summary>
         /// <param name="field">Array representation of the game field.</param>
-        /// <param name="row"></param>
-        /// <param name="column"></param>
+        /// <param name="row">The number of rows in the field.</param>
+        /// <param name="column">The number of columns in the field.</param>
         public void PopBalloons(IBalloon[,] field, int row, int column)
         {
             this.balloonPopper.PopBalloons(field, row, column);
@@ -62,7 +62,7 @@
         /// <returns>Returns whether there remains at least one unpopped balloon.</returns>
         public bool GameIsOver(IBalloon[,] matrix)
         {
-            var fieldIsEmpty = new QueriableMatrix<IBalloon>(matrix).All(balloon => balloon.IsPopped);
+            var fieldIsEmpty = new QueryableMatrix<IBalloon>(matrix).All(balloon => balloon.IsPopped);
 
             return fieldIsEmpty;
         }

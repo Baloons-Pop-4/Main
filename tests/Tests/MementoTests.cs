@@ -34,8 +34,8 @@
 
             var stateFromMemento = this.memento.GetState();
 
-            var areEqual = new QueriableMatrix<IBalloon>(game.Field)
-                                .Join(new QueriableMatrix<IBalloon>(stateFromMemento.Field), x => x, y => y, (x, y) => (x.IsPopped == y.IsPopped) && (x.Number == y.Number))
+            var areEqual = new QueryableMatrix<IBalloon>(game.Field)
+                                .Join(new QueryableMatrix<IBalloon>(stateFromMemento.Field), x => x, y => y, (x, y) => (x.IsPopped == y.IsPopped) && (x.Number == y.Number))
                                 .All(x => x);
 
             Assert.IsTrue(areEqual);
@@ -52,8 +52,8 @@
 
             var stateFromMemento = this.memento.GetState();
 
-            var areEqual = new QueriableMatrix<IBalloon>(memento2.GetState().Field)
-                                .Join(new QueriableMatrix<IBalloon>(stateFromMemento.Field), x => x, y => y, (x, y) => (x.IsPopped == y.IsPopped) && (x.Number == y.Number))
+            var areEqual = new QueryableMatrix<IBalloon>(memento2.GetState().Field)
+                                .Join(new QueryableMatrix<IBalloon>(stateFromMemento.Field), x => x, y => y, (x, y) => (x.IsPopped == y.IsPopped) && (x.Number == y.Number))
                                 .All(x => x);
 
             Assert.IsTrue(areEqual);

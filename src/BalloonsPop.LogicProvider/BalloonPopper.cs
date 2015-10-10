@@ -7,7 +7,7 @@
     using BalloonsPop.Common.Gadgets;
 
     /// <summary>
-    /// Provides methods for popping ballons in a balloon field.
+    /// Provides methods for popping balloons in a balloon field.
     /// </summary>
     internal class BalloonPopper : IBalloonPopper
     {
@@ -22,7 +22,7 @@
         private readonly IMatrixValidator matrixValidator;
 
         /// <summary>
-        /// Constructor for the BalloonPopper class.
+        /// Initializes a new instance of the <see cref="BalloonPopper"/> class.
         /// </summary>
         /// <param name="matrixValidator">An object that provides validations for matrix operations.</param>
         public BalloonPopper(IMatrixValidator matrixValidator)
@@ -33,9 +33,9 @@
         /// <summary>
         /// Pops the balloons on the same row and column that have the same color.
         /// </summary>
-        /// <param name="field">The balloon field in which a ballon will be popped.</param>
-        /// <param name="row">The zero-based number row of the ballon to be popped.</param>
-        /// <param name="column">The zero-based number column of the ballon to be popped.</param>
+        /// <param name="field">The balloon field in which a balloon will be popped.</param>
+        /// <param name="row">The zero-based number row of the balloon to be popped.</param>
+        /// <param name="column">The zero-based number column of the balloon to be popped.</param>
         public void PopBalloons(IBalloon[,] field, int row, int column)
         {
             foreach (var dir in PopDirections)
@@ -52,7 +52,7 @@
         /// <param name="field">The balloon field in which the balloons will be let to fall.</param>
         public void LetBalloonsFall(IBalloon[,] field)
         {
-            var asColumns = new QueriableMatrix<IBalloon>(field)
+            var asColumns = new QueryableMatrix<IBalloon>(field)
                                         .TakeColumns()
                                         .Select(column => column.OrderBy(x => (x.IsPopped ? -1 : 0)).ToArray())
                                         .ToArray();

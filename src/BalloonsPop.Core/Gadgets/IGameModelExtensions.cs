@@ -11,7 +11,7 @@
         {
             var digitsInCoordinates = coordinatesAsString.Where(x => char.IsDigit(x)).ToArray();
 
-            if(digitsInCoordinates.Length !=2)
+            if (digitsInCoordinates.Length != 2)
             {
                 return null;
             }

@@ -33,18 +33,18 @@
         }
 
         /// <summary>
-        /// Projects the provided collection into a new QueriableMatrix with the provided row and column count.
+        /// Projects the provided collection into a new QueryableMatrix with the provided row and column count.
         /// </summary>
-        /// <typeparam name="T">The type of the resulting QueriableMatrix.</typeparam>
-        /// <param name="collection">The collection to be projected into a QueriableMatrix.</param>
-        /// <param name="rows">The count of the rows of the QueriableMatrix.</param>
-        /// <param name="columns">The counts of the columns of the QueriableMatrix.</param>
-        /// <returns>The collections projected into a QueriableMatrix.</returns>
-        public static QueriableMatrix<T> ToQueriableMatrix<T>(this IEnumerable<T> collection, int rows, int columns)
+        /// <typeparam name="T">The type of the resulting QueryableMatrix.</typeparam>
+        /// <param name="collection">The collection to be projected into a QueryableMatrix.</param>
+        /// <param name="rows">The count of the rows of the QueryableMatrix.</param>
+        /// <param name="columns">The counts of the columns of the QueryableMatrix.</param>
+        /// <returns>The collections projected into a QueryableMatrix.</returns>
+        public static QueryableMatrix<T> ToQueryableMatrix<T>(this IEnumerable<T> collection, int rows, int columns)
         {
             // reuse code like a baws :D
             var matrix = collection.ToMatrix(rows, columns);
-            var queriableMatrix = new QueriableMatrix<T>(matrix);
+            var queriableMatrix = new QueryableMatrix<T>(matrix);
 
             return queriableMatrix;
         }
