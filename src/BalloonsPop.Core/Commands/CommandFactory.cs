@@ -11,6 +11,7 @@
     public class CommandFactory : ICommandFactory
     {
         private readonly IDictionary<string, Func<ICommand>> commandMap;
+
         // flyweight factory
         private readonly IDictionary<string, ICommand> commandCache;
 

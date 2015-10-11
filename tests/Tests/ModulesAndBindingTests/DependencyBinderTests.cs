@@ -15,7 +15,7 @@
 
         public DependencyBinderTests()
         {
-            binder.Modules.Clear();
+            this.binder.Modules.Clear();
         }
 
         [TestMethod]

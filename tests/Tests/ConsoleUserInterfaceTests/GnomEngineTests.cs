@@ -1,21 +1,21 @@
-﻿using System;
-using BalloonsPop.Bundling;
-using BalloonsPop.Common.Contracts;
-using BalloonsPop.Common.Gadgets;
-using BalloonsPop.ConsoleUserInterface;
-using BalloonsPop.Core.Commands;
-using BalloonsPop.Core.Contexts;
-using BalloonsPop.GameModels;
-using BalloonsPop.Highscore;
-using BalloonsPop.LogicProvider;
-using BalloonsPop.Saver;
-using BalloonsPop.SoundPlayer;
-using BalloonsPop.Validation;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ninject;
-
-namespace Tests.ConsoleUserInterfaceTests
+﻿namespace Tests.ConsoleUserInterfaceTests
 {
+    using System;
+    using BalloonsPop.Bundling;
+    using BalloonsPop.Common.Contracts;
+    using BalloonsPop.Common.Gadgets;
+    using BalloonsPop.ConsoleUserInterface;
+    using BalloonsPop.Core.Commands;
+    using BalloonsPop.Core.Contexts;
+    using BalloonsPop.GameModels;
+    using BalloonsPop.Highscore;
+    using BalloonsPop.LogicProvider;
+    using BalloonsPop.Saver;
+    using BalloonsPop.SoundPlayer;
+    using BalloonsPop.Validation;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Ninject;
+
     [TestClass]
     public class GnomEngineTests
     {
@@ -44,7 +44,6 @@ namespace Tests.ConsoleUserInterfaceTests
             this.context = new Context(kernel);
 
             this.engine = new GnomEngine(this.context, bundle);
-
         }
 
         [TestCleanup]
@@ -56,7 +55,7 @@ namespace Tests.ConsoleUserInterfaceTests
         [TestMethod]
         public void TestIfEngineDoesntThrowExceptionsWithValidInput()
         {
-            string[] validInput = { "field", "1 1", "top", "gameover"};
+            string[] validInput = { "field", "1 1", "top", "gameover" };
 
             foreach (var input in validInput)
             {

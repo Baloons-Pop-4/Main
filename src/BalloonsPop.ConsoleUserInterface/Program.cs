@@ -5,6 +5,7 @@
     using BalloonsPop.Bundling;
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
+    using BalloonsPop.Core.Commands;
     using BalloonsPop.Core.Contexts;
     using BalloonsPop.GameModels;
     using BalloonsPop.Highscore;
@@ -12,15 +13,14 @@
     using BalloonsPop.Saver;
     using BalloonsPop.SoundPlayer;
     using BalloonsPop.Validation;
-    using BalloonsPop.Core.Commands;
-
+    
     using GnomUi;
     using GnomUi.Contracts;
     using GnomUi.Drawing;
     
     using Ninject;
 
-    class Program
+    internal class Program
     {
         private static void LoadModules(IKernel kernel)
         {
@@ -39,7 +39,7 @@
                 .LoadAll();
         }
 
-        static void Main()
+        private static void Main()
         {
             var kernel = new StandardKernel();
 

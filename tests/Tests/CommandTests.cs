@@ -96,7 +96,6 @@
 
             mockLogic.Verify(x => x.PopBalloons(It.IsAny<IBalloon[,]>(), It.IsAny<int>(), It.IsAny<int>()), Times.Once);
             mockLogic.Verify(x => x.LetBalloonsFall(It.IsAny<IBalloon[,]>()), Times.Once);
-            // mockGame.Verify(x => x.Field, Times.Once);
         }
 
         [TestMethod]

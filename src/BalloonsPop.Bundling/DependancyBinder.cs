@@ -11,7 +11,7 @@
     /// </summary>
     public sealed class DependancyBinder
     {
-        private static readonly DependancyBinder instance = new DependancyBinder();
+        private static readonly DependancyBinder BinderInstance = new DependancyBinder();
 
         private DependancyBinder()
         {
@@ -25,7 +25,7 @@
         {
             get
             {
-                return instance;
+                return BinderInstance;
             }
         }
 

@@ -24,13 +24,12 @@
                 view = viewBuilder.Construct(uiDescription, controlsMap, stylesheet);
             }
 
-
             return view;
         }
 
         public static GnomController GetController()
         {
-            if(controller == null)
+            if (controller == null)
             {
                 controller = new GnomController(GetGnomView());
             }

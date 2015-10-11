@@ -21,6 +21,7 @@
         {
             Logger.Info("Start initialization.");
             var kernel = new StandardKernel();
+
             // TODO: create logger module
             kernel.Bind<ILogger>().ToMethod(x => LogHelper.GetLogger());
             DependancyBinder.Instance

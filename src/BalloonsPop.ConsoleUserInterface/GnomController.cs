@@ -4,9 +4,9 @@
 
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.ConsoleUserInterface.Gadgets;
-    
-    using GnomUi.TreeComponents;
+
     using GnomUi.Contracts;
+    using GnomUi.TreeComponents;
 
     public class GnomController : IPrinter
     {
@@ -22,7 +22,7 @@
         private const int BalloonPaddingLeftMultiplier = 4;
         private const int BalloonPaddingTopMultiplier = 2;
 
-        private static readonly ConsoleColor[] colors = 
+        private static readonly ConsoleColor[] Colors = 
         { 
             ConsoleColor.Black, 
             ConsoleColor.Red, 
@@ -44,7 +44,6 @@
             var text2 = new TextElement("Current moves: 0");
             text2.Style.PaddingTop = 3;
             this.View[MessageBoxId].AddChild(text2);
-
         }
 
         public IGnomTree View { get; private set; }
@@ -77,7 +76,7 @@
                 for (int j = 0; j < columns; j++)
                 {
                     var childToUpdate = this.cachedField[i, j];
-                    childToUpdate.Style.Color = colors[matrix[i, j].IsPopped ? 0 : matrix[i, j].Number];
+                    childToUpdate.Style.Color = Colors[matrix[i, j].IsPopped ? 0 : matrix[i, j].Number];
 
                     if (matrix[i, j].IsPopped)
                     {
@@ -87,7 +86,7 @@
                 }
             }
 
-            if (popped >= (rows * columns - 1))
+            if (popped >= (rows * columns) - 1)
             {
                 foreach (var element in this.cachedField)
                 {
@@ -114,7 +113,7 @@
                     {
                         PaddingLeft = j * BalloonPaddingLeftMultiplier,
                         PaddingTop = i * BalloonPaddingTopMultiplier,
-                        Color = colors[matrix[i, j].IsPopped ? 0 : matrix[i, j].Number]
+                        Color = Colors[matrix[i, j].IsPopped ? 0 : matrix[i, j].Number]
                     };
 
                     childToAdd.Id = i + " " + j;
@@ -122,7 +121,7 @@
                     // cache
                     this.cachedField[i, j] = childToAdd;
 
-                    this.View.AddChildToParent(field, childToAdd);
+                    this.View.AddChildToParent(this.field, childToAdd);
 
                     // link to neighbors
                     if (i > 0)
@@ -152,7 +151,7 @@
             {
                 // TODO: extract in resource provider
                 var scoreToAdd = new TextElement(rankings[i].Stringify(i + 1));
-                scoreToAdd.Style.PaddingTop = i * PlayerScoreMargin + 1;
+                scoreToAdd.Style.PaddingTop = (i * PlayerScoreMargin) + 1;
 
                 this.View.AddChildToParent(this.View[ScoreBoxId], scoreToAdd);
                 this.View[ScoreBoxId].Style.Height = table.Table.Count * HighscoreTableHeightIncrement;
