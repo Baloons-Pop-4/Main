@@ -13,6 +13,11 @@
     {
         private DependancyBinder binder = DependancyBinder.Instance;
 
+        public DependencyBinderTests()
+        {
+            binder.Modules.Clear();
+        }
+
         [TestMethod]
         public void TestIfModulesPropertyIsAnEmptyCollectionWhenNoModulesHaveBeenRegistered()
         {

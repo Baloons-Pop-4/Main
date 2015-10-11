@@ -66,6 +66,7 @@
     <Compile Include="CloningStrategiesTests\SerializationStrategyTests.cs" />
     <Compile Include="CloningStrategiesTests\DotNetCloningTests.cs" />
     <Compile Include="CommandTests.cs" />
+    <Compile Include="ConsoleUserInterfaceTests\GnomEngineTests.cs" />
     <Compile Include="ModulesAndBindingTests\DependencyBinderTests.cs" />
     <Compile Include="Gadget tests\QueriableMatrixTests.cs" />
     <Compile Include="Gadget tests\StringExtensionsTests.cs" />
@@ -97,9 +98,9 @@
       <Project>{8c8b1419-0948-4d28-b57a-8d4f68d3bc0c}</Project>
       <Name>BalloonsPop.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\BalloonsPop.ConsoleUI\BalloonsPop.ConsoleUI.csproj">
-      <Project>{dd61bf23-6994-4ebb-aaa3-cb280765e833}</Project>
-      <Name>BalloonsPop.ConsoleUI</Name>
+    <ProjectReference Include="..\..\src\BalloonsPop.ConsoleUserInterface\BalloonsPop.ConsoleUserInterface.csproj">
+      <Project>{68d41369-b315-4e67-a1b4-cf5a7c7fe940}</Project>
+      <Name>BalloonsPop.ConsoleUserInterface</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\BalloonsPop.Core\BalloonsPop.Core.csproj">
       <Project>{b4ff3beb-43d3-4d4e-963e-50108922d688}</Project>
