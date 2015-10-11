@@ -1,0 +1,6 @@
+﻿root #root .root
+	field #field .field
+	btn #restart .restart :restart
+	btn #undo .undo :undo
+	box #message-box .message-box :Welcome, 
+	box #score .score
