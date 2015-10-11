@@ -3,6 +3,9 @@
     using System;
     using BalloonsPop.Common.Contracts;
 
+    /// <summary>
+    /// Implementation of the IBalloon model.
+    /// </summary>
     public class Balloon : IBalloon
     {
         /// <summary>

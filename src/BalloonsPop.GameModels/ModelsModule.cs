@@ -8,6 +8,9 @@
     using Ninject;
     using Ninject.Modules;
 
+    /// <summary>
+    /// This class inherits the NinjectModule class and provides loading with a provided kernel for the exports of the GameModels module.
+    /// </summary>
     public class ModelsModule : NinjectModule
     {
         private static IKernel kernel;
@@ -21,6 +24,9 @@
             kernel = bindingKernel;
         }
 
+        /// <summary>
+        /// Binds the exports of the current module to their respective interfaces.
+        /// </summary>
         public override void Load()
         {
             kernel.Unbind<IBalloon>();

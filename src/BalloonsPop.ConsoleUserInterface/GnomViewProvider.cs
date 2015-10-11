@@ -5,11 +5,18 @@
     using GnomInterpreter;
     using GnomUi.Contracts;
 
-    public class GnomViewProvider
+    /// <summary>
+    /// Provides instances of the GnomView and the GnomController.
+    /// </summary>
+    public static class GnomViewProvider
     {
         private static GnomController controller;
         private static IGnomTree view;
 
+        /// <summary>
+        /// Provides an instance of the app's gnom view.
+        /// </summary>
+        /// <returns></returns>
         public static IGnomTree GetGnomView()
         {
             if (view == null)
@@ -27,6 +34,10 @@
             return view;
         }
 
+        /// <summary>
+        /// Provides a controller initialized with the app's view.
+        /// </summary>
+        /// <returns></returns>
         public static GnomController GetController()
         {
             if (controller == null)

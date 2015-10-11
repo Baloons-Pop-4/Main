@@ -6,6 +6,9 @@
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
 
+    /// <summary>
+    /// Models the game by encapsulating a balloon field and information about user moves.
+    /// </summary>
     public class GameModel : IGameModel
     {
         private IBalloon[,] field;
@@ -61,16 +64,26 @@
             }
         }
 
+        /// <summary>
+        /// Zeroes the moves in the current game.
+        /// </summary>
         public void ResetUserMoves()
         {
             this.userMovesCount = 0;
         }
 
+        /// <summary>
+        /// Increments the moves in the current game by one.
+        /// </summary>
         public void IncrementMoves()
         {
             this.userMovesCount++;
         }
 
+        /// <summary>
+        /// Provides a deep clone of the current instance.
+        /// </summary>
+        /// <returns></returns>
         public IGameModel Clone()
         {
             var clonedField = new QueryableMatrix<IBalloon>(this.field)

@@ -21,7 +21,7 @@
         }
 
         /// <summary>
-        /// Gets or sets the kernel which the instance of WpfModule will use to bind exports.
+        /// Returns the kernel which the instance of WpfModule will use to bind exports.
         /// </summary>
         public IKernel AppKernel { get; set; }
 

@@ -5,7 +5,7 @@
     using BalloonsPop.Core;
 
     /// <summary>
-    /// Extends the EngineCore to compile with the application's graphic interface.
+    /// Extends the EngineCore to compile with the application's gnomui interface.
     /// </summary>
     public class GnomEngine : EngineCore
     {
@@ -15,7 +15,7 @@
         }
 
         /// <summary>
-        /// The method which handles user input by delegating events in compatible form to the core.
+        /// The method which handles user input by delegating user input to the core.
         /// </summary>
         /// <param name="sender">The object that raised the event.</param>
         /// <param name="e">The event arguments provided by the raiser.</param>

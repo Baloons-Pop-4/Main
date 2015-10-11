@@ -1,11 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="BalloonsPop.Highscore.HighscoreTable" Collapsed="true">
-    <Position X="0.75" Y="0.75" Width="1.5" />
+  <Class Name="BalloonsPop.Highscore.HighscoreTable">
+    <Position X="2.25" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAgAABAAAAAQAAAAAAAAAAAAAgAAAAACAA=</HashCode>
       <FileName>HighscoreTable.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BalloonsPop.Highscore.HighscoreHandlingStrategies.XmlHandlingStrategy">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgIAAAAIAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAA=</HashCode>
+      <FileName>HighscoreHandlingStrategies\XmlHandlingStrategy.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BalloonsPop.Highscore.HighscoreHandlingStrategies.JsonHandlingStrategy">
+    <Position X="4.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgIAAAAIAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAA=</HashCode>
+      <FileName>HighscoreHandlingStrategies\JsonHandlingStrategy.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BalloonsPop.Highscore.HighscoreModule" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>HighscoreModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BalloonsPop.Common.Contracts.PlayerScore" Collapsed="true">
+    <Position X="2.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier />
     <Lollipop Position="0.2" />
   </Class>
   <Font Name="Segoe UI" Size="9" />
