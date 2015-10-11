@@ -5,8 +5,6 @@
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
 
-    using BalloonsPop.Core.Gadgets;
-
     public class EngineCore
     {
         #region Constants
@@ -27,12 +25,15 @@
 
         private IContext context;
 
-        protected EngineCore(IContext ctx, IUserInputValidator inputValidator, ICommandFactory cmdFactory)
+        private ILogger logger;
+
+        protected EngineCore(IContext ctx, IUserInputValidator inputValidator, ICommandFactory cmdFactory, ILogger logger)
         {
             this.Context = ctx;
             this.Validator = inputValidator;
             this.commandFactory = cmdFactory;
             this.Context.LogicProvider.RandomizeBalloonField(this.Context.Game.Field);
+            this.logger = logger;
         }
 
         protected IContext Context
@@ -79,22 +80,38 @@
             ICommand cmd = null;
 
             bool isValidPopMove = this.validator.IsValidUserMove(userCommand)
-                                    && !this.Context.Game.At(userCommand).IsPopped;
+                                    && !this.Context.Game.Field[userCommand[0].ToInt32(), userCommand[2].ToInt32()].IsPopped;
 
-            if (isValidPopMove)
+            try
             {
-                this.context.UserRow = userCommand[IndexOfRowDigit].ToInt32();
-                this.context.UserCol = userCommand[IndexOfColumnDigit].ToInt32();
-                cmd = this.commandFactory.CreateCommand(Pop);
+                if (isValidPopMove)
+                {
+                    this.context.UserRow = userCommand[IndexOfRowDigit].ToInt32();
+                    this.context.UserCol = userCommand[IndexOfColumnDigit].ToInt32();
+                    cmd = this.commandFactory.CreateCommand(Pop);
+
+
+                }
+                else if (this.CommandFactory.ContainsKey(userCommand.ToLower()))
+                {
+                    cmd = this.CommandFactory.CreateCommand(userCommand.ToLower());
+                }
+                else
+                {
+                    this.context.Message = WrongInputMessage;
+                    cmd = this.commandFactory.CreateCommand(Message);
+                }
             }
-            else if (this.CommandFactory.ContainsKey(userCommand.ToLower()))
+            catch (ArgumentException e)
             {
-                cmd = this.CommandFactory.CreateCommand(userCommand.ToLower());
-            }
-            else
-            {
-                this.context.Message = WrongInputMessage;
-                cmd = this.commandFactory.CreateCommand(Message);
+                var errorLog = string.Format("{0}{1}{2}{3}",
+                                                 "The command factory failed to create the command."
+                                                 , Environment.NewLine,
+                                                 e.Message,
+                                                 e.StackTrace);
+                this.logger.Error(errorLog);
+
+                throw e;
             }
 
             return cmd;

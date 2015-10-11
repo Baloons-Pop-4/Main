@@ -6,7 +6,7 @@
 
     public class Memory<T> : IMemory<T>
     {
-        private Stack<T> memory;
+        private readonly Stack<T> memory;
 
         public Memory()
         {

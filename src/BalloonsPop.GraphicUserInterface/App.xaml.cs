@@ -2,6 +2,7 @@
 {
     using System.Windows;
     using BalloonsPop.Bundling;
+    using BalloonsPop.Common.Contracts;
     using BalloonsPop.Core.Contexts;
     using BalloonsPop.GameModels;
     using BalloonsPop.GraphicUserInterface.Commands;
@@ -9,6 +10,7 @@
     using BalloonsPop.LogicProvider;
     using BalloonsPop.Saver;
     using BalloonsPop.Validation;
+    using BalloonsPop.Common.Gadgets;
     using Ninject;
 
     /// <summary>
@@ -23,6 +25,7 @@
             base.OnStartup(e);
 
             var kernel = new StandardKernel();
+            kernel.Bind<ILogger>().ToMethod(x => LogHelper.GetLogger());
             DependancyBinder.Instance
                 .RegisterModules(
                                  new ModelsModule(kernel),

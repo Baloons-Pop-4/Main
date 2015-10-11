@@ -9,7 +9,7 @@
     /// </summary>
     public sealed class DependancyBinder
     {
-        private static DependancyBinder instance = new DependancyBinder();
+        private readonly static DependancyBinder instance = new DependancyBinder();
 
         private DependancyBinder()
         {
@@ -41,7 +41,11 @@
         {
             foreach (var item in modules)
             {
-                this.Modules.Add(item);
+                if (!this.Modules.Contains(item))
+                {
+                    this.Modules.Add(item);
+                }
+
             }
 
             return this;

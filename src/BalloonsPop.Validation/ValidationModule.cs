@@ -22,6 +22,8 @@
         /// </summary>
         public override void Load()
         {
+            kernel.Unbind<IMatrixValidator>();
+            kernel.Unbind<IUserInputValidator>();
             kernel.Bind<IMatrixValidator>().To<MatrixValidator>();
             kernel.Bind<IUserInputValidator>().To<UserInputValidator>();
         }

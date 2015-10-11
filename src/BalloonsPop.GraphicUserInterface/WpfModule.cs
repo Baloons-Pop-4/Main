@@ -33,6 +33,8 @@
             var window = new BalloonsView();
             var controller = new MainWindowController(window, new Resources());
 
+            this.AppKernel.Unbind<IEventBasedUserInterface>();
+            this.AppKernel.Unbind<IPrinter>();
             this.AppKernel.Bind<IEventBasedUserInterface>().ToMethod(ctx => controller);
             this.AppKernel.Bind<IPrinter>().ToMethod(ctx => controller);
         }

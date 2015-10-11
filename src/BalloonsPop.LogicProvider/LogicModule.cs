@@ -29,6 +29,8 @@
         /// </summary>
         public override void Load()
         {
+            kernel.Unbind<IGameLogicProvider>();
+            kernel.Unbind<IRandomNumberGenerator>();
             kernel.Bind<IGameLogicProvider>().To<LogicProvider>();
             kernel.Bind<IRandomNumberGenerator>().To<RandomNumberGenerator>();
         }

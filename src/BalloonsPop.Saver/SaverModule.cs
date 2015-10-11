@@ -29,6 +29,7 @@
         /// </summary>
         public override void Load()
         {
+            this.AppKernel.Unbind<IStateSaver<IGameModel>>();
             this.AppKernel.Bind<IStateSaver<IGameModel>>().To<Saver<IGameModel>>();
         }
     }

@@ -37,6 +37,8 @@ namespace BalloonsPop.Highscore
         /// </summary>
         public override void Load()
         {
+            kernel.Unbind<IHighscoreHandlingStrategy>();
+            kernel.Unbind<IHighscoreTable>();
             kernel.Bind<IHighscoreHandlingStrategy>().To<XmlHandlingStrategy>().WithConstructorArgument("highscore.xml");
             kernel.Bind<IHighscoreTable>().ToMethod(x => kernel.Get<IHighscoreHandlingStrategy>().Load());
         }

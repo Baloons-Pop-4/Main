@@ -4,12 +4,9 @@
     using System.Collections.Generic;
 
     using BalloonsPop.Common.Contracts;
-    using BalloonsPop.Common.Gadgets;
 
     public class CommandFactory : ICommandFactory
     {
-        private static readonly ILogger Logger = LogHelper.GetLogger();
-
         private readonly IDictionary<string, Func<ICommand>> commandMap;
 
         public CommandFactory()

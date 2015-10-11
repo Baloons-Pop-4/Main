@@ -5,5 +5,7 @@
         IUserInputValidator UserInputValidator { get; set; }
 
         ICommandFactory CommandFactory { get; set; }
+
+        ILogger Logger { get; set; }
     }
 }

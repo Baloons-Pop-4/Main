@@ -13,7 +13,7 @@
         private IInputReader reader;
 
         public ConsoleEngine(IContext ctx, IConsoleBundle depBundle)
-            : base(ctx, depBundle.UserInputValidator, depBundle.CommandFactory)
+            : base(ctx, depBundle.UserInputValidator, depBundle.CommandFactory, depBundle.Logger)
         {
             this.reader = depBundle.Reader;
         }

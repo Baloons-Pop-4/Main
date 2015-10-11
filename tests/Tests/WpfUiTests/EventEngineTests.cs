@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using BalloonsPop.Bundling;
 using BalloonsPop.Common.Contracts;
+using BalloonsPop.Common.Gadgets;
 using BalloonsPop.Core.Contexts;
 using BalloonsPop.GameModels;
 using BalloonsPop.GraphicUserInterface;
@@ -25,19 +26,13 @@ namespace Tests.WpfUiTests
         private BalloonsView view;
         private IContext ctx;
         private IBalloonsWpfResourceProvider resources;
+        private IKernel kernel;
+        private WpfBundle bundle;
 
-        [TestInitialize]
-        public void TestInit()
+        public EventEngineTests()
         {
-            this.view = new BalloonsView();
-            this.resources = new Resources();
-            this.controller = new MainWindowController(this.view, this.resources);
-        }
-
-        [TestMethod]
-        public void TestIfSetPlayerNameInContextSetsTheNewNameInContext()
-        {
-            var kernel = new StandardKernel();
+            this.kernel = new StandardKernel();
+            kernel.Bind<ILogger>().ToMethod(x => LogHelper.GetLogger());
             DependancyBinder.Instance
                 .RegisterModules(
                                  new ModelsModule(kernel),
@@ -47,18 +42,39 @@ namespace Tests.WpfUiTests
                                  new HighscoreModule(kernel),
                                  new SaverModule(kernel),
                                  new WpfModule(kernel))
-                .LoadAll();       
-    
-
-            var bundle = new WpfBundle(kernel);
+                .LoadAll();
+            
+            this.bundle = new WpfBundle(this.kernel);
             this.ctx = new Context(kernel);
-            var engine = new EventEngine(ctx, bundle);
+            this.engine = new EventEngine(ctx, bundle);
+            this.view = new BalloonsView();
+            this.resources = new Resources();
+            this.controller = new MainWindowController(this.view, this.resources);
+        }
 
-            this.engine = engine;
-
+        [TestMethod]
+        public void TestIfSetPlayerNameInContextSetsTheNewNameInContext()
+        {
             this.engine.SetPlayerNameInContext(new TextBox() { Text = "gosho" }, new EventArgs());
 
             Assert.AreEqual("gosho", this.ctx.PlayerName);
+        }
+
+        [TestMethod]
+        public void TestIfEventEngineDoesntThrowExceptionDoesntThrowExceptionsWithValidCommands()
+        {
+             string[] validCommands = { "1 1", "undo", "2 2", "restart", "4 9", "3 3", "2 5", "undo", "undo", "9 9" };
+
+            foreach (var cmd in validCommands)
+            {
+                this.engine.HandleUserInput(new object(), new UserCommandArgs(cmd));
+            }
+        }
+
+        [TestMethod]
+        public void TestIfInvalidCommandsPassedToTheEngineDoesntCrashIt()
+        {
+            this.engine.HandleUserInput(new object(), new UserCommandArgs("icrasheduzz"));
         }
     }
 }

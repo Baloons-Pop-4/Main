@@ -19,6 +19,8 @@
 
         public override void Load()
         {
+            kernel.Unbind<IBalloon>();
+            kernel.Unbind<IGameModel>();
             kernel.Bind<IBalloon>().To<Balloon>();
             kernel.Bind<IGameModel>().To<GameModel>();
         }

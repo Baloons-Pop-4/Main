@@ -18,14 +18,13 @@
             kernel.Inject(this);
         }
 
-        public CoreBundle()
-        {
-        }
-
         [Inject]
         public IUserInputValidator UserInputValidator { get; set; }
 
         [Inject]
         public ICommandFactory CommandFactory { get; set; }
+
+        [Inject]
+        public ILogger Logger { get; set; }
     }
 }

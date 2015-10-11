@@ -11,7 +11,7 @@
     public class EventEngine : EngineCore
     {
         public EventEngine(IContext ctx, WpfBundle depBundle)
-            : base(ctx, depBundle.UserInputValidator, depBundle.CommandFactory)
+            : base(ctx, depBundle.UserInputValidator, depBundle.CommandFactory, depBundle.Logger)
         {
             depBundle.Gui.RaiseCommand += this.HandleUserInput;
             depBundle.Gui.ChangedUserName += this.SetPlayerNameInContext;
