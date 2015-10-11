@@ -1,8 +1,8 @@
 ﻿namespace BalloonsPop.SoundPlayer
 {
+    using System;
     using System.Media;
-
-    using BalloonsPop.SoundPlayer.Contracts;
+    using BalloonsPop.Common.Contracts;
 
     public class SoundsLoader : ISoundsLoader
     {
@@ -15,7 +15,7 @@
 
         private string BuildFilePath(string soundName)
         {
-            string filePath = "../../Sounds/" + soundName + ".wav";
+            string filePath = Environment.CurrentDirectory.Substring(0, Environment.CurrentDirectory.LastIndexOf("src")) +"src\\BalloonsPop.SoundPlayer\\Sounds\\" +  soundName + ".wav";
             return filePath;
         }
     }

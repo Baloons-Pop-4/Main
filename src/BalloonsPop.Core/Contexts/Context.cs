@@ -1,7 +1,7 @@
 ﻿namespace BalloonsPop.Core.Contexts
 {
+    using System;
     using BalloonsPop.Common.Contracts;
-
     using Ninject;
 
     /// <summary>
@@ -67,6 +67,12 @@
         /// </summary>
         [Inject]
         public IHighscoreHandlingStrategy HighscoreHandling { get; set; }
+
+        /// <summary>
+        /// Gets or sets the current media player.
+        /// </summary>
+        [Inject]
+        public ISoundsPlayer Orchestra { get; set; }
 
         /// <summary>
         /// Gets or sets the current "message" that describes the current state of the engine.

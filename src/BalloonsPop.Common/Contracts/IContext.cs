@@ -14,6 +14,8 @@
 
         IHighscoreHandlingStrategy HighscoreHandling { get; }
 
+        ISoundsPlayer Orchestra { get; }
+
         string Message { get; set; }
 
         string PlayerName { get; set; }

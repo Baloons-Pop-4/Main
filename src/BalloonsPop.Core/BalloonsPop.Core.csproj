@@ -53,6 +53,7 @@
     <Compile Include="Commands\CompositePopCommand.cs" />
     <Compile Include="Commands\CompositeUndoCommand.cs" />
     <Compile Include="Commands\GameOverHandlingCommand.cs" />
+    <Compile Include="Commands\PlaySoundCommand.cs" />
     <Compile Include="Commands\PopBalloonCommand.cs" />
     <Compile Include="Commands\PrintFieldCommand.cs" />
     <Compile Include="Commands\PrintHighscoreCommand.cs" />

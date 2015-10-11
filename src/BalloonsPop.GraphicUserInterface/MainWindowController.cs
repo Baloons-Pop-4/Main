@@ -67,7 +67,7 @@
         /// <summary>
         /// Gets the view which the current instance of the controller is responsible for managing.
         /// </summary>
-        public BalloonsView Window { get; private set; }
+        public BalloonsView Window { get; internal set; }
 
         /// <summary>
         /// Gets the resource provider which the current instance of the controller is using.

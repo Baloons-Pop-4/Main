@@ -10,6 +10,7 @@
     using BalloonsPop.GraphicUserInterface;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using BalloonsPop.Highscore;
+    using Moq;
 
     /// <summary>
     /// Summary description for MainWindowControllerTests
@@ -119,13 +120,30 @@
 
             var highscoreChildren = this.view.Rankings.Children.Cast<Border>().Select(x =>
                 {
-                    if (x.Child as TextBlock == null)
-                    {
-                        Assert.Fail();
-                    }
-
                     return (x.Child as TextBlock).Text;
                 }).ToList();
+        }
+
+        [TestMethod]
+        public void TestIfControllersTextChangedHandlerRemovesMethodsFromView()
+        {
+            bool firstCalled = false;
+            bool secondCalled = false;
+            TextChangedEventHandler action1 = (s, e) => { firstCalled = true; };
+            TextChangedEventHandler action2 = (s, e) => { secondCalled = true; };
+            this.controller.ChangedUserName += action1;
+            this.controller.ChangedUserName += action2;
+
+            this.view.PlayerNicknameBox.Text = "gosho";
+
+            Assert.IsTrue(firstCalled && secondCalled);
+
+            secondCalled = false;
+            this.controller.ChangedUserName -= action2;
+
+            this.view.PlayerNicknameBox.Text = "tosho";
+
+            Assert.IsFalse(secondCalled);
         }
 
         [TestMethod]

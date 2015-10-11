@@ -11,6 +11,7 @@
     using BalloonsPop.Saver;
     using BalloonsPop.Validation;
     using BalloonsPop.Common.Gadgets;
+    using BalloonsPop.SoundPlayer;
     using Ninject;
 
     /// <summary>
@@ -34,7 +35,8 @@
                                  new WpfCommandModule(kernel),
                                  new HighscoreModule(kernel),
                                  new SaverModule(kernel),
-                                 new WpfModule(kernel))
+                                 new WpfModule(kernel),
+                                 new SoundsModule(kernel))
                 .LoadAll();       
     
 

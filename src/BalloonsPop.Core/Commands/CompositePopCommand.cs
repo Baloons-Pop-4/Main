@@ -11,6 +11,7 @@
             {
                 new SaveCommand(),
                 new PopBalloonCommand(),
+                new PlaySoundCommand("pop"),
                 new GameOverHandlingCommand(),
                 new PrintFieldCommand()
             };

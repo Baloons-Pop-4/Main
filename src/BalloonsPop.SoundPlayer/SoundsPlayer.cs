@@ -1,23 +1,22 @@
 ﻿namespace BalloonsPop.SoundPlayer
 {
     using System;
-    using System.Collections.Generic;
     using System.Media;
+    using System.Collections.Generic;
+    
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
-
-    using BalloonsPop.SoundPlayer.Contracts;
 
     public class SoundsPlayer : ISoundsPlayer
     {
         private static readonly ILogger Logger = LogHelper.GetLogger();
 
-        private IDictionary<string, ISound> sounds;
+        private IDictionary<string, SoundPlayer> sounds;
         private ISoundsLoader loader;
 
         public SoundsPlayer(ISoundsLoader loader)
         {
-            this.sounds = new Dictionary<string, ISound>();
+            this.sounds = new Dictionary<string, SoundPlayer>();
             this.loader = loader;
         }
 
@@ -27,10 +26,10 @@
             {
                 if (!this.sounds.ContainsKey(soundName))
                 {
-                    this.RegisterSound(soundName);
+                    this.RegisterSound(soundName, this.loader.CreateSoundMedia(soundName));
                 }
 
-                SoundPlayer player = this.loader.CreateSoundMedia(soundName);
+                var player = this.sounds[soundName];
                 player.Play();
             }
             catch (Exception ex)
@@ -39,10 +38,9 @@
             }
         }
 
-        public void RegisterSound(string soundName)
+        public void RegisterSound(string soundName, SoundPlayer player)
         {
-            ISound newSound = new Sound(soundName);
-            this.sounds.Add(soundName, newSound);
+            this.sounds.Add(soundName, player);
         }
     }
 }

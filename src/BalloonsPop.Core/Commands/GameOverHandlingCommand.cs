@@ -23,10 +23,13 @@
                     this.SubCommands.Add(new PrintHighscoreCommand());
                 }
 
+                this.SubCommands.Add(new PlaySoundCommand("win"));
                 this.SubCommands.Add(new CompositeRestart());
-            }
 
-            base.Execute(context);
+                base.Execute(context);
+
+                this.SubCommands.Clear();
+            }
         }
     }
 }

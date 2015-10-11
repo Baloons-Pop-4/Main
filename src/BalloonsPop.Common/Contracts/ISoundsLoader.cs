@@ -1,4 +1,4 @@
-﻿namespace BalloonsPop.SoundPlayer.Contracts
+﻿namespace BalloonsPop.Common.Contracts
 {
     using System.Media;
 

@@ -11,6 +11,7 @@ using BalloonsPop.GraphicUserInterface.Contracts;
 using BalloonsPop.Highscore;
 using BalloonsPop.LogicProvider;
 using BalloonsPop.Saver;
+using BalloonsPop.SoundPlayer;
 using BalloonsPop.Validation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -41,7 +42,8 @@ namespace Tests.WpfUiTests
                                  new WpfCommandModule(kernel),
                                  new HighscoreModule(kernel),
                                  new SaverModule(kernel),
-                                 new WpfModule(kernel))
+                                 new WpfModule(kernel),
+                                 new SoundsModule(kernel))
                 .LoadAll();
             
             this.bundle = new WpfBundle(this.kernel);
