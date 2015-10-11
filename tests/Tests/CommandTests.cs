@@ -38,13 +38,13 @@
         [TestMethod]
         public void TestIfNonNullObjectIsReturnedWithValidCommandKey()
         {
-            var commands = new string[] { "message", "exit", "undo", "pop", "restart", "field", "save", "top" };
+            var commands = new string[] { "message", "undo", "pop", "restart", "field", "save", "top" };
 
             foreach (var key in commands)
             {
                 var cmd = this.commandFactory.CreateCommand(key);
 
-                Assert.AreNotEqual(null, cmd);
+                Assert.IsNotNull(cmd);
             }
         }
 

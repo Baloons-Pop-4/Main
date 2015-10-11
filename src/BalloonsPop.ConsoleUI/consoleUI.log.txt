@@ -167,3 +167,5 @@ UTC Date - 2015-10-10 18:24:05,241; [d:\TELERIK\Teamworks\TEAMWORK - BALOON-mast
 UTC Date - 2015-10-11 10:38:27,015; [c:\Users\Pc\Desktop\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Start initialization.
 UTC Date - 2015-10-11 10:40:58,699; [c:\Users\Pc\Desktop\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Start initialization.
 UTC Date - 2015-10-11 10:40:58,813; [c:\Users\Pc\Desktop\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Starting the game.
+UTC Date - 2015-10-11 12:26:13,387; [c:\Users\Pc\Desktop\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Start initialization.
+UTC Date - 2015-10-11 12:26:13,559; [c:\Users\Pc\Desktop\Main\src\BalloonsPop.ConsoleUI\MainProgram.cs] Level - INFO  - Starting the game.

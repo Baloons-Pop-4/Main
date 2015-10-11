@@ -1,6 +1,7 @@
 ﻿namespace BalloonsPop.ConsoleUI
 {
     using BalloonsPop.Bundling;
+    using BalloonsPop.Commands;
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
     using BalloonsPop.Core.Commands;
@@ -34,6 +35,8 @@
 
             var ctx = new Context(kernel);
             var bundle = new ConsoleBundle(kernel);
+            bundle.CommandFactory.RegisterCommand("exit", () => new ExitCommand());
+
             var engine = new ConsoleEngine(ctx, bundle);
 
             Logger.Info("Starting the game.");

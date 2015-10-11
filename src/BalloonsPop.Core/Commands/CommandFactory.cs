@@ -49,7 +49,6 @@
             this.RegisterCommand("top", () => new PrintHighscoreCommand());
             this.RegisterCommand("message", () => new PrintMessageCommand());
             this.RegisterCommand("field", () => new PrintFieldCommand());
-            this.RegisterCommand("exit", () => new ExitCommand());
             this.RegisterCommand("undo", () => new CompositeUndoCommand());
             this.RegisterCommand("pop", () => new CompositePopCommand());
             this.RegisterCommand("save", () => new SaveCommand());

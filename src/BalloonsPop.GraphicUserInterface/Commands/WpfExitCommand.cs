@@ -11,14 +11,20 @@
     {
         private const int WpfExitCode = 348944;
 
+        public WpfExitCommand()
+            :base()
+        {
+            this.SubCommands.Add(new SaveHighscoreCommand());
+        }
+
         /// <summary>
         /// Executes the exit command in a provided context.
         /// </summary>
         /// <param name="context">The execution context for the command.</param>
         public override void Execute(IContext context)
         {
-            new SaveHighscoreCommand().Execute(context);
             Application.Current.Shutdown(WpfExitCode);
+            base.Execute(context);
         }
     }
 }
