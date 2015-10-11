@@ -9,11 +9,8 @@
     {
         #region Constants
         protected const string WrongInputMessage = "Wrong input! Try Again!";
-        protected const string Save = "save";
-        protected const string Pop = "pop";
-        protected const string GameOver = "gameover";
-        protected const string Field = "field";
-        protected const string Message = "message";
+        protected const string PopCommandKey = "pop";
+        protected const string MessageCommandKey = "message";
 
         protected const int IndexOfRowDigit = 0;
         protected const int IndexOfColumnDigit = 2;
@@ -88,7 +85,7 @@
                 {
                     this.context.UserRow = userCommand[IndexOfRowDigit].ToInt32();
                     this.context.UserCol = userCommand[IndexOfColumnDigit].ToInt32();
-                    cmd = this.commandFactory.CreateCommand(Pop);
+                    cmd = this.commandFactory.CreateCommand(PopCommandKey);
 
 
                 }
@@ -99,7 +96,7 @@
                 else
                 {
                     this.context.Message = WrongInputMessage;
-                    cmd = this.commandFactory.CreateCommand(Message);
+                    cmd = this.commandFactory.CreateCommand(MessageCommandKey);
                 }
             }
             catch (ArgumentException e)

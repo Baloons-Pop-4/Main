@@ -63,6 +63,7 @@
     <Compile Include="Commands\SaveHighscoreCommand.cs" />
     <Compile Include="Commands\UndoCommand.cs" />
     <Compile Include="Contexts\Context.cs" />
+    <Compile Include="CoreBundle.cs" />
     <Compile Include="EngineCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -182,6 +182,22 @@
             moqPrinter.Verify(x => x.PrintMessage(It.Is<string>(a => a == "gosho")), Times.Once);
         }
 
+        [TestMethod]
+        public void TestIfSaveHighscoreCallsTheSaveMethodOfTheSavingStrategy()
+        {
+            var moqHighsoreSaver = new Mock<IHighscoreHandlingStrategy>();
+            moqHighsoreSaver.Setup(x => x.Save(It.IsAny<IHighscoreTable>())).Verifiable();
+
+            var ctx = new Context()
+            {
+                HighscoreHandling = moqHighsoreSaver.Object
+            };
+
+            new SaveHighscoreCommand().Execute(ctx);
+
+            moqHighsoreSaver.Verify(x => x.Save(It.IsAny<IHighscoreTable>()), Times.Once);
+        }
+
         //[TestMethod]
         //public void TestIfSaveCommandUsesTheMementoSetter()
         //{

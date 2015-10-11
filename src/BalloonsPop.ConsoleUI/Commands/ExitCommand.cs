@@ -9,7 +9,7 @@
         public ExitCommand()
             : base()
         {
-            this.SubCommands.Add(new SaveCommand());
+            this.SubCommands.Add(new SaveHighscoreCommand());
         }
 
         public override void Execute(IContext context)
