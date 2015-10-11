@@ -1,50 +1,39 @@
 ﻿namespace Tests.CloningStrategiesTests
 {
     using System;
-
+    using System.Text;
     using BalloonsPop.Saver.CloningStrategies;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Moq;
 
     [TestClass]
     public class DotNetCloningTests
     {
-        private DotNetCloning<CloneableClass> cloning;
-        private DotNetCloning<NonCloneableClass> invalidCloning;
-        private CloneableClass testObject;
-        private NonCloneableClass nonCloneableTestObject;
-
-        [TestInitialize]
-        public void TestInit()
-        {
-            this.cloning = new DotNetCloning<CloneableClass>();
-            this.invalidCloning = new DotNetCloning<NonCloneableClass>();
-            this.testObject = new CloneableClass();
-            this.nonCloneableTestObject = new NonCloneableClass();
-        }
-
+        private DotNetCloning<Object> cloning = new DotNetCloning<object>();
         [TestMethod]
         public void TestIfIsMatchReturnTrueWithTypeThatImplementsICloneable()
         {
-            Assert.IsTrue(this.cloning.IsMatch(this.testObject));
+            var moqCloneable = new Mock<ICloneable>();
+            
+            Assert.IsTrue(this.cloning.IsMatch(moqCloneable.Object));
         }
 
         [TestMethod]
         public void TestIfIsMatchReturnFalseWithTypeThatDoesntImplementsICloneable()
         {
-            Assert.IsFalse(this.invalidCloning.IsMatch(this.nonCloneableTestObject));
+            var notCLoneableObj = new StringBuilder();
+            Assert.IsFalse(this.cloning.IsMatch(notCLoneableObj));
         }
 
-        internal class NonCloneableClass
+        [TestMethod]
+        public void TestIfCloneMethodUsesTheICloneablesInterfaceClone()
         {
-        }
+            var moqCloneable = new Mock<ICloneable>();
+            moqCloneable.Setup(x => x.Clone()).Returns(new object()).Verifiable();
 
-        internal class CloneableClass : ICloneable
-        {
-            public object Clone()
-            {
-                return new CloneableClass();
-            }
+            this.cloning.Clone(moqCloneable.Object);
+
+            moqCloneable.Verify(x => x.Clone(), Times.Once);
         }
     }
 }
