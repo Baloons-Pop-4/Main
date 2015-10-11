@@ -8,8 +8,8 @@
     using BalloonsPop.Common.Gadgets;
     using BalloonsPop.GameModels;
     using BalloonsPop.GraphicUserInterface;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using BalloonsPop.Highscore;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
 
     /// <summary>
@@ -69,7 +69,6 @@
         [TestMethod]
         public void TestIfPrintFieldInitializesTheImageSourcesAtFirstPrint()
         {
-
             var game = new GameModel();
             Assert.AreEqual(0, this.view.BalloonGrid.Children.Count);
             this.controller.PrintField(game.Field);
@@ -79,7 +78,6 @@
         [TestMethod]
         public void TestIfPrintFieldChangesTheSourceOfTheImages()
         {
-
             var game = new GameModel();
             Assert.AreEqual(0, this.view.BalloonGrid.Children.Count);
 

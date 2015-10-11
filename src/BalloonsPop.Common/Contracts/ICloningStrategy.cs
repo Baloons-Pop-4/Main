@@ -10,14 +10,14 @@
         /// Returns true if the strategy implementation is designed for the type of object passed.
         /// </summary>
         /// <param name="obj"></param>
-        /// <returns></returns>
+        /// <returns>if the strategy implementation is designed for the type of object passed</returns>
         bool IsMatch(T obj);
 
         /// <summary>
         /// Deeply clones the object.
         /// </summary>
         /// <param name="obj"></param>
-        /// <returns></returns>
+        /// <returns>Deep object clone</returns>
         T Clone(T obj);
     }
 }

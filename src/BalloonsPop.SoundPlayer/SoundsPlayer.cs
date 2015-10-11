@@ -1,8 +1,8 @@
 ﻿namespace BalloonsPop.SoundPlayer
 {
     using System;
-    using System.Media;
     using System.Collections.Generic;
+    using System.Media;
     
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
@@ -57,6 +57,15 @@
         public void RegisterSound(string soundName, SoundPlayer player)
         {
             this.sounds.Add(soundName, player);
+        }
+
+        /// <summary>
+        /// Returns the amount of registered sounds
+        /// </summary>
+        /// <returns>The amount of resitered sounds</returns>
+        public int CountSounds()
+        {
+            return this.sounds.Count;
         }
     }
 }

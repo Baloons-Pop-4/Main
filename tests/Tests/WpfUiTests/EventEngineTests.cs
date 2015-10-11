@@ -1,24 +1,24 @@
-﻿using System;
-using System.Windows.Controls;
-using BalloonsPop.Bundling;
-using BalloonsPop.Common.Contracts;
-using BalloonsPop.Common.Gadgets;
-using BalloonsPop.Core.Contexts;
-using BalloonsPop.GameModels;
-using BalloonsPop.GraphicUserInterface;
-using BalloonsPop.GraphicUserInterface.Commands;
-using BalloonsPop.GraphicUserInterface.Contracts;
-using BalloonsPop.Highscore;
-using BalloonsPop.LogicProvider;
-using BalloonsPop.Saver;
-using BalloonsPop.SoundPlayer;
-using BalloonsPop.Validation;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using Ninject;
-
-namespace Tests.WpfUiTests
+﻿namespace Tests.WpfUiTests
 {
+    using System;
+    using System.Windows.Controls;
+    using BalloonsPop.Bundling;
+    using BalloonsPop.Common.Contracts;
+    using BalloonsPop.Common.Gadgets;
+    using BalloonsPop.Core.Contexts;
+    using BalloonsPop.GameModels;
+    using BalloonsPop.GraphicUserInterface;
+    using BalloonsPop.GraphicUserInterface.Commands;
+    using BalloonsPop.GraphicUserInterface.Contracts;
+    using BalloonsPop.Highscore;
+    using BalloonsPop.LogicProvider;
+    using BalloonsPop.Saver;
+    using BalloonsPop.SoundPlayer;
+    using BalloonsPop.Validation;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Moq;
+    using Ninject;
+
     [TestClass]
     public class EventEngineTests
     {
@@ -33,22 +33,22 @@ namespace Tests.WpfUiTests
         public EventEngineTests()
         {
             this.kernel = new StandardKernel();
-            kernel.Bind<ILogger>().ToMethod(x => LogHelper.GetLogger());
+            this.kernel.Bind<ILogger>().ToMethod(x => LogHelper.GetLogger());
             DependancyBinder.Instance
                 .RegisterModules(
-                                 new ModelsModule(kernel),
-                                 new LogicModule(kernel),
-                                 new ValidationModule(kernel),
-                                 new WpfCommandModule(kernel),
-                                 new HighscoreModule(kernel),
-                                 new SaverModule(kernel),
-                                 new WpfModule(kernel),
-                                 new SoundsModule(kernel))
+                                 new ModelsModule(this.kernel),
+                                 new LogicModule(this.kernel),
+                                 new ValidationModule(this.kernel),
+                                 new WpfCommandModule(this.kernel),
+                                 new HighscoreModule(this.kernel),
+                                 new SaverModule(this.kernel),
+                                 new WpfModule(this.kernel),
+                                 new SoundsModule(this.kernel))
                 .LoadAll();
-            
+
             this.bundle = new WpfBundle(this.kernel);
-            this.ctx = new Context(kernel);
-            this.engine = new EventEngine(ctx, bundle);
+            this.ctx = new Context(this.kernel);
+            this.engine = new EventEngine(this.ctx, this.bundle);
             this.view = new BalloonsView();
             this.resources = new Resources();
             this.controller = new MainWindowController(this.view, this.resources);
@@ -65,7 +65,7 @@ namespace Tests.WpfUiTests
         [TestMethod]
         public void TestIfEventEngineDoesntThrowExceptionDoesntThrowExceptionsWithValidCommands()
         {
-             string[] validCommands = { "1 1", "undo", "2 2", "restart", "4 9", "3 3", "2 5", "undo", "undo", "9 9" };
+            string[] validCommands = { "1 1", "undo", "2 2", "restart", "4 9", "3 3", "2 5", "undo", "undo", "9 9" };
 
             foreach (var cmd in validCommands)
             {

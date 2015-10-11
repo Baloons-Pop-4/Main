@@ -1,18 +1,16 @@
-﻿
-
-namespace Tests.ModulesAndBindingTests
+﻿namespace Tests.ModulesAndBindingTests
 {
     using System;
+    using BalloonsPop.Common.Contracts;
     using BalloonsPop.GameModels;
     using BalloonsPop.GraphicUserInterface;
-    using BalloonsPop.Saver;
-    using BalloonsPop.Validation;
-    using BalloonsPop.Common.Contracts;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Ninject;
-    using BalloonsPop.LogicProvider;
     using BalloonsPop.GraphicUserInterface.Commands;
     using BalloonsPop.GraphicUserInterface.Contracts;
+    using BalloonsPop.LogicProvider;
+    using BalloonsPop.Saver;
+    using BalloonsPop.Validation;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Ninject;
 
     [TestClass]
     public class ModuleTests
@@ -29,11 +27,11 @@ namespace Tests.ModulesAndBindingTests
         {
             new ValidationModule(this.kernel).Load();
 
-            var matrixValidator = kernel.Get<IMatrixValidator>();
+            var matrixValidator = this.kernel.Get<IMatrixValidator>();
 
             Assert.IsNotNull(matrixValidator);
 
-            Assert.IsNotNull(kernel.Get<IUserInputValidator>());
+            Assert.IsNotNull(this.kernel.Get<IUserInputValidator>());
         }
 
         [TestMethod]

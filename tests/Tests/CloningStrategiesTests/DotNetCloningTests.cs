@@ -9,7 +9,8 @@
     [TestClass]
     public class DotNetCloningTests
     {
-        private DotNetCloning<Object> cloning = new DotNetCloning<object>();
+        private DotNetCloning<object> cloning = new DotNetCloning<object>();
+
         [TestMethod]
         public void TestIfIsMatchReturnTrueWithTypeThatImplementsICloneable()
         {
