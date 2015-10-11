@@ -6,6 +6,10 @@
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Saver.CloningStrategies;
 
+    /// <summary>
+    /// Provides generic state saving via replicating objects.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class Saver<T> : IStateSaver<T>
     {
         /// <summary>

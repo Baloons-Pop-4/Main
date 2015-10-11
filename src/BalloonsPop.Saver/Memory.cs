@@ -4,6 +4,10 @@
 
     using BalloonsPop.Common.Contracts;
 
+    /// <summary>
+    /// Provides a generic container for objects that is used by the Save class to store states.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class Memory<T> : IMemory<T>
     {
         private readonly Stack<T> memory;
@@ -27,11 +31,19 @@
             }
         }
 
+        /// <summary>
+        /// Adds a state in the memory.
+        /// </summary>
+        /// <param name="state"></param>
         public void PushItem(T state)
         {
             this.memory.Push(state);
         }
 
+        /// <summary>
+        /// Gets the last added element from the memory. If the memory is empty, throws an exception.
+        /// </summary>
+        /// <returns></returns>
         public T GetItem()
         {
             return this.memory.Pop();
