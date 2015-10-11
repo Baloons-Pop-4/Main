@@ -46,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\IBalloon.cs" />
+    <Compile Include="Contracts\IBalloonFieldRandomizer.cs" />
+    <Compile Include="Contracts\IBalloonPopper.cs" />
     <Compile Include="Contracts\IBundler.cs" />
     <Compile Include="Contracts\ICloneableObject.cs" />
     <Compile Include="Contracts\ICloningStrategy.cs" />
