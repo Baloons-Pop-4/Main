@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram.cd" />
     <None Include="GnomFiles\index.guid" />
     <None Include="GnomFiles\styles.gss" />
     <None Include="packages.config" />
