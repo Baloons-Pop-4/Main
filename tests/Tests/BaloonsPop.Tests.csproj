@@ -77,6 +77,7 @@
     <Compile Include="MementoTests.cs" />
     <Compile Include="ModulesAndBindingTests\ModuleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SoundsPlayerTests.cs" />
     <Compile Include="UserInputValidatorTests.cs" />
     <Compile Include="WpfUiTests\BalloonsViewTests.cs" />
     <Compile Include="WpfUiTests\EventEngineTests.cs" />

@@ -58,5 +58,14 @@
         {
             this.sounds.Add(soundName, player);
         }
+
+        /// <summary>
+        /// Returns the amount of registered sounds
+        /// </summary>
+        /// <returns>The amount of resitered sounds</returns>
+        public int CountSounds()
+        {
+            return this.sounds.Count;
+        }
     }
 }
