@@ -21,6 +21,7 @@
         {
             Logger.Info("Start initialization.");
             var kernel = new StandardKernel();
+            // TODO: create logger module
             kernel.Bind<ILogger>().ToMethod(x => LogHelper.GetLogger());
             DependancyBinder.Instance
                 .RegisterModules(
@@ -35,6 +36,8 @@
 
             var ctx = new Context(kernel);
             var bundle = new ConsoleBundle(kernel);
+
+            // TODO: extract in a module
             bundle.CommandFactory.RegisterCommand("exit", () => new ExitCommand());
 
             var engine = new ConsoleEngine(ctx, bundle);

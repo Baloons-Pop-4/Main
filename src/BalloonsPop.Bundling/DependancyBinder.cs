@@ -4,6 +4,8 @@
 
     using Ninject.Modules;
 
+    // TODO: remove this class and use Ninject loading
+
     /// <summary>
     /// Provides a consistent way to store, register, unregister and load ninject modules.
     /// </summary>

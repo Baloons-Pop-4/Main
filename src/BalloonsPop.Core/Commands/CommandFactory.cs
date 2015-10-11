@@ -8,10 +8,13 @@
     public class CommandFactory : ICommandFactory
     {
         private readonly IDictionary<string, Func<ICommand>> commandMap;
+        // flyweight factory
+        private readonly IDictionary<string, ICommand> commandCache;
 
         public CommandFactory()
         {
             this.commandMap = new Dictionary<string, Func<ICommand>>();
+            this.commandCache = new Dictionary<string, ICommand>();
             this.RegisterDefaults();
         }
 
@@ -21,8 +24,13 @@
             {
                 throw new KeyNotFoundException("No command with such key was registered");
             }
+            
+            if(!this.commandCache.ContainsKey(commandName))
+            {
+                this.commandCache.Add(commandName, this.commandMap[commandName]());
+            }
 
-            return this.commandMap[commandName]();
+            return this.commandCache[commandName];
         }
 
         public bool ContainsKey(string commandKey)
@@ -41,10 +49,12 @@
         public void UnregisterCommand(string commandKey)
         {
             this.commandMap.Remove(commandKey);
+            this.commandCache.Remove(commandKey);
         }
 
         private void RegisterDefaults()
         {
+            // TODO: find a pretty way to register defaults
             this.RegisterCommand("restart", () => new CompositeRestart());
             this.RegisterCommand("top", () => new PrintHighscoreCommand());
             this.RegisterCommand("message", () => new PrintMessageCommand());
