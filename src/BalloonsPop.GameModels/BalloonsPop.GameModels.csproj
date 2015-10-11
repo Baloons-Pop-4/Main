@@ -47,7 +47,7 @@
   <ItemGroup>
     <Compile Include="Balloon.cs" />
     <Compile Include="GameModel.cs" />
-    <Compile Include="ModelsConfig.cs" />
+    <Compile Include="ModelsModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

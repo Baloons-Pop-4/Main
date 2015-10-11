@@ -18,6 +18,10 @@
             kernel.Inject(this);
         }
 
+        public CoreBundle()
+        {
+        }
+
         [Inject]
         public IUserInputValidator UserInputValidator { get; set; }
 

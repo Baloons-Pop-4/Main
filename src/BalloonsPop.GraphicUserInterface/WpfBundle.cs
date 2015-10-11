@@ -20,6 +20,9 @@
             kernel.Inject(this.Gui);
         }
 
+        public WpfBundle()
+        { }
+
         /// <summary>
         /// Gets or sets access to the graphic interface exported by the wpf project.
         /// </summary>

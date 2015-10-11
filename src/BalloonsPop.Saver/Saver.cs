@@ -15,8 +15,7 @@
         {
             new CustomCloning<T>(),
             new DotNetCloning<T>(),
-            new SerializationCloning<T>(),
-            new ReflectionCloning<T>()
+            new SerializationCloning<T>()
         };
 
         private IMemory<T> memory;

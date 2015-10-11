@@ -20,14 +20,9 @@
 
         public ICommand CreateCommand(string commandName)
         {
-            try
+            if(!this.ContainsKey(commandName))
             {
-                this.commandMap.ContainsKey(commandName);
-            }
-            catch (Exception ex)
-            {
-                Logger.Error("Invalid type of command requested!", ex);
-                throw;
+                throw new KeyNotFoundException("No command with such key was registered");
             }
 
             return this.commandMap[commandName]();

@@ -23,7 +23,6 @@
             base.OnStartup(e);
 
             var kernel = new StandardKernel();
-
             DependancyBinder.Instance
                 .RegisterModules(
                                  new ModelsModule(kernel),
@@ -33,7 +32,8 @@
                                  new HighscoreModule(kernel),
                                  new SaverModule(kernel),
                                  new WpfModule(kernel))
-                .LoadAll();            
+                .LoadAll();       
+    
 
             var bundle = new WpfBundle(kernel);
             var ctx = new Context(kernel);

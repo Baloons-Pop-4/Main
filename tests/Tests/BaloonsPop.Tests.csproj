@@ -63,11 +63,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CloningStrategiesTests\ReflectionCloningTests.cs" />
     <Compile Include="CloningStrategiesTests\SerializationStrategyTests.cs" />
     <Compile Include="CloningStrategiesTests\DotNetCloningTests.cs" />
     <Compile Include="CommandTests.cs" />
-    <Compile Include="DependancyBinderTests\DependencyBinderTests.cs" />
+    <Compile Include="ModulesAndBindingTests\DependencyBinderTests.cs" />
     <Compile Include="Gadget tests\QueriableMatrixTests.cs" />
     <Compile Include="Gadget tests\StringExtensionsTests.cs" />
     <Compile Include="Gadget tests\IEnumerableExtensionTests.cs" />
@@ -76,9 +75,11 @@
     <Compile Include="HighscoreTests\HighscoreTableTests.cs" />
     <Compile Include="MatrixValidatorTest.cs" />
     <Compile Include="MementoTests.cs" />
+    <Compile Include="ModulesAndBindingTests\ModuleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserInputValidatorTests.cs" />
     <Compile Include="WpfUiTests\BalloonsViewTests.cs" />
+    <Compile Include="WpfUiTests\EventEngineTests.cs" />
     <Compile Include="WpfUiTests\ExtensionsTests\IHighscoreTableExtensionsTests.cs" />
     <Compile Include="WpfUiTests\ExtensionsTests\StringExtensionsTests.cs" />
     <Compile Include="WpfUiTests\ExtensionsTests\WpfExtensionsTests.cs" />

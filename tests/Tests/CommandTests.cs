@@ -69,6 +69,14 @@
         }
 
         [TestMethod]
+        public void TestIfUnregisterRemovesTheCommandWithTheProvidedKey()
+        {
+            this.commandFactory.RegisterCommand("minko donchov", () => new RestartCommand());
+            this.commandFactory.UnregisterCommand("minko donchov");
+            Assert.IsFalse(this.commandFactory.ContainsKey("minko donchov"));
+        }
+
+        [TestMethod]
         public void TestIfPopBalloonsCommandCallsTheNeededMethodsFromGameModelAndGameLogic()
         {
             var mockLogic = new Mock<IGameLogicProvider>();
@@ -141,8 +149,6 @@
             };
 
             new AddPlayerscoreCommand().Execute(ctx);
-
-            bool areEqual = true;
 
             Assert.AreEqual("Gosho", ctx.HighscoreTable.Table[0].Name);
         }

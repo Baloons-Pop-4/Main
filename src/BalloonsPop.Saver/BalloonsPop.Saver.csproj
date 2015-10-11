@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="CloningStrategies\CustomCloning.cs" />
     <Compile Include="CloningStrategies\DotNetCloning.cs" />
-    <Compile Include="CloningStrategies\ReflectionCloning.cs" />
     <Compile Include="CloningStrategies\SerializationCloning.cs" />
     <Compile Include="Memory.cs" />
     <Compile Include="Saver.cs" />
