@@ -7,6 +7,9 @@
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
 
+    /// <summary>
+    /// Playes sounds based on string parameters.
+    /// </summary>
     public class SoundsPlayer : ISoundsPlayer
     {
         private static readonly ILogger Logger = LogHelper.GetLogger();
@@ -14,12 +17,20 @@
         private IDictionary<string, SoundPlayer> sounds;
         private ISoundsLoader loader;
 
+        /// <summary>
+        /// Public constructor that accepts an ISoundsLoader instance that takes care of sound loading.
+        /// </summary>
+        /// <param name="loader"></param>
         public SoundsPlayer(ISoundsLoader loader)
         {
             this.sounds = new Dictionary<string, SoundPlayer>();
             this.loader = loader;
         }
 
+        /// <summary>
+        /// Plays the sound matching the given string. If no matching sound, throw an exception.
+        /// </summary>
+        /// <param name="soundName"></param>
         public void PlaySound(string soundName)
         {
             try
@@ -38,6 +49,11 @@
             }
         }
 
+        /// <summary>
+        /// Caches a sound in the current instance.
+        /// </summary>
+        /// <param name="soundName"></param>
+        /// <param name="player"></param>
         public void RegisterSound(string soundName, SoundPlayer player)
         {
             this.sounds.Add(soundName, player);
