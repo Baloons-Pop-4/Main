@@ -10,6 +10,11 @@
     /// </summary>
     public class EventEngine : EngineCore
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EventEngine" /> class.
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="depBundle"></param>
         public EventEngine(IContext ctx, WpfBundle depBundle)
             : base(ctx, depBundle.UserInputValidator, depBundle.CommandFactory, depBundle.Logger)
         {

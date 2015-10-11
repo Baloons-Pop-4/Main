@@ -8,7 +8,7 @@
     public class SaveCommand : ICommand
     {
         /// <summary>
-        /// The class constructor.
+        /// Initializes a new instance of the <see cref="SaveCommand" /> class.
         /// </summary>
         public SaveCommand()
         {

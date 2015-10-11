@@ -11,6 +11,9 @@
     {
         private const int WpfExitCode = 348944;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WpfExitCommand" /> class.
+        /// </summary>
         public WpfExitCommand()
             : base()
         {

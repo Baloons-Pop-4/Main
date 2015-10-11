@@ -12,6 +12,10 @@
     {
         private static IKernel kernel;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ValidationModule" /> class.
+        /// </summary>
+        /// <param name="bindingKernel"></param>
         public ValidationModule(IKernel bindingKernel)
         {
             kernel = bindingKernel;

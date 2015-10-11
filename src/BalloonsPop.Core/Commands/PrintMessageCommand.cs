@@ -8,7 +8,7 @@
     public class PrintMessageCommand : ICommand
     {
         /// <summary>
-        /// The class constructor.
+        /// Initializes a new instance of the <see cref="PrintMessageCommand" /> class.
         /// </summary>
         public PrintMessageCommand()
         {

@@ -10,7 +10,7 @@
     public class SoundsModule : NinjectModule
     {
         /// <summary>
-        /// Public constructor that accepts kernel for binding.
+        /// Initializes a new instance of the <see cref="SoundsModule" /> class.
         /// </summary>
         /// <param name="kernel"></param>
         public SoundsModule(IKernel kernel)
@@ -19,7 +19,7 @@
         }
 
         /// <summary>
-        /// The kernel on which the exports are bound.
+        /// Gets the kernel on which the exports are bound.
         /// </summary>
         public IKernel AppKernel { get; private set; }
 

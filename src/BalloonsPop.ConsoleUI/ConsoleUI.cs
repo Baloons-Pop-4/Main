@@ -17,6 +17,9 @@
 
         private readonly ConsoleColor[] consoleColors = new ConsoleColor[] { ConsoleColor.White, ConsoleColor.Red, ConsoleColor.Green, ConsoleColor.Blue, ConsoleColor.Yellow };
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConsoleUI" /> class.
+        /// </summary>
         public ConsoleUI()
         {
             this.SetConsoleColorToDefault();

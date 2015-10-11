@@ -12,6 +12,10 @@
     {
         private static IKernel kernel;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ModelsModule" /> class.
+        /// </summary>
+        /// <param name="bindingKernel"></param>
         public ModelsModule(IKernel bindingKernel)
         {
             kernel = bindingKernel;

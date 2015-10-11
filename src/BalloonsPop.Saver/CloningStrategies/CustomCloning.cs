@@ -10,6 +10,9 @@
     /// <typeparam name="T"></typeparam>
     public class CustomCloning<T> : ICloningStrategy<T>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CustomCloning{T}" /> class.
+        /// </summary>
         public CustomCloning()
         {
         }

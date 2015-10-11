@@ -37,6 +37,9 @@
 
         private static string sourcePathTemplate;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Resources" /> class.
+        /// </summary>
         public Resources()
         {
             int indexOfExecutionFolderName = Environment.CurrentDirectory.IndexOf(ExectutionFolderName);

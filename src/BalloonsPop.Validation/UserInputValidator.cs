@@ -19,7 +19,7 @@
         /// Returns true when the provided string is a valid player move.
         /// </summary>
         /// <param name="playerMove">The player move as string.</param>
-        /// <returns></returns>
+        /// <returns>If it's a valid user move</returns>
         public bool IsValidUserMove(string playerMove)
         {
             return HasCorrectLength(playerMove) && IsValidCommand(playerMove) && IsValidRowMove(playerMove[0]);
@@ -29,7 +29,7 @@
         /// Returns true if the player move has the appropriate length.
         /// </summary>
         /// <param name="playerMove">The player move as string.</param>
-        /// <returns></returns>
+        /// <returnsIf the move has correct length></returns>
         private static bool HasCorrectLength(string playerMove)
         {
             return playerMove.Length == ValidInputLength;
@@ -39,7 +39,7 @@
         /// Returns true if the player move matches the specified pattern.
         /// </summary>
         /// <param name="playerMove">The player move as string.</param>
-        /// <returns></returns>
+        /// <returns>If it's a valid command</returns>
         private static bool IsValidCommand(string playerMove)
         {
             return ValidationRegex.Match(playerMove).Length > 0;
@@ -49,7 +49,7 @@
         /// Returns true if the row coordinate of the player move falls within the allowed range.
         /// </summary>
         /// <param name="playerMove">The player move as string.</param>
-        /// <returns></returns>
+        /// <returns>If it is a valid row move</returns>
         private static bool IsValidRowMove(char playerMove)
         {
             return (playerMove - 48) <= MaxRowInputValue;

@@ -7,6 +7,9 @@
 
     public interface IConsoleBundle : ICoreBundle
     {
+        /// <summary>
+        /// Gets or sets a Reader
+        /// </summary>
         IInputReader Reader { get; set; }
     }
 }

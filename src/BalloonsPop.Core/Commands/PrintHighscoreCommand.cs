@@ -3,12 +3,12 @@
     using BalloonsPop.Common.Contracts;
 
     /// <summary>
-    /// Implements command to print Highscore.
+    /// Implements command to print high score.
     /// </summary>
     public class PrintHighscoreCommand : ICommand
     {
         /// <summary>
-        /// The class constructor.
+        /// Initializes a new instance of the <see cref="PrintHighscoreCommand" /> class.
         /// </summary>
         public PrintHighscoreCommand()
         {

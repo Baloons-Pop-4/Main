@@ -17,6 +17,9 @@
 
         private readonly IDictionary<string, Button> commandButtons;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BalloonsView" /> class.
+        /// </summary>
         public BalloonsView()
         {
             this.InitializeComponent();
@@ -115,6 +118,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets a PlayerNicknameBox
+        /// </summary>
         public TextBox PlayerNicknameBox
         {
             get

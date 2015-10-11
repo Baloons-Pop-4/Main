@@ -8,7 +8,7 @@
     using BalloonsPop.Common.Gadgets;
 
     /// <summary>
-    /// Playes sounds based on string parameters.
+    /// Playres sounds based on string parameters.
     /// </summary>
     public class SoundsPlayer : ISoundsPlayer
     {
@@ -18,7 +18,7 @@
         private ISoundsLoader loader;
 
         /// <summary>
-        /// Public constructor that accepts an ISoundsLoader instance that takes care of sound loading.
+        /// Initializes a new instance of the <see cref="SoundsPlayer" /> class.
         /// </summary>
         /// <param name="loader"></param>
         public SoundsPlayer(ISoundsLoader loader)
@@ -62,7 +62,7 @@
         /// <summary>
         /// Returns the amount of registered sounds
         /// </summary>
-        /// <returns>The amount of resitered sounds</returns>
+        /// <returns>The amount of registered sounds</returns>
         public int CountSounds()
         {
             return this.sounds.Count;

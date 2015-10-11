@@ -10,7 +10,7 @@
     public class ExitCommand : CompositeCommand
     {
         /// <summary>
-        /// The class constructor.
+        /// Initializes a new instance of the <see cref="ExitCommand" /> class.
         /// </summary>
         public ExitCommand()
             : base()

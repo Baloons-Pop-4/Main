@@ -14,7 +14,7 @@
         /// <param name="matrix">The matrix against which the coordinates will be checked.</param>
         /// <param name="row">The row part of the coordinates.</param>
         /// <param name="col">The column part of the coordinates.</param>
-        /// <returns></returns>
+        /// <returns>If the position is inside the matrix</returns>
         public bool IsInsideMatrix<T>(T[,] matrix, int row, int col)
         {
             var rowIsInRange = IsInRange(0, matrix.GetLength(0), row);
@@ -29,7 +29,7 @@
         /// <param name="start">Start of the range(inclusive).</param>
         /// <param name="end">End of the range(not inclusive).</param>
         /// <param name="value">The value which is tested against the range.</param>
-        /// <returns></returns>
+        /// <returns>If the value is in the range</returns>
         private static bool IsInRange(int start, int end, int value)
         {
             return start <= value && value < end;

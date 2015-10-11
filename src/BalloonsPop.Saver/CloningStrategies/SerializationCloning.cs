@@ -12,6 +12,9 @@
     /// <typeparam name="T"></typeparam>
     public class SerializationCloning<T> : ICloningStrategy<T>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SerializationCloning{T}" /> class. 
+        /// </summary>
         public SerializationCloning()
         {
         }

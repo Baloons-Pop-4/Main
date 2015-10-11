@@ -18,12 +18,21 @@
             kernel.Inject(this);
         }
 
+        /// <summary>
+        /// Gets or sets a UserInputValidator
+        /// </summary>
         [Inject]
         public IUserInputValidator UserInputValidator { get; set; }
 
+        /// <summary>
+        /// Gets or sets a CommandFactory
+        /// </summary>
         [Inject]
         public ICommandFactory CommandFactory { get; set; }
 
+        /// <summary>
+        /// Gets or sets a Logger
+        /// </summary>
         [Inject]
         public ILogger Logger { get; set; }
     }

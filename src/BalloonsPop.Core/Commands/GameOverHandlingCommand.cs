@@ -5,12 +5,12 @@
     using BalloonsPop.Common.Contracts;
 
     /// <summary>
-    /// Implements command to handle Gameover
+    /// Implements command to handle game over
     /// </summary>
     public class GameOverHandlingCommand : CompositeCommand
     {
         /// <summary>
-        /// The class constructor.
+        /// Initializes a new instance of the <see cref="GameOverHandlingCommand" /> class.
         /// </summary>
         public GameOverHandlingCommand()
         {

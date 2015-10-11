@@ -5,6 +5,9 @@
 
     public class CompositePopCommand : CompositeCommand
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CompositePopCommand" /> class.
+        /// </summary>
         public CompositePopCommand()
         {
             this.SubCommands = new List<ICommand>() 

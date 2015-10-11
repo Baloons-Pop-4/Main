@@ -10,7 +10,7 @@
         private string sound;
 
         /// <summary>
-        /// Plays a specified sound
+        /// Initializes a new instance of the <see cref="PlaySoundCommand" /> class.
         /// </summary>
         /// <param name="sound"></param>
         public PlaySoundCommand(string sound)

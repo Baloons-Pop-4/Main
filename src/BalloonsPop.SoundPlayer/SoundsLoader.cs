@@ -12,6 +12,8 @@
         /// <summary>
         /// Provides System.Media.SoundPlayers loaded with the sound matching the provided string.
         /// </summary>
+        /// <param name="soundName"></param>
+        /// <returns>A new SoundPlayer object</returns>
         public SoundPlayer CreateSoundMedia(string soundName)
         {
             string path = this.BuildFilePath(soundName);

@@ -24,6 +24,13 @@
 
         private ILogger logger;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EngineCore" /> class.
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="inputValidator"></param>
+        /// <param name="cmdFactory"></param>
+        /// <param name="logger"></param>
         protected EngineCore(IContext ctx, IUserInputValidator inputValidator, ICommandFactory cmdFactory, ILogger logger)
         {
             this.Context = ctx;
@@ -33,6 +40,9 @@
             this.logger = logger;
         }
 
+        /// <summary>
+        /// Gets or sets a Context
+        /// </summary>
         protected IContext Context
         {
             get
@@ -46,6 +56,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets a CommandFactory
+        /// </summary>
         protected ICommandFactory CommandFactory
         {
             get
@@ -59,6 +72,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets a UserInputValidator
+        /// </summary>
         protected IUserInputValidator Validator
         {
             get

@@ -10,6 +10,9 @@
     /// <typeparam name="T"></typeparam>
     public class DotNetCloning<T> : ICloningStrategy<T>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DotNetCloning{T}" /> class. 
+        /// </summary>
         public DotNetCloning()
         {
         }

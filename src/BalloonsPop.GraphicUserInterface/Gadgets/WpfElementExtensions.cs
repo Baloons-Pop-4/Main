@@ -134,7 +134,7 @@
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="uiElement"></param>
-        /// <returns></returns>
+        /// <returns>A clone of the generic object</returns>
         public static T Clone<T>(this T uiElement)
             where T : UIElement
         {

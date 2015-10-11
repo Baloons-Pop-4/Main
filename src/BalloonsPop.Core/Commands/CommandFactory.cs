@@ -15,7 +15,7 @@
         private readonly IDictionary<string, ICommand> commandCache;
 
         /// <summary>
-        /// The class constructor.
+        /// Initializes a new instance of the <see cref="CommandFactory" /> class.
         /// </summary>
         public CommandFactory()
         {
@@ -47,8 +47,8 @@
         /// <summary>
         /// A method to check if the command is already created.
         /// </summary>
-        /// <param name="commandKey">string</param>
-        /// <returns></returns>
+        /// <param name="commandKey"></param>
+        /// <returns>If the command is already registered</returns>
         public bool ContainsKey(string commandKey)
         {
             return this.commandMap.ContainsKey(commandKey);

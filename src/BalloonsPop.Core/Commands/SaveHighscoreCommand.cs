@@ -3,7 +3,7 @@
     using BalloonsPop.Common.Contracts;
 
     /// <summary>
-    /// Implements command to save Highscore
+    /// Implements command to save high score
     /// </summary>
     public class SaveHighscoreCommand : ICommand
     {

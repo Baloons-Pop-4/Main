@@ -8,7 +8,7 @@
     public class UndoCommand : ICommand
     {
         /// <summary>
-        /// The class constructor.
+        /// Initializes a new instance of the <see cref="UndoCommand" /> class.
         /// </summary>
         public UndoCommand()
         {

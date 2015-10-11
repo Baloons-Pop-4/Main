@@ -3,12 +3,12 @@
     using BalloonsPop.Common.Contracts;
 
     /// <summary>
-    /// Implements command to pop ballon.
+    /// Implements command to pop balloon.
     /// </summary>
     public class PopBalloonCommand : ICommand
     {
         /// <summary>
-        /// The class constructor.
+        /// Initializes a new instance of the <see cref="PopBalloonCommand" /> class.
         /// </summary>
         public PopBalloonCommand() 
         {

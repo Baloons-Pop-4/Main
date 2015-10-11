@@ -10,18 +10,29 @@
     public class QueryableMatrix<T> : IEnumerable<T>
     {
         // Wrapping constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="QueryableMatrix{T}" /> class.
+        /// </summary>
+        /// <param name="matrix"></param>
         public QueryableMatrix(T[,] matrix)
         {
             this.Value = matrix;
         }
 
         // Constructor for creating a new matrix and wrapping it automatically
+        /// <summary>
+        /// Initializes a new instance of the <see cref="QueryableMatrix{T}" /> class.
+        /// </summary>
+        /// <param name="matrix"></param>
         public QueryableMatrix(int rows, int cols)
             : this(new T[rows, cols])
         {
         }
 
         // The actual matrix
+        /// <summary>
+        /// Gets or sets a generic value for the Queryable matrix
+        /// </summary>
         public T[,] Value { get; set; }
 
         public T[][] TakeColumns()

@@ -8,7 +8,7 @@
     public class PrintFieldCommand : ICommand
     {
         /// <summary>
-        /// The class constructor.
+        /// Initializes a new instance of the <see cref="PrintFieldCommand" /> class.
         /// </summary>
         public PrintFieldCommand()
         {

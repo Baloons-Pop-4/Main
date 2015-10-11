@@ -20,11 +20,17 @@
 
         private IMemory<T> memory;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Saver{T}" /> class. 
+        /// </summary>
         public Saver()
         {
             this.memory = new Memory<T>();
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the saver has a state
+        /// </summary>
         public bool HasStates
         {
             get

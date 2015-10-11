@@ -12,6 +12,10 @@
 
         private int userMovesCount;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GameModel" /> class.
+        /// </summary>
+        /// <param name="balloonFiller"></param>
         public GameModel(IBalloon balloonFiller = null)
         {
             if (balloonFiller == null)
@@ -29,6 +33,9 @@
                                                                 this.userMovesCount = 0;
         }
 
+        /// <summary>
+        /// Gets or sets a Balloon field
+        /// </summary>
         public IBalloon[,] Field
         {
             get
@@ -43,6 +50,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets the user's moves count
+        /// </summary>
         public int UserMovesCount
         {
             get

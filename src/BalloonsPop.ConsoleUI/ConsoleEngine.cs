@@ -12,6 +12,11 @@
 
         private IInputReader reader;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConsoleEngine" /> class.
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="depBundle"></param>
         public ConsoleEngine(IContext ctx, IConsoleBundle depBundle)
             : base(ctx, depBundle.UserInputValidator, depBundle.CommandFactory, depBundle.Logger)
         {

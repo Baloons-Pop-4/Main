@@ -4,6 +4,9 @@
 
     public interface IHighscoreTable
     {
+        /// <summary>
+        /// Gets a list of player scores
+        /// </summary>
         List<PlayerScore> Table { get;  }
 
         bool CanAddPlayer(int movesCount);
