@@ -4,13 +4,23 @@
 
     using BalloonsPop.Common.Contracts;
 
+    /// <summary>
+    /// Implements command to handle Gameover
+    /// </summary>
     public class GameOverHandlingCommand : CompositeCommand
     {
+        /// <summary>
+        /// The class constructor.
+        /// </summary>
         public GameOverHandlingCommand()
         {
             this.SubCommands = new List<ICommand>();
         }
 
+        /// <summary>
+        /// Executes GameOverHandlingCommand
+        /// </summary>
+        /// <param name="context"></param>
         public override void Execute(IContext context)
         {
             if (context.LogicProvider.GameIsOver(context.Game.Field))

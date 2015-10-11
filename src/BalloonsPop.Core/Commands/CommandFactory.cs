@@ -5,12 +5,18 @@
 
     using BalloonsPop.Common.Contracts;
 
+    /// <summary>
+    /// Implements a factory to create commands.
+    /// </summary>
     public class CommandFactory : ICommandFactory
     {
         private readonly IDictionary<string, Func<ICommand>> commandMap;
         // flyweight factory
         private readonly IDictionary<string, ICommand> commandCache;
 
+        /// <summary>
+        /// The class constructor.
+        /// </summary>
         public CommandFactory()
         {
             this.commandMap = new Dictionary<string, Func<ICommand>>();
@@ -18,6 +24,11 @@
             this.RegisterDefaults();
         }
 
+        /// <summary>
+        /// A method to create a command.
+        /// </summary>
+        /// <param name="commandName"></param>
+        /// <returns>New command</returns>
         public ICommand CreateCommand(string commandName)
         {
             if (!this.ContainsKey(commandName))
@@ -33,11 +44,21 @@
             return this.commandCache[commandName];
         }
 
+        /// <summary>
+        /// A method to check if the command is already created.
+        /// </summary>
+        /// <param name="commandKey">string</param>
+        /// <returns></returns>
         public bool ContainsKey(string commandKey)
         {
             return this.commandMap.ContainsKey(commandKey);
         }
 
+        /// <summary>
+        /// A method to register a new command.
+        /// </summary>
+        /// <param name="commandKey"></param>
+        /// <param name="commandProvidingMethod"></param>
         public void RegisterCommand(string commandKey, Func<ICommand> commandProvidingMethod)
         {
             if (!this.commandMap.ContainsKey(commandKey))
@@ -46,12 +67,19 @@
             }
         }
 
+        /// <summary>
+        /// A method to delete a command.
+        /// </summary>
+        /// <param name="commandKey"></param>
         public void UnregisterCommand(string commandKey)
         {
             this.commandMap.Remove(commandKey);
             this.commandCache.Remove(commandKey);
         }
 
+        /// <summary>
+        /// A method to register default commands.
+        /// </summary>
         private void RegisterDefaults()
         {
             // TODO: find a pretty way to register defaults

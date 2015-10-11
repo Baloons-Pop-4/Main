@@ -2,12 +2,22 @@
 {
     using BalloonsPop.Common.Contracts;
 
+    /// <summary>
+    /// Implements Undo command
+    /// </summary>
     public class UndoCommand : ICommand
     {
+        /// <summary>
+        /// The class constructor.
+        /// </summary>
         public UndoCommand()
         {
         }
 
+        /// <summary>
+        /// Executes UndoCommand
+        /// </summary>
+        /// <param name="context"></param>
         public void Execute(IContext context)
         {
             if (context.Memento.HasStates)
