@@ -48,7 +48,7 @@
   <ItemGroup>
     <Compile Include="Commands\AddPlayerscoreCommand.cs" />
     <Compile Include="Commands\CommandFactory.cs" />
-    <Compile Include="Commands\CommandFactoryModule.cs" />
+    <Compile Include="Commands\CommandModule.cs" />
     <Compile Include="Commands\CompositeCommand.cs" />
     <Compile Include="Commands\CompositePopCommand.cs" />
     <Compile Include="Commands\CompositeUndoCommand.cs" />

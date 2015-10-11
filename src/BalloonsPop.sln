@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalloonsPop.SoundPlayer", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalloonsPop.Saver", "BalloonsPop.Saver\BalloonsPop.Saver.csproj", "{4CB227C2-6BA7-4BCC-A2D1-63AD18A478CC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalloonsPop.ConsoleUserInterface", "BalloonsPop.ConsoleUserInterface\BalloonsPop.ConsoleUserInterface.csproj", "{68D41369-B315-4E67-A1B4-CF5A7C7FE940}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -157,6 +159,16 @@ Global
 		{4CB227C2-6BA7-4BCC-A2D1-63AD18A478CC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{4CB227C2-6BA7-4BCC-A2D1-63AD18A478CC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{4CB227C2-6BA7-4BCC-A2D1-63AD18A478CC}.Release|x86.ActiveCfg = Release|Any CPU
+		{68D41369-B315-4E67-A1B4-CF5A7C7FE940}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68D41369-B315-4E67-A1B4-CF5A7C7FE940}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68D41369-B315-4E67-A1B4-CF5A7C7FE940}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{68D41369-B315-4E67-A1B4-CF5A7C7FE940}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{68D41369-B315-4E67-A1B4-CF5A7C7FE940}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{68D41369-B315-4E67-A1B4-CF5A7C7FE940}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68D41369-B315-4E67-A1B4-CF5A7C7FE940}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68D41369-B315-4E67-A1B4-CF5A7C7FE940}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{68D41369-B315-4E67-A1B4-CF5A7C7FE940}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{68D41369-B315-4E67-A1B4-CF5A7C7FE940}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

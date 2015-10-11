@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{68D41369-B315-4E67-A1B4-CF5A7C7FE940}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BalloonsPop.ConsoleUserInterface</RootNamespace>
+    <AssemblyName>BalloonsPop.ConsoleUserInterface</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GnomInterpreter">
+      <HintPath>..\packages\GnomUi.1.1\lib\GnomInterpreter.dll</HintPath>
+    </Reference>
+    <Reference Include="GnomUi">
+      <HintPath>..\packages\GnomUi.1.1\lib\GnomUi.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GnomEngine.cs" />
+    <Compile Include="Gadgets\PlayerScoreExtensions.cs" />
+    <Compile Include="GnomController.cs" />
+    <Compile Include="GnomModule.cs" />
+    <Compile Include="GnomViewProvider.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="GnomFiles\index.guid" />
+    <None Include="GnomFiles\styles.gss" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GnomFiles\control-map.gsm" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BalloonsPop.Bundling\BalloonsPop.Bundling.csproj">
+      <Project>{df25e530-7b05-4280-b08b-0fb4a71186ea}</Project>
+      <Name>BalloonsPop.Bundling</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BalloonsPop.Common\BalloonsPop.Common.csproj">
+      <Project>{8c8b1419-0948-4d28-b57a-8d4f68d3bc0c}</Project>
+      <Name>BalloonsPop.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BalloonsPop.Core\BalloonsPop.Core.csproj">
+      <Project>{b4ff3beb-43d3-4d4e-963e-50108922d688}</Project>
+      <Name>BalloonsPop.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BalloonsPop.GameModels\BalloonsPop.GameModels.csproj">
+      <Project>{95de20c4-4653-44d9-91c3-8944b4753faa}</Project>
+      <Name>BalloonsPop.GameModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BalloonsPop.Highscore\BalloonsPop.Highscore.csproj">
+      <Project>{8e28d39b-5915-48d9-8419-a7b0cb995e81}</Project>
+      <Name>BalloonsPop.Highscore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BalloonsPop.LogicProvider\BalloonsPop.LogicProvider.csproj">
+      <Project>{e735039b-49cc-4cc2-a57a-49c1ef91290a}</Project>
+      <Name>BalloonsPop.LogicProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BalloonsPop.Saver\BalloonsPop.Saver.csproj">
+      <Project>{4cb227c2-6ba7-4bcc-a2d1-63ad18a478cc}</Project>
+      <Name>BalloonsPop.Saver</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BalloonsPop.SoundPlayer\BalloonsPop.SoundPlayer.csproj">
+      <Project>{3ae11565-145c-4b39-96bf-eb5aa3ce794a}</Project>
+      <Name>BalloonsPop.SoundPlayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BalloonsPop.Validation\BalloonsPop.Validation.csproj">
+      <Project>{8d75c4c3-63e8-4b33-aac5-9b9b2eda4ee9}</Project>
+      <Name>BalloonsPop.Validation</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

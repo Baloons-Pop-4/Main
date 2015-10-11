@@ -1,0 +1,36 @@
+﻿.root
+color black
+
+.field
+width 40
+height 15
+color black
+top 1
+left 1
+
+.restart
+color blue
+width 13
+height 4
+top 15
+left 5
+
+.undo
+color blue
+width 10
+height 4
+top 15
+left 18
+
+.message-box
+top 20
+height 7
+width 50
+color red
+
+.score
+color black
+top 0
+left 50
+height 4
+width 45
