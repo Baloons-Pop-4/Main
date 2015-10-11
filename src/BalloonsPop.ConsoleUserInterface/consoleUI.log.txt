@@ -88,3 +88,4 @@ UTC Date - 2015-10-11 20:59:58,899; [c:\Users\Pc\Desktop\Main\src\BalloonsPop.Hi
 UTC Date - 2015-10-11 21:26:55,149; [c:\Users\Pc\Desktop\Main\src\BalloonsPop.Highscore\HighscoreHandlingStrategies\XmlHandlingStrategy.cs] Level - WARN  - No highscore.xml, falling back to empty highscore table.
 UTC Date - 2015-10-11 21:33:55,021; [c:\Users\Pc\Desktop\Main\src\BalloonsPop.Highscore\HighscoreHandlingStrategies\XmlHandlingStrategy.cs] Level - WARN  - No highscore.xml, falling back to empty highscore table.
 UTC Date - 2015-10-11 22:20:10,700; [c:\Users\Pc\Desktop\Main\src\BalloonsPop.Highscore\HighscoreHandlingStrategies\XmlHandlingStrategy.cs] Level - WARN  - No highscore.xml, falling back to empty highscore table.
+UTC Date - 2015-10-11 22:49:22,774; [c:\Users\Pc\Desktop\Main\src\BalloonsPop.Highscore\HighscoreHandlingStrategies\XmlHandlingStrategy.cs] Level - WARN  - No highscore.xml, falling back to empty highscore table.

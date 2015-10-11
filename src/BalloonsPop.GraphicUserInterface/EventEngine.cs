@@ -36,7 +36,7 @@
                 throw new ArgumentException("Invalid event arguments are provided");
             }
 
-            var parsedCommand = this.GetCommandList(castedArguments.CommandToPass);
+            var parsedCommand = this.GetCommand(castedArguments.CommandToPass);
 
             parsedCommand.Execute(this.Context);
         }

@@ -21,7 +21,7 @@
         /// <param name="e">The event arguments provided by the raiser.</param>
         public void HandleUserInput(string input)
         {
-            var parsedCommand = this.GetCommandList(input);
+            var parsedCommand = this.GetCommand(input);
 
             parsedCommand.Execute(this.Context);
         }

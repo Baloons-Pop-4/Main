@@ -88,7 +88,7 @@
             }
         }
 
-        protected virtual ICommand GetCommandList(string userCommand)
+        protected virtual ICommand GetCommand(string userCommand)
         {
             ICommand cmd = null;
 
