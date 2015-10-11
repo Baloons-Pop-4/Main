@@ -86,8 +86,6 @@
                     this.context.UserRow = userCommand[IndexOfRowDigit].ToInt32();
                     this.context.UserCol = userCommand[IndexOfColumnDigit].ToInt32();
                     cmd = this.commandFactory.CreateCommand(PopCommandKey);
-
-
                 }
                 else if (this.CommandFactory.ContainsKey(userCommand.ToLower()))
                 {
@@ -101,9 +99,10 @@
             }
             catch (ArgumentException e)
             {
-                var errorLog = string.Format("{0}{1}{2}{3}",
-                                                 "The command factory failed to create the command."
-                                                 , Environment.NewLine,
+                var errorLog = string.Format(
+                    "{0}{1}{2}{3}",
+                                                 "The command factory failed to create the command.",
+                                                 Environment.NewLine,
                                                  e.Message,
                                                  e.StackTrace);
                 this.logger.Error(errorLog);

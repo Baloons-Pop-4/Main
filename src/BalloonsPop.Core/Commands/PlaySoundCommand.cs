@@ -13,7 +13,7 @@
 
         public void Execute(IContext context)
         {
-            context.Orchestra.PlaySound(sound);
+            context.Orchestra.PlaySound(this.sound);
         }
     }
 }

@@ -20,12 +20,12 @@
 
         public ICommand CreateCommand(string commandName)
         {
-            if(!this.ContainsKey(commandName))
+            if (!this.ContainsKey(commandName))
             {
                 throw new KeyNotFoundException("No command with such key was registered");
             }
-            
-            if(!this.commandCache.ContainsKey(commandName))
+
+            if (!this.commandCache.ContainsKey(commandName))
             {
                 this.commandCache.Add(commandName, this.commandMap[commandName]());
             }

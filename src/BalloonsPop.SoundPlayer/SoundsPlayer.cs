@@ -1,8 +1,8 @@
 ﻿namespace BalloonsPop.SoundPlayer
 {
     using System;
-    using System.Media;
     using System.Collections.Generic;
+    using System.Media;
     
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;

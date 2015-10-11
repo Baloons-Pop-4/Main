@@ -3,15 +3,15 @@
     using System.Windows;
     using BalloonsPop.Bundling;
     using BalloonsPop.Common.Contracts;
+    using BalloonsPop.Common.Gadgets;
     using BalloonsPop.Core.Contexts;
     using BalloonsPop.GameModels;
     using BalloonsPop.GraphicUserInterface.Commands;
     using BalloonsPop.Highscore;
     using BalloonsPop.LogicProvider;
     using BalloonsPop.Saver;
-    using BalloonsPop.Validation;
-    using BalloonsPop.Common.Gadgets;
     using BalloonsPop.SoundPlayer;
+    using BalloonsPop.Validation;
     using Ninject;
 
     /// <summary>
@@ -39,7 +39,6 @@
                                  new SoundsModule(kernel))
                 .LoadAll();       
     
-
             var bundle = new WpfBundle(kernel);
             var ctx = new Context(kernel);
             var engine = new EventEngine(ctx, bundle);

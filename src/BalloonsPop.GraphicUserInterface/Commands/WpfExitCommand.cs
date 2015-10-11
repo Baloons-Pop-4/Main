@@ -12,7 +12,7 @@
         private const int WpfExitCode = 348944;
 
         public WpfExitCommand()
-            :base()
+            : base()
         {
             this.SubCommands.Add(new SaveHighscoreCommand());
         }

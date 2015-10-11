@@ -4,10 +4,10 @@
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Core.Commands;
     using BalloonsPop.Core.Contexts;
+    using BalloonsPop.GameModels;
+    using BalloonsPop.Highscore;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
-    using BalloonsPop.Highscore;
-    using BalloonsPop.GameModels;
 
     [TestClass]
     public class CommandTests
@@ -96,7 +96,7 @@
 
             mockLogic.Verify(x => x.PopBalloons(It.IsAny<IBalloon[,]>(), It.IsAny<int>(), It.IsAny<int>()), Times.Once);
             mockLogic.Verify(x => x.LetBalloonsFall(It.IsAny<IBalloon[,]>()), Times.Once);
-            //mockGame.Verify(x => x.Field, Times.Once);
+            // mockGame.Verify(x => x.Field, Times.Once);
         }
 
         [TestMethod]
@@ -198,16 +198,16 @@
             moqHighsoreSaver.Verify(x => x.Save(It.IsAny<IHighscoreTable>()), Times.Once);
         }
 
-        //[TestMethod]
-        //public void TestIfSaveCommandUsesTheMementoSetter()
-        //{
-        //    this.context = new Context() { Game = new GameMock(), Memento = new MockSaver() };
+        // [TestMethod]
+        // public void TestIfSaveCommandUsesTheMementoSetter()
+        // {
+        // this.context = new Context() { Game = new GameMock(), Memento = new MockSaver() };
 
-        //    var saveCommand = this.commandFactory.CreateCommand("save");
+        // var saveCommand = this.commandFactory.CreateCommand("save");
 
-        //    saveCommand.Execute(this.context);
+        // saveCommand.Execute(this.context);
 
-        //    Assert.AreEqual(1, (this.context.Memento as MockSaver).CallsToSetCount);
-        //}
+        // Assert.AreEqual(1, (this.context.Memento as MockSaver).CallsToSetCount);
+        // }
     }
 }

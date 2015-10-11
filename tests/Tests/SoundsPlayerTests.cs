@@ -1,9 +1,10 @@
 ﻿namespace Tests
 {
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System.Media;
 
     using BalloonsPop.SoundPlayer;
+    
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class SoundsPlayerTests

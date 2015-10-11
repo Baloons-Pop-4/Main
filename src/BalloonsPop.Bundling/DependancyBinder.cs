@@ -11,7 +11,7 @@
     /// </summary>
     public sealed class DependancyBinder
     {
-        private readonly static DependancyBinder instance = new DependancyBinder();
+        private static readonly DependancyBinder instance = new DependancyBinder();
 
         private DependancyBinder()
         {
@@ -47,7 +47,6 @@
                 {
                     this.Modules.Add(item);
                 }
-
             }
 
             return this;
