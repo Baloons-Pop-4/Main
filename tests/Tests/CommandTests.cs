@@ -151,25 +151,30 @@
         [TestMethod]
         public void TestIfPrintHighscoreCommandCallsThePrintHighscoreMethodOfTheUI()
         {
-            this.context = new Context() { Printer = new MockPrinter(), Game = new GameMock() };
+            var moqPrinter = new Mock<IPrinter>();
+            moqPrinter.Setup(x => x.PrintHighscore(It.IsAny<IHighscoreTable>())).Verifiable();
+
+            this.context = new Context() { Printer = moqPrinter.Object };
 
             var printHighscoreCommand = this.commandFactory.CreateCommand("top");
 
             printHighscoreCommand.Execute(this.context);
 
-            Assert.AreEqual(1, (this.context.Printer as MockPrinter).MethodCallCounts["highscore"]);
+            moqPrinter.Verify(x => x.PrintHighscore(It.IsAny<IHighscoreTable>()), Times.AtLeastOnce);
         }
 
         [TestMethod]
         public void TestIfPrintMessageCommandCallsThePrintMessageMethodOfTheUI()
         {
-            this.context = new Context() { Printer = new MockPrinter(), Game = new GameMock() };
+            var moqPrinter = new Mock<IPrinter>();
+            moqPrinter.Setup(x => x.PrintMessage(It.Is<string>(a => a == "gosho"))).Verifiable();
+            this.context = new Context() { Printer = moqPrinter.Object, Message = "gosho" };
 
             var printMessageCommand = this.commandFactory.CreateCommand("message");
 
             printMessageCommand.Execute(this.context);
 
-            Assert.AreEqual(1, (this.context.Printer as MockPrinter).MethodCallCounts["message"]);
+            moqPrinter.Verify(x => x.PrintMessage(It.Is<string>(a => a == "gosho")), Times.Once);
         }
 
         [TestMethod]
