@@ -25,7 +25,8 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="QueryableMatrix{T}" /> class.
         /// </summary>
-        /// <param name="matrix"></param>
+        /// <param name="rows">The rows count of the new matrix.</param>
+        /// <param name="cols">The column count of the new matrix.</param>
         public QueryableMatrix(int rows, int cols)
             : this(new T[rows, cols])
         {

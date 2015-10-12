@@ -19,11 +19,21 @@
         {
         }
 
+        /// <summary>
+        /// Determines whether the object matches the strategy.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns>True if the strategy matches, false otherwise.</returns>
         public bool IsMatch(T obj)
         {
             return typeof(T).IsSerializable;
         }
 
+        /// <summary>
+        /// Contes the provided object.
+        /// </summary>
+        /// <param name="obj">The object to be cloned.</param>
+        /// <returns>A cloned object.</returns>
         public T Clone(T obj)
         {
             using (var ms = new MemoryStream())

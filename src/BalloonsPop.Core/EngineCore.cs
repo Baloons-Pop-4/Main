@@ -5,6 +5,9 @@
     using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Gadgets;
 
+    /// <summary>
+    /// The core logic for requsting commands based on input and executing those commands in the provided context.
+    /// </summary>
     public class EngineCore
     {
         #region Constants

@@ -35,7 +35,7 @@ namespace BalloonsPop.Highscore
         }
 
         /// <summary>
-        /// Gets a list of <see cref="IPlayerScore"/> entries, hence the actual table.
+        /// Gets a list of PlayerScore entries, hence the actual table.
         /// </summary>
         public List<PlayerScore> Table
         {
@@ -66,7 +66,7 @@ namespace BalloonsPop.Highscore
         /// <summary>
         /// Adds a player to a <see cref="HighscoreTable"/>.
         /// </summary>
-        /// <param name="score">An instance of a class that implements the <see cref="IPlayerScore"/> interface.</param>
+        /// <param name="score">An instance of a class that implements the PlayerScore interface.</param>
         public void AddPlayer(PlayerScore score)
         {
             this.table.Add(score);

@@ -43,11 +43,19 @@
             }
         }
 
+        /// <summary>
+        /// Saves a state for later retrieval.
+        /// </summary>
+        /// <param name="obj">The object state to save.</param>
         public void SaveState(T obj)
         {
             this.memory.PushItem(this.DeepClone(obj));
         }
 
+        /// <summary>
+        /// Fetches and returnd a state.
+        /// </summary>
+        /// <returns>A state of type T.</returns>
         public T GetState()
         {
             return this.memory.GetItem();

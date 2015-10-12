@@ -29,7 +29,7 @@
         /// Returns true if the player move has the appropriate length.
         /// </summary>
         /// <param name="playerMove">The player move as string.</param>
-        /// <returnsIf the move has correct length></returns>
+        /// <returns>If the move has correct length></returns>
         private static bool HasCorrectLength(string playerMove)
         {
             return playerMove.Length == ValidInputLength;
