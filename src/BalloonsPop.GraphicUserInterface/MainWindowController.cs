@@ -51,6 +51,9 @@
             }
         }
 
+        /// <summary>
+        /// Provides add/remove access to the TextChanged event on the PlayerName text container.
+        /// </summary>
         public event TextChangedEventHandler ChangedUserName
         {
             add
@@ -109,6 +112,10 @@
             this.Window.Show();
         }
 
+        /// <summary>
+        /// Draws the passed string as player moves on the view.
+        /// </summary>
+        /// <param name="moves"></param>
         public void PrintPlayerMoves(string moves)
         {
             this.Window.UserMoves = moves;

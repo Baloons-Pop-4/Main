@@ -9,6 +9,11 @@
     /// </summary>
     public class GnomEngine : EngineCore
     {
+        /// <summary>
+        /// Public constructor that initializes the instance with context and core dependency bundle.
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="depBundle"></param>
         public GnomEngine(IContext ctx, ICoreBundle depBundle)
             : base(ctx, depBundle.UserInputValidator, depBundle.CommandFactory, depBundle.Logger)
         {
@@ -17,8 +22,6 @@
         /// <summary>
         /// The method which handles user input by delegating user input to the core.
         /// </summary>
-        /// <param name="sender">The object that raised the event.</param>
-        /// <param name="e">The event arguments provided by the raiser.</param>
         public void HandleUserInput(string input)
         {
             var parsedCommand = this.GetCommand(input);

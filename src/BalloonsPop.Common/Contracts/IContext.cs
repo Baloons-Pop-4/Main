@@ -1,5 +1,8 @@
 ﻿namespace BalloonsPop.Common.Contracts
 {
+    /// <summary>
+    /// Provides an abstraction of context for command execution.
+    /// </summary>
     public interface IContext
     {
         /// <summary>

@@ -21,6 +21,10 @@
     {
         private EventEngine engine;
 
+        /// <summary>
+        /// This override sets up the balloons app.
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);

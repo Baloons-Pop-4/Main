@@ -1,5 +1,8 @@
 ﻿namespace BalloonsPop.Common.Contracts
 {
+    /// <summary>
+    /// Abstracts the signature of an object type containing the core dependencies for the EngineCore.
+    /// </summary>
     public interface ICoreBundle
     {   
         /// <summary>

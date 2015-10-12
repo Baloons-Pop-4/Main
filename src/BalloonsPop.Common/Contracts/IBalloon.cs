@@ -1,5 +1,8 @@
 ﻿namespace BalloonsPop.Common.Contracts
 {
+    /// <summary>
+    /// Defines the properties that a balloon model should implement.
+    /// </summary>
     public interface IBalloon : ICloneableObject<IBalloon>
     {
         /// <summary>

@@ -11,8 +11,19 @@
     /// </summary>
     public partial class BalloonsView : Window
     {
+        /// <summary>
+        /// Key of the exit button.
+        /// </summary>
         public const string ExitButtonKey = "exit";
+
+        /// <summary>
+        /// Key of the restart button.
+        /// </summary>
         public const string RestartButtonKey = "restart";
+
+        /// <summary>
+        /// Key of the undo button.
+        /// </summary>
         public const string UndoButtonKey = "undo";
 
         private readonly IDictionary<string, Button> commandButtons;

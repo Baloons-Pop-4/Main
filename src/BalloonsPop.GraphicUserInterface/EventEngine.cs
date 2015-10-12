@@ -41,6 +41,11 @@
             parsedCommand.Execute(this.Context);
         }
 
+        /// <summary>
+        /// Sets the player name in the context when it is changed in the view.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void SetPlayerNameInContext(object sender, EventArgs e)
         {
             this.Context.PlayerName = (sender as TextBox).Text;

@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\BalloonsPop.Common.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -48,7 +49,6 @@
     <Compile Include="Contracts\IBalloon.cs" />
     <Compile Include="Contracts\IBalloonFieldRandomizer.cs" />
     <Compile Include="Contracts\IBalloonPopper.cs" />
-    <Compile Include="Contracts\IBundler.cs" />
     <Compile Include="Contracts\ICloneableObject.cs" />
     <Compile Include="Contracts\ICloningStrategy.cs" />
     <Compile Include="Contracts\ICommand.cs" />
@@ -68,7 +68,6 @@
     <Compile Include="Contracts\ISoundsPlayer.cs" />
     <Compile Include="Contracts\IStateSaver.cs" />
     <Compile Include="Contracts\IUserInputValidator.cs" />
-    <Compile Include="Contracts\IValidationFactory.cs" />
     <Compile Include="Contracts\PlayerScore.cs" />
     <Compile Include="Gadgets\IEnumerableExtensions.cs" />
     <Compile Include="Gadgets\Log4NetWrapper.cs" />
